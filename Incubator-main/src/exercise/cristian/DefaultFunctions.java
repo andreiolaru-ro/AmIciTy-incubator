@@ -27,17 +27,25 @@ import javax.swing.JCheckBox;
  */
 public abstract class DefaultFunctions implements Functions {
 
+	/**
+	 * CheckBox for each editing text file
+	 */
 	JCheckBox c;
 
+	/**
+	 * @param name
+	 *            that will appear on CheckBox
+	 */
 	DefaultFunctions(String name) {
 		c = new JCheckBox();
 		c.setPreferredSize(new Dimension(120, 50));
 		c.setText(name);
 	}
 
+	@Override
 	public ArrayList<String> read(File in) {
 
-		ArrayList<String> allFile = new ArrayList();
+		ArrayList<String> allFile = new ArrayList<String>();
 
 		try {
 
@@ -55,8 +63,11 @@ public abstract class DefaultFunctions implements Functions {
 		return allFile;
 	}
 
+	@Override
 	public abstract ArrayList<String> transform(ArrayList<String> toTransform);
 
+	@SuppressWarnings("resource")
+	@Override
 	public void write(File out, int indicator, ArrayList<String> str) {
 
 		boolean b = indicator == 1 ? true : false;

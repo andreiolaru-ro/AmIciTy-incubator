@@ -20,15 +20,28 @@ import java.util.ArrayList;
  */
 public interface Functions {
 
-	// return text from File in
+	/**
+	 * @param in
+	 *            - read from in file
+	 * @return an ArrayList of String for each line in File
+	 */
 	public ArrayList<String> read(File in);
 
-	// return transformed toTransform string
+	/**
+	 * @param toTransform
+	 *            - ArrayList of String that needs to transform
+	 * @return the transformed ArrayList of String
+	 */
 	public ArrayList<String> transform(ArrayList<String> toTransform);
 
-	// write String str in File out
-	// if indicator in 0 => write from begging
-	// else append to file
+	/**
+	 * @param out
+	 *            - write in File out
+	 * @param indicator
+	 *            - 1 - append, 0 - not append;
+	 * @param str
+	 *            - String that neds to be write in file
+	 */
 	public void write(File out, int indicator, ArrayList<String> str);
 
 }

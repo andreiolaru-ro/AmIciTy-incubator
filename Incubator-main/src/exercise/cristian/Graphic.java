@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (C) 2013 Andrei Olaru, Cristian Grigoras.
+ * 
+ * This file is part of AmIciTy-incubator.
+ * 
+ * AmIciTy-incubator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+ * 
+ * AmIciTy-incubator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
 package exercise.cristian;
 
 import java.awt.Color;
@@ -20,6 +31,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 
 /**
@@ -27,21 +39,53 @@ import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
  * @author cristian
  */
 
+@SuppressWarnings("serial")
 public class Graphic extends JFrame implements ItemListener {
 
+	/**
+	 * append indicator - if checked is 1 else 0;
+	 */
 	int append;
+	/**
+	 * true if in file is selected, else false;
+	 */
 	boolean activeGo1 = false;
+	/**
+	 * true if in file is selected, else false;
+	 */
 	boolean activeGo2 = false;
+	/**
+	 * true if in file is selected, else false;
+	 */
 	boolean activeGo3 = false;
+	/**
+	 * true if a new file is created
+	 */
 	boolean create;
 
-	private Vector<String> items = new Vector();
-	private Vector<String> items2 = new Vector();
+	/**
+	 * files from in directory
+	 */
+	private Vector<String> items = new Vector<String>();
+	/**
+	 * files from out directory
+	 */
+	private Vector<String> items2 = new Vector<String>();
 
+	/**
+	 * An ArrayList of possible functions
+	 */
 	final ArrayList<DefaultFunctions> functions;
 
+	/**
+	 * A button for do it command
+	 */
 	final JButton go = new JButton("GO");
 
+	/**
+	 * @param functions
+	 *            The ArrayList of functions
+	 */
 	Graphic(final ArrayList<DefaultFunctions> functions) {
 
 		super("Quicksilver");
@@ -84,12 +128,14 @@ public class Graphic extends JFrame implements ItemListener {
 		// add actions
 		filin.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				filin.setVisible(false);
 				comboin.setVisible(true);
 				comboin.setSelectedItem(null);
 				SwingUtilities.invokeLater(new Runnable() {
 
+					@Override
 					public void run() {
 						comboin.setPopupVisible(true);
 					}
@@ -100,13 +146,13 @@ public class Graphic extends JFrame implements ItemListener {
 		});
 		comboin.addItemListener(new ItemListener() {
 
+			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					filin.setText(comboin.getSelectedItem().toString());
 					filin.setVisible(true);
 					comboin.setVisible(false);
 					activeGo1 = true;
-					;
 					if (activeGo1 && activeGo2 && activeGo3)
 						go.setEnabled(true);
 				}
@@ -148,12 +194,14 @@ public class Graphic extends JFrame implements ItemListener {
 		// add actions
 		filout.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				filout.setVisible(false);
 				comboout.setVisible(true);
 				comboout.setSelectedItem(null);
 				SwingUtilities.invokeLater(new Runnable() {
 
+					@Override
 					public void run() {
 						comboout.setPopupVisible(true);
 					}
@@ -164,6 +212,7 @@ public class Graphic extends JFrame implements ItemListener {
 		});
 		comboout.addItemListener(new ItemListener() {
 
+			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					if (comboout.getSelectedItem().toString()
@@ -185,6 +234,7 @@ public class Graphic extends JFrame implements ItemListener {
 		});
 		newFile.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				filout.setText(newFile.getText());
 				newFile.setVisible(false);
@@ -197,6 +247,7 @@ public class Graphic extends JFrame implements ItemListener {
 		});
 		check.addActionListener(new ActionListener() {
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (check.isSelected())
 					append = 1;
@@ -206,6 +257,8 @@ public class Graphic extends JFrame implements ItemListener {
 		});
 		go.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("synthetic-access")
+			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				if (create == true) {
@@ -216,8 +269,7 @@ public class Graphic extends JFrame implements ItemListener {
 
 				}
 				int k = 0;
-				int last = 0;
-				ArrayList<String> transformed = new ArrayList();
+				ArrayList<String> transformed = new ArrayList<String>();
 				for (int i = 0; i < functions.size(); i++) {
 					if (functions.get(i).c.isSelected()) {
 						if (k == 0) {
@@ -225,12 +277,10 @@ public class Graphic extends JFrame implements ItemListener {
 									new File("./Folder/" + filin.getText()));
 							transformed = functions.get(i).transform(text);
 							k++;
-							last = i;
 						}
 						else {
 							transformed = functions.get(i).transform(
 									transformed);
-							last = i;
 							k++;
 						}
 					}
@@ -255,6 +305,7 @@ public class Graphic extends JFrame implements ItemListener {
 
 	}
 
+	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if (functions.get(0).c.isSelected())
 			functions.get(1).c.setEnabled(false);
