@@ -101,7 +101,7 @@ public class Graphic extends JFrame implements ItemListener {
 
 		/*---------------------------------generate files------------------------------------------------*/
 
-		File folder = new File("./Folder");
+		File folder = new File("./files/cristian/Folder");
 		File[] files = folder.listFiles();
 
 		items2.add("New file");
