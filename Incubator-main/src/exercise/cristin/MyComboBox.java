@@ -57,7 +57,7 @@ public class MyComboBox extends JPanel implements GeoManInt
 	public void init()
 	{
 		String[] colors = { "default", "black", "red", "blue", "green" };
-		h = new Hashtable<>();
+		h = new Hashtable<String, Color>();
 		h.put("black", Color.black);
 		h.put("red", Color.red);
 		h.put("blue", Color.blue);

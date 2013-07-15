@@ -171,7 +171,7 @@ public class GeoMan extends JFrame implements ActionListener{
 		this.setLocation(dim.width/2 - width/2, dim.height/2 - height/2);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		buttonList = new ArrayList<>();
+		buttonList = new ArrayList<JButton>();
 
 		jp1= new MyPanel();
 		jp2 = new JPanel();
