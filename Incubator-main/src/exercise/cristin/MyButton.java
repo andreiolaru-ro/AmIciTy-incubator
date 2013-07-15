@@ -17,14 +17,28 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
+/**
+ * @author ''Azgabast''
+ *
+ */
 public class MyButton extends JPanel implements GeoManInt{
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 1L;
 	/**
 	 * jb - butonul care controleaza culoarea fundalului
 	 */
 	JButton jb;
-	GeoMan gm;
-	public MyButton(GeoMan g){
-		this.gm = g;
+	/**
+	 * 
+	 */
+	private GeoMan gm;
+	/**
+	 * @param g
+	 */
+	public MyButton(final GeoMan g){
+		this.setGm(g);
 		init();
 		addComponents();
 		addListeners();
@@ -47,17 +61,33 @@ public class MyButton extends JPanel implements GeoManInt{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(gm.bgcolor == Color.black){
-					gm.bgcolor = Color.white;
+				if(getGm().bgcolor == Color.black){
+					getGm().bgcolor = Color.white;
 					jb.setBackground(Color.red);
 				}
 				else{
-					gm.setColor(Color.black);
+					getGm().setColor(Color.black);
 					jb.setBackground(Color.green);
 				}
-				gm.jp1.repaint();
+				getGm().jp1.repaint();
 
 
 			}});
+	}
+
+	/**
+	 * @return the GeoMan instance
+	 */
+	public GeoMan getGm()
+	{
+		return gm;
+	}
+
+	/**
+	 * @param gm
+	 */
+	public void setGm(final GeoMan gm)
+	{
+		this.gm = gm;
 	}
 }

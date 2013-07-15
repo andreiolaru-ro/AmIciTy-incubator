@@ -18,8 +18,17 @@ package exercise.cristin;
  *  @addListeners - adauga ascultatori componentelor interactive
  */
 public interface GeoManInt {
+	/**
+	 * metoda de initializare
+	 */
 	public void init();
+	/**
+	 * metoda de adaugare de componente
+	 */
 	public void addComponents();
+	/**
+	 * metoda de adaugare de ascultatori
+	 */
 	public void addListeners();
 
 }

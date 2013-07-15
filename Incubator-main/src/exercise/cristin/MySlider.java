@@ -16,14 +16,28 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
+/**
+ * @author ''Azgabast''
+ *
+ */
 public class MySlider extends JPanel implements GeoManInt{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * js - sliderul care controleaza grosimea formelor geometrice
 	 */
 	JSlider js;
+	/**
+	 * 
+	 */
 	GeoMan gm;
 
-	public MySlider(GeoMan g){
+	/**
+	 * @param g the GeoMan instance
+	 */
+	public MySlider(final GeoMan g){
 		this.gm = g;
 		init();
 		addListeners();

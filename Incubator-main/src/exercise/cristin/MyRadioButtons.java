@@ -17,13 +17,41 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 
+/**
+ * @author ''Azgabast''
+ *
+ */
 public class MyRadioButtons extends JPanel implements GeoManInt{
-	JRadioButton c1,c2,c3;
-	ButtonGroup bg;
-	GeoMan gm;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private JRadioButton c1;
+	/**
+	 * 
+	 */
+	private JRadioButton c2;
+	/**
+	 * 
+	 */
+	private JRadioButton c3;
+	/**
+	 * 
+	 */
+	private ButtonGroup bg;
+	/**
+	 * 
+	 */
+	private GeoMan gm;
 	
-	public MyRadioButtons(GeoMan g){
-		this.gm = g;
+	/**
+	 * @param g
+	 */
+	public MyRadioButtons(final GeoMan g){
+		this.setGm(g);
 	
 		init();
 		addComponents();
@@ -33,56 +61,136 @@ public class MyRadioButtons extends JPanel implements GeoManInt{
 
 	@Override
 	public void init() {
-		c1 = new JRadioButton("1x", null, true);
-		c2 = new JRadioButton("2x");
-		c3 = new JRadioButton("3x");		
-		bg = new ButtonGroup();
+		setC1(new JRadioButton("1x", null, true));
+		setC2(new JRadioButton("2x"));
+		setC3(new JRadioButton("3x"));		
+		setBg(new ButtonGroup());
 	}
 
 	@Override
 	public void addComponents() {
-		bg.add(c1);
-		bg.add(c2);
-		bg.add(c3);
-		add(c1);
-		add(c2);
-		add(c3);
+		getBg().add(getC1());
+		getBg().add(getC2());
+		getBg().add(getC3());
+		add(getC1());
+		add(getC2());
+		add(getC3());
 	}
 
 	@Override
 	public void addListeners() {
-		c1.addActionListener(new ActionListener(){
+		getC1().addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gm.x = 23;
-				gm.y = 34;
-				gm.d = 40; 
-				gm.jp1.repaint();
+				getGm().x = 23;
+				getGm().y = 34;
+				getGm().d = 40; 
+				getGm().jp1.repaint();
 
 			}});
 
-		c2.addActionListener(new ActionListener(){
+		getC2().addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gm.x = 2 * gm.x;
-				gm.y = 2 * gm.y;
-				gm.d = 2 * gm.d;
-				gm.jp1.repaint();
+				getGm().x = 2 * getGm().x;
+				getGm().y = 2 * getGm().y;
+				getGm().d = 2 * getGm().d;
+				getGm().jp1.repaint();
 
 			}});
 
-		c3.addActionListener(new ActionListener(){
+		getC3().addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gm.x = 3 * gm.x;
-				gm.y = 3 * gm.y;
-				gm.d = 3 * gm.d;
-				gm.jp1.repaint();
+				getGm().x = 3 * getGm().x;
+				getGm().y = 3 * getGm().y;
+				getGm().d = 3 * getGm().d;
+				getGm().jp1.repaint();
 
 			}});
+	}
+
+	/**
+	 * @return the second button
+	 */
+	public JRadioButton getC2()
+	{
+		return c2;
+	}
+
+	/**
+	 * @param c2 the second button
+	 */
+	public void setC2(final JRadioButton c2)
+	{
+		this.c2 = c2;
+	}
+
+	/**
+	 * @return the first button
+	 */
+	public JRadioButton getC1()
+	{
+		return c1;
+	}
+
+	/**
+	 * @param c1 the first button
+	 */
+	public void setC1(final JRadioButton c1)
+	{
+		this.c1 = c1;
+	}
+
+	/**
+	 * @return the third button
+	 */
+	public JRadioButton getC3()
+	{
+		return c3;
+	}
+
+	/**
+	 * @param c3 the third button
+	 */
+	public void setC3(final JRadioButton c3)
+	{
+		this.c3 = c3;
+	}
+
+	/**
+	 * @return the background color
+	 */
+	public ButtonGroup getBg()
+	{
+		return bg;
+	}
+
+	/**
+	 * @param bg the background color
+	 */
+	public void setBg(final ButtonGroup bg)
+	{
+		this.bg = bg;
+	}
+
+	/**
+	 * @return the GeoMan instance
+	 */
+	public GeoMan getGm()
+	{
+		return gm;
+	}
+
+	/**
+	 * @param gm the GeoMan instance
+	 */
+	public void setGm(final GeoMan gm)
+	{
+		this.gm = gm;
 	}
 	
 

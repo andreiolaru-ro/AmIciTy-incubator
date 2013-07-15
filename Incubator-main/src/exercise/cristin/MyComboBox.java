@@ -31,15 +31,22 @@ public class MyComboBox extends JPanel implements GeoManInt
 	 * jcb - lista de culori pentru formele geometrice
 	 */
 	JComboBox					jcb;
-	GeoMan						gm;
+	/**
+	 * the GeoMan instance
+	 */
+	private GeoMan						gm;
 	/**
 	 * h - tabela de asocieri de culori
 	 */
 	Hashtable<String, Color>	h;
 
-	public MyComboBox(GeoMan g)
+
+	/**
+	 * @param g the GeoMan instance
+	 */
+	public MyComboBox(final GeoMan g)
 	{
-		this.gm = g;
+		this.setGm(g);
 		init();
 		addComponents();
 		addListeners();
@@ -50,7 +57,7 @@ public class MyComboBox extends JPanel implements GeoManInt
 	public void init()
 	{
 		String[] colors = { "default", "black", "red", "blue", "green" };
-		h = new Hashtable<String, Color>();
+		h = new Hashtable<>();
 		h.put("black", Color.black);
 		h.put("red", Color.red);
 		h.put("blue", Color.blue);
@@ -76,11 +83,27 @@ public class MyComboBox extends JPanel implements GeoManInt
 			{
 				JComboBox cb = (JComboBox) e.getSource();
 				String col = (String) cb.getSelectedItem();
-				gm.color = h.get(col);
-				gm.jp1.repaint();
+				getGm().color = h.get(col);
+				getGm().jp1.repaint();
 
 			}
 		});
+	}
+
+	/**
+	 * @return the GeoMan instance
+	 */
+	public GeoMan getGm()
+	{
+		return gm;
+	}
+
+	/**
+	 * @param gm the GeoMan instance
+	 */
+	public void setGm(final GeoMan gm)
+	{
+		this.gm = gm;
 	}
 
 }

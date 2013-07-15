@@ -36,49 +36,66 @@ import javax.swing.JSplitPane;
  */
 public class GeoMan extends JFrame implements ActionListener{
 	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 1L;
+	/**
 	 * lista de butoane
 	 */
 	ArrayList<JButton> buttonList;
 	/**
-	 * x, y - lungimea si latimea dreptunghiului desenat
+	 * x - lungimea dreptunghiului desenat
 	 */
-	 int x = 23, y = 34;
-	
+
+	int x = 23;
 	/**
-	 * cx, cy - coordonatele centrului cercului desenat
+	 * y - lungimea si latimea dreptunghiului desenat
 	 */
-	int cx = 90, cy = 120;
+	int y = 34;
 
 	/**
-	 * pozx, pozy - coltul stanga sus al dreptunghiului
+	 * cx - coordonata x a centrului cercului desenat
 	 */
-	int pozx = 15, pozy = 22;
+	int cx = 90;
+	/**
+	 * cy - coordonata y a centrului cercului desenat
+	 */
+	int cy = 120;
+
+	/**
+	 * pozx - x din coltul stanga sus al dreptunghiului
+	 */
+	int pozx = 15;
+	/**
+	 * pozy - y din coltul stanga sus al dreptunghiului
+	 */
+	int pozy = 22;
 
 	/** 
 	 * d - diametrul cercului
 	 */
-	 int d = 40;
+	int d = 40;
 
 	/** 
 	 * stroke - grosimea liniei de desenat
 	 */
-	 int stroke = 1;
+	int stroke = 1;
 
 	/**
 	 * bgcolor - culoarea de fundal a desenului
 	 */	
-	 Color bgcolor = Color.white;
-	
+	Color bgcolor = Color.white;
+
 	/**
 	 * color - culoarea default a formelor geometrice desenate
 	 */
-	 Color color = Color.gray;
+	Color color = Color.gray;
 
 	/**
 	 * height - inaltimea ferestrei
 	 */	
 	final int height = 400;
-	
+
 	/**
 	 * width - latimea ferestrei
 	 */
@@ -87,18 +104,18 @@ public class GeoMan extends JFrame implements ActionListener{
 	/**
 	 * jp1 - panoul din stanga, unde e desenul
 	 */
-	 JPanel jp1;
-	
+	JPanel jp1;
+
 	/**
 	 * jp2 - panoul din dreapta, unde sunt optiunile si butoanele de activare
 	 */
 	JPanel jp2;
-	
+
 	/**
 	 * jup - panoul cu butoanele de activare
 	 */
 	JPanel jup;
-	
+
 	/**
 	 * jd - panoul cu optiunile
 	 */
@@ -123,17 +140,18 @@ public class GeoMan extends JFrame implements ActionListener{
 		init();
 		addListeners();
 		addComponents();
-	};
-	
+	}
+
 	/**
 	 * @param c
 	 */
 	public void setColor( final Color c){
 		this.bgcolor = c;
 	}
-	
+
 	/**
-	 * @return
+	 * 
+	 * @return culoarea de fundal
 	 */
 	public Color getColor (){
 		return this.bgcolor;
@@ -152,8 +170,8 @@ public class GeoMan extends JFrame implements ActionListener{
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2 - width/2, dim.height/2 - height/2);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		buttonList = new ArrayList<JButton>();
+
+		buttonList = new ArrayList<>();
 
 		jp1= new MyPanel();
 		jp2 = new JPanel();
@@ -228,9 +246,10 @@ public class GeoMan extends JFrame implements ActionListener{
 	 * @param args
 	 */
 	public static void main(String[] args){
-		new GeoMan();
+		GeoMan g = new GeoMan();
+		g.repaint();
 	}
-	
+
 	/**
 	 * @author Cristian
 	 * clasa imbricata ce extinde JPanel
@@ -239,8 +258,13 @@ public class GeoMan extends JFrame implements ActionListener{
 	 * alese
 	 */
 	class MyPanel extends JPanel{
-		
-		
+
+
+		/**
+		 * 
+		 */
+		private static final long	serialVersionUID	= 1L;
+
 		@Override
 		public void paintComponent(Graphics g){
 
@@ -271,12 +295,12 @@ public class GeoMan extends JFrame implements ActionListener{
 				jd.getComponent(i).setVisible(true);
 			}
 			else
-			if((JButton) e.getSource() == buttonList.get(i))
-			{
-				buttonList.get(i).setText(i + " - Off");
-				jd.getComponent(i).setVisible(false);
-			} 
-		
+				if((JButton) e.getSource() == buttonList.get(i))
+				{
+					buttonList.get(i).setText(i + " - Off");
+					jd.getComponent(i).setVisible(false);
+				} 
+
 
 	}
 }
