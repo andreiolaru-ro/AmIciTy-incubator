@@ -1,17 +1,31 @@
 package exercise.vlad.client;
-
 // clasa Receiver se ocupa cu captarea streamului 
 
 import java.net.*;
 import java.io.*;
-import java.util.*;
 
 
+/**
+ * class which has the purpose to catch text from the server
+ *  it then redirects to the client thread
+ * 
+ * @author vlad
+ *
+ */
 class Receiver extends Thread{
     
+    /**
+     * instance class Client to know where to redirect the received text
+     */
     private Client reDirect;
+	/**
+	 * instance which saves the text received from Server
+	 */
+	private BufferedReader in;
     
-    // primeste ca argument instanta ferestrei pentru a avea acces la TextArea
+    /**
+     * @param c : instance of the Client which will receive the text
+     */
     Receiver(Client c){
         reDirect = c;
     }
@@ -22,17 +36,19 @@ class Receiver extends Thread{
     // asteapa sa primeasca mesajul OVER, dupa care iese din bucla while
     // la fiecare mesaj primit se determina si momentul in care a fost primit 
     // mesajul si timpul sunt afisate in TextArea
-    public void run(){
+    @SuppressWarnings("null")
+	@Override
+	public void run(){
         
-         Socket kkSocket = null;
-	 BufferedReader in = null;
+    	 Socket kkSocket= null;
+	     in = null;
 
          // realizeaza conexiunea
 	 try {
 	       kkSocket = new Socket("localhost", 4444);
 	       in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
 	 } 
-         catch (UnknownHostException e) {
+     catch (UnknownHostException e) {
 	            System.err.println("Don't know about host: taranis.");
 	            System.exit(1);
 	 } catch (IOException e) {
@@ -47,7 +63,7 @@ class Receiver extends Thread{
             while(true){  
                 
                 // asteapta ca serverul sa aiba ceva de transmis
-                while ((fromServer = in.readLine()) == null) {} 
+                while ((fromServer = in.readLine()) == null){}
                 reDirect.setText( fromServer);
                
             }
@@ -56,13 +72,13 @@ class Receiver extends Thread{
           catch (IOException e){
 	    	   System.exit(1);
 	  }
-          try{
+      try{
           
             in.close();
             kkSocket.close();
           }
           catch(IOException e){
               System.out.println("Eroare la inchidere socket ");
-          }
+      }
     }
 }

@@ -1,52 +1,82 @@
 package exercise.vlad.client;
 
-
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
 
+/**
+ * the canvas used in JFrame, where the text will be shown and filtered
+ * @author vlad
+ *
+ */
 class GraphicsProgram extends JPanel{
 	  
-    private static Font monoFont;
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+     * the frame which contains the canvas
+     * used for receveing the data such as the text
+     * and controlling the other members of the frame
+     */
     private Client frame;
     
     // pentru a stii daca trebuie sa afisez un text nou venit sau textul cat timp a fost blocat
+    /**
+     * used for knowing whether the text must be drawn using blue Filter 
+     * or a red Filter 
+     */
     private boolean afisArray; 
+    /**
+     * instance of the filter which colors the word "blue" with blue
+     */
     private FiltruOne blueFiltru;
+    /**
+     * instance of the filter which colors the word "red" with red
+     */
     private FiltruTwo redFiltru;
+    /**
+     * variable which says from where to draw the next String 
+     */
     private int Originx;
+    
+    /**
+     * variable which says from where to draw the next String 
+     */
     private final int Originy;
     
-     GraphicsProgram(Client frame){
+     /**
+     * @param frame : instance of the frame to get information from the components 
+     * belonging to the frame 
+     */
+    GraphicsProgram(Client frame){
          
-       //   setSize(new Dimension(700, 300));
-      //    this.setPreferredSize(new Dimension(700,300);
-          monoFont = new Font("Monospaced", Font.BOLD | Font.ITALIC, 18);
+     //   new Font("Monospaced", Font.BOLD | Font.ITALIC, 18);
           this.frame = frame;
           afisArray = false;
           
-          // initializarea filtrelor
-          blueFiltru = new FiltruOne(this); 
-          redFiltru = new FiltruTwo(this);
+          blueFiltru = new FiltruOne(); 
+          redFiltru = new FiltruTwo();
           
           Originy = 0;
           Originx = 0;
           
      }
 
-      public void paintComponent(Graphics g){
+      @Override
+	public void paintComponent(Graphics g){
   
                
-	    //   super.paintComponent(g);     
-              int w, h;
-              if(afisArray == false ){
+	    if(afisArray == false ){
                    blueFiltru.receiveData(frame.getText(), g,Originy, Originx);  
                    Originx += blueFiltru.findHeight();     
               }
 
-              if(afisArray == true){
+        if(afisArray == true){
                   
                    ArrayList< String> TextAl = frame.getLockedText();
                    redFiltru.receiveData(TextAl, g,Originy, Originx);
@@ -58,7 +88,11 @@ class GraphicsProgram extends JPanel{
               } 
       }
               
-      public void changeAfis(){
+      /**
+       * called bye the Client instance to inform GraphicProgram instance that it
+       * has to draw an ArrayList
+     */
+    public void changeAfis(){
             afisArray = true;
       }
 }

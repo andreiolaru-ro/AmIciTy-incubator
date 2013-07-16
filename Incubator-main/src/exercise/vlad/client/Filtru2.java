@@ -1,42 +1,81 @@
 package exercise.vlad.client;
-
 // scrie textul "rosu" cu rosu intr-o propozitie
 
 import java.awt.*;
 import java.util.*;
-import javax.swing.*;
 
+
+/**
+ *  this filter renders with red the word "red" included in the text belonging
+ *  to Arraylist  Client.LockedT
+ * @author vlad
+ *
+ */
 class FiltruTwo implements Filtre{
+	
+    /**
+     * the Font used for rendering
+     */
     private static Font monoFont;
+    /**
+     *  varibile which receives the value of the string for redenring from
+     *  method receiveData
+     */
     private String text;
-    private GraphicsProgram GP;
+    
+    
+    /**
+     * variable for redendering the graphic belonging to Canvas 
+     */
     private Graphics g;
+    /**
+     * variable for knowing where to drawu the next String received 
+     */
     private int heightOrigin;
+    
+    /**
+    
+     * variable for knowing where to draw the next String received 
+    
+     */
     private int widthOrigin;
+    
+    /**
+     * variable which has the value of the height of the String rendered
+     */
     private int height;
     
-    FiltruTwo(GraphicsProgram GP){
+    
+    
+    /**
+     * constructor of this class:
+     * initialises general dates ( font)
+     */
+    FiltruTwo(){
         
-        this.GP = GP;
         monoFont = new Font("Monospaced", Font.BOLD | Font.ITALIC, 18);
     }
-     public void receiveData(Object  arrayList, Graphics g,int width, int height){
+    
+    @Override
+	public void receiveData(Object  arrayList, Graphics gRecv,int width, int heightRecv){
          
-         ArrayList al = (ArrayList) arrayList;
-         this.g = g;
+         @SuppressWarnings("unchecked")
+		ArrayList<String> al = ((ArrayList<String>) arrayList);
+         this.g = gRecv;
          int i;
-         heightOrigin = height;
+         heightOrigin = heightRecv;
          for(i=0; i< al.size(); i++){
              widthOrigin = width;
-             text =(String) al.get(i);
+             text = al.get(i);
              setText();
          }
         
     }
-     public void setText(){
+     @Override
+	public void setText(){
          
          String s[]= text.split(" ");   
-         int w,h=0, i;
+         int w, i;
          g.setFont(monoFont);
          FontMetrics fm = g.getFontMetrics();
          for( i = 0 ; i < s.length; i++ ){
@@ -54,7 +93,8 @@ class FiltruTwo implements Filtre{
          height +=fm.getAscent();
          
      }
-     public void compareWord(String wordCompared){
+     @Override
+	public void compareWord(String wordCompared){
 
         if(wordCompared.compareTo("rosu") == 0)
                 g.setColor(Color.red);
@@ -62,7 +102,8 @@ class FiltruTwo implements Filtre{
                  g.setColor(Color.BLACK);
         
      }
-     public int findHeight(){
+     @Override
+	public int findHeight(){
         int x = height;
         height = 0;
         return x;

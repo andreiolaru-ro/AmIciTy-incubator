@@ -1,5 +1,4 @@
 package exercise.vlad;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -15,29 +14,78 @@ import java.net.*;
 import java.util.*;
 
 
+/**
+ * Strings to be drawn
+ * @author vlad
+ *
+ */
 interface Strings{
+    /**
+     * constant String 1
+     */
     public String s1 = "Cerul este albastru";
+    /**
+     * 
+     * constant String 2
+     */
+     
     public String s2 = "Marea isi schimba culoarea din albastru in verde";
+    /**
+     * constant String 3
+     */
     public String s3 = "Ana are un mar rosu ";
+    /**
+     * constant String 4
+     */
     public String s4 = "Facultatea Automatica este grea";
+    /**
+     * constant String 5
+     */
     public String s5 = "A foolosit mult albastru in pictura";
+    /**
+     * constant String 6
+     */
     public String s6 = "Mergem la picnic si soarele este rosu ";
+    /**
+     * constant String 7
+     */
     public String s7 = "Culorile echipei sunt albastru si rosu ";
 }
 
+/**
+ * class which transmits Strings to the Client
+ * @author vlad
+ *
+ */
 public class Server {
+	
+    /**
+     * instance which writes random Strings frm interface Strings
+     */
     PrintWriter out;
+    /**
+     * 
+     */
     String text;
+    /**
+     * @param arg : param received
+     * @throws IOException : due to the fact that it contains instance of Server
+     */
     public static void main(String arg[])throws IOException{
         Server s  = new Server();
         s.start();
     }
+    /**
+     * @throws IOException : because of the work with Server and Client 
+     */
     void start() throws IOException{
 		
         
 	ServerSocket serverSocket = null;
 	try {
 		/* portul serverului este 4444 */
+		// imi da warning pentru ca nu este inchis
+		// tr s ama gandesc la o metoda de inchidere a serverului
 		serverSocket = new ServerSocket(4444); 
 				
 	} catch (IOException e) {
@@ -47,7 +95,7 @@ public class Server {
 			
 	Socket clientSocket = null;
 		
-        System.out.println("astept sa se faca conexiunea");
+    System.out.println("astept sa se faca conexiunea");
         
 	try{ /* identifica clientul */
 	        clientSocket = serverSocket.accept();  
@@ -81,14 +129,14 @@ public class Server {
                 }
              }
              catch(Exception ie){
-                 
+                 System.out.println("Error to print");
              }
              System.out.println(randomNr);
         }
         
-	/*out.close();
-	clientSocket.close();
-        serverSocket.close();*/
+//	out.close();
+//	clientSocket.close();
+ //       serverSocket.close();
 	   	
         }
 }
