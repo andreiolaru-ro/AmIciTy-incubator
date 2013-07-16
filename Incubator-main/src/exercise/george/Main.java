@@ -15,7 +15,7 @@ public class Main {
         adjacencyMatrix = GraphFileReader.GetAdjacencyMatrix("Graph.txt");
 
         // GraphUtility.printAdjacencyMatrix(adjacencyMatrix);
-      /*                  
+                        
          LowestIndegreeNode lowestInNode = new LowestIndegreeNode();
          int nodeNumber = lowestInNode.AlgorithmNode_process(adjacencyMatrix);
          System.out.println("Lowest Indegree Node: " + nodeNumber);
@@ -38,7 +38,7 @@ public class Main {
          for(int i = 0; i <  Constants.NodeNumber; i++)
          System.out.println(shortestPathVector[i]);
 
-         */
+         
         
 
     }

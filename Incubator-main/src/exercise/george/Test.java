@@ -10,16 +10,21 @@
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 package exercise.george;
-
+ 
 /**
  * @author ''George Cirlan''
  *
  */
+
 public class Test {
 	/**
 	 * @param args
 	 */
+	
 	public static void main(String[] args) {
-		System.out.println("ceva");
-	}
+		int a = 8;
+		
+		System.out.println(a);
+		
+	} 
 }
