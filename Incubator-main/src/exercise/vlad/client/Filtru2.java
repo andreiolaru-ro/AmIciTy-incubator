@@ -43,9 +43,17 @@ class FiltruTwo implements Filtre{
     /**
      * variable which has the value of the height of the String rendered
      */
-    private int height;
+//    private int height;
     
+   /**
+      variabile which saves the arraylist received 
+    */
+ //   private ArrayList<String> al;
     
+    /**
+     * variable which has the value of the height of the String rendered
+     */
+    private int Height = 0;
     
     /**
      * constructor of this class:
@@ -57,10 +65,23 @@ class FiltruTwo implements Filtre{
     }
     
     @Override
+   	public void receiveData(Object textRecv, Graphics gRecv,int width, int height1){
+           
+           this.text =(String) textRecv;
+           this.g = gRecv;
+           heightOrigin = height1;
+           widthOrigin = width;
+           setText();
+           
+       }
+    
+    
+ /*   @SuppressWarnings("unchecked")
+	@Override
 	public void receiveData(Object  arrayList, Graphics gRecv,int width, int heightRecv){
          
-         @SuppressWarnings("unchecked")
-		ArrayList<String> al = ((ArrayList<String>) arrayList);
+         
+		 al = ((ArrayList<String>) arrayList);
          this.g = gRecv;
          int i;
          heightOrigin = heightRecv;
@@ -70,8 +91,28 @@ class FiltruTwo implements Filtre{
              setText();
          }
         
+    } */
+    
+    @Override
+   	public void setText(){
+           
+            String s[]= text.split(" ");   
+            int w, i;
+            g.setFont(monoFont);
+            FontMetrics fm = g.getFontMetrics();
+            
+            for( i = 0 ; i < s.length; i++ ){
+                
+                compareWord(s[i]);
+                w = fm.stringWidth(s[i] + " ");
+                g.drawString(s[i] + " ", widthOrigin, heightOrigin);
+                widthOrigin = widthOrigin + w;
+
+            }   
+            Height =  fm.getAscent();
     }
-     @Override
+    
+/*     @Override
 	public void setText(){
          
          String s[]= text.split(" ");   
@@ -92,7 +133,7 @@ class FiltruTwo implements Filtre{
          heightOrigin += fm.getAscent();
          height +=fm.getAscent();
          
-     }
+     } */
      @Override
 	public void compareWord(String wordCompared){
 
@@ -102,11 +143,33 @@ class FiltruTwo implements Filtre{
                  g.setColor(Color.BLACK);
         
      }
-     @Override
+/*     @Override
 	public int findHeight(){
         int x = height;
         height = 0;
         return x;
+     }*/
+     
+     @Override
+	public int findHeight(){
+         return Height;
      }
+     
+     @SuppressWarnings("boxing")
+	@Override
+     public void addStringsToHistory(ArrayList<Integer> type, ArrayList<String> Strings){
+     	type.add(1);
+     	Strings.add(text);
+     	
+     }
+/*	public void addStringsToHistory(ArrayList<Integer> type, ArrayList<String> Strings){
+    	 
+    	int i;
+    	for( i = 0 ; i < al.size(); i++ ){
+    		type.add(1);
+    		Strings.add(al.get(i));
+    	}
+     	
+     }*/
  
 }

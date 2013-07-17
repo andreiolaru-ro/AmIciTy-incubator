@@ -1,5 +1,6 @@
 package exercise.vlad.client;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 
 /**
@@ -29,5 +30,11 @@ interface Filtre{
     /**
      * @return the height occupied
      */
-    public int findHeight();         
+    public int findHeight();  
+    /**
+     * @param type : the type of the filter used
+     * @param Strings : the arrayList to be drawn to every repaint();
+     */
+    public void addStringsToHistory(ArrayList<Integer> type, ArrayList<String> Strings);
+    
 }

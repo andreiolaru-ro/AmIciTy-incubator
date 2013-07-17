@@ -2,6 +2,7 @@ package exercise.vlad.client;
 // scrie textul "albastru" cu albastru intr-o propozitie
 
 import java.awt.*;
+import java.util.ArrayList;
 
 
 /**
@@ -91,4 +92,12 @@ class FiltruOne implements Filtre{
 	public int findHeight(){
         return Height;
     }
+    @SuppressWarnings("boxing")
+	@Override
+	public void addStringsToHistory(ArrayList<Integer> type, ArrayList<String> Strings){
+    	type.add(0);
+    	Strings.add(text);
+    	
+    }
+    
 }

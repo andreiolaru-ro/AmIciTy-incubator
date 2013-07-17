@@ -78,7 +78,8 @@ public class Server {
     /**
      * @throws IOException : because of the work with Server and Client 
      */
-    void start() throws IOException{
+    @SuppressWarnings("null")
+	void start() throws IOException{
 		
         
 	ServerSocket serverSocket = null;
@@ -134,9 +135,9 @@ public class Server {
              System.out.println(randomNr);
         }
         
-//	out.close();
-//	clientSocket.close();
- //       serverSocket.close();
+        //	out.close();
+        //	clientSocket.close();
+        //       serverSocket.close();
 	   	
         }
 }

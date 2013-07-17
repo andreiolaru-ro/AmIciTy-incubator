@@ -31,11 +31,8 @@ class Receiver extends Thread{
     }
     
     
-    // in functia run se stabileste conexiunea cu serverul
-    // primeste mesaje intr-un while
-    // asteapa sa primeasca mesajul OVER, dupa care iese din bucla while
-    // la fiecare mesaj primit se determina si momentul in care a fost primit 
-    // mesajul si timpul sunt afisate in TextArea
+    // in function run is established the conection with the Server
+    // the messages are received in a while
     @SuppressWarnings("null")
 	@Override
 	public void run(){
@@ -43,7 +40,7 @@ class Receiver extends Thread{
     	 Socket kkSocket= null;
 	     in = null;
 
-         // realizeaza conexiunea
+     // the connection is set
 	 try {
 	       kkSocket = new Socket("localhost", 4444);
 	       in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
@@ -62,8 +59,11 @@ class Receiver extends Thread{
               
             while(true){  
                 
-                // asteapta ca serverul sa aiba ceva de transmis
-                while ((fromServer = in.readLine()) == null){}
+                while ((fromServer = in.readLine()) == null){
+                	// this busy wating runs untill something 
+                	//is received from Server
+                }
+                
                 reDirect.setText( fromServer);
                
             }

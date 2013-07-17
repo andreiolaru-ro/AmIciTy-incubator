@@ -2,65 +2,74 @@ package exercise.vlad.client;
 
 import java.awt.event.*;
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.util.*;
 
 /**
- * clasa pentru crearea ferestrei unde vor fi afisate textele
+ * class for creating the Frame where the components(Canvas and Button) 
+ * will be shown
  */
 public class Client extends JFrame implements ActionListener{
     
     /**
-	 * nu stiu ce este asta
+	 * serial number used in a possible communication
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-     inaltimea ferestrei
+     the window's height
      */
     private final int height = 510;
     
     /**
-     lungimea ferestrei
+     the window's width
      */
     private final int width = 640;
     
     /**
-     componenta a ferestrei cu care se blocheaza/deblocheaza afisarea textului
+     the buttuon the user uses for disabling/ enabling receveing messages
      */
     private JButton lock;
     
     /**
-     status = 0 => este deblocat, status  = 1 => este blocat
+     status = 0 =>  enabled,
+     status  = 1 => disabled
      */
     // 
     private int status = 0;
    
     /**
-    variabila pentru a calcula cand a afisat textul fata de incperea procesului
+    variable used for calculating when the tet is received
      */
     private long timeStart;
     
    
     /**
-     lista pentru salvarea structurilor : timeStamp + String;
+     an aray of the structures: timeStamp + String;
      */
     private ArrayList<String> LockedT;
     
     /**
-      compinenta CANVAS a ferestrei
+      the Canvas component of the Program
      */
     private GraphicsProgram GP;
     
     
     /**
-     Stringul de afisat
+     the string received and to be shown
      */
     private String output;
     
     /**
-    constructorul clasei
-    contine metodele de initializare a ferestrei si a componentelor
+     * scroll bar the person uses to scroll to all text
+     */
+    public JScrollBar vbar;
+    
+    /**
+    the constructor of the class
+    contains the methods to initialise the window and its components
      */
     Client(){
         
@@ -70,7 +79,7 @@ public class Client extends JFrame implements ActionListener{
     
     
     /**
-     functia init creeza fereastra si stabileste atributele acesteia
+    function init creates the frame and establishes its components
      */
     public void init(){
         this.setTitle(" Fereastra Filtru de texte");
@@ -90,7 +99,7 @@ public class Client extends JFrame implements ActionListener{
     }
     
     /**
-     functia components adauga componentele la fereastra
+     function components adds components to the window
      */
     public void components(){
         
@@ -98,16 +107,17 @@ public class Client extends JFrame implements ActionListener{
         GP = new GraphicsProgram(this); 
         add(GP);
        
-        GP.setBounds(0,0,600,300);
-       
-
         lock = new JButton("Lock Output");
         Dimension lock_dim = lock.getPreferredSize();
         lock.setBounds(50,350 ,lock_dim.width, lock_dim.height);
         add(lock);
         lock.addActionListener(this);
         
-     //   JScrollPane scrolltxt = new JScrollPane(GP);
+        
+        vbar = new JScrollBar(Adjustable.VERTICAL);
+        GP.add(vbar,BorderLayout.EAST);
+        
+    //    JScrollPane scrolltxt = new JScrollPane(GP);
    /*     scrolltxt = new JScrollPane(GP,
         JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
         JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -115,9 +125,9 @@ public class Client extends JFrame implements ActionListener{
         scrolltxt.setPreferredSize(new Dimension(160, 200)); */
 
         
-      //  scrolltxt.setPreferredSize(new Dimension(200,200));
-    //    scrolltxt.setBounds( 20  , 20 , 600, 300);
-    //    add(scrolltxt);
+   //     scrolltxt.setPreferredSize(new Dimension(200,200));
+   //     scrolltxt.setBounds( 20  , 20 , 600, 300);
+   //     add(scrolltxt);
         
         this. setSize(width-1,height-1);
         this. setSize(width,height);
@@ -127,13 +137,16 @@ public class Client extends JFrame implements ActionListener{
     
     
     /**
-     *  functie apelata de threadul separat pentru a afisa mesajele de la consola
-     fuctiile setText si actionPerformed sunt synchronized pentru excludere 
-     mutuala asupra Arralistului care salveaza stringurile si asupra spatiului de afisare
-     status = 0 => textul este afisat
-     status = 1 => textul este salvat
+     *    
+     the functions are synchronised for mutual exclusion 
+     on the arraylist which saves the strings and on the canvas
+     between the thread which draws the text and the one that receives them
      
-     * @param received : stringul primit de la procesul Receiver
+     status = 0 =>the text is shown
+     status = 1 =>the text is saved
+     
+     * @param received : the String received from the thread
+     *  which runs in class Receiver 
      */
     public synchronized void setText(String received){
        long time2 =   System.currentTimeMillis();
@@ -147,23 +160,22 @@ public class Client extends JFrame implements ActionListener{
     }
     
     /**
-     * pentru obtinerea textului de catre Canvas
-     * @return stringul de afisat
+     * @return Sting by the Canvas when the Canvas is not blocked
      */
     public synchronized String getText(){
         return output;
     }
     
     /**
-     * pentru obtinerea lsitei de stringuri de catre Canvas
-     * @return lista ce salveaza structurile linie + timestamp
+     * getter for getting the list of strings by the canvas
+     * @return the list which saves the structures string + timeStamp 
      */
     public synchronized ArrayList <String> getLockedText(){
         return LockedT;
     }
 
     /**
-     * lista este stearsa de catre Canvas dupa ce datele au fost afisare
+     * the list is Cleared bu Canvas once the dats where shown
      */
     public synchronized void setLocketText(){
         LockedT.clear();
@@ -188,16 +200,13 @@ public class Client extends JFrame implements ActionListener{
     }
     
     /**
-     * metoda main: instantiaza clientul ce primeste mesajele si receiverul care
-     * primeste textele de la celalalt proces
-     * @param arg : lista de parametri primiti , adica nula
+     * creates the object Client which has the role to draw the text
+     * creates the object Receiver which receives the text from the Server
+     * @param arg : list of parameters received 
      */
     public static void main(final String arg[]){
         
         Client filtru  = new Client();
-        
-        // apelez threadul ce primeste mesaje de la celalalt program
-        // ii trimit ca argument instanta filtru, pentru a aduga in TextArea 
         Receiver r = new Receiver(filtru);
         r.start();
 
