@@ -39,9 +39,12 @@ import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
  * @author cristian
  */
 
-@SuppressWarnings("serial")
 public class Graphic extends JFrame implements ItemListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * append indicator - if checked is 1 else 0;
 	 */
@@ -66,11 +69,11 @@ public class Graphic extends JFrame implements ItemListener {
 	/**
 	 * files from in directory
 	 */
-	private Vector<String> items = new Vector<String>();
+	Vector<String> items = new Vector<String>();
 	/**
 	 * files from out directory
 	 */
-	private Vector<String> items2 = new Vector<String>();
+	Vector<String> items2 = new Vector<String>();
 
 	/**
 	 * An ArrayList of possible functions
@@ -257,7 +260,6 @@ public class Graphic extends JFrame implements ItemListener {
 		});
 		go.addActionListener(new ActionListener() {
 
-			@SuppressWarnings("synthetic-access")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 

@@ -28,7 +28,7 @@ import javax.swing.JCheckBox;
 public abstract class DefaultFunctions implements Functions {
 
 	/**
-	 * CheckBox for each editing text file
+	 * CheckBox for each editing text file functions
 	 */
 	JCheckBox c;
 

@@ -23,7 +23,6 @@ public class Main {
 	 * @param args
 	 *            the command line arguments
 	 */
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		ArrayList<DefaultFunctions> functions = new ArrayList<DefaultFunctions>();
 		UpperCaseFunction upper = new UpperCaseFunction("toUpperCase");
@@ -31,9 +30,16 @@ public class Main {
 		LowerCaseFunction lower = new LowerCaseFunction("toLowerCase");
 		functions.add(lower);
 		NewLine80Characters eighty = new NewLine80Characters("newLine80ch");
+		// !new line after word "stop"
+		// !java reflection (structura unui obiect)
+		// Cred ca cea mai eleganta metoda de a rezolva asta e ca in Default
+		// function
+		// sa fie un vector in care sunt retinute niste numere reprezentand
+		// categoria. Daca doua functii au numarul 1 nu pot fi enable in
+		// aceelasi timp.
 		functions.add(eighty);
 		TrimFunction trim = new TrimFunction("Trim");
 		functions.add(trim);
-		Graphic frame = new Graphic(functions);
+		new Graphic(functions).repaint();
 	}
 }
