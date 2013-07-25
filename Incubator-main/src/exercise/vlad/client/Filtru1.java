@@ -92,10 +92,9 @@ class FiltruOne implements Filtre{
 	public int findHeight(){
         return Height;
     }
-    @SuppressWarnings("boxing")
 	@Override
 	public void addStringsToHistory(ArrayList<Integer> type, ArrayList<String> Strings){
-    	type.add(0);
+    	type.add(new Integer(0));
     	Strings.add(text);
     	
     }

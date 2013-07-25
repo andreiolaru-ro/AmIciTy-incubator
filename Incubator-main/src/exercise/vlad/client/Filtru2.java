@@ -155,10 +155,9 @@ class FiltruTwo implements Filtre{
          return Height;
      }
      
-     @SuppressWarnings("boxing")
 	@Override
      public void addStringsToHistory(ArrayList<Integer> type, ArrayList<String> Strings){
-     	type.add(1);
+     	type.add(new Integer(1));
      	Strings.add(text);
      	
      }
