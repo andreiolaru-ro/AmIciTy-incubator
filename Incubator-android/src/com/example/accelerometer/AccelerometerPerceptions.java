@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (C) 2013 Andrei Olaru, Cristian Grigoras.
+ * 
+ * This file is part of Accelerometer.
+ * 
+ * Accelerometer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+ * 
+ * Accelerometer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along with Accelerometer.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
 package com.example.accelerometer;
 
 import android.app.Activity;
@@ -12,13 +23,40 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * @author cristian
+ * 
+ */
 public class AccelerometerPerceptions extends Activity implements
 		SensorEventListener {
 
-	private float mLastX, mLastY, mLastZ;
+	/**
+	 * mLastX -> last x coordonate taken by accelerometer
+	 */
+	private float mLastX;
+	/**
+	 * mLastX -> last y coordonate taken by accelerometer
+	 */
+	private float mLastY;
+	/**
+	 * mLastX -> last z coordonate taken by accelerometer
+	 */
+	private float mLastZ;
+	/**
+	 * mInitialized -> true if sensor is initialized
+	 */
 	private boolean mInitialized;
+	/**
+	 * The SensorManager
+	 */
 	private SensorManager mSensorManager;
+	/**
+	 * The Accelerometer sensor
+	 */
 	private Sensor mAccelerometer;
+	/**
+	 * A minimum value for showing movement.
+	 */
 	private final float NOISE = (float) 5.0;
 
 	@Override
@@ -34,12 +72,14 @@ public class AccelerometerPerceptions extends Activity implements
 				SensorManager.SENSOR_DELAY_NORMAL);
 	}
 
+	@Override
 	protected void onResume() {
 		super.onResume();
 		mSensorManager.registerListener(this, mAccelerometer,
 				SensorManager.SENSOR_DELAY_NORMAL);
 	}
 
+	@Override
 	protected void onPause() {
 		super.onPause();
 		mSensorManager.unregisterListener(this);
