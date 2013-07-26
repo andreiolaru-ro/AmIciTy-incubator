@@ -41,6 +41,14 @@ public class MainActivity extends Activity
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		
+	//	de ce nu merge asta?
+	//   cand se salveaza starea ?
+	/*	if(savedInstanceState != null)
+			return;
+		
+	*/	
 
 		this.mainText = (TextView) findViewById(R.id.mainText);
 		showChartButton = (Button) findViewById(R.id.buttonChart);
@@ -71,6 +79,13 @@ public class MainActivity extends Activity
 		mainWifi.startScan();
 		mainText.setText("\\nStarting Scan...\\n");
 	}
+	
+	public void onRestart(){
+		super.onRestart();
+		//signalValueList = new ArrayList<Integer>();
+		//netNameList = new ArrayList<String>();
+	}
+	
 
 	public void makeChart()
 	{
@@ -136,6 +151,9 @@ class WifiReceiver extends BroadcastReceiver
 
 	public void onReceive(Context c, Intent intent)
 	{
+		
+		main.signalValueList.clear();
+		main.netNameList.clear();
 
 		main.sb = new StringBuilder();
 		main.wifiList = main.mainWifi.getScanResults();
