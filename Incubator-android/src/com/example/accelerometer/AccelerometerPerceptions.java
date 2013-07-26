@@ -31,15 +31,15 @@ public class AccelerometerPerceptions extends Activity implements
 		SensorEventListener {
 
 	/**
-	 * mLastX -> last x coordonate taken by accelerometer
+	 * mLastX -> last x coordinate taken by accelerometer
 	 */
 	private float mLastX;
 	/**
-	 * mLastX -> last y coordonate taken by accelerometer
+	 * mLastX -> last y coordinate taken by accelerometer
 	 */
 	private float mLastY;
 	/**
-	 * mLastX -> last z coordonate taken by accelerometer
+	 * mLastX -> last z coordinate taken by accelerometer
 	 */
 	private float mLastZ;
 	/**
