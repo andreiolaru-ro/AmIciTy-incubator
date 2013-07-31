@@ -8,6 +8,7 @@
  * Contributors:
  *     ''Azgabast'' - initial API and implementation
  ******************************************************************************/
+import java.net.InetAddress;
 
 
 /**
@@ -23,7 +24,7 @@ public class Connection
 	/**
 	 *  The Ip of the device to connect with.
 	 */
-	String ip;
+	InetAddress ip;
 	
 	/**
 	 * The id of the device to connect with.
@@ -62,7 +63,7 @@ public class Connection
 	 * @param s The state of the device.
 	 * @param port The port for the connection
 	 */
-	public Connection(String ip, String id , int port ) {
+	public Connection( InetAddress ip, String id , int port ) {
 		this.ip= ip;
 		this.id = id;
 		this.s = State.Off;
@@ -82,7 +83,7 @@ public class Connection
 	/**
 	 * @return The ip of the connection.
 	 */
-	public String getIp() {
+	public InetAddress getIp() {
 		return this.ip;
 	}
 	
