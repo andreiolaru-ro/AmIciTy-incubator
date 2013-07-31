@@ -60,7 +60,8 @@ public class ConnMgr
 	 */
 	public int contains(Connection c) {
 		for ( int i = 0; i < connList.size(); i ++)
-			if( connList.get(i).id == c.id && connList.get(i).ip == c.ip)
+			if( connList.get(i).id == c.id && connList.get(i).ip == c.ip 
+			&& connList.get(i).port == c.port)
 				return i;
 		return -1;
 	}
