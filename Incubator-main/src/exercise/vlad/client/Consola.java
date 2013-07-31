@@ -111,7 +111,7 @@ class GraphicsProgram extends JPanel
 		for (i = 0; i < StringReceived.size(); i++)
 		{
 
-			int integer = typeString.get(i);
+			int integer = typeString.get(i).intValue();
 			if (integer == 0)
 			{
 
