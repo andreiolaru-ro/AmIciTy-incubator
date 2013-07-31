@@ -26,6 +26,11 @@ public class Connection
 	 * The id of the device to connect with.
 	 */
 	String id;
+	
+	/**
+	 * The port used for the connection.
+	 */
+	int port;
 	/**
 	 * 
 	 * The list of possible states of a connection.
@@ -52,11 +57,13 @@ public class Connection
 	 * @param ip The device ip.
 	 * @param id The device id.
 	 * @param s The state of the device.
+	 * @param port The port for the connection
 	 */
-	public Connection( InetAddress ip, String id , State s) {
+	public Connection( InetAddress ip, String id , int port, State s ) {
 		this.ip= ip;
 		this.id = id;
 		this.s = s;
+		this.port = port;
 	}
 	
 	/**
@@ -86,6 +93,22 @@ public class Connection
 	 */
 	public State getState() {
 		return this.s;
+	}
+
+	/**
+	 * @return The port for the current connection.
+	 */
+	public int getPort()
+	{
+		return port;
+	}
+
+	/**
+	 * @param port The port for the current connection.
+	 */
+	public void setPort(int port)
+	{
+		this.port = port;
 	}
 	
 	
