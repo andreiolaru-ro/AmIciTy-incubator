@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * The class which manages what connections the device has and their current
  * state.
  */
-public class ConnMgr
+public class ConnMgr implements ConnectionManager
 {
 	/**
 	 *  The connection list.
@@ -49,40 +49,38 @@ public class ConnMgr
 	/**
 	 * @param c The Connection to be added.
 	 */
+	@Override
 	public void addConnection(Connection c) {
 		connList.add(c);
 	}
 	
 	/**
-	 * @param c The connection to be checked.
-	 * @return A boolean value representing whether the connection is contained
-	 * or not in the list.
+	 * @param id The desired connection's ID.
+	 * @return The desired connection, or null if it isn't found.
 	 */
-	public int contains(Connection c) {
-		for ( int i = 0; i < connList.size(); i ++)
-			if( connList.get(i).id == c.id && connList.get(i).ip == c.ip 
-			&& connList.get(i).port == c.port)
-				return i;
-		return -1;
+	@Override
+	public Connection getConnection(String id) {
+		for ( Connection c: connList)
+			if( c.id == id )
+				return c;
+		return null;
 	}
 	
 	/**
 	 * @param c The connection to be removed.
 	 * @return Whether the connection was removed or not.
 	 */
+	@Override
 	public boolean removeConnection(Connection c) {
-		int where = contains(c);
-		if( where == -1)
-			return false;
-		connList.remove(where);
-		return true;
+		return connList.remove(c);	
 	}
 	
 	@Override
 	public String toString() {
 		String s="";
 		for( Connection c: connList) {
-			s = s + "Id: " + c.id + " Ip: " + c.ip + " State: " + c.getState() + "\n";
+			s = s + "Id: " + c.id + " Ip: " + c.ip 
+					+ "Port: " + c.port + " State: " + c.getState() + "\n";
 		}
 		return s;
 		

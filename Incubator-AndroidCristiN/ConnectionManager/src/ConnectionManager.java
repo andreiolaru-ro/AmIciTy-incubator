@@ -14,14 +14,15 @@ public interface ConnectionManager
 	 * @param c The connection to be added.
 	 */
 	public void addConnection(Connection c);
+	
 	/**
-	 * @param c The connection to be checked
-	 * @return Whether the connection is contained in the list or not.
+	 * @param id The desired connection's id.
+	 * @return The desired connection, or null if it isn't found.
 	 */
-	public int contains (Connection c);
+	public Connection getConnection(String id);
 	/**
 	 * @param c The connection to be removed.
 	 * @return Whether the connection was removed or not.
 	 */
-	public boolean removeCOnnection(Connection c);
+	public boolean removeConnection(Connection c);
 }

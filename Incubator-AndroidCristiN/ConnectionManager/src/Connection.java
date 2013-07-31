@@ -18,6 +18,10 @@ import java.net.InetAddress;
 public class Connection
 {
 	/**
+	 * The time passed since this connection was created.
+	 */
+	long lifeSpan;
+	/**
 	 *  The Ip of the device to connect with.
 	 */
 	InetAddress ip;
@@ -59,10 +63,10 @@ public class Connection
 	 * @param s The state of the device.
 	 * @param port The port for the connection
 	 */
-	public Connection( InetAddress ip, String id , int port, State s ) {
+	public Connection( InetAddress ip, String id , int port ) {
 		this.ip= ip;
 		this.id = id;
-		this.s = s;
+		this.s = State.Off;
 		this.port = port;
 	}
 	
@@ -72,6 +76,8 @@ public class Connection
 	 */
 	public void setState(State s) {
 		this.s = s;
+		if ( this.s == State.On)
+			lifeSpan = System.currentTimeMillis();
 	}
 	
 	/**
@@ -109,6 +115,13 @@ public class Connection
 	public void setPort(int port)
 	{
 		this.port = port;
+	}
+	
+	/**
+	 * @return The time this connection was on
+	 */
+	public long getConnectionTime() {
+		return System.currentTimeMillis() - lifeSpan;
 	}
 	
 	
