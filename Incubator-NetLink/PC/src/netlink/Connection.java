@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2013 Andrei Olaru, Cristian Neagoe.
+ * Copyright (C) 2013 Andrei Olaru, ''Azgabast''.
  * 
  * This file is part of NetLink-PC.
  * 
@@ -20,6 +20,10 @@ import java.net.InetAddress;
 public class Connection {
 
 	/**
+	 * The time passed since this connection was created.
+	 */
+	long lifeSpan;
+	/**
 	 * The Ip of the device to connect with.
 	 */
 	InetAddress ip;
@@ -30,7 +34,7 @@ public class Connection {
 	String id;
 
 	/**
-	 * The port of the device to connect with.
+	 * The port used for the connection.
 	 */
 	int port;
 
@@ -62,15 +66,13 @@ public class Connection {
 	 *            The device ip.
 	 * @param id
 	 *            The device id.
-	 * @param s
-	 *            The state of the device.
 	 * @param port
-	 *            The device port
+	 *            The port for the connection
 	 */
-	public Connection(InetAddress ip, String id, State s, int port) {
+	public Connection(InetAddress ip, String id, int port) {
 		this.ip = ip;
 		this.id = id;
-		this.s = s;
+		this.s = State.Off;
 		this.port = port;
 	}
 
@@ -81,6 +83,8 @@ public class Connection {
 	 */
 	public void setState(State s) {
 		this.s = s;
+		if (this.s == State.On)
+			lifeSpan = System.currentTimeMillis();
 	}
 
 	/**
@@ -98,17 +102,32 @@ public class Connection {
 	}
 
 	/**
-	 * @return The port of the device connected with.
-	 */
-	public int getPort() {
-		return this.port;
-	}
-
-	/**
 	 * @return The state of the connection.
 	 */
 	public State getState() {
 		return this.s;
+	}
+
+	/**
+	 * @return The port for the current connection.
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * @param port
+	 *            The port for the current connection.
+	 */
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	/**
+	 * @return The time this connection was on
+	 */
+	public long getConnectionTime() {
+		return System.currentTimeMillis() - lifeSpan;
 	}
 
 }

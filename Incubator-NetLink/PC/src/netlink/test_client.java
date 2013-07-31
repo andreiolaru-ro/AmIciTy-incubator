@@ -11,13 +11,14 @@
  ******************************************************************************/
 package netlink;
 
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
  * @author cristian
  * 
  */
-public class test {
+public class test_client {
 
 	/**
 	 * @param args
@@ -27,7 +28,10 @@ public class test {
 
 		DefaultNetLink d = new DefaultNetLink();
 
-		d.initializeReceival(4500, new DefaultMessageReceiver());
+		Connection c = new Connection(InetAddress.getByName("172.17.102.17"),
+				"gica", 4500);
+
+		d.send(c, "mama");
 
 	}
 
