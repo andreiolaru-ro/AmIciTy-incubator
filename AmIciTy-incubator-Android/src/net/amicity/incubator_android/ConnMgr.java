@@ -9,7 +9,6 @@
  *     ''Azgabast'' - initial API and implementation
  ******************************************************************************/
 import java.util.ArrayList;
-import java.util.Set;
 
 
 /**
@@ -34,9 +33,8 @@ public class ConnMgr implements ConnectionManager
 	/**
 	 * @param connLst The initial connection list.
 	 */
-	public ConnMgr(Set<Connection> connLst) {
-		connList = new ArrayList<Connection>();
-		connList.addAll(connLst);
+	public ConnMgr(ArrayList<Connection> connLst) {
+		connList = new ArrayList<Connection>(connLst);
 	}
 	
 	/**
