@@ -1,4 +1,4 @@
-package net.amicity.communications;
+package net.amicity.incubator_android;
 /*******************************************************************************
  * Copyright (c) 2013 ''Azgabast''.
  * All rights reserved. This program and the accompanying materials
