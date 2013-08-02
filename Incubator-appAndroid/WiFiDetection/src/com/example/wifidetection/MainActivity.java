@@ -237,7 +237,7 @@ public class MainActivity extends Activity
 				mainText.append(line + "\n");
 			}
 			br.close();
-		//	this.deleteFile(wireless);
+			this.deleteFile(wireless);
 
 		}
 		catch (IOException e)
