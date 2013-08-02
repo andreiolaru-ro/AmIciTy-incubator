@@ -14,8 +14,14 @@ package com.example.netlink_android;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
+import java.util.Enumeration;
+
+import android.util.Log;
 
 /**
  * @author cristian
@@ -50,13 +56,16 @@ public class DefaultNetLink implements NetLink {
 	}
 
 	@Override
-	public void initializeReceival(int port, final MessageReceiver msgR) {
+	public void initializeReceival(int port, final MessageReceiver msgR,
+			final Test act) {
 		final ServerSocket serverSocket;
 
 		try {
 			serverSocket = new ServerSocket(port);
 
 			System.out.println("Server started on port: " + port);
+			act.tx.setText("My ip is: " + getLocalIpAddress());
+			// System.out.println("My ip is:" + getLocalIpAddress());
 
 			new Thread(new Runnable() {
 
@@ -68,12 +77,15 @@ public class DefaultNetLink implements NetLink {
 							ObjectInputStream in = new ObjectInputStream(
 									client.getInputStream());
 							final Object obj = in.readObject();
-							/*
-							 * act.runOnUiThread(new Runnable() {
-							 * 
-							 * @Override public void run() {
-							 * act.textField.setText((String) obj); } });
-							 */
+
+							act.runOnUiThread(new Runnable() {
+
+								@Override
+								public void run() {
+									act.tx.setText((String) obj);
+								}
+							});
+
 							msgR.receive(obj);
 							in.close();
 							client.close();
@@ -96,6 +108,29 @@ public class DefaultNetLink implements NetLink {
 			System.out.println("Could not listen on port: " + port);
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @return A string representing the local ip adress
+	 */
+	public static String getLocalIpAddress() {
+		try {
+			for (Enumeration<NetworkInterface> en = NetworkInterface
+					.getNetworkInterfaces(); en.hasMoreElements();) {
+				NetworkInterface intf = en.nextElement();
+				for (Enumeration<InetAddress> enumIpAddr = intf
+						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+					InetAddress inetAddress = enumIpAddr.nextElement();
+					if (!inetAddress.isLoopbackAddress()) {
+						return inetAddress.getHostAddress().toString();
+					}
+				}
+			}
+		}
+		catch (SocketException ex) {
+			Log.e("ServerActivity", ex.toString());
+		}
+		return null;
 	}
 
 	@Override

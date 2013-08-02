@@ -14,12 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
-        android:inputType="text">
-
-        <requestFocus />
-    </EditText>
+        android:inputType="text" />
 
     <Button
         android:id="@+id/button1"
@@ -27,16 +24,23 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/editText1"
         android:layout_below="@+id/editText1"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="16dp"
         android:text="@string/button" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="121dp"
         android:text="@string/none" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_toRightOf="@+id/textView1"
+        android:text="@string/listen" />
 
 </RelativeLayout>

@@ -14,7 +14,7 @@ import android.widget.TextView;
  * @author root
  * 
  */
-public class Test extends Activity {
+public class Test extends Activity implements View.OnClickListener {
 
 	/**
 	 * textField -> for messages
@@ -23,7 +23,15 @@ public class Test extends Activity {
 	/**
 	 * Button to send
 	 */
-	Button button;
+	Button send;
+	/**
+	 * TextView -> for listening
+	 */
+	TextView tx;
+	/**
+	 * Button to listen
+	 */
+	Button listen;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +39,11 @@ public class Test extends Activity {
 		setContentView(R.layout.main);
 
 		textField = (EditText) findViewById(R.id.editText1);
-		button = (Button) findViewById(R.id.button1);
-		final TextView tx = (TextView) findViewById(R.id.textView1);
+		send = (Button) findViewById(R.id.button1);
+		tx = (TextView) findViewById(R.id.textView1);
+		listen = (Button) findViewById(R.id.button2);
 
-		button.setOnClickListener(new View.OnClickListener() {
+		send.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -47,12 +56,21 @@ public class Test extends Activity {
 					textField.setText("");
 				}
 				catch (UnknownHostException e) {
-					tx.setText(e.getMessage());
 					e.printStackTrace();
 				}
 			}
 
 		});
+		listen.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		listen.setEnabled(false);
+		DefaultNetLink d = new DefaultNetLink();
+
+		d.initializeReceival(4500, new DefaultMessageReceiver(), this);
+
 	}
 
 }

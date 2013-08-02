@@ -27,10 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.netlink_android.Test_client"
-            android:label="@string/title_activity_test_client" >
-        </activity>
     </application>
 
 </manifest>

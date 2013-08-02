@@ -7,6 +7,5 @@
     <string name="button">Send</string>
     <string name="listen">Listen</string>
     <string name="none"></string>
-    <string name="title_activity_test_client">Test_client</string>
 
 </resources>
