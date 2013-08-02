@@ -14,6 +14,7 @@ package netlink;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -29,9 +30,13 @@ public class DefaultNetLink implements NetLink {
 		ObjectOutputStream out;
 
 		try {
+			System.out.println("aici");
 			client = new Socket(c.getIp(), c.getPort());
+			System.out.println("aici1");
 			out = new ObjectOutputStream(client.getOutputStream());
+			System.out.println("aici2");
 			out.writeObject(o);
+			System.out.println("aici3");
 			out.flush();
 			out.close();
 			client.close();
@@ -49,6 +54,8 @@ public class DefaultNetLink implements NetLink {
 			serverSocket = new ServerSocket(port);
 
 			System.out.println("Server started on port: " + port);
+			System.out.println("My ip is:"
+					+ InetAddress.getLocalHost().getHostAddress());
 
 			new Thread(new Runnable() {
 

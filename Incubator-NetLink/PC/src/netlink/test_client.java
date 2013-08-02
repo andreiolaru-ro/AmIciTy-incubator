@@ -28,10 +28,10 @@ public class test_client {
 
 		DefaultNetLink d = new DefaultNetLink();
 
-		Connection c = new Connection(InetAddress.getByName("172.17.102.17"),
+		Connection c = new Connection(InetAddress.getByName("192.168.0.198"),
 				"gica", 4500);
 
-		d.send(c, "mama");
+		d.send(c, "De ce nu merge?");
 
 	}
 
