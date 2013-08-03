@@ -1,5 +1,8 @@
 package net.amicity.incubator_android;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import android.os.Bundle;
 import android.widget.TextView;
 import android.app.Activity;
@@ -54,6 +57,22 @@ public class MainActivity extends Activity {
 				    SimplePeerMachinesManager  managerP2P= new SimplePeerMachinesManager();
 				    Station d =  managerP2P.getServerForLocation(location);
 				    locationReceivedText.setText(d.Ip );
+				  
+				    
+				    // cristi Grig
+				    
+				    DefaultNetLink test = new DefaultNetLink();
+				    
+				    try
+				    {
+					Connection c = new Connection(InetAddress.getByName(d.Ip),
+								"gica", 4500);
+				    }
+				    catch (UnknownHostException e)
+				    {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				    }
 			    }
 			    
 			    
