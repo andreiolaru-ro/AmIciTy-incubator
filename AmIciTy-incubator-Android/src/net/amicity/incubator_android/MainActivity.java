@@ -61,18 +61,19 @@ public class MainActivity extends Activity {
 				    
 				    // cristi Grig
 				    
-				    DefaultNetLink test = new DefaultNetLink();
+				 //   DefaultNetLink test = new DefaultNetLink();
 				    
-				    try
+				  /*  try
 				    {
 					Connection c = new Connection(InetAddress.getByName(d.Ip),
 								"gica", 4500);
+					test.send(c, "hello");
 				    }
 				    catch (UnknownHostException e)
 				    {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				    }
+				    } */
 			    }
 			    
 			    
