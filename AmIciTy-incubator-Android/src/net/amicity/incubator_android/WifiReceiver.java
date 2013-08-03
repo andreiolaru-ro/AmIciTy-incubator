@@ -32,21 +32,20 @@ class WifiReceiver extends BroadcastReceiver
 		main = wld;
 	}
 
+	@Override
 	public void onReceive(Context c, Intent intent)
 	{
 		List <ScanResult> networksDetected=  main.mainWifi.getScanResults();
-		main.mainText.setText("am trecut de scanare");
 	
 		
           for(Iterator<ScanResult> it = networksDetected.iterator(); it.hasNext();){
           	
-          	ScanResult networkResult =(ScanResult) it.next();
+          	ScanResult networkResult = it.next();
           	if(main.wifiList.contains(networkResult.SSID) == false)
           		main.wifiList.add(networkResult.SSID);
            }
 		
-		main.mainText.setText("numele retelelor au fost salvate");
-		main.getLocation();
+		main.getLocation(); 
 		
 	}
 

@@ -43,9 +43,11 @@ class WifiReceiver extends BroadcastReceiver
           	ScanResult networkResult =(ScanResult) it.next();
           	if(main.wifiList.contains(networkResult.SSID) == false)
           		main.wifiList.add(networkResult.SSID);
+     
            }
 		
 		main.mainText.setText("numele retelelor au fost salvate");
+		
 		main.getLocation();
 		
 	}

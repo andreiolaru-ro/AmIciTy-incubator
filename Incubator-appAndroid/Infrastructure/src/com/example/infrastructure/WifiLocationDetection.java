@@ -165,6 +165,10 @@ public class WifiLocationDetection extends Activity implements LocationDetector
 		return LocationDetected;
 				
 	}
+	public void onPause(){
+		super.onPause();
+		this.unregisterReceiver(receiverWifi);
+	}
 
 }
 

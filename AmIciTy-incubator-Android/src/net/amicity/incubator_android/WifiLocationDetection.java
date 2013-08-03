@@ -1,5 +1,4 @@
 package net.amicity.incubator_android;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 
 
@@ -38,42 +38,34 @@ public class WifiLocationDetection extends Activity implements LocationDetector
 	 */
 	WifiManager mainWifi;
 	
-	/**
-	 *  shows the location detected
-	 */
-	TextView mainText;
-	
-	/**
-	 *  shows the common networks detected
-	 */
-	TextView showText;
 	
 	/**
 	 * simulates the history of user's old locations and its wifis associated
 	 */
 	TreeMap<String, ArrayList<String>> dataNetLocation;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		
 
-//		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.activity_wifi_location_detection);
+		super.onCreate(savedInstanceState);
+	//	setContentView(R.layout.activity_wifi_location_detection);
 		wifiList= new ArrayList<String>();
 		
+		
+	
+		
 		initHardData();
-//		mainText = (TextView) findViewById(R.id.mainText);
-//		showText = (TextView) findViewById(R.id.showText);
-	     mainWifi = (WifiManager)  getSystemService(Context.WIFI_SERVICE);
+	     mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 	     receiverWifi = new WifiReceiver(this);
 	     mainWifi.setWifiEnabled(true);
 	     registerReceiver(receiverWifi, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 	     mainWifi.startScan();
-	     mainText.setText("\\nStarting Scan...\\n"); 
 		
 		
-	}
+	} 
 	
 	/**
 	 * hardcoding the history locations
@@ -140,12 +132,12 @@ public class WifiLocationDetection extends Activity implements LocationDetector
 		for(Iterator<String> itLocation = keys.iterator(); itLocation.hasNext();){
 			
 			value = 0;
-			String location =(String) itLocation.next();
+			String location =itLocation.next();
 			ArrayList<String> networks = dataNetLocation.get(location);
 			commun.clear();
 			
 			for(Iterator<String> itNet = wifiList.iterator(); itNet.hasNext();){
-				String network =(String) itNet.next();
+				String network =itNet.next();
 				if(networks.contains(network)== true){
 					value ++;	
 					commun.add(network);
@@ -154,16 +146,21 @@ public class WifiLocationDetection extends Activity implements LocationDetector
 			if(value > max){
 				max  = value;
 				LocationDetected = location; 
-				showText.setText("");
-				for(i=0; i<commun.size(); i++)
-					showText.append(commun.get(i)+ "\n");
 
 			}
 		}
 		
-		mainText.setText(LocationDetected);
+		Intent resultIntent = new Intent();
+		resultIntent.putExtra("result", LocationDetected);
+		this.setResult(RESULT_OK,resultIntent);
+		finish();
+
 		return LocationDetected;
 				
+	}
+	public void onDestroy(){
+		this.unregisterReceiver(receiverWifi);
+		super.onDestroy();
 	}
 
 }
