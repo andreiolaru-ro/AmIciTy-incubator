@@ -6,7 +6,6 @@ import java.util.TreeMap;
 
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -122,7 +121,7 @@ public class WifiLocationDetection extends Activity implements LocationDetector
 	public String getLocation(){
 
 		
-		int max = 0, value  = 0, i;
+		int max = 0, value  = 0;
 		Set<String> keys = dataNetLocation.keySet();
 		String LocationDetected= new String("No Location detected");
 		
@@ -158,6 +157,8 @@ public class WifiLocationDetection extends Activity implements LocationDetector
 		return LocationDetected;
 				
 	}
+	
+	@Override
 	public void onDestroy(){
 		this.unregisterReceiver(receiverWifi);
 		super.onDestroy();

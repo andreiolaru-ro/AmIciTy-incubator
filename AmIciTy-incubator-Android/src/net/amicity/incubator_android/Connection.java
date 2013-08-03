@@ -62,7 +62,6 @@ public class Connection
 	/**
 	 * @param ip The device ip.
 	 * @param id The device id.
-	 * @param s The state of the device.
 	 * @param port The port for the connection
 	 */
 	public Connection( InetAddress ip, String id , int port ) {
