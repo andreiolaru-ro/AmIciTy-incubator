@@ -2,11 +2,13 @@ package net.amicity.incubator_android;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
-import android.os.Bundle;
-import android.widget.TextView;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * 
@@ -26,6 +28,10 @@ public class MainActivity extends Activity {
      *  used just to show that the location determined was received and to show it
      */
 	TextView locationReceivedText;
+	EditText mesTxt;
+	Button sendB;
+	
+	ConnMgr connectionManager;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +45,16 @@ public class MainActivity extends Activity {
         
         Intent intent = new Intent(this, WifiLocationDetection.class);
         startActivityForResult(intent, requestCode); 
+        mesTxt = (EditText) findViewById(R.id.msg);
+        sendB = (Button) findViewById(R.id.b1);
+       
+		
+        connectionManager = new ConnMgr();
     }
     
   
-    public void onActivityResult(int codeReceived, int returnStatus, Intent data){
+    @Override
+	public void onActivityResult(int codeReceived, int returnStatus, Intent data){
 	    locationReceivedText.setText("se intra aici");
 	    
 	    if(codeReceived == requestCode){
@@ -66,19 +78,30 @@ public class MainActivity extends Activity {
 				    
 				    // cristi Grig
 				    
-				   DefaultNetLink test = new DefaultNetLink();
+				   final DefaultNetLink test = new DefaultNetLink();
 				    
-				    try
-				    {
-					Connection c = new Connection(InetAddress.getByName(d.Ip),
-								"gica", 4501);
-					test.send(c, "hello");
-				    }
-				    catch (UnknownHostException e)
-				    {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				    } 
+					try
+					{
+						Connection c = new Connection(InetAddress.getByName(d.Ip),
+									"Server", 4501);
+						connectionManager.addConnection(c);
+						test.send(c, "HI!");
+					}
+					
+					catch (UnknownHostException e)
+					{
+						e.printStackTrace();
+					}
+					 sendB.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v)
+							{
+								test.send(connectionManager.getConnection("Server"), mesTxt.getText().toString());
+								
+							}
+				        	
+				        });				
 			    }
 			    }
 			    

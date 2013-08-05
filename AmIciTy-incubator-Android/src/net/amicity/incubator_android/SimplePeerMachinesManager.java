@@ -2,7 +2,6 @@ package net.amicity.incubator_android;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import android.util.Log;
 
 
@@ -29,6 +28,7 @@ class SimplePeerMachinesManager implements PeerMachinesManager{
 		setLocationStations();
 		
 	}
+	@Override
 	public void setLocationStations(){
 		
 		stationsReceived.add(new Station("172.128.12.6", 5000,"1","CANTI"));
@@ -39,6 +39,7 @@ class SimplePeerMachinesManager implements PeerMachinesManager{
 		stationsReceived.add(new Station("192.168.0.192", 2323,"6",true,"CANTI"));
 		stationsReceived.add(new Station("192.168.0.128", 4444,"7",true,"acasa"));
 	}
+	@Override
 	public Station getServerForLocation(String location ){
 		
 		Log.w("getServer", "am intrat in functia getServerForLocation");
@@ -54,6 +55,7 @@ class SimplePeerMachinesManager implements PeerMachinesManager{
 		}
 		return null; 
 	}
+	@Override
 	public String getStationIp(Object Id){
 		
 		for(Iterator<Station> it  = stationsReceived.listIterator(); it.hasNext();){
