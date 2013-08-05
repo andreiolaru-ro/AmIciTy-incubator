@@ -27,7 +27,7 @@ public class test {
 
 		DefaultNetLink d = new DefaultNetLink();
 
-		d.initializeReceival(4500, new DefaultMessageReceiver());
+		d.initializeReceival(4501, new DefaultMessageReceiver());
 
 	}
 
