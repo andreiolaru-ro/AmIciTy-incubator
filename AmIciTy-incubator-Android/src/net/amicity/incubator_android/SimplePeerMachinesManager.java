@@ -36,8 +36,8 @@ class SimplePeerMachinesManager implements PeerMachinesManager{
 		stationsReceived.add(new Station("172.128.12.8", 1555,"3","CANTI"));
 		stationsReceived.add(new Station("172.128.12.9", 7000,"4","CANTI"));
 		stationsReceived.add(new Station("172.128.12.10", 4000,"5","CANTI"));
-		stationsReceived.add(new Station("172.128.12.11", 2323,"6","CANTI"));
-		stationsReceived.add(new Station("192.168.0.197", 4444,"7",true,"acasa"));
+		stationsReceived.add(new Station("172.17.101.206", 2323,"6",true,"CANTI"));
+		stationsReceived.add(new Station("192.168.0.128", 4444,"7",true,"acasa"));
 	}
 	public Station getServerForLocation(String location ){
 		

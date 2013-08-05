@@ -38,10 +38,10 @@ public class MainActivity extends Activity {
         locationReceivedText = (TextView) findViewById(R.id.mainText);
         
         Intent intent = new Intent(this, WifiLocationDetection.class);
-        startActivityForResult(intent, requestCode);
+        startActivityForResult(intent, requestCode); 
     }
     
-    @Override
+  
     public void onActivityResult(int codeReceived, int returnStatus, Intent data){
 	    locationReceivedText.setText("se intra aici");
 	    
@@ -56,29 +56,35 @@ public class MainActivity extends Activity {
 			    
 				    SimplePeerMachinesManager  managerP2P= new SimplePeerMachinesManager();
 				    Station d =  managerP2P.getServerForLocation(location);
-				    locationReceivedText.setText(d.Ip );
+				    
+				    if(d == null)
+					    locationReceivedText.setText("No server detected");
+				    else{
+				    
+				   locationReceivedText.setText(d.Ip );
 				  
 				    
 				    // cristi Grig
 				    
-				 //   DefaultNetLink test = new DefaultNetLink();
+			/*	   DefaultNetLink test = new DefaultNetLink();
 				    
-				  /*  try
+				    try
 				    {
 					Connection c = new Connection(InetAddress.getByName(d.Ip),
 								"gica", 4500);
-					test.send(c, "hello");
+				//	test.send(c, "hello");
 				    }
 				    catch (UnknownHostException e)
 				    {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				    } */
+				    } */ 
+			    }
 			    }
 			    
 			    
    
-		    }
+		    } 
 	    }
     }
 
