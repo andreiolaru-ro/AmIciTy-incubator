@@ -1,4 +1,5 @@
 package net.amicity.communications;
+
 /*******************************************************************************
  * Copyright (c) 2013 ''Azgabast''.
  * All rights reserved. This program and the accompanying materials
