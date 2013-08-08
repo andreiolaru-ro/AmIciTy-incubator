@@ -1,5 +1,9 @@
 package testing;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+
 /**
  * Tester for the communications infrastructure.
  * 
@@ -23,9 +27,29 @@ public class CommunicationsTester
 	{
 		// TODO implement and test these functionalities:
 		
-		// LocationDetector d = new WifiLocationDetector();
-		// PeerMachinesManager pm = new SimplePeerMachinesManager();
-		// Machine m = pm.getServerForLocation(d);
+		LocationDetector d = new WifiLocationDetection();
+		System.out.println(d.getLocation());
+		PeerMachinesManager pm = new SimplePeerMachinesManager();
+		Station m = pm.getServerForLocation(d.getLocation());
+		System.out.println(m.Ip);
+		
+		
+		DefaultNetLink test = new DefaultNetLink();
+		    
+		 try
+			{
+				Connection c = new Connection(InetAddress.getByName(m.Ip), "Server", 4500);
+				ConnMgr connectionManager = new ConnMgr(); 
+				connectionManager.addConnection(c);
+				test.send(c, "HI!");
+			}
+			
+			catch (UnknownHostException e)
+			{
+				e.printStackTrace();
+			}
+		
+		
 		// ConnectionManager cm = new ConnectionManager();
 		// cm.addConnection(new Connection(m));
 		// NetLink net = new InetLink();
