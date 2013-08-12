@@ -25,7 +25,7 @@ public interface NetLink {
 	 *            -> the user you want to send
 	 * @param o
 	 *            -> the object you want to send
-	 * @throws IOException 
+	 * @throws IOException -> the thrown exception
 	 */
 	public void send(Connection c, Object o) throws IOException;
 
