@@ -13,7 +13,8 @@
  * 
  */
 /**
- * @author vlad
+ * @author cristian, ''Azgabast'', vlad
  * 
  */
 package net.amicity.sensors;
+
