@@ -3,6 +3,7 @@ package net.amicity.android.communications;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import net.amicity.common.communications.Connection;
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.incubator_android.R;
 import android.app.Activity;

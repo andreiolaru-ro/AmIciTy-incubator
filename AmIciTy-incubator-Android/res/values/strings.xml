@@ -16,5 +16,8 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_mai">MainActivity</string>
+    <string name="button">Send</string>
+    <string name="listen">Listen</string>
+    <string name="none"></string>
 
 </resources>
