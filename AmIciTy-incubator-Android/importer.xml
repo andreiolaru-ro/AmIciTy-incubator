@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project default="import">
+
+	<!-- the directory where the project is, relative to the parent of the current 
+		project -->
+	<property name="import-directory" value="." />
+
+	<target name="Android-PC">
+		<delete includeEmptyDirs="true">
+			<fileset dir="src/net/amicity/common" includes="**/*" />
+		</delete>
+		<copy todir="src/net/amicity/common">
+			<!-- please do not abuse the excludes atribute; normally it should be 
+				empty -->
+			<fileset dir="../${import-directory}/Incubator-main/src/net/amicity/common" includes="**/*"/>
+		</copy>
+	</target>
+
+	<target name="import" depends="Android-PC" />
+</project>
