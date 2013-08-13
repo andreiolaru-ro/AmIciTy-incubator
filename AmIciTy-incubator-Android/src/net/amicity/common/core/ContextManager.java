@@ -11,6 +11,8 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
+import net.amicity.common.core.context.ContextCore;
+
 /**
  * @author ''Azgabast'', vlad, cristian
  *	The class which takes updates from the ContextUpdates queue and adds them
@@ -18,5 +20,30 @@ package net.amicity.common.core;
  */
 public class ContextManager
 {
-	//TODO
+
+	/**
+	 * instance to acces the ContextCore's synchr queues : Update
+	 * and to manage them by using core's methods
+	 */
+	ContextCore myCore;	
+	/**
+	 * @param coreReceived : instance of singleton ContextCore
+	 */
+	ContextManager(ContextCore coreReceived){
+		myCore = coreReceived;
+		while(true){
+			try
+			{
+				wait();
+				ContextItem itemSelected = myCore.getContextUpdate();
+			}
+			catch (InterruptedException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//
+		}
+	}
 }
+	
