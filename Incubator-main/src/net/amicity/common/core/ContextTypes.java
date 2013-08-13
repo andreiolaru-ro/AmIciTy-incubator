@@ -18,5 +18,11 @@ package net.amicity.common.core;
  */
 public enum ContextTypes
 {
-	//TODO
+	/**
+	 * Context type for the LocationModule
+	 */
+	LocationContext, /**
+	 * Contexy type for the SoundModule
+	 */
+	SoundContext;
 }
