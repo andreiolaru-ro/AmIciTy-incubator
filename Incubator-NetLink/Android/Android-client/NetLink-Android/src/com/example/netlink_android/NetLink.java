@@ -31,11 +31,8 @@ public interface NetLink {
 	 *            -> the server port
 	 * @param msgR
 	 *            -> MessageReceiver for execute commands
-	 * @param act
-	 *            -> The main activity where i write the output
 	 */
-	public void initializeReceival(int port, final MessageReceiver msgR,
-			Test act);
+	public void initializeReceival(int port, final MessageReceiver msgR);
 
 	/**
 	 * @param c

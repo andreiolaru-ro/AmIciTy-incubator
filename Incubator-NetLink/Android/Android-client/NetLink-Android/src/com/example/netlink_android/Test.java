@@ -14,7 +14,8 @@ import android.widget.TextView;
  * @author root
  * 
  */
-public class Test extends Activity implements View.OnClickListener {
+public class Test extends Activity implements View.OnClickListener,
+		MessageReceiver {
 
 	/**
 	 * textField -> for messages
@@ -69,8 +70,13 @@ public class Test extends Activity implements View.OnClickListener {
 		listen.setEnabled(false);
 		DefaultNetLink d = new DefaultNetLink();
 
-		d.initializeReceival(4500, new DefaultMessageReceiver(), this);
+		d.initializeReceival(4500, this);
 
+	}
+
+	@Override
+	public void receive(Object obj) {
+		tx.setText((String) obj);
 	}
 
 }

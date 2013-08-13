@@ -56,12 +56,12 @@ public class DefaultNetLink implements NetLink {
 	}
 
 	@Override
-	public void initializeReceival(int port, final MessageReceiver msgR,
-			final Test act) {
+	public void initializeReceival(int port, final MessageReceiver msgR) {
 		final ServerSocket serverSocket;
 
 		try {
 			serverSocket = new ServerSocket(port);
+			final Test act = (Test) msgR;
 
 			System.out.println("Server started on port: " + port);
 			act.tx.setText("My ip is: " + getLocalIpAddress());
@@ -82,7 +82,8 @@ public class DefaultNetLink implements NetLink {
 
 								@Override
 								public void run() {
-									act.tx.setText((String) obj);
+									msgR.receive(obj);
+									// act.tx.setText((String) obj);
 								}
 							});
 
