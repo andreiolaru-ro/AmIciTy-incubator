@@ -21,10 +21,6 @@ import net.amicity.common.core.context.ContextCore;
 public interface SensorModule
 {
 	/**
-	 *  The contextCore to connect with.
-	 */
-	ContextCore ctxCore = null;
-	/**
 	 * @param cc The contextCore which connects to the module.
 	 */
 	public void connect (ContextCore cc);
