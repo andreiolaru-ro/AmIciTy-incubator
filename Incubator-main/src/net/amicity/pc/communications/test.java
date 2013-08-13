@@ -9,9 +9,11 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.common.communications;
+package net.amicity.pc.communications;
 
 import java.net.UnknownHostException;
+import net.amicity.common.communications.DefaultMessageReceiver;
+import net.amicity.common.communications.DefaultNetLink;
 
 /**
  * @author cristian
