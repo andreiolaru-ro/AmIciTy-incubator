@@ -9,8 +9,9 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.incubator_android;
+package net.amicity.android.communications;
 
+import net.amicity.incubator_android.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;

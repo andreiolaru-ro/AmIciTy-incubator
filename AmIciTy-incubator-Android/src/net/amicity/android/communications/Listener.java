@@ -1,5 +1,6 @@
-package net.amicity.incubator_android;
+package net.amicity.android.communications;
 
+import net.amicity.incubator_android.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
