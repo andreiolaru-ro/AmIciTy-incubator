@@ -9,12 +9,18 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-/**
- * 
- */
-/**
- * @author cristian, ''Azgabast'', vlad
- * 
- */
-package net.amicity.intelligence;
+package net.amicity.common.communications;
 
+/**
+ * @author cristian
+ * 
+ */
+public interface MessageReceiver {
+
+	/**
+	 * @param obj
+	 *            -> the received message
+	 */
+	public void receive(Object obj);
+
+}

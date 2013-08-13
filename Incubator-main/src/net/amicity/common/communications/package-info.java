@@ -9,18 +9,10 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.communications;
-
 /**
- * @author cristian
+ * This package contains interfaces and classes for handling communication between machines.
  * 
+ * @author Andrei Olaru
+ *
  */
-public interface MessageReceiver {
-
-	/**
-	 * @param obj
-	 *            -> the received message
-	 */
-	public void receive(Object obj);
-
-}
+package net.amicity.common.communications;

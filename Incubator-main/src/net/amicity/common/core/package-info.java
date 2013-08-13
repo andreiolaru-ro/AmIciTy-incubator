@@ -10,8 +10,11 @@
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 /**
+ * 
+ */
+/**
  * @author cristian, ''Azgabast'', vlad
  * 
  */
-package net.amicity.context_types;
+package net.amicity.common.core;
 

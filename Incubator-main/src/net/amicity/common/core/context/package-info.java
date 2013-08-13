@@ -16,5 +16,5 @@
  * @author cristian, ''Azgabast'', vlad
  * 
  */
-package net.amicity.core.context;
+package net.amicity.common.core.context;
 

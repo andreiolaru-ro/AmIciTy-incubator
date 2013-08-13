@@ -9,7 +9,7 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.communications;
+package net.amicity.common.communications;
 /*******************************************************************************
  * Copyright (c) 2013 ''Azgabast''.
  * All rights reserved. This program and the accompanying materials

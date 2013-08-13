@@ -16,5 +16,5 @@
  * @author cristian, ''Azgabast'', vlad
  * 
  */
-package net.amicity.sensors;
+package net.amicity.pc.sensors;
 

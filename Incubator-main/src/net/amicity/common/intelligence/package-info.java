@@ -10,9 +10,11 @@
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 /**
- * This package contains interfaces and classes for handling communication between machines.
  * 
- * @author Andrei Olaru
- *
  */
-package net.amicity.communications;
+/**
+ * @author cristian, ''Azgabast'', vlad
+ * 
+ */
+package net.amicity.common.intelligence;
+

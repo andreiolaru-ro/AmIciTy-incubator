@@ -9,14 +9,14 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.core;
+package net.amicity.common.core;
 
 /**
  * @author ''Azgabast'', vlad, cristian
- *	The class which takes updates from the ContextUpdates queue and adds them
- * to the sendQueue and/or post notifications in the notificationsQueue.
+ * The class which takes notifications from the notificationQueue and calls for
+ * the IntelligenceModules which are interested, in a random order.
  */
-public class ContextManager
+public class NotificationDispatcher
 {
 	//TODO
 }

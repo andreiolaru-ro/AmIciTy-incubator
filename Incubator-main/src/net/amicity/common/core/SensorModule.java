@@ -9,14 +9,14 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.core;
+package net.amicity.common.core;
 
 /**
  * @author ''Azgabast'', vlad, cristian
- * The class which takes notifications from the notificationQueue and calls for
- * the IntelligenceModules which are interested, in a random order.
+ * This interface is implemented by all classes which offer information fetching
+ * from outside the application.
  */
-public class NotificationDispatcher
+public interface SensorModule
 {
 	//TODO
 }

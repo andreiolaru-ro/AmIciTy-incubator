@@ -9,18 +9,9 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.communications;
-
 /**
- * @author cristian
+ * @author cristian, ''Azgabast'', vlad
  * 
  */
-public class DefaultMessageReceiver implements MessageReceiver {
+package net.amicity.common.context_types;
 
-	@Override
-	public void receive(Object obj) {
-		String str = (String) obj;
-		System.out.println(str);
-	}
-
-}

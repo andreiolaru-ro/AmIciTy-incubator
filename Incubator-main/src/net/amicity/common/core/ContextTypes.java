@@ -9,13 +9,14 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.core.context;
+package net.amicity.common.core;
 
 /**
  * @author ''Azgabast'', vlad, cristian
- * The top-level module of the application.
+ * This class contains the context types that are used.
+ *
  */
-public class ContextCore
+public enum ContextTypes
 {
 	//TODO
 }

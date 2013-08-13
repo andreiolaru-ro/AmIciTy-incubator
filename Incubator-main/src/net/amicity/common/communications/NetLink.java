@@ -9,26 +9,35 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.communications;
-
-import java.net.UnknownHostException;
+package net.amicity.common.communications;
 
 /**
  * @author cristian
  * 
  */
-public class test {
+
+public interface NetLink {
 
 	/**
-	 * @param args
-	 * @throws UnknownHostException
+	 * @param c
+	 *            -> the user you want to send
+	 * @param o
+	 *            -> the object you want to send
 	 */
-	public static void main(String args[]) throws UnknownHostException {
+	public void send(Connection c, Object o);
 
-		DefaultNetLink d = new DefaultNetLink();
+	/**
+	 * @param port
+	 *            -> the server port
+	 * @param msgR
+	 *            -> MessageReceiver for execute commands
+	 */
+	public void initializeReceival(int port, MessageReceiver msgR);
 
-		d.initializeReceival(4500, new DefaultMessageReceiver());
-
-	}
+	/**
+	 * @param c
+	 *            -> person to connect
+	 */
+	public void createConnection(Connection c);
 
 }

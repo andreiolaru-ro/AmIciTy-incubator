@@ -9,14 +9,13 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.core;
+package net.amicity.common.core.context;
 
 /**
  * @author ''Azgabast'', vlad, cristian
- * This interface is implemented by all classes which offer information fetching
- * from outside the application.
+ * The top-level module of the application.
  */
-public interface SensorModule
+public class ContextCore
 {
 	//TODO
 }

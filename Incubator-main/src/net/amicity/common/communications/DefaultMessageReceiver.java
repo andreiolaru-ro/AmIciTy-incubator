@@ -9,35 +9,18 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.communications;
+package net.amicity.common.communications;
 
 /**
  * @author cristian
  * 
  */
+public class DefaultMessageReceiver implements MessageReceiver {
 
-public interface NetLink {
-
-	/**
-	 * @param c
-	 *            -> the user you want to send
-	 * @param o
-	 *            -> the object you want to send
-	 */
-	public void send(Connection c, Object o);
-
-	/**
-	 * @param port
-	 *            -> the server port
-	 * @param msgR
-	 *            -> MessageReceiver for execute commands
-	 */
-	public void initializeReceival(int port, MessageReceiver msgR);
-
-	/**
-	 * @param c
-	 *            -> person to connect
-	 */
-	public void createConnection(Connection c);
+	@Override
+	public void receive(Object obj) {
+		String str = (String) obj;
+		System.out.println(str);
+	}
 
 }
