@@ -11,8 +11,6 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
-import net.amicity.common.core.context.ContextCore;
-
 /**
  * @author ''Azgabast'', vlad, cristian
  * This interface is implemented by all classes which offer information fetching
@@ -20,12 +18,5 @@ import net.amicity.common.core.context.ContextCore;
  */
 public interface SensorModule
 {
-	/**
-	 *  The ContextCore instance that this sensor is connected to.
-	 */
-	ContextCore ctxCore = null;
-	/**
-	 * @param cc : the ContextCore instance that connects to the sensor.
-	 */
-	public void connect( ContextCore cc );
+	//TODO
 }
