@@ -11,11 +11,64 @@
  ******************************************************************************/
 package net.amicity.common.core.context;
 
+import java.util.concurrent.LinkedBlockingQueue;
+
+import javax.management.Notification;
+
+import net.amicity.common.core.ContextItem;
+
 /**
  * @author ''Azgabast'', vlad, cristian
  * The top-level module of the application.
  */
 public class ContextCore
 {
-	//TODO
+	/**
+	 * a synchronized queue used to add new ContextItems by Sensor modules or
+	 * Intelligent modules and to extract added ContextItems to be prepared for
+	 *  Notification 
+	 */
+	LinkedBlockingQueue<ContextItem> contextUpdates;
+	/**
+	 * a synch queue to notify intelligent modules that they may be interested 
+	 * in some (processed)ContextItems added in ContextStorage 
+	 */
+	LinkedBlockingQueue<Notification> notificationQueue;
+	/**
+	 * initialising the class's queues 
+	 */
+	ContextCore(){
+		contextUpdates = new LinkedBlockingQueue<ContextItem>();
+		notificationQueue = new LinkedBlockingQueue<Notification>();
+	}
+	/**
+	 * @param newItem : ContextItem to be added by the IntelligentModule or
+	 * SensorModule to be analised and used by interested entities
+	 */
+	public void postContextUpdate(ContextItem newItem){
+		contextUpdates.add(newItem);
+	}
+	/**
+	 * @return the Contextitem by ContextManager to be processed, creating an
+	 * ContextStore's component and to notify the interested entities 
+	 */
+	public ContextItem getContextUpdate(){
+		return contextUpdates.remove();
+	}
+	/**
+	 * @param newNotificaition : the Notification added by ContextManager after adding a 
+	 * processed ContextItem to ContextStore
+	 */
+	public void postNotification(Notification newNotificaition){
+		notificationQueue.add(newNotificaition);
+	}
+	/**
+	 * @return the notification used to notify an intelligent module that a ContextItem
+	 * is ready to be pulled 
+	 */
+	public Notification getNotification(){
+		return notificationQueue.remove();
+	}
+	
+
 }
