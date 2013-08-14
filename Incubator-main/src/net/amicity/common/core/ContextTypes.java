@@ -21,7 +21,7 @@ public enum ContextTypes
 	/**
 	 * Context type for the LocationModule
 	 */
-	LocationContext, /**
+	WirelessContext, /**
 	 * Contexy type for the SoundModule
 	 */
 	SoundContext;

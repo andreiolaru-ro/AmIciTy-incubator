@@ -3,7 +3,7 @@ package net.amicity.common.core;
 
 /**
  *  Interface used in order for the queue to be general
- *  it can be SoundItem, LocationItem, etc 
+ *  it can be SoundItem, WirelessItem, etc 
  * @author vlad
  *
  */
