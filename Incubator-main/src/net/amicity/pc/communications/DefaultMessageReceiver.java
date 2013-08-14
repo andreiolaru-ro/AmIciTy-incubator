@@ -9,7 +9,9 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.common.communications;
+package net.amicity.pc.communications;
+
+import net.amicity.common.communications.MessageReceiver;
 
 /**
  * @author cristian

@@ -12,9 +12,7 @@
 package net.amicity.common.core.context;
 
 import java.util.concurrent.LinkedBlockingQueue;
-
 import javax.management.Notification;
-
 import net.amicity.common.core.ContextItem;
 
 /**
@@ -37,6 +35,7 @@ public class ContextCore
 	/**
 	 * initialising the class's queues 
 	 */
+
 	public ContextCore(){
 		contextUpdates = new LinkedBlockingQueue<ContextItem>();
 		notificationQueue = new LinkedBlockingQueue<Notification>();

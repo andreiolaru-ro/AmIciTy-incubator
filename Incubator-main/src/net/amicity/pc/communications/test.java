@@ -12,8 +12,6 @@
 package net.amicity.pc.communications;
 
 import java.net.UnknownHostException;
-import net.amicity.common.communications.DefaultMessageReceiver;
-import net.amicity.common.communications.DefaultNetLink;
 
 /**
  * @author cristian

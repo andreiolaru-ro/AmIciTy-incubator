@@ -121,7 +121,7 @@ class WirelessResult implements ContextItem{
 	 * initialising the members
 	 */
 	WirelessResult(){
-		type = ContextTypes.WirelessContext; 
+		type = ContextTypes.WIRELESS_CONTEXT; 
 		wifiDetected = new ArrayList<String>();
 	}
 	
