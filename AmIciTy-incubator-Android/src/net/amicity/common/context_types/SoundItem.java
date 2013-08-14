@@ -26,6 +26,6 @@ public class SoundItem implements ContextItem
 	 */
 	public SoundItem(double value) {
 		this.value = value;
-		this.type = ContextTypes.SoundContext;
+		this.type = ContextTypes.SOUND_CONTEXT;
 	}
 }
