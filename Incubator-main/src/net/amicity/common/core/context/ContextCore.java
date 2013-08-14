@@ -37,7 +37,7 @@ public class ContextCore {
 	/**
 	 * initialising the class's queues
 	 */
-	ContextCore() {
+	public ContextCore() {
 		contextUpdates = new LinkedBlockingQueue<ContextItem>();
 		notificationQueue = new LinkedBlockingQueue<Notification>();
 	}
