@@ -1,7 +1,9 @@
 package net.amicity.pc;
 
+import net.amicity.common.core.ContextManager;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.pc.sensors.*;
+
 
 
 public class Initialiser
@@ -15,6 +17,8 @@ public class Initialiser
 
 		WirelessModule wd = new WirelessModule();
 		ContextCore cc = new ContextCore();
+		ContextManager cm = new ContextManager(cc);
+		cm.start();
 		wd.connect(cc);
 	}
 

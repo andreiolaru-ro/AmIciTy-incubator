@@ -22,7 +22,7 @@ import net.amicity.common.core.context.ContextCore;
  *         ContextUpdates queue and adds them to the sendQueue and/or post
  *         notifications in the notificationsQueue.
  */
-public class ContextManager {
+public class ContextManager extends Thread {
 
 	/**
 	 * instance to access the ContextCore's synchronized queues : Update and to
@@ -43,18 +43,20 @@ public class ContextManager {
 	 * @param coreReceived
 	 *            : instance of singleton ContextCore
 	 */
-	ContextManager(ContextCore coreReceived) {
+	public  ContextManager(ContextCore coreReceived) {
 		myCore = coreReceived;
+		
+	}
+	
+	
+	@Override
+	public void run(){
 		while (true) {
-			try {
-				wait();
+			if(myCore.contextUpdates.isEmpty() == false){
 				ContextItem itemSelected = myCore.getContextUpdate();
+				System.out.println("a intrat aici");
 			}
-			catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//
+	
 		}
 	}
 
