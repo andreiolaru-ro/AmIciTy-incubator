@@ -28,16 +28,16 @@ public class ContextCore
 	 * Intelligent modules and to extract added ContextItems to be prepared for
 	 *  Notification 
 	 */
-	LinkedBlockingQueue<ContextItem> contextUpdates;
+	public LinkedBlockingQueue<ContextItem> contextUpdates;
 	/**
 	 * a synch queue to notify intelligent modules that they may be interested 
 	 * in some (processed)ContextItems added in ContextStorage 
 	 */
-	LinkedBlockingQueue<Notification> notificationQueue;
+	public LinkedBlockingQueue<Notification> notificationQueue;
 	/**
 	 * initialising the class's queues 
 	 */
-	ContextCore(){
+	public ContextCore(){
 		contextUpdates = new LinkedBlockingQueue<ContextItem>();
 		notificationQueue = new LinkedBlockingQueue<Notification>();
 	}

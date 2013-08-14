@@ -18,7 +18,7 @@ import net.amicity.common.core.context.ContextCore;
  *	The class which takes updates from the ContextUpdates queue and adds them
  * to the sendQueue and/or post notifications in the notificationsQueue.
  */
-public class ContextManager
+public class ContextManager extends Thread
 {
 	/**
 	 * instance to acces the ContextCore's synchr queues : Update
@@ -28,11 +28,19 @@ public class ContextManager
 	/**
 	 * @param coreReceived : instance of singleton ContextCore
 	 */
-	ContextManager(ContextCore coreReceived){
+	public ContextManager(ContextCore coreReceived){
 		myCore = coreReceived;
 	}
 	
 	
-	
+	@Override
+	public void run(){
+		while(true){
+			if(myCore.contextUpdates.isEmpty() == false){
+				ContextItem item = myCore.getContextUpdate();
+				System.out.println("s-a intrat aici");
+			}
+		}
+	}
 	
 }
