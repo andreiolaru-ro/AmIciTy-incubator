@@ -13,8 +13,8 @@ package net.amicity.pc.communications;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+
 import net.amicity.common.communications.Connection;
-import net.amicity.common.communications.DefaultNetLink;
 
 /**
  * @author cristian

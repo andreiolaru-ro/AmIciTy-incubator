@@ -9,13 +9,17 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.common.communications;
+package net.amicity.pc.communications;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import net.amicity.common.communications.Connection;
+import net.amicity.common.communications.MessageReceiver;
+import net.amicity.common.communications.NetLink;
 
 /**
  * @author cristian
