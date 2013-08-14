@@ -11,13 +11,21 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
-
 /**
- * @author ''Azgabast'', vlad, cristian
- * Implemented by all objects with context info or notifications.
- *
+ * @author ''Azgabast'', vlad, cristian Implemented by all objects with context
+ *         info or notifications.
+ * 
  */
-public interface IntelligenceModule
-{
-	//TODO
+public interface IntelligenceModule {
+
+	// TODO
+	/**
+	 * A Intelligence module is invoked by a notification dispatcher
+	 * 
+	 * @param item
+	 *            -> the ContextItem that is directly involved in intelligence
+	 *            action
+	 */
+	public void invoke(ContextItem item);
+
 }

@@ -11,41 +11,51 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+
 import net.amicity.common.core.context.ContextCore;
 
 /**
- * @author ''Azgabast'', vlad, cristian
- *	The class which takes updates from the ContextUpdates queue and adds them
- * to the sendQueue and/or post notifications in the notificationsQueue.
+ * @author ''Azgabast'', vlad, cristian The class which takes updates from the
+ *         ContextUpdates queue and adds them to the sendQueue and/or post
+ *         notifications in the notificationsQueue.
  */
-public class ContextManager
-{
+public class ContextManager {
+
 	/**
-	 * instance to acces the ContextCore's synchr queues : Update
-	 * and to manage them by using core's methods
+	 * instance to access the ContextCore's synchronized queues : Update and to
+	 * manage them by using core's methods
 	 */
-	ContextCore myCore;	
+	ContextCore myCore;
 	/**
-	 * @param coreReceived : instance of singleton ContextCore
+	 * A map representation of type of a context and a set of Intelligence
+	 * Modules related to context
 	 */
-	ContextManager(ContextCore coreReceived){
+	HashMap<ContextTypes, ArrayList<IntelligenceModule>> contextIntelModule;
+	/**
+	 * A set of devices associated to the same user
+	 */
+	HashSet<?> devices;
+
+	/**
+	 * @param coreReceived
+	 *            : instance of singleton ContextCore
+	 */
+	ContextManager(ContextCore coreReceived) {
 		myCore = coreReceived;
-		while(true){
-			try
-			{
+		while (true) {
+			try {
 				wait();
 				ContextItem itemSelected = myCore.getContextUpdate();
 			}
-			catch (InterruptedException e)
-			{
+			catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			//
 		}
 	}
-	
-	
-	
-	
+
 }
