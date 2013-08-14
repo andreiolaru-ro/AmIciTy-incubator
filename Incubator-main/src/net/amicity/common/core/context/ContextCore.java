@@ -12,7 +12,9 @@
 package net.amicity.common.core.context;
 
 import java.util.concurrent.LinkedBlockingQueue;
+
 import javax.management.Notification;
+
 import net.amicity.common.core.ContextItem;
 
 /**
@@ -26,7 +28,7 @@ public class ContextCore
 	 * Intelligent modules and to extract added ContextItems to be prepared for
 	 *  Notification 
 	 */
- 	 public LinkedBlockingQueue<ContextItem> contextUpdates;
+	LinkedBlockingQueue<ContextItem> contextUpdates;
 	/**
 	 * a synch queue to notify intelligent modules that they may be interested 
 	 * in some (processed)ContextItems added in ContextStorage 
@@ -35,8 +37,7 @@ public class ContextCore
 	/**
 	 * initialising the class's queues 
 	 */
-
-	public ContextCore(){
+	ContextCore(){
 		contextUpdates = new LinkedBlockingQueue<ContextItem>();
 		notificationQueue = new LinkedBlockingQueue<Notification>();
 	}
@@ -61,10 +62,6 @@ public class ContextCore
 	public void postNotification(Notification newNotificaition){
 		notificationQueue.add(newNotificaition);
 	}
-	/**
-	 * @return the notification used to notify an intelligent module that a ContextItem
-	 * is ready to be pulled 
-	 */
 	public Notification getNotification(){
 		return notificationQueue.remove();
 	}

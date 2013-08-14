@@ -11,53 +11,28 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-
 import net.amicity.common.core.context.ContextCore;
 
 /**
- * @author ''Azgabast'', vlad, cristian The class which takes updates from the
- *         ContextUpdates queue and adds them to the sendQueue and/or post
- *         notifications in the notificationsQueue.
+ * @author ''Azgabast'', vlad, cristian
+ *	The class which takes updates from the ContextUpdates queue and adds them
+ * to the sendQueue and/or post notifications in the notificationsQueue.
  */
-public class ContextManager extends Thread {
-
+public class ContextManager
+{
 	/**
-	 * instance to access the ContextCore's synchronized queues : Update and to
-	 * manage them by using core's methods
+	 * instance to acces the ContextCore's synchr queues : Update
+	 * and to manage them by using core's methods
 	 */
-	ContextCore myCore;
+	ContextCore myCore;	
 	/**
-	 * A map representation of type of a context and a set of Intelligence
-	 * Modules related to context
+	 * @param coreReceived : instance of singleton ContextCore
 	 */
-	HashMap<ContextTypes, ArrayList<IntelligenceModule>> contextIntelModule;
-	/**
-	 * A set of devices associated to the same user
-	 */
-	HashSet<?> devices;
-
-	/**
-	 * @param coreReceived
-	 *            : instance of singleton ContextCore
-	 */
-	public  ContextManager(ContextCore coreReceived) {
+	ContextManager(ContextCore coreReceived){
 		myCore = coreReceived;
-		
 	}
 	
 	
-	@Override
-	public void run(){
-		while (true) {
-			if(myCore.contextUpdates.isEmpty() == false){
-				ContextItem itemSelected = myCore.getContextUpdate();
-				System.out.println("a intrat aici");
-			}
 	
-		}
-	}
-
+	
 }
