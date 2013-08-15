@@ -19,9 +19,12 @@ package net.amicity.common.core;
 public enum ContextTypes
 {
 	/**
-	 * Context type for the LocationModule
+	 * Context type for the WirelessModule
 	 */
 
 	WIRELESS_CONTEXT, 
+	/**
+	 * Context type used for SoundModule
+	 */
 	SOUND_CONTEXT;
 }

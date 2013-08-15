@@ -11,12 +11,42 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
+import net.amicity.common.core.context.ContextCore;
+import net.amicity.common.intelligence.LocationModule;
+
 /**
  * @author ''Azgabast'', vlad, cristian
  * The class which takes notifications from the notificationQueue and calls for
  * the IntelligenceModules which are interested, in a random order.
  */
-public class NotificationDispatcher
+public class NotificationDispatcher extends Thread
 {
-	//TODO
+	/**
+	 * instance used for accesing the queues used
+	 */
+	ContextCore myCore; 
+	/**
+	 * a LocationModule instance for calling invoke method
+	 */
+	LocationModule locationContact;
+	/**
+	 * @param core : received for accesing the queues
+	 */
+	public NotificationDispatcher(ContextCore core){
+		myCore = core;
+		locationContact = new LocationModule();
+	}
+	
+	@Override
+	public void run(){
+		while(true){
+			if(myCore.notificationQueue.isEmpty() == false){
+				Notification notExtract = myCore.getNotification();
+				
+				if(notExtract.myNotified == IntelligentTypes.LOCATION_INTELLIGENT)	
+					System.out.println("cucu");
+				
+			}
+		}
+	}
 }

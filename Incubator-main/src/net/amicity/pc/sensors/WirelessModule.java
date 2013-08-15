@@ -3,12 +3,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
-
 import net.amicity.common.core.ContextItem;
-import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.SensorModule;
 import net.amicity.common.context_types.*;
 import net.amicity.common.core.context.ContextCore;

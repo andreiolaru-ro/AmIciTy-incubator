@@ -6,6 +6,10 @@ import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.ContextTypes;
 
 
+/**
+ * result of wireless sensors
+ * @author vlad
+ */
 public class WirelessItem implements ContextItem{
 	/**
 	 * enum used to know the ContextItem's type by ContextManager
