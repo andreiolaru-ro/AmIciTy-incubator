@@ -10,6 +10,7 @@ import java.util.TreeMap;
 import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.SensorModule;
+import net.amicity.common.context_types.*;
 import net.amicity.common.core.context.ContextCore;
 
 
@@ -43,7 +44,7 @@ public class WirelessModule implements SensorModule{
 	public WirelessModule(){
 		
 		
-		wirelessItem = new WirelessResult();
+		wirelessItem = new WirelessItem();
 	
 	}
 	
@@ -75,7 +76,7 @@ public class WirelessModule implements SensorModule{
 			     	String nameLine= st.nextToken();
 			     	if(nameLine.compareTo("SSID") == 0){
 			     		st.nextToken();
-			     		((WirelessResult) wirelessItem).wifiDetected.add(st.nextToken());
+			     		((WirelessItem) wirelessItem).wifiDetected.add(st.nextToken());
 			     		
 			     	}
 			     	else
@@ -100,7 +101,7 @@ public class WirelessModule implements SensorModule{
 		
 		
 		myCore.postContextUpdate(wirelessItem);
-		System.out.println(((WirelessResult) wirelessItem).wifiDetected.size());
+		System.out.println(((WirelessItem) wirelessItem).wifiDetected.size());
 		
 		
 	}
@@ -108,23 +109,6 @@ public class WirelessModule implements SensorModule{
 }
 
 
-class WirelessResult implements ContextItem{
-	/**
-	 * enum used to know the ContextItem's type by ContextManager
-	 */
-	ContextTypes type;
-	/**
-	 * arraylist of wireless netowrks detected
-	 */
-	ArrayList <String> wifiDetected;
-	/**
-	 * initialising the members
-	 */
-	WirelessResult(){
-		type = ContextTypes.WIRELESS_CONTEXT; 
-		wifiDetected = new ArrayList<String>();
-	}
-	
-}
+
 
 

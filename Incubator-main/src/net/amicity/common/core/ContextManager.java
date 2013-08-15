@@ -12,6 +12,7 @@
 package net.amicity.common.core;
 
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.common.context_types.*;
 
 /**
  * @author ''Azgabast'', vlad, cristian
@@ -38,7 +39,10 @@ public class ContextManager extends Thread
 		while(true){
 			if(myCore.contextUpdates.isEmpty() == false){
 				ContextItem item = myCore.getContextUpdate();
-				System.out.println("s-a intrat aici");
+				if(item instanceof WirelessItem)
+					System.out.println("s-a intrat aici");
+				if(item instanceof SoundItem)
+					System.out.println("s-a intrat aici");
 			}
 		}
 	}
