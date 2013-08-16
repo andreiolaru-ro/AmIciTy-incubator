@@ -9,28 +9,33 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.common.core;
+package net.amicity.common.context_types;
+
+import java.util.ArrayList;
+
+import net.amicity.common.core.ContextItem;
+import net.amicity.common.core.ContextTypes;
+
 
 /**
- * @author ''Azgabast'', vlad, cristian This class contains the context types
- *         that are used.
- * 
+ * result of wireless sensors
+ * @author vlad
  */
-public enum ContextTypes {
+public class WirelessItem implements ContextItem{
 	/**
-	 * Context type for the WirelessModule
+	 * enum used to know the ContextItem's type by ContextManager
 	 */
-	WIRELESS_CONTEXT, /**
-	 * Context type for the SoundModule
-	 */
-	SOUND_CONTEXT,
+	ContextTypes type;
 	/**
-	 * Context type for AccelerometerModule if the suspect walks
+	 * arraylist of wireless netowrks detected
 	 */
-	ACCELEROMETER_WALKS,
+	public ArrayList <String> wifiDetected;
 	/**
-	 * Context type for AccelerometerModule if the suspect stays
+	 * initialising the members
 	 */
-	ACCELEROMETER_STAYS;
-
+	public WirelessItem(){
+		type = ContextTypes.WIRELESS_CONTEXT; 
+		wifiDetected = new ArrayList<String>();
+	}
+	
 }

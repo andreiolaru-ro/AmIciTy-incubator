@@ -15,9 +15,9 @@ import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.context_types.*;
 
 /**
- * @author ''Azgabast'', vlad, cristian
- *	The class which takes updates from the ContextUpdates queue and adds them
+ * The class which takes updates from the ContextUpdates queue and adds them
  * to the sendQueue and/or post notifications in the notificationsQueue.
+ * @author ''Azgabast'', vlad, cristian
  */
 public class ContextManager extends Thread
 {

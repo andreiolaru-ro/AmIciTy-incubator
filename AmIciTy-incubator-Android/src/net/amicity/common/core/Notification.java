@@ -18,6 +18,15 @@ package net.amicity.common.core;
  * @author vlad
  * 
  */
-public interface Notification {
-
+public class Notification {
+	/**
+	 *  the type of notification to know which intelligent module should notify
+	 */
+	IntelligentTypes myNotified;
+	/**
+	 * @param toBeNotified : the value given to MyNotified
+	 */
+	public Notification(IntelligentTypes toBeNotified){
+		myNotified = toBeNotified;
+	}
 }

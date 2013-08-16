@@ -11,6 +11,8 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
+import net.amicity.common.context_types.SoundItem;
+import net.amicity.common.context_types.WirelessItem;
 import net.amicity.common.core.context.ContextCore;
 
 /**
@@ -18,9 +20,8 @@ import net.amicity.common.core.context.ContextCore;
  *	The class which takes updates from the ContextUpdates queue and adds them
  * to the sendQueue and/or post notifications in the notificationsQueue.
  */
-public class ContextManager
+public class ContextManager extends Thread
 {
-
 	/**
 	 * instance to acces the ContextCore's synchr queues : Update
 	 * and to manage them by using core's methods
@@ -29,21 +30,28 @@ public class ContextManager
 	/**
 	 * @param coreReceived : instance of singleton ContextCore
 	 */
-	ContextManager(ContextCore coreReceived){
+	public ContextManager(ContextCore coreReceived){
 		myCore = coreReceived;
+	}
+	
+	
+	@Override
+	public void run(){
 		while(true){
-			try
-			{
-				wait();
-				ContextItem itemSelected = myCore.getContextUpdate();
+			if(myCore.contextUpdates.isEmpty() == false){
+				ContextItem item = myCore.getContextUpdate();
+				if(item instanceof WirelessItem){
+					System.out.println("s-a intrat aici - Wireless");
+					Notification newNot = new Notification(IntelligentTypes.LOCATION_INTELLIGENT);
+					myCore.postNotification(newNot);
+				}
+				if(item instanceof SoundItem){
+					System.out.println("s-a intrat aici");
+				}
 			}
-			catch (InterruptedException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//
 		}
 	}
+	
 }
+
 	
