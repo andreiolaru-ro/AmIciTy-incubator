@@ -1,35 +1,43 @@
 /*******************************************************************************
- * Copyright (C) 2013 Andrei Olaru, Cristian Grigoras.
+ * Copyright (C) 2013 Andrei Olaru, Vlad Herescu, Cristian Neagoe, Cristian Grigoras.
  * 
- * This file is part of Accelerometer.
+ * This file is part of AmIciTy-incubator-Android.
  * 
- * Accelerometer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+ * AmIciTy-incubator-Android is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
  * 
- * Accelerometer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ * AmIciTy-incubator-Android is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
  * 
- * You should have received a copy of the GNU General Public License along with Accelerometer.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package com.example.accelerometer;
+package net.amicity.android.sensors;
 
-import android.app.Activity;
+import net.amicity.common.context_types.AccelerometerItem;
+import net.amicity.common.core.SensorModule;
+import net.amicity.common.core.context.ContextCore;
+import android.app.Service;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.os.IBinder;
 
 /**
+ * 
+ * The class which listens periodically to accelerometer and creates a context
+ * item based on the level of movemets.
+ * 
  * @author cristian
  * 
  */
-public class AccelerometerPerceptions extends Activity implements
-		SensorEventListener {
+public class AccelerometerModule extends Service implements
+		SensorEventListener, SensorModule {
 
+	/**
+	 * The core linked with the module.
+	 */
+	ContextCore ctxCore;
 	/**
 	 * mLastX -> last x coordinate taken by accelerometer
 	 */
@@ -66,12 +74,20 @@ public class AccelerometerPerceptions extends Activity implements
 	 * Represent the total number of movements on x, y and z direction
 	 */
 	float total;
+	/**
+	 * The accelerometer item.
+	 */
+	AccelerometerItem accelerometerItem;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		setContentView(R.layout.main);
+	public void connect(ContextCore cc) {
+		this.ctxCore = cc;
+		accelerometerItem = new AccelerometerItem();
+	}
+
+	@Override
+	public int onStartCommand(final Intent intent, int flags, int startId) {
+		super.onStartCommand(intent, flags, startId);
 		mInitialized = false;
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mAccelerometer = mSensorManager
@@ -79,50 +95,23 @@ public class AccelerometerPerceptions extends Activity implements
 		clock.start();
 		mSensorManager.registerListener(this, mAccelerometer,
 				SensorManager.SENSOR_DELAY_NORMAL);
-	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		mSensorManager.registerListener(this, mAccelerometer,
-				SensorManager.SENSOR_DELAY_NORMAL);
-	}
+		// maybe a while(true) here
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		mSensorManager.unregisterListener(this);
-	}
-
-	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-		// can be ignored
+		return Service.START_STICKY;
 	}
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 
-		TextView tvX = (TextView) findViewById(R.id.x_axis);
-		TextView tvY = (TextView) findViewById(R.id.y_axis);
-		TextView tvZ = (TextView) findViewById(R.id.z_axis);
-
-		ImageView iv = (ImageView) findViewById(R.id.image);
-
-		TextView time = (TextView) findViewById(R.id.time);
-		TextView totalul = (TextView) findViewById(R.id.total);
-
-		time.setText(clock.getMinutes(System.currentTimeMillis()) + " ");
-
-		if (clock.getMinutes(System.currentTimeMillis()) > 0.5) {
-			totalul.setText(total + " ");
+		if (clock.getMinutes(System.currentTimeMillis()) > 5) {
 			clock.stop();
 			try {
-				totalul.setText(total + " ");
-				Thread.sleep(8000);
-				totalul.setText(total + " ");
+				accelerometerItem.changeType(total);
+				ctxCore.postContextUpdate(accelerometerItem);
+				Thread.sleep(4000);
 			}
 			catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			total = 0;
@@ -136,10 +125,6 @@ public class AccelerometerPerceptions extends Activity implements
 			mLastX = x;
 			mLastY = y;
 			mLastZ = z;
-
-			tvX.setText("0.0");
-			tvY.setText("0.0");
-			tvZ.setText("0.0");
 
 			mInitialized = true;
 		}
@@ -160,27 +145,20 @@ public class AccelerometerPerceptions extends Activity implements
 			mLastX = x;
 			mLastY = y;
 			mLastZ = z;
-
-			tvX.setText(Float.toString(deltaX));
-			tvY.setText(Float.toString(deltaY));
-			tvZ.setText(Float.toString(deltaZ));
-
-			iv.setVisibility(View.VISIBLE);
-
-			if (deltaX > deltaY && deltaX > deltaZ) {
-				iv.setImageResource(R.drawable.shaker_fig_1);
-			}
-			else if (deltaY > deltaX && deltaY > deltaZ) {
-				iv.setImageResource(R.drawable.shaker_fig_2);
-			}
-			else if (deltaZ > deltaX && deltaZ > deltaY) {
-				iv.setImageResource(R.drawable.shaker_fig_3);
-			}
-			else {
-				iv.setVisibility(View.INVISIBLE);
-			}
 		}
 	}
+
+	@Override
+	public void onAccuracyChanged(Sensor arg0, int arg1) {
+		// can be ignored
+	}
+
+	@Override
+	public IBinder onBind(Intent intent) {
+		// can be ignored
+		return null;
+	}
+
 }
 
 /**

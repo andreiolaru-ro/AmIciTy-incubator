@@ -12,17 +12,25 @@
 package net.amicity.common.core;
 
 /**
- * @author ''Azgabast'', vlad, cristian
- * This class contains the context types that are used.
- *
+ * @author ''Azgabast'', vlad, cristian This class contains the context types
+ *         that are used.
+ * 
  */
-public enum ContextTypes
-{
+public enum ContextTypes {
 	/**
 	 * Context type for the LocationModule
 	 */
 	LOCATION_CONTEXT, /**
-	 * Contexy type for the SoundModule
+	 * Context type for the SoundModule
 	 */
-	SOUND_CONTEXT;
+	SOUND_CONTEXT,
+	/**
+	 * Context type for AccelerometerModule if the suspect walks
+	 */
+	ACCELEROMETER_WALKS,
+	/**
+	 * Context type for AccelerometerModule if the suspect stays
+	 */
+	ACCELEROMETER_STAYS;
+
 }

@@ -72,4 +72,20 @@
 		android:id="@+id/image"
 		android:layout_gravity="center"
 		android:contentDescription="@string/nothing"/>
+	<TextView
+		android:paddingTop="20dip"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:gravity="center"
+		android:id="@+id/time"/>
+	<TextView
+		android:paddingTop="20dip"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:gravity="center"
+		android:id="@+id/total"/>
 </LinearLayout>
