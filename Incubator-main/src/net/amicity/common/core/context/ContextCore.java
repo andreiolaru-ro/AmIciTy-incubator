@@ -14,6 +14,7 @@ package net.amicity.common.core.context;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import net.amicity.common.core.ContextItem;
+import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.Notification;
 
 /**
@@ -22,6 +23,9 @@ import net.amicity.common.core.Notification;
  */
 public class ContextCore
 {
+	
+	public ContextStorage contextItemRemaining;
+	
 	/**
 	 * a synchronized queue used to add new ContextItems by Sensor modules or
 	 * Intelligent modules and to extract added ContextItems to be prepared for
@@ -39,6 +43,7 @@ public class ContextCore
 	public ContextCore(){
 		contextUpdates = new LinkedBlockingQueue<ContextItem>();
 		notificationQueue = new LinkedBlockingQueue<Notification>();
+		contextItemRemaining = new ContextStorage();
 
 	}
 	/**

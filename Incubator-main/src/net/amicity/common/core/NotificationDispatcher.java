@@ -11,6 +11,8 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
+import java.util.ArrayList;
+
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.LocationModule;
 
@@ -29,12 +31,18 @@ public class NotificationDispatcher extends Thread
 	 * a LocationModule instance for calling invoke method
 	 */
 	LocationModule locationContact;
+	
+	/**
+	 * sau un vector de toate modulele inteligente in loc sa scriem pe toate?
+	 */
+	ArrayList<IntelligenceModule> allIntelligent;
 	/**
 	 * @param core : received for accesing the queues
 	 */
 	public NotificationDispatcher(ContextCore core){
 		myCore = core;
 		locationContact = new LocationModule();
+		allIntelligent.add(locationContact);
 	}
 	
 	@Override

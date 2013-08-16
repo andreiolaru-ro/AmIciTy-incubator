@@ -41,6 +41,7 @@ public class ContextManager extends Thread
 				ContextItem item = myCore.getContextUpdate();
 				if(item instanceof WirelessItem){
 					System.out.println("s-a intrat aici - Wireless");
+					myCore.contextItemRemaining.add(item);
 					Notification newNot = new Notification(IntelligentTypes.LOCATION_INTELLIGENT);
 					myCore.postNotification(newNot);
 				}
