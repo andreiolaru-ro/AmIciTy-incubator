@@ -11,21 +11,28 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
+import java.util.Set;
+
 /**
- * @author ''Azgabast'', vlad, cristian Implemented by all objects with context
- *         info or notifications.
+ * @author cristian
  * 
  */
-public interface IntelligenceModule {
+public class AbstractIntelligenceModule implements IntelligenceModule {
 
-	// TODO
+	@Override
+	public void invoke(ContextItem item) {
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
-	 * A Intelligence module is invoked by a notification dispatcher
-	 * 
-	 * @param item
-	 *            -> the ContextItem that is directly involved in intelligence
-	 *            action
+	 * @param t
+	 *            -> a set of types from should the Module receive items
+	 * @return a set of ContextItem related to the Types from parameter
 	 */
-	public void invoke(ContextItem item);
+	protected static Set<ContextItem> get(Set<ContextTypes> t) {
+		return null;
+		// TODO ask the contextStore for Items of Types: t
+	}
 
 }

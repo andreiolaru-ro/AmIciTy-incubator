@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
-
 import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.IntelligenceModule;
 
@@ -143,6 +142,13 @@ public class LocationModule implements IntelligenceModule
 
 		return LocationDetected;
 				
+	}
+
+	@Override
+	public void invoke(ContextItem item)
+	{
+		//TODO
+		
 	}
 
 }
