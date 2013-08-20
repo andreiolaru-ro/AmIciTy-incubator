@@ -26,11 +26,11 @@ public class SoundItem implements ContextItem
 	/**
 	 * The maximum noise heard in the last interval.
 	 */
-	double value;
+	public double value;
 	/**
 	 * The type of this context item.
 	 */
-	ContextTypes type;
+	public ContextTypes type;
 	
 	/**
 	 * @param value The sound level returned by the device microphone during

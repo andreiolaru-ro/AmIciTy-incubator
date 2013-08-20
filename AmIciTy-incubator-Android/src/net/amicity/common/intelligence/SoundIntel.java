@@ -1,5 +1,6 @@
 package net.amicity.common.intelligence;
 
+import net.amicity.common.context_types.SoundItem;
 import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.IntelligenceModule;
 import android.app.Service;
@@ -12,13 +13,25 @@ import android.os.IBinder;
  * @author ''Azgabast''
  *
  */
-public class ISoundModule extends Service implements IntelligenceModule
+public class SoundIntel extends Service implements IntelligenceModule
 {
-
+	/**
+	 * The current value of the recorded sound.
+	 */
+	int value;
+	/**
+	 * The object which stores the current soundItem;
+	 */
+	SoundItem si;
 	@Override
 	public void invoke(ContextItem item)
 	{
-		// TODO Auto-generated method stub
+		if ( item instanceof SoundItem ) {
+			si = (SoundItem) item;
+			if( si.value > .6 )
+				//TODO
+				System.out.println();
+		}
 		
 	}
 
