@@ -13,6 +13,7 @@ package net.amicity.common.core;
 
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.LocationModule;
+import net.amicity.common.intelligence.SoundIntel;
 
 /**
  * @author ''Azgabast'', vlad, cristian
@@ -26,9 +27,13 @@ public class NotificationDispatcher extends Thread
 	 */
 	ContextCore myCore; 
 	/**
-	 * a LocationModule instance for calling invoke method
+	 * a LocationModule instance for calling the invoke method
 	 */
 	LocationModule locationContact;
+	/**
+	 * a SoundIntel instance for calling the invoke method
+	 */
+	SoundIntel soundIntel;
 	/**
 	 * @param core : received for accesing the queues
 	 */
@@ -42,9 +47,12 @@ public class NotificationDispatcher extends Thread
 		while(true){
 			if(myCore.notificationQueue.isEmpty() == false){
 				Notification notExtract = myCore.getNotification();
-				
-				if(notExtract.myNotified == IntelligentTypes.LOCATION_INTELLIGENT)	
-					System.out.println("cucu");
+				for( IntelligentTypes i : notExtract.intelModules) {
+					if( i == IntelligentTypes.LOCATION_INTELLIGENT)
+						locationContact.invoke(notExtract.type);
+					if( i == IntelligentTypes.SOUND_INTELLIGENT)
+						soundIntel.invoke(notExtract.type);
+				}
 				
 			}
 		}
