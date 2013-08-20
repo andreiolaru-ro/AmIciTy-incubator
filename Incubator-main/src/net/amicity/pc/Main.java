@@ -16,14 +16,19 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
-		ContextCore cc = new ContextCore();
-		
+		final ContextCore cc = new ContextCore();
 
 		WirelessModule wm = new WirelessModule();
 		wm.connect(cc);
 
-		ContextManager cm = new ContextManager(cc);
-		cm.run();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				ContextManager cm = new ContextManager(cc);
+				cm.run();
+			}
+		}).start();
 
 		NotificationDispatcher nd = new NotificationDispatcher(cc);
 		nd.run();
