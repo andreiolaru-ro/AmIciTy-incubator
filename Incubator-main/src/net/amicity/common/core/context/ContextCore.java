@@ -18,61 +18,68 @@ import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.Notification;
 
 /**
- * @author ''Azgabast'', vlad, cristian
- * The top-level module of the application.
+ * @author ''Azgabast'', vlad, cristian The top-level module of the application.
  */
-public class ContextCore
-{
-	
+public class ContextCore {
+
+	/**
+	 * 
+	 */
 	public ContextStorage contextItemRemaining;
-	
+
 	/**
 	 * a synchronized queue used to add new ContextItems by Sensor modules or
 	 * Intelligent modules and to extract added ContextItems to be prepared for
-	 *  Notification 
+	 * Notification
 	 */
 	public LinkedBlockingQueue<ContextItem> contextUpdates;
 	/**
-	 * a synch queue to notify intelligent modules that they may be interested 
-	 * in some (processed)ContextItems added in ContextStorage 
+	 * a synch queue to notify intelligent modules that they may be interested
+	 * in some (processed)ContextItems added in ContextStorage
 	 */
 	public LinkedBlockingQueue<Notification> notificationQueue;
+
 	/**
-	 * initialising the class's queues 
+	 * initialising the class's queues
 	 */
-	public ContextCore(){
+	public ContextCore() {
 		contextUpdates = new LinkedBlockingQueue<ContextItem>();
 		notificationQueue = new LinkedBlockingQueue<Notification>();
 		contextItemRemaining = new ContextStorage();
 
 	}
+
 	/**
-	 * @param newItem : ContextItem to be added by the IntelligentModule or
-	 * SensorModule to be analised and used by interested entities
+	 * @param newItem
+	 *            : ContextItem to be added by the IntelligentModule or
+	 *            SensorModule to be analised and used by interested entities
 	 */
-	public void postContextUpdate(ContextItem newItem){
+	public void postContextUpdate(ContextItem newItem) {
 		contextUpdates.add(newItem);
 	}
+
 	/**
 	 * @return the Contextitem by ContextManager to be processed, creating an
-	 * ContextStore's component and to notify the interested entities 
+	 *         ContextStore's component and to notify the interested entities
 	 */
-	public ContextItem getContextUpdate(){
+	public ContextItem getContextUpdate() {
 		return contextUpdates.remove();
 	}
+
 	/**
-	 * @param newNotificaition : the Notification added by ContextManager after adding a 
-	 * processed ContextItem to ContextStore
+	 * @param newNotificaition
+	 *            : the Notification added by ContextManager after adding a
+	 *            processed ContextItem to ContextStore
 	 */
-	public void postNotification(Notification newNotificaition){
+	public void postNotification(Notification newNotificaition) {
 		notificationQueue.add(newNotificaition);
 	}
+
 	/**
 	 * @return : the Notification which mentions the next module to be notified
 	 */
-	public Notification getNotification(){
+	public Notification getNotification() {
 		return notificationQueue.remove();
 	}
-	
 
 }
