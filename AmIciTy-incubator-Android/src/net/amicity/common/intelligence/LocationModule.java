@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
-import net.amicity.common.core.ContextItem;
+import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 
 
@@ -144,8 +144,10 @@ public class LocationModule implements IntelligenceModule
 				
 	}
 
-	@Override
-	public void invoke(ContextItem item)
+	/**
+	 * @param item : the type of item.
+	 */
+	public void invoke(ContextTypes item)
 	{
 		//TODO
 		

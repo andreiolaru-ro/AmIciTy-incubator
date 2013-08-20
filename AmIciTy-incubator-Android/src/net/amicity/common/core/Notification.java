@@ -11,6 +11,8 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
+import java.util.ArrayList;
+
 /**
  * Notification added by Contextmanager and pulled from NotificationManager in
  * order to notify the Intelligent Modules to get a ContextItem
@@ -20,13 +22,21 @@ package net.amicity.common.core;
  */
 public class Notification {
 	/**
-	 *  the type of notification to know which intelligent module should notify
+	 *  the type of notification 
 	 */
-	IntelligentTypes myNotified;
+	//IntelligentTypes myNotified;
+	ContextTypes type;
 	/**
-	 * @param toBeNotified : the value given to MyNotified
+	 * The list of modules to be notified.
 	 */
-	public Notification(IntelligentTypes toBeNotified){
-		myNotified = toBeNotified;
+	ArrayList<IntelligentTypes> intelModules;
+	/**
+	 * @param toBeNotified : the value given to type
+	 * @param modules : the modules to be notified
+	 */
+	public Notification(ContextTypes toBeNotified, ArrayList<IntelligentTypes> modules){
+		type = toBeNotified;
+		intelModules = new ArrayList<IntelligentTypes>(modules);
+		
 	}
 }

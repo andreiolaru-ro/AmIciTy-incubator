@@ -26,6 +26,6 @@ public interface IntelligenceModule {
 	 *            -> the ContextItem that is directly involved in intelligence
 	 *            action
 	 */
-	public void invoke(ContextItem item);
+	public void invoke(ContextTypes item);
 
 }

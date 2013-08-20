@@ -1,7 +1,7 @@
 package net.amicity.common.intelligence;
 
 import net.amicity.common.context_types.SoundItem;
-import net.amicity.common.core.ContextItem;
+import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import android.app.Service;
 import android.content.Intent;
@@ -24,14 +24,9 @@ public class SoundIntel extends Service implements IntelligenceModule
 	 */
 	SoundItem si;
 	@Override
-	public void invoke(ContextItem item)
+	public void invoke(ContextTypes item)
 	{
-		if ( item instanceof SoundItem ) {
-			si = (SoundItem) item;
-			if( si.value > .6 )
-				//TODO
-				System.out.println();
-		}
+		
 		
 	}
 
