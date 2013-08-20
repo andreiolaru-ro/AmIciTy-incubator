@@ -20,7 +20,7 @@ import java.util.Set;
 public class AbstractIntelligenceModule implements IntelligenceModule {
 
 	@Override
-	public void invoke(ContextTypes item) {
+	public void invoke() {
 		// TODO Auto-generated method stub
 
 	}

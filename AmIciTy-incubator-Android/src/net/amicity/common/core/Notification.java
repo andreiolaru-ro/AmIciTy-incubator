@@ -21,22 +21,17 @@ import java.util.ArrayList;
  * 
  */
 public class Notification {
-	/**
-	 *  the type of notification 
-	 */
-	//IntelligentTypes myNotified;
-	ContextTypes type;
+
 	/**
 	 * The list of modules to be notified.
 	 */
 	ArrayList<IntelligentTypes> intelModules;
+
 	/**
-	 * @param toBeNotified : the value given to type
-	 * @param modules : the modules to be notified
+	 * @param modules
+	 *            : the modules to be notified
 	 */
-	public Notification(ContextTypes toBeNotified, ArrayList<IntelligentTypes> modules){
-		type = toBeNotified;
+	public Notification(ArrayList<IntelligentTypes> modules) {
 		intelModules = new ArrayList<IntelligentTypes>(modules);
-		
 	}
 }

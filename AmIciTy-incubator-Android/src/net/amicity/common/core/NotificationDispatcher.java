@@ -16,16 +16,16 @@ import net.amicity.common.intelligence.LocationModule;
 import net.amicity.common.intelligence.SoundIntel;
 
 /**
- * @author ''Azgabast'', vlad, cristian
- * The class which takes notifications from the notificationQueue and calls for
- * the IntelligenceModules which are interested, in a random order.
+ * @author ''Azgabast'', vlad, cristian The class which takes notifications from
+ *         the notificationQueue and calls for the IntelligenceModules which are
+ *         interested, in a random order.
  */
-public class NotificationDispatcher extends Thread
-{
+public class NotificationDispatcher extends Thread {
+
 	/**
 	 * instance used for accesing the queues used
 	 */
-	ContextCore myCore; 
+	ContextCore myCore;
 	/**
 	 * a LocationModule instance for calling the invoke method
 	 */
@@ -34,26 +34,28 @@ public class NotificationDispatcher extends Thread
 	 * a SoundIntel instance for calling the invoke method
 	 */
 	SoundIntel soundIntel;
+
 	/**
-	 * @param core : received for accesing the queues
+	 * @param core
+	 *            : received for accesing the queues
 	 */
-	public NotificationDispatcher(ContextCore core){
+	public NotificationDispatcher(ContextCore core) {
 		myCore = core;
 		locationContact = new LocationModule();
 	}
-	
+
 	@Override
-	public void run(){
-		while(true){
-			if(myCore.notificationQueue.isEmpty() == false){
+	public void run() {
+		while (true) {
+			if (myCore.notificationQueue.isEmpty() == false) {
 				Notification notExtract = myCore.getNotification();
-				for( IntelligentTypes i : notExtract.intelModules) {
-					if( i == IntelligentTypes.LOCATION_INTELLIGENT)
-						locationContact.invoke(notExtract.type);
-					if( i == IntelligentTypes.SOUND_INTELLIGENT)
-						soundIntel.invoke(notExtract.type);
+				for (IntelligentTypes i : notExtract.intelModules) {
+					if (i == IntelligentTypes.LOCATION_INTELLIGENT)
+						locationContact.invoke();
+					if (i == IntelligentTypes.SOUND_INTELLIGENT)
+						soundIntel.invoke();
 				}
-				
+
 			}
 		}
 	}
