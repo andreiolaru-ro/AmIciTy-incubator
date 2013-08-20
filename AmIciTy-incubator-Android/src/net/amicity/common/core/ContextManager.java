@@ -42,8 +42,8 @@ public class ContextManager extends Thread
 				ContextItem item = myCore.getContextUpdate();
 				if(item instanceof WirelessItem){
 					System.out.println("s-a intrat aici - Wireless");
-				//	Notification newNot = new Notification(IntelligentTypes.LOCATION_INTELLIGENT);
-					//myCore.postNotification(newNot);
+					Notification newNot = new Notification(IntelligentTypes.LOCATION_INTELLIGENT);
+					myCore.postNotification(newNot);
 				}
 				if(item instanceof SoundItem){
 					System.out.println("s-a intrat aici");
