@@ -15,13 +15,12 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// external entity that starts everything
 
 		ContextCore cc = new ContextCore();
+		
 
 		WirelessModule wm = new WirelessModule();
 		wm.connect(cc);
-		wm.obtainData();
 
 		ContextManager cm = new ContextManager(cc);
 		cm.run();

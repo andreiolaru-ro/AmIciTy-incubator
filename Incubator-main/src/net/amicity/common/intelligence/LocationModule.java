@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
-
-import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.IntelligenceModule;
 
 
@@ -49,10 +47,12 @@ public class LocationModule implements IntelligenceModule
 	}
 
 	@Override
-	public void invoke(ContextItem item)
+	public void invoke()
 	{
-		wifiDetected = (ArrayList <String>) item;
-		getLocation();
+		System.out.println("Location module invoked");
+		//TODO get item from store
+	//	wifiDetected = (ArrayList <String>) item;
+		System.out.println("Location: " + getLocation());
 		
 	}
 	

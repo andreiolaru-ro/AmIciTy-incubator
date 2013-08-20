@@ -1,35 +1,37 @@
 /*******************************************************************************
  * Copyright (C) 2013 Andrei Olaru , Vlad Herescu, Cristian Radu Neagoe, Cristian Grigoras.
  * 
- * This file is part of AmIciTy-incubator.
+ * This file is part of AmIciTy-incubator-Android.
  * 
- * AmIciTy-incubator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+ * AmIciTy-incubator-Android is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
  * 
- * AmIciTy-incubator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ * AmIciTy-incubator-Android is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
  * 
- * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 package net.amicity.common.core;
 
+import java.util.ArrayList;
 
 /**
- * Notification added by Contextmanager and pulled from NotificationManager
- * in order to notify the Intelligent Modules to get a ContextItem 
+ * Notification added by Contextmanager and pulled from NotificationManager in
+ * order to notify the Intelligent Modules to get a ContextItem
  * 
  * @author vlad
- *
+ * 
  */
-public class Notification
-{
-	/**
-	 *  the type of notification to know which intelligent module should notify
-	 */
-	IntelligentTypes myNotified;
-	/**
-	 * @param toBeNotified : the value given to MyNotified
-	 */
-	public Notification(IntelligentTypes toBeNotified){
-		myNotified = toBeNotified;
-	} 
+public class Notification {
 
+	/**
+	 * The list of modules to be notified.
+	 */
+	ArrayList<IntelligentTypes> intelModules;
+
+	/**
+	 * @param modules
+	 *            : the modules to be notified
+	 */
+	public Notification(ArrayList<IntelligentTypes> modules) {
+		intelModules = new ArrayList<IntelligentTypes>(modules);
+	}
 }

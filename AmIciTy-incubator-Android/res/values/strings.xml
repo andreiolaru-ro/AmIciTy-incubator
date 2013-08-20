@@ -8,7 +8,7 @@
   
   AmIciTy-incubator-Android is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
   
-  You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
+  You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
 
@@ -21,5 +21,6 @@
     <string name="none"></string>
     <string name="title_activity_sound_module">SoundModule</string>
     <string name="title_activity_wifi_module">WifiModule</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

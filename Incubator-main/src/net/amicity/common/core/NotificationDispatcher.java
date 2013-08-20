@@ -11,49 +11,48 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
-import java.util.ArrayList;
-
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.LocationModule;
 
 /**
- * @author ''Azgabast'', vlad, cristian
- * The class which takes notifications from the notificationQueue and calls for
- * the IntelligenceModules which are interested, in a random order.
+ * @author ''Azgabast'', vlad, cristian The class which takes notifications from
+ *         the notificationQueue and calls for the IntelligenceModules which are
+ *         interested, in a random order.
  */
-public class NotificationDispatcher extends Thread
-{
+public class NotificationDispatcher extends Thread {
+
 	/**
 	 * instance used for accesing the queues used
 	 */
-	ContextCore myCore; 
+	ContextCore myCore;
 	/**
-	 * a LocationModule instance for calling invoke method
+	 * a LocationModule instance for calling the invoke method
 	 */
 	LocationModule locationContact;
-	
+
 	/**
-	 * sau un vector de toate modulele inteligente in loc sa scriem pe toate?
+	 * @param core
+	 *            : received for accesing the queues
 	 */
-	ArrayList<IntelligenceModule> allIntelligent;
-	/**
-	 * @param core : received for accesing the queues
-	 */
-	public NotificationDispatcher(ContextCore core){
+	public NotificationDispatcher(ContextCore core) {
 		myCore = core;
 		locationContact = new LocationModule();
-		allIntelligent.add(locationContact);
+		System.out.println("Notif disp constructor");
 	}
-	
+
 	@Override
-	public void run(){
-		while(true){
-			if(myCore.notificationQueue.isEmpty() == false){
+	public void run() {
+		while (true) {
+			if (myCore.notificationQueue.isEmpty() == false) {
 				Notification notExtract = myCore.getNotification();
-				
-				if(notExtract.myNotified == IntelligentTypes.LOCATION_INTELLIGENT)	
-					System.out.println("cucu");
-				
+				System.out.println("Notif disp get notif");
+				for (IntelligentTypes i : notExtract.intelModules) {
+					if (i == IntelligentTypes.LOCATION_INTELLIGENT) {
+						System.out.println("Notif disp invoking intel");
+						locationContact.invoke();
+					}
+				}
+
 			}
 		}
 	}

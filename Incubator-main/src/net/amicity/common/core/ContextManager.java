@@ -11,45 +11,58 @@
  ******************************************************************************/
 package net.amicity.common.core;
 
+import java.util.ArrayList;
+import net.amicity.common.context_types.SoundItem;
+import net.amicity.common.context_types.WirelessItem;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.common.context_types.*;
 
 /**
- * The class which takes updates from the ContextUpdates queue and adds them
- * to the sendQueue and/or post notifications in the notificationsQueue.
- * @author ''Azgabast'', vlad, cristian
+ * @author ''Azgabast'', vlad, cristian The class which takes updates from the
+ *         ContextUpdates queue and adds them to the sendQueue and/or post
+ *         notifications in the notificationsQueue.
  */
-public class ContextManager extends Thread
-{
+public class ContextManager extends Thread {
+
 	/**
-	 * instance to acces the ContextCore's synchr queues : Update
-	 * and to manage them by using core's methods
+	 * instance to acces the ContextCore's synchr queues : Update and to manage
+	 * them by using core's methods
 	 */
-	ContextCore myCore;	
+	ContextCore myCore;
+
 	/**
-	 * @param coreReceived : instance of singleton ContextCore
+	 * @param coreReceived
+	 *            : instance of singleton ContextCore
 	 */
-	public ContextManager(ContextCore coreReceived){
+	public ContextManager(ContextCore coreReceived) {
 		myCore = coreReceived;
+		System.out.println("ContextManager constructor");
 	}
-	
-	
+
 	@Override
-	public void run(){
-		while(true){
-			if(myCore.contextUpdates.isEmpty() == false){
+	public void run() {
+		while (true) {
+			if (myCore.contextUpdates.isEmpty() == false) {
 				ContextItem item = myCore.getContextUpdate();
-				if(item instanceof WirelessItem){
-					System.out.println("s-a intrat aici - Wireless");
-					myCore.contextItemRemaining.add(item);
-					Notification newNot = new Notification(IntelligentTypes.LOCATION_INTELLIGENT);
+				System.out.println("ContextManager got update");
+				if (item instanceof WirelessItem) {
+					System.out.println("ContextManager entered wireless zone");
+					ArrayList<IntelligentTypes> list = new ArrayList<IntelligentTypes>();
+					list.add(IntelligentTypes.LOCATION_INTELLIGENT);
+					Notification newNot = new Notification(list);
 					myCore.postNotification(newNot);
+					System.out.println("ContextManager post notification");
+					myCore.contextItemRemaining.add(item);
 				}
-				if(item instanceof SoundItem){
-					System.out.println("s-a intrat aici");
+				if (item instanceof SoundItem) {
+					ArrayList<IntelligentTypes> list = new ArrayList<IntelligentTypes>();
+					list.add(IntelligentTypes.LOCATION_INTELLIGENT);
+					list.add(IntelligentTypes.SOUND_INTELLIGENT);
+					Notification newNot = new Notification(list);
+					myCore.postNotification(newNot);
+					myCore.contextItemRemaining.add(item);
 				}
 			}
 		}
 	}
-	
+
 }

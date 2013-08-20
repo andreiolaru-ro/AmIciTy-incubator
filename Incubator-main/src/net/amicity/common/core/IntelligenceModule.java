@@ -21,11 +21,7 @@ public interface IntelligenceModule {
 	// TODO
 	/**
 	 * A Intelligence module is invoked by a notification dispatcher
-	 * 
-	 * @param item
-	 *            -> the ContextItem that is directly involved in intelligence
-	 *            action
 	 */
-	public void invoke(ContextItem item);
+	public void invoke();
 
 }

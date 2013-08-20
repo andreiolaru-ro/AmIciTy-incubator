@@ -12,7 +12,6 @@
 package net.amicity.common.core.context;
 
 import java.util.concurrent.LinkedBlockingQueue;
-
 import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.Notification;
@@ -46,6 +45,7 @@ public class ContextCore {
 		contextUpdates = new LinkedBlockingQueue<ContextItem>();
 		notificationQueue = new LinkedBlockingQueue<Notification>();
 		contextItemRemaining = new ContextStorage();
+		System.out.println(" ContextCore constructor ");
 
 	}
 

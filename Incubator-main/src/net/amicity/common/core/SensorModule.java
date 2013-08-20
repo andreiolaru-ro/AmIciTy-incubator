@@ -20,21 +20,8 @@ import net.amicity.common.core.context.ContextCore;
  */
 public interface SensorModule
 {
-
 	/**
-	 * @param core : The contextCore which connects to the module.
+	 * @param cc The contextCore which connects to the module.
 	 */
-	public void connect(ContextCore core);
-	
-	/**
-	 * method to add the data to core's queues
-	 */
-	public void addDataDetected();
-	
-	/**
-	 * obtain data using sensors
-	 */
-	public void obtainData();
-	
-	
+	public void connect (ContextCore cc);
 }

@@ -15,9 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+import net.amicity.common.context_types.WirelessItem;
 import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.SensorModule;
-import net.amicity.common.context_types.*;
 import net.amicity.common.core.context.ContextCore;
 
 
@@ -52,17 +52,22 @@ public class WirelessModule implements SensorModule{
 		
 		
 		wirelessItem = new WirelessItem();
+		System.out.println(" wirelessModule constructor ");
 	
 	}
 	
 	@Override
 	public void connect(ContextCore coreReceived){
 		myCore = coreReceived;
+		System.out.println(" wireless module connect");
 		obtainData();
+		System.out.println(" wireless module obtainData");
 	}
 
 	
-	@Override
+	/**
+	 * 
+	 */
 	public void obtainData(){
 			
 		
@@ -102,7 +107,6 @@ public class WirelessModule implements SensorModule{
 	      addDataDetected();
 
 	}
-	@Override
 	public void addDataDetected(){
 
 		
