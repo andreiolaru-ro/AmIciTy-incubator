@@ -15,11 +15,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
+import net.amicity.common.context_types.LocationItem;
 import net.amicity.common.context_types.WirelessItem;
 import net.amicity.common.core.ContextItem;
+import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.IntelligenceModule;
-import net.amicity.common.core.context.*;
-import net.amicity.common.context_types.*;
+import net.amicity.common.core.context.ContextCore;
 
 
 /**
@@ -34,6 +35,10 @@ public class LocationModule implements IntelligenceModule
 	 */
 	ContextCore myCore;
 	/**
+	 * The ContextStorage;
+	 */
+	ContextStorage storage;
+	/**
 	 * arraylist of wireless netowrks detected
 	 */
 	ArrayList <String> wifiDetected;
@@ -47,10 +52,11 @@ public class LocationModule implements IntelligenceModule
 	/**
 	 * constructor of the class
 	 * initialize its members
-	 * @param receivedCore : used to acces the storage and its queues
+	 * @param contextItemRemaining 
 	 */
-	public LocationModule(ContextCore receivedCore){
-		myCore = receivedCore;
+
+	public LocationModule(ContextStorage contextItemRemaining){
+		storage = contextItemRemaining;
 		dataNetLocation = new TreeMap<String, ArrayList<String>>();
 		initHardData();
 	}
@@ -60,11 +66,9 @@ public class LocationModule implements IntelligenceModule
 	{
 		System.out.println("Location module invoked");
 		//TODO get item from store
-		for ( ContextItem i : myCore.contextItemRemaining)
+		for ( ContextItem i : storage)
 			if ( i instanceof WirelessItem)
 				wifiDetected =((WirelessItem) i).wifiDetected;
-		
-		
 		System.out.println("Location: " + getLocation());
 		
 		
