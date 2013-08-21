@@ -10,115 +10,114 @@
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 package net.amicity.pc.sensors;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+
+import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.context_types.WirelessItem;
-import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.SensorModule;
 import net.amicity.common.core.context.ContextCore;
-
 
 /**
  * 
  * detects wireless networks
  * 
  * @author vlad
- *
+ * 
  */
-public class WirelessModule implements SensorModule{
-	
+public class WirelessModule implements SensorModule {
+
 	/**
-	 *  a ContextItem which will be added to core's queue
+	 * a ContextItem which will be added to core's queue
 	 */
-	ContextItem wirelessItem;
+	AbstractItem wirelessItem;
 
 	/**
 	 * the location detected used further for connection
 	 */
 	String location;
-	
+
 	/**
-	 *  instance of ContextCore to acces its queues
+	 * instance of ContextCore to acces its queues
 	 */
 	ContextCore myCore;
+
 	/**
-	 * constructor of the class
-	 * initialize its members
+	 * constructor of the class initialize its members
 	 */
-	public WirelessModule(){
-		
-		
+	public WirelessModule() {
+
 		wirelessItem = new WirelessItem();
 		System.out.println(" wirelessModule constructor ");
-	
+
 	}
-	
+
 	@Override
-	public void connect(ContextCore coreReceived){
+	public void connect(ContextCore coreReceived) {
 		myCore = coreReceived;
 		System.out.println(" wireless module connect");
 		obtainData();
 		System.out.println(" wireless module obtainData");
 	}
 
-	
 	/**
 	 * 
 	 */
-	public void obtainData(){
-			
-		
-		ProcessBuilder builder = new ProcessBuilder("netsh", "wlan", "show", "networks");
-		
+	public void obtainData() {
+
+		ProcessBuilder builder = new ProcessBuilder("netsh", "wlan", "show",
+				"networks");
+
 		Process process;
-		try
-		{
-			process = builder.start();				// pornesc programul
-			InputStream is = process.getInputStream();   // obtin outuputul shellului ca input in program
-												// clasa este abstracta
-			InputStreamReader isr = new InputStreamReader(is);  // creez o instanta ISR pe baza lui InputStream
-			BufferedReader br = new BufferedReader(isr); // transform streamul de biti in caractere
+		try {
+			process = builder.start(); // pornesc programul
+			InputStream is = process.getInputStream(); // obtin outuputul
+														// shellului ca input in
+														// program
+			// clasa este abstracta
+			InputStreamReader isr = new InputStreamReader(is); // creez o
+																// instanta ISR
+																// pe baza lui
+																// InputStream
+			BufferedReader br = new BufferedReader(isr); // transform streamul
+															// de biti in
+															// caractere
 			String line;
 			while ((line = br.readLine()) != null) {
-			     StringTokenizer st = new StringTokenizer(line,": ");
-			     while(st.hasMoreTokens()){
-			     	String nameLine= st.nextToken();
-			     	if(nameLine.compareTo("SSID") == 0){
-			     		st.nextToken();
-			     		((WirelessItem) wirelessItem).wifiDetected.add(st.nextToken());
-			     		
-			     	}
-			     	else
-			     		break;
-			     }
+				StringTokenizer st = new StringTokenizer(line, ": ");
+				while (st.hasMoreTokens()) {
+					String nameLine = st.nextToken();
+					if (nameLine.compareTo("SSID") == 0) {
+						st.nextToken();
+						((WirelessItem) wirelessItem).wifiDetected.add(st
+								.nextToken());
+
+					}
+					else
+						break;
+				}
 			}
 			br.close();
-			
+
 		}
-		catch (IOException e)
-		{
-			
+		catch (IOException e) {
+
 			e.printStackTrace();
 		}
-		
-	      addDataDetected();
+
+		addDataDetected();
 
 	}
-	public void addDataDetected(){
 
+	public void addDataDetected() {
 
 		myCore.postContextUpdate(wirelessItem);
 		System.out.println(((WirelessItem) wirelessItem).wifiDetected.size());
-		
-		
+
 	}
-		
+
 }
-
-
-
-
-

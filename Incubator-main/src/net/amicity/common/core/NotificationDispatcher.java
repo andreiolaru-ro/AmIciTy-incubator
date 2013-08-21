@@ -36,7 +36,7 @@ public class NotificationDispatcher extends Thread {
 	 */
 	public NotificationDispatcher(ContextCore core) {
 		myCore = core;
-		locationContact = new LocationModule(myCore.contextItemRemaining);
+		locationContact = new LocationModule(myCore.contextStorage);
 		System.out.println("Notif disp constructor");
 	}
 
@@ -46,11 +46,9 @@ public class NotificationDispatcher extends Thread {
 			if (myCore.notificationQueue.isEmpty() == false) {
 				Notification notExtract = myCore.getNotification();
 				System.out.println("Notif disp get notif");
-				for (IntelligentTypes i : notExtract.intelModules) {
-					if (i == IntelligentTypes.LOCATION_INTELLIGENT) {
-						System.out.println("Notif disp invoking intel");
-						locationContact.invoke();
-					}
+				for (IntelligenceModule i : notExtract.intelModules) {
+					System.out.println("Notif disp invoking intel");
+					i.invoke();
 				}
 
 			}

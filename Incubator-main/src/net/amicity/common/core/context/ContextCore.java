@@ -12,7 +12,8 @@
 package net.amicity.common.core.context;
 
 import java.util.concurrent.LinkedBlockingQueue;
-import net.amicity.common.core.ContextItem;
+
+import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.Message;
 import net.amicity.common.core.Notification;
@@ -25,20 +26,20 @@ public class ContextCore {
 	/**
 	 * 
 	 */
-	public ContextStorage contextItemRemaining;
+	public ContextStorage contextStorage;
 
 	/**
 	 * a synchronized queue used to add new ContextItems by Sensor modules or
 	 * Intelligent modules and to extract added ContextItems to be prepared for
 	 * Notification
 	 */
-	public LinkedBlockingQueue<ContextItem> contextUpdates;
+	public LinkedBlockingQueue<AbstractItem> contextUpdates;
 	/**
 	 * a synch queue to notify intelligent modules that they may be interested
 	 * in some (processed)ContextItems added in ContextStorage
 	 */
 	public LinkedBlockingQueue<Notification> notificationQueue;
-	
+
 	/**
 	 * q of messages sent to other devices/ for connection with the server
 	 */
@@ -48,9 +49,9 @@ public class ContextCore {
 	 * initialising the class's queues
 	 */
 	public ContextCore() {
-		contextUpdates = new LinkedBlockingQueue<ContextItem>();
+		contextUpdates = new LinkedBlockingQueue<AbstractItem>();
 		notificationQueue = new LinkedBlockingQueue<Notification>();
-		contextItemRemaining = new ContextStorage();
+		contextStorage = new ContextStorage();
 		System.out.println(" ContextCore constructor ");
 
 	}
@@ -60,7 +61,7 @@ public class ContextCore {
 	 *            : ContextItem to be added by the IntelligentModule or
 	 *            SensorModule to be analised and used by interested entities
 	 */
-	public void postContextUpdate(ContextItem newItem) {
+	public void postContextUpdate(AbstractItem newItem) {
 		contextUpdates.add(newItem);
 	}
 
@@ -68,7 +69,7 @@ public class ContextCore {
 	 * @return the Contextitem by ContextManager to be processed, creating an
 	 *         ContextStore's component and to notify the interested entities
 	 */
-	public ContextItem getContextUpdate() {
+	public AbstractItem getContextUpdate() {
 		return contextUpdates.remove();
 	}
 
