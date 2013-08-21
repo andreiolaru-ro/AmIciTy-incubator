@@ -36,7 +36,6 @@ public class NotificationDispatcher extends Thread {
 	 */
 	public NotificationDispatcher(ContextCore core) {
 		myCore = core;
-		locationContact = new LocationModule(myCore.contextStorage);
 		System.out.println("Notif disp constructor");
 	}
 

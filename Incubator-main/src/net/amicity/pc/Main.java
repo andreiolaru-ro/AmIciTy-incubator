@@ -24,7 +24,7 @@ public class Main {
 
 		final ContextCore cc = new ContextCore();
 
-		LocationModule lm = new LocationModule(cc.contextStorage);
+		LocationModule lm = new LocationModule(cc);
 
 		final HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm = new HashMap<ContextTypes, ArrayList<IntelligenceModule>>();
 		ArrayList<IntelligenceModule> iModules = new ArrayList<IntelligenceModule>();

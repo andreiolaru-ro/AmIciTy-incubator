@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
-
 import net.amicity.common.context_types.LocationItem;
 import net.amicity.common.context_types.WirelessItem;
 import net.amicity.common.core.ContextStorage;
@@ -51,12 +50,12 @@ public class LocationModule implements IntelligenceModule {
 
 	/**
 	 * constructor of the class initialize its members
-	 * 
-	 * @param contextStorage
+	 * @param cc the context core
 	 */
 
-	public LocationModule(ContextStorage contextStorage) {
-		storage = contextStorage;
+	public LocationModule( ContextCore cc) {
+		myCore = cc;
+		storage = cc.contextStorage;
 		dataNetLocation = new TreeMap<String, ArrayList<String>>();
 		initHardData();
 	}

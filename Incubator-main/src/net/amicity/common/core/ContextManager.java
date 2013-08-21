@@ -13,7 +13,6 @@ package net.amicity.common.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.core.context.ContextCore;
 
@@ -56,10 +55,12 @@ public class ContextManager extends Thread {
 			if (myCore.contextUpdates.isEmpty() == false) {
 				AbstractItem item = myCore.getContextUpdate();
 				System.out.println("ContextManager got update");
-				Notification newNot = new Notification(hm.get(item.type));
-				myCore.contextStorage.add(item);
-				myCore.postNotification(newNot);
-				System.out.println("ContextManager post notification");
+				if( hm.containsKey(item.type)) {
+						Notification newNot = new Notification(hm.get(item.type));
+						myCore.contextStorage.add(item);
+						myCore.postNotification(newNot);
+						System.out.println("ContextManager post notification");
+				}
 				/*if (item instanceof WirelessItem) {
 					System.out.println("ContextManager entered wireless zone");
 					ArrayList<IntelligentTypes> list = new ArrayList<IntelligentTypes>();
