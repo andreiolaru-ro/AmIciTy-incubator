@@ -12,6 +12,8 @@
 package net.amicity.common.core;
 
 import java.util.ArrayList;
+
+import net.amicity.common.context_types.LocationItem;
 import net.amicity.common.context_types.SoundItem;
 import net.amicity.common.context_types.WirelessItem;
 import net.amicity.common.core.context.ContextCore;
@@ -60,6 +62,9 @@ public class ContextManager extends Thread {
 					Notification newNot = new Notification(list);
 					myCore.postNotification(newNot);
 					myCore.contextItemRemaining.add(item);
+				}
+				if( item instanceof LocationItem){
+					myCore.sendQueue.add(null);
 				}
 			}
 		}

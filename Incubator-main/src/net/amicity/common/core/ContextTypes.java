@@ -31,6 +31,12 @@ public enum ContextTypes {
 	/**
 	 * Context type for AccelerometerModule if the suspect stays
 	 */
-	ACCELEROMETER_STAYS;
+	ACCELEROMETER_STAYS,
+	
+	/**
+	 * the result  of the intelligent module LocationModule, used by 
+	 * infrastructure to determine the IP adress for connection
+	 */
+	LOCATION_CONTEXT;
 
 }

@@ -14,6 +14,7 @@ package net.amicity.common.core.context;
 import java.util.concurrent.LinkedBlockingQueue;
 import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.ContextStorage;
+import net.amicity.common.core.Message;
 import net.amicity.common.core.Notification;
 
 /**
@@ -37,6 +38,11 @@ public class ContextCore {
 	 * in some (processed)ContextItems added in ContextStorage
 	 */
 	public LinkedBlockingQueue<Notification> notificationQueue;
+	
+	/**
+	 * q of messages sent to other devices/ for connection with the server
+	 */
+	public LinkedBlockingQueue<Message> sendQueue;
 
 	/**
 	 * initialising the class's queues

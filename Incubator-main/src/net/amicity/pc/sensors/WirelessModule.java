@@ -109,8 +109,7 @@ public class WirelessModule implements SensorModule{
 	}
 	public void addDataDetected(){
 
-		
-		
+
 		myCore.postContextUpdate(wirelessItem);
 		System.out.println(((WirelessItem) wirelessItem).wifiDetected.size());
 		
