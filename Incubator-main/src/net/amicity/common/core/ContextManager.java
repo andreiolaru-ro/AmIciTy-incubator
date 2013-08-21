@@ -64,7 +64,9 @@ public class ContextManager extends Thread {
 					myCore.contextItemRemaining.add(item);
 				}
 				if( item instanceof LocationItem){
-					myCore.sendQueue.add(null);
+					// ??????????????????????????????
+					// de-ai ma gandesc ca ar tebui sa fie trimis un mesaj catre messagedipsatcher
+					// care sa anunte infrastrcutura de adresa IP
 				}
 			}
 		}
