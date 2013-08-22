@@ -12,7 +12,6 @@
 package net.amicity.common.core.context;
 
 import java.util.concurrent.LinkedBlockingQueue;
-
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.Message;
@@ -26,32 +25,32 @@ public class ContextCore {
 	/**
 	 * 
 	 */
-	public ContextStorage contextStorage;
+	 private final ContextStorage contextStorage;
 
 	/**
 	 * a synchronized queue used to add new ContextItems by Sensor modules or
 	 * Intelligent modules and to extract added ContextItems to be prepared for
 	 * Notification
 	 */
-	public LinkedBlockingQueue<AbstractItem> contextUpdates;
+	 private final LinkedBlockingQueue<AbstractItem> contextUpdates;
 	/**
 	 * a synch queue to notify intelligent modules that they may be interested
 	 * in some (processed)ContextItems added in ContextStorage
 	 */
-	public LinkedBlockingQueue<Notification> notificationQueue;
+	 private final LinkedBlockingQueue<Notification> notificationQueue;
 
 	/**
 	 * q of messages sent to other devices/ for connection with the server
 	 */
-	public LinkedBlockingQueue<Message> sendQueue;
+	 LinkedBlockingQueue<Message> sendQueue;
 
 	/**
 	 * initialising the class's queues
 	 */
 	public ContextCore() {
-		contextUpdates = new LinkedBlockingQueue<AbstractItem>();
-		notificationQueue = new LinkedBlockingQueue<Notification>();
-		contextStorage = new ContextStorage();
+		this.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
+		this.notificationQueue = new LinkedBlockingQueue<Notification>();
+		this.contextStorage = new ContextStorage();
 		System.out.println(" ContextCore constructor ");
 
 	}
@@ -62,7 +61,7 @@ public class ContextCore {
 	 *            SensorModule to be analised and used by interested entities
 	 */
 	public void postContextUpdate(AbstractItem newItem) {
-		contextUpdates.add(newItem);
+		getContextUpdates().add(newItem);
 	}
 
 	/**
@@ -70,7 +69,7 @@ public class ContextCore {
 	 *         ContextStore's component and to notify the interested entities
 	 */
 	public AbstractItem getContextUpdate() {
-		return contextUpdates.remove();
+		return getContextUpdates().remove();
 	}
 
 	/**
@@ -79,14 +78,41 @@ public class ContextCore {
 	 *            processed ContextItem to ContextStore
 	 */
 	public void postNotification(Notification newNotificaition) {
-		notificationQueue.add(newNotificaition);
+		getNotificationQueue().add(newNotificaition);
 	}
 
 	/**
 	 * @return : the Notification which mentions the next module to be notified
 	 */
 	public Notification getNotification() {
-		return notificationQueue.remove();
+		return getNotificationQueue().remove();
 	}
+
+	/**
+	 * @return The contextUpdates queue.
+	 */
+	public LinkedBlockingQueue<AbstractItem> getContextUpdates()
+	{
+		return contextUpdates;
+	}
+
+
+	/**
+	 * @return The current context storage.
+	 */
+	public ContextStorage getContextStorage()
+	{
+		return contextStorage;
+	}
+
+	/**
+	 * @return The notification queue
+	 */
+	public LinkedBlockingQueue<Notification> getNotificationQueue()
+	{
+		return notificationQueue;
+	}
+
+
 
 }

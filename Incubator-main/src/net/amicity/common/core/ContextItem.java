@@ -19,5 +19,14 @@ package net.amicity.common.core;
  * 
  */
 public interface ContextItem {
+	
+	/**
+	 * @param type The item type to be set.
+	 */
+	public void setType( ContextTypes type );
+	/**
+	 * @return The item type.
+	 */
+	public ContextTypes getType();
 
 }

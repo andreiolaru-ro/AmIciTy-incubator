@@ -55,7 +55,7 @@ public class LocationModule implements IntelligenceModule {
 
 	public LocationModule( ContextCore cc) {
 		myCore = cc;
-		storage = cc.contextStorage;
+		storage = cc.getContextStorage();
 		dataNetLocation = new TreeMap<String, ArrayList<String>>();
 		initHardData();
 	}

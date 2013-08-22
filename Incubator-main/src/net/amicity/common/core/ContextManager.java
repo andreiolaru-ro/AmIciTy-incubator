@@ -52,12 +52,12 @@ public class ContextManager extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			if (myCore.contextUpdates.isEmpty() == false) {
+			if (myCore.getContextUpdates().isEmpty() == false) {
 				AbstractItem item = myCore.getContextUpdate();
 				System.out.println("ContextManager got update");
-				if( hm.containsKey(item.type)) {
-						Notification newNot = new Notification(hm.get(item.type));
-						myCore.contextStorage.add(item);
+				if( hm.containsKey(item.getType())) {
+						Notification newNot = new Notification(hm.get(item.getType()));
+						myCore.getContextStorage().add(item);
 						myCore.postNotification(newNot);
 						System.out.println("ContextManager post notification");
 				}

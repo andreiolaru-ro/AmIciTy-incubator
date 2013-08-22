@@ -9,11 +9,23 @@ import net.amicity.common.core.ContextTypes;
  * @author cristian
  * 
  */
-public abstract class AbstractItem implements ContextItem {
+public  abstract class AbstractItem implements ContextItem {
 
 	/**
 	 * the ContextType
 	 */
-	public ContextTypes type;
+	ContextTypes type;
+
+	@Override
+	public void setType(ContextTypes type)
+	{
+		this.type = type;
+	}
+
+	@Override
+	public ContextTypes getType()
+	{
+		return this.type;
+	}
 
 }

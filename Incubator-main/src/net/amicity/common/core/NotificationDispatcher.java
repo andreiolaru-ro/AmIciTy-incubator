@@ -42,7 +42,7 @@ public class NotificationDispatcher extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			if (myCore.notificationQueue.isEmpty() == false) {
+			if (myCore.getNotificationQueue().isEmpty() == false) {
 				Notification notExtract = myCore.getNotification();
 				System.out.println("Notif disp get notif");
 				for (IntelligenceModule i : notExtract.intelModules) {

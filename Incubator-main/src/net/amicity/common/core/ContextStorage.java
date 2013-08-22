@@ -1,7 +1,6 @@
 package net.amicity.common.core;
 
 import java.util.ArrayList;
-
 import net.amicity.common.context_types.AbstractItem;
 
 /**
@@ -25,7 +24,7 @@ public class ContextStorage extends ArrayList<AbstractItem> {
 	 */
 	public AbstractItem get(ContextTypes type) {
 		for (AbstractItem i : this) {
-			if (i.type == type)
+			if (i.getType() == type)
 				return i;
 		}
 		return null;
