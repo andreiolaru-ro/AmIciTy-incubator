@@ -13,7 +13,6 @@ package net.amicity.pc.communications;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
 import net.amicity.common.communications.Connection;
 
 /**
@@ -30,7 +29,7 @@ public class test_client {
 
 		DefaultNetLink d = new DefaultNetLink();
 
-		Connection c = new Connection(InetAddress.getByName("172.16.6.24"),
+		Connection c = new Connection(InetAddress.getByName("172.16.4.144"),
 				"gica", 4500);
 
 		d.send(c, "hello");

@@ -14,7 +14,7 @@ public class LocationItem extends AbstractItem {
 	/**
 	 * the location detected to connect to its server
 	 */
-	String location;
+	public String location;
 
 	/**
 	 * initialising the members
