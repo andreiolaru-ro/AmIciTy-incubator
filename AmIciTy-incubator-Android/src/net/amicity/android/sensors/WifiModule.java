@@ -45,7 +45,7 @@ public class WifiModule extends Service implements SensorModule {
 	 */
 	WifiManager mainWifi;
 	/**
-	 * 
+	 * Intent
 	 */
 	Intent mamaie;
 
@@ -99,12 +99,9 @@ public class WifiModule extends Service implements SensorModule {
 				+ " networks");
 		System.out.println("The curent size of ContextUpdates = "
 				+ myCore.getContextUpdates().size());
-
 		Bundle b = new Bundle();
 		b.putSerializable("core", myCore);
-		mamaie.putExtra("update", b);
-		this.sendBroadcast(mamaie);
-
+		mamaie.putExtras(b);
 	}
 
 	@Override

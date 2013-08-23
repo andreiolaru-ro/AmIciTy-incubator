@@ -1,5 +1,6 @@
 package net.amicity.android;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,18 +13,19 @@ import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.LocationModule;
 import net.amicity.incubator_android.R;
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 
 /**
  * @author cristian
  * 
  */
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * The context Core
 	 */
@@ -33,17 +35,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_act);
-
-		this.registerReceiver(new BroadcastReceiver() {
-
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				Bundle b = intent.getExtras();
-				cc = (ContextCore) b.getSerializable("core");
-				System.out.println(cc.getContextUpdates().size() + "hehe");
-			}
-		}, new IntentFilter());
-
 		// Create ContextCore
 		cc = new ContextCore("mamaie");
 		// Create intelligence modules
@@ -68,5 +59,13 @@ public class MainActivity extends Activity {
 		NotificationDispatcher nd = new NotificationDispatcher(cc);
 		nd.start();
 
+		System.out.println("before : ");
+		while (this.getIntent().getExtras() == null) {
+			continue;
+		}
+		b = this.getIntent().getExtras();
+		cc = (ContextCore) b.getSerializable("core");
+		System.out.println("after : " + cc.getContextUpdates().size());
 	}
+
 }
