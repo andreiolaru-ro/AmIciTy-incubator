@@ -29,6 +29,10 @@ public class ContextCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * testing stuff
+	 */
+	public String something;
+	/**
 	 * 
 	 */
 	private final ContextStorage contextStorage;
@@ -49,6 +53,17 @@ public class ContextCore implements Serializable {
 	 * initialising the class's queues
 	 */
 	public ContextCore() {
+		this.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
+		this.notificationQueue = new LinkedBlockingQueue<Notification>();
+		this.contextStorage = new ContextStorage();
+		System.out.println(" ContextCore constructor ");
+	}
+
+	/**
+	 * @param ceva
+	 */
+	public ContextCore(String ceva) {
+		something = ceva;
 		this.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
 		this.notificationQueue = new LinkedBlockingQueue<Notification>();
 		this.contextStorage = new ContextStorage();

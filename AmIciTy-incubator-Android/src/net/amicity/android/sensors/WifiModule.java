@@ -44,6 +44,10 @@ public class WifiModule extends Service implements SensorModule {
 	 * used for detecting the Wifi's acces points
 	 */
 	WifiManager mainWifi;
+	/**
+	 * 
+	 */
+	Intent mamaie;
 
 	/*
 	 * protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +66,13 @@ public class WifiModule extends Service implements SensorModule {
 	@Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
+		mamaie = intent;
 		System.out.println(" wirelessModule starts ");
 
 		Bundle b = intent.getExtras();
 		myCore = (ContextCore) b.getSerializable("core");
 		wirelessItem = new WirelessItem();
+		System.out.println("Testing the core: " + myCore.something);
 
 		System.out.println("got the core");
 
@@ -78,9 +84,6 @@ public class WifiModule extends Service implements SensorModule {
 		registerReceiver(receiverWifi, new IntentFilter(
 				WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 		mainWifi.startScan();
-
-		((WirelessItem) wirelessItem).wifiDetected = wifiList;
-		addDataDetected();
 
 		return Service.START_STICKY;
 	}
@@ -94,6 +97,13 @@ public class WifiModule extends Service implements SensorModule {
 		System.out.println("Detected: "
 				+ ((WirelessItem) wirelessItem).wifiDetected.size()
 				+ " networks");
+		System.out.println("The curent size of ContextUpdates = "
+				+ myCore.getContextUpdates().size());
+
+		Bundle b = new Bundle();
+		b.putSerializable("core", myCore);
+		mamaie.putExtra("update", b);
+		this.sendBroadcast(mamaie);
 
 	}
 

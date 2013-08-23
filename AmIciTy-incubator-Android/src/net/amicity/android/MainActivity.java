@@ -12,7 +12,10 @@ import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.LocationModule;
 import net.amicity.incubator_android.R;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 /**
@@ -21,12 +24,28 @@ import android.os.Bundle;
  */
 public class MainActivity extends Activity {
 
+	/**
+	 * The context Core
+	 */
+	ContextCore cc;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_act);
+
+		this.registerReceiver(new BroadcastReceiver() {
+
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				Bundle b = intent.getExtras();
+				cc = (ContextCore) b.getSerializable("core");
+				System.out.println(cc.getContextUpdates().size() + "hehe");
+			}
+		}, new IntentFilter());
+
 		// Create ContextCore
-		final ContextCore cc = new ContextCore();
+		cc = new ContextCore("mamaie");
 		// Create intelligence modules
 		LocationModule lm = new LocationModule(cc);
 		// make the link between ContextTypes and intelligence modules related
@@ -41,25 +60,13 @@ public class MainActivity extends Activity {
 		b.putSerializable("core", cc);
 		intent.putExtras(b);
 		startService(intent);
+
 		// Create the ContextManger
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				ContextManager cm = new ContextManager(cc, hm);
-				cm.run();
-			}
-		}).start();
+		ContextManager cm = new ContextManager(cc, hm);
+		cm.start();
 		// Create the Notification Dispatcher
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				NotificationDispatcher nd = new NotificationDispatcher(cc);
-				nd.run();
-			}
-
-		}).start();
+		NotificationDispatcher nd = new NotificationDispatcher(cc);
+		nd.start();
 
 	}
 }
