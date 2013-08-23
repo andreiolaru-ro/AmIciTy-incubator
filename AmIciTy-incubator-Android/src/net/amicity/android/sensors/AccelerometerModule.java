@@ -82,7 +82,7 @@ public class AccelerometerModule extends Service implements
 	@Override
 	public void connect(ContextCore cc) {
 		this.ctxCore = cc;
-		accelerometerItem = new AccelerometerItem();
+		accelerometerItem = new AccelerometerItem(0);
 	}
 
 	@Override

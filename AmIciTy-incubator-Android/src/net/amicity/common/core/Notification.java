@@ -25,13 +25,13 @@ public class Notification {
 	/**
 	 * The list of modules to be notified.
 	 */
-	ArrayList<IntelligentTypes> intelModules;
+	ArrayList<IntelligenceModule> intelModules;
 
 	/**
-	 * @param modules
+	 * @param arrayList
 	 *            : the modules to be notified
 	 */
-	public Notification(ArrayList<IntelligentTypes> modules) {
-		intelModules = new ArrayList<IntelligentTypes>(modules);
+	public Notification(ArrayList<IntelligenceModule> arrayList) {
+		intelModules = new ArrayList<IntelligenceModule>(arrayList);
 	}
 }

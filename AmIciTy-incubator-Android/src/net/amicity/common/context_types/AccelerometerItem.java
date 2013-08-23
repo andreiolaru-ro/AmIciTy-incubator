@@ -11,7 +11,6 @@
  ******************************************************************************/
 package net.amicity.common.context_types;
 
-import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.ContextTypes;
 
 /**
@@ -22,16 +21,25 @@ import net.amicity.common.core.ContextTypes;
  * @author cristian
  * 
  */
-public class AccelerometerItem implements ContextItem {
+public class AccelerometerItem extends AbstractItem {
 
 	/**
 	 * the total number of moves (on x, y and z) in 5 minutes
 	 */
 	float total;
 	/**
-	 * The type of this context item.
+	 * String that says if the man walks or stays
 	 */
-	ContextTypes type;
+	String man;
+
+	/**
+	 * @param nr
+	 *            -> the total number of moves
+	 */
+	public AccelerometerItem(float nr) {
+		this.total = nr;
+		man = new String();
+	}
 
 	/**
 	 * @param nr
@@ -39,9 +47,10 @@ public class AccelerometerItem implements ContextItem {
 	 */
 	public void changeType(float nr) {
 		this.total = nr;
+		type = ContextTypes.ACCELEROMETER;
 		if (total > 1.5)
-			type = ContextTypes.ACCELEROMETER_WALKS;
+			man = "walking";
 		else
-			type = ContextTypes.ACCELEROMETER_STAYS;
+			man = "stays";
 	}
 }

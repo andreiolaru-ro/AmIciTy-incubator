@@ -13,7 +13,6 @@ package net.amicity.common.core;
 
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.LocationModule;
-import net.amicity.common.intelligence.SoundIntel;
 
 /**
  * @author ''Azgabast'', vlad, cristian The class which takes notifications from
@@ -30,10 +29,6 @@ public class NotificationDispatcher extends Thread {
 	 * a LocationModule instance for calling the invoke method
 	 */
 	LocationModule locationContact;
-	/**
-	 * a SoundIntel instance for calling the invoke method
-	 */
-	SoundIntel soundIntel;
 
 	/**
 	 * @param core
@@ -41,19 +36,18 @@ public class NotificationDispatcher extends Thread {
 	 */
 	public NotificationDispatcher(ContextCore core) {
 		myCore = core;
-		locationContact = new LocationModule();
+		System.out.println("Notif disp constructor");
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			if (myCore.notificationQueue.isEmpty() == false) {
+			if (myCore.getNotificationQueue().isEmpty() == false) {
 				Notification notExtract = myCore.getNotification();
-				for (IntelligentTypes i : notExtract.intelModules) {
-					if (i == IntelligentTypes.LOCATION_INTELLIGENT)
-						locationContact.invoke();
-					if (i == IntelligentTypes.SOUND_INTELLIGENT)
-						soundIntel.invoke();
+				System.out.println("Notif disp get notif");
+				for (IntelligenceModule i : notExtract.intelModules) {
+					System.out.println("Notif disp invoking intel");
+					i.invoke();
 				}
 
 			}

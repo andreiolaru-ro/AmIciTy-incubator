@@ -13,8 +13,9 @@ package net.amicity.android.sensors;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.context_types.SoundItem;
-import net.amicity.common.core.ContextItem;
 import net.amicity.common.core.SensorModule;
 import net.amicity.common.core.context.ContextCore;
 import android.app.Service;
@@ -27,13 +28,13 @@ import android.os.IBinder;
 import android.util.Log;
 
 /**
- * The class which listens periodically to ambient sounds and creates a
- * context item based on the level of the sound.
+ * The class which listens periodically to ambient sounds and creates a context
+ * item based on the level of the sound.
+ * 
  * @author ''Azgabast''
- *
+ * 
  */
-public class SoundModule extends Service implements SensorModule
-{
+public class SoundModule extends Service implements SensorModule {
 
 	/**
 	 * The core linked with the module.
@@ -42,13 +43,13 @@ public class SoundModule extends Service implements SensorModule
 	/**
 	 * The sound item.
 	 */
-	ContextItem soundItem;
-	
+	AbstractItem soundItem;
+
 	@Override
-	public void connect(ContextCore cc)
-	{
-		this.ctxCore = cc;		
+	public void connect(ContextCore cc) {
+		this.ctxCore = cc;
 	}
+
 	/**
 	 * The timer which sets when the service should start working and states the
 	 * time of repetition.
@@ -64,8 +65,7 @@ public class SoundModule extends Service implements SensorModule
 	AudioManager audioManager;
 
 	@Override
-	public int onStartCommand(final Intent intent, int flags, int startId)
-	{
+	public int onStartCommand(final Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
 		audioManager = (AudioManager) this
 				.getSystemService(Context.AUDIO_SERVICE);
@@ -77,33 +77,29 @@ public class SoundModule extends Service implements SensorModule
 		m.setOutputFile(Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + "/ex.3gp");
 		m.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-		try
-		{
+		try {
 			m.prepare();
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 
 			e.printStackTrace();
 		}
 		m.start();
 		m.getMaxAmplitude();
 
-		t.scheduleAtFixedRate(new TimerTask()
-		{
+		t.scheduleAtFixedRate(new TimerTask() {
 
 			@Override
-			public void run()
-			{
+			public void run() {
 				double d = m.getMaxAmplitude() / 32767.0;
 				audioManager.setStreamVolume(AudioManager.STREAM_RING,
 						(int) Math.ceil(d * 7),
 						AudioManager.FLAG_ALLOW_RINGER_MODES);
 				Log.e("Cristi", "Changed to " + (int) Math.ceil(d * 7));
-		
-				soundItem = new SoundItem( d );
+
+				soundItem = new SoundItem(d);
 				ctxCore.postContextUpdate(soundItem);
-				
+
 				m.stop();
 				m.reset();
 				m.release();
@@ -114,12 +110,10 @@ public class SoundModule extends Service implements SensorModule
 				m.setOutputFile(Environment.getExternalStorageDirectory()
 						.getAbsolutePath() + "/ex.3gp");
 				m.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-				try
-				{
+				try {
 					m.prepare();
 				}
-				catch (Exception e)
-				{
+				catch (Exception e) {
 
 					e.printStackTrace();
 				}
@@ -136,8 +130,7 @@ public class SoundModule extends Service implements SensorModule
 	}
 
 	@Override
-	public void onDestroy()
-	{
+	public void onDestroy() {
 		super.onDestroy();
 		t.cancel();
 		if (m != null)
@@ -145,8 +138,7 @@ public class SoundModule extends Service implements SensorModule
 	}
 
 	@Override
-	public IBinder onBind(Intent i)
-	{
+	public IBinder onBind(Intent i) {
 		return null;
 	}
 

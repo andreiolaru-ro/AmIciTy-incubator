@@ -12,9 +12,9 @@
 package net.amicity.common.core.context;
 
 import java.util.concurrent.LinkedBlockingQueue;
+
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.core.ContextStorage;
-import net.amicity.common.core.Message;
 import net.amicity.common.core.Notification;
 
 /**
@@ -25,24 +25,19 @@ public class ContextCore {
 	/**
 	 * 
 	 */
-	 private final ContextStorage contextStorage;
+	private final ContextStorage contextStorage;
 
 	/**
 	 * a synchronized queue used to add new ContextItems by Sensor modules or
 	 * Intelligent modules and to extract added ContextItems to be prepared for
 	 * Notification
 	 */
-	 private final LinkedBlockingQueue<AbstractItem> contextUpdates;
+	private final LinkedBlockingQueue<AbstractItem> contextUpdates;
 	/**
 	 * a synch queue to notify intelligent modules that they may be interested
 	 * in some (processed)ContextItems added in ContextStorage
 	 */
-	 private final LinkedBlockingQueue<Notification> notificationQueue;
-
-	/**
-	 * q of messages sent to other devices/ for connection with the server
-	 */
-	 LinkedBlockingQueue<Message> sendQueue;
+	private final LinkedBlockingQueue<Notification> notificationQueue;
 
 	/**
 	 * initialising the class's queues
@@ -91,28 +86,22 @@ public class ContextCore {
 	/**
 	 * @return The contextUpdates queue.
 	 */
-	public LinkedBlockingQueue<AbstractItem> getContextUpdates()
-	{
+	public LinkedBlockingQueue<AbstractItem> getContextUpdates() {
 		return contextUpdates;
 	}
-
 
 	/**
 	 * @return The current context storage.
 	 */
-	public ContextStorage getContextStorage()
-	{
+	public ContextStorage getContextStorage() {
 		return contextStorage;
 	}
 
 	/**
 	 * @return The notification queue
 	 */
-	public LinkedBlockingQueue<Notification> getNotificationQueue()
-	{
+	public LinkedBlockingQueue<Notification> getNotificationQueue() {
 		return notificationQueue;
 	}
-
-
 
 }

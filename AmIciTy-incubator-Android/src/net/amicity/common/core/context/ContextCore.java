@@ -13,61 +13,95 @@ package net.amicity.common.core.context;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-
-import net.amicity.common.core.ContextItem;
+import net.amicity.common.context_types.AbstractItem;
+import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.Notification;
 
 /**
- * @author ''Azgabast'', vlad, cristian
- * The top-level module of the application.
+ * @author ''Azgabast'', vlad, cristian The top-level module of the application.
  */
-public class ContextCore
-{
+public class ContextCore {
+
+	/**
+	 * 
+	 */
+	private final ContextStorage contextStorage;
+
 	/**
 	 * a synchronized queue used to add new ContextItems by Sensor modules or
 	 * Intelligent modules and to extract added ContextItems to be prepared for
-	 *  Notification 
+	 * Notification
 	 */
-	public LinkedBlockingQueue<ContextItem> contextUpdates;
+	private final LinkedBlockingQueue<AbstractItem> contextUpdates;
 	/**
-	 * a synch queue to notify intelligent modules that they may be interested 
-	 * in some (processed)ContextItems added in ContextStorage 
+	 * a synch queue to notify intelligent modules that they may be interested
+	 * in some (processed)ContextItems added in ContextStorage
 	 */
-	public LinkedBlockingQueue<Notification> notificationQueue;
+	private final LinkedBlockingQueue<Notification> notificationQueue;
+
 	/**
-	 * initialising the class's queues 
+	 * initialising the class's queues
 	 */
-	ContextCore(){
-		contextUpdates = new LinkedBlockingQueue<ContextItem>();
-		notificationQueue = new LinkedBlockingQueue<Notification>();
+	public ContextCore() {
+		this.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
+		this.notificationQueue = new LinkedBlockingQueue<Notification>();
+		this.contextStorage = new ContextStorage();
+		System.out.println(" ContextCore constructor ");
+
 	}
+
 	/**
-	 * @param newItem : ContextItem to be added by the IntelligentModule or
-	 * SensorModule to be analised and used by interested entities
+	 * @param newItem
+	 *            : ContextItem to be added by the IntelligentModule or
+	 *            SensorModule to be analised and used by interested entities
 	 */
-	public void postContextUpdate(ContextItem newItem){
-		contextUpdates.add(newItem);
+	public void postContextUpdate(AbstractItem newItem) {
+		getContextUpdates().add(newItem);
 	}
+
 	/**
 	 * @return the Contextitem by ContextManager to be processed, creating an
-	 * ContextStore's component and to notify the interested entities 
+	 *         ContextStore's component and to notify the interested entities
 	 */
-	public ContextItem getContextUpdate(){
-		return contextUpdates.remove();
+	public AbstractItem getContextUpdate() {
+		return getContextUpdates().remove();
 	}
+
 	/**
-	 * @param newNotificaition : the Notification added by ContextManager after adding a 
-	 * processed ContextItem to ContextStore
+	 * @param newNotificaition
+	 *            : the Notification added by ContextManager after adding a
+	 *            processed ContextItem to ContextStore
 	 */
-	public void postNotification(Notification newNotificaition){
-		notificationQueue.add(newNotificaition);
+	public void postNotification(Notification newNotificaition) {
+		getNotificationQueue().add(newNotificaition);
 	}
+
 	/**
-	 * @return the notification used to notify an intelligent module that a ContextItem
-	 * is ready to be pulled 
+	 * @return : the Notification which mentions the next module to be notified
 	 */
-	public Notification getNotification(){
-		return notificationQueue.remove();
+	public Notification getNotification() {
+		return getNotificationQueue().remove();
 	}
-	
+
+	/**
+	 * @return The contextUpdates queue.
+	 */
+	public LinkedBlockingQueue<AbstractItem> getContextUpdates() {
+		return contextUpdates;
+	}
+
+	/**
+	 * @return The current context storage.
+	 */
+	public ContextStorage getContextStorage() {
+		return contextStorage;
+	}
+
+	/**
+	 * @return The notification queue
+	 */
+	public LinkedBlockingQueue<Notification> getNotificationQueue() {
+		return notificationQueue;
+	}
+
 }
