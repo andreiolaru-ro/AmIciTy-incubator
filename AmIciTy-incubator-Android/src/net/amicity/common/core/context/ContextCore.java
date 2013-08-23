@@ -11,6 +11,7 @@
  ******************************************************************************/
 package net.amicity.common.core.context;
 
+import java.io.Serializable;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import net.amicity.common.context_types.AbstractItem;
@@ -20,7 +21,12 @@ import net.amicity.common.core.Notification;
 /**
  * @author ''Azgabast'', vlad, cristian The top-level module of the application.
  */
-public class ContextCore {
+public class ContextCore implements Serializable {
+
+	/**
+	 * The defaul serail version
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 
@@ -47,7 +53,6 @@ public class ContextCore {
 		this.notificationQueue = new LinkedBlockingQueue<Notification>();
 		this.contextStorage = new ContextStorage();
 		System.out.println(" ContextCore constructor ");
-
 	}
 
 	/**
