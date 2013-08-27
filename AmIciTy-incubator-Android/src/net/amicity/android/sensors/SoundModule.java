@@ -24,6 +24,7 @@ import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.IBinder;
+import android.util.Log;
 
 /**
  * The class which listens periodically to ambient sounds and creates a context
@@ -65,6 +66,7 @@ public class SoundModule extends Service implements SensorModule {
 	@Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
+		Log.e("CRISTI", "I M IN");
 		audioManager = (AudioManager) this
 				.getSystemService(Context.AUDIO_SERVICE);
 		t = new Timer();

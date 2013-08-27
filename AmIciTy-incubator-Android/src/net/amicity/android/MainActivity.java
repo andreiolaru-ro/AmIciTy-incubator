@@ -64,7 +64,7 @@ public class MainActivity extends Activity implements Serializable {
 		Intent intent2 = new Intent(this, SoundModule.class);
 		startService(intent2);
 		Intent intent3 = new Intent(this, AccelerometerModule.class);
-		startService(intent3);
+		//startService(intent3);
 
 		// Create the ContextManger
 		ContextManager cm = new ContextManager(cc, hm);
