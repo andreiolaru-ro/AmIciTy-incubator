@@ -83,6 +83,7 @@ public class AccelerometerModule extends Service implements
 	@Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
+		System.out.println("AccelerometerModule starts");
 
 		accelerometerItem = new AccelerometerItem();
 
@@ -100,9 +101,11 @@ public class AccelerometerModule extends Service implements
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 
-		if (clock.getMinutes(System.currentTimeMillis()) > 1) {
+		if (clock.getMinutes(System.currentTimeMillis()) > 0.5) {
 			clock.stop();
 			try {
+				System.out
+						.println("AccelerometerModule changed type and added an item");
 				accelerometerItem.changeType(total);
 				ContextCore.postContextUpdate(accelerometerItem);
 				Thread.sleep(4000);

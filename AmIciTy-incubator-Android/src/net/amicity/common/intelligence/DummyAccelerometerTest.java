@@ -40,7 +40,7 @@ public class DummyAccelerometerTest implements IntelligenceModule {
 
 	@Override
 	public void invoke() {
-		System.out.println("Location module invoked");
+		System.out.println("DummyAccelerometerTest invoked");
 
 		action = ((AccelerometerItem) storage.get(ContextTypes.ACCELEROMETER)).man;
 		System.out.println("The (wo)man is: " + action);
