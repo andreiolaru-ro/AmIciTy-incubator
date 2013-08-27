@@ -50,7 +50,7 @@ public class MainActivity extends Activity implements Serializable {
 		cc = new ContextCore();
 		// Create intelligence modules
 		LocationModule lm = new LocationModule(cc);
-		SoundIntel si = new SoundIntel(cc);
+		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
 		// make the link between ContextTypes and intelligence modules related
 		// to type
