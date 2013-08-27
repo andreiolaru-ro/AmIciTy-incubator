@@ -69,7 +69,7 @@ public class AccelerometerModule extends Service implements
 	/**
 	 * A clock implementation for calculating activity in time
 	 */
-	private Chronometer clock = new Chronometer();
+	private final Chronometer clock = new Chronometer();
 	/**
 	 * Represent the total number of movements on x, y and z direction
 	 */
@@ -108,7 +108,7 @@ public class AccelerometerModule extends Service implements
 			clock.stop();
 			try {
 				accelerometerItem.changeType(total);
-				ctxCore.postContextUpdate(accelerometerItem);
+				ContextCore.postContextUpdate(accelerometerItem);
 				Thread.sleep(4000);
 			}
 			catch (InterruptedException e) {

@@ -13,7 +13,6 @@ package net.amicity.android.sensors;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.context_types.SoundItem;
 import net.amicity.common.core.SensorModule;
@@ -98,7 +97,7 @@ public class SoundModule extends Service implements SensorModule {
 				Log.e("Cristi", "Changed to " + (int) Math.ceil(d * 7));
 
 				soundItem = new SoundItem(d);
-				ctxCore.postContextUpdate(soundItem);
+				ContextCore.postContextUpdate(soundItem);
 
 				m.stop();
 				m.reset();

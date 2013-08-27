@@ -13,7 +13,6 @@ package net.amicity.common.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.core.context.ContextCore;
 
@@ -53,8 +52,8 @@ public class ContextManager extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			if (myCore.getContextUpdates().isEmpty() == false) {
-				AbstractItem item = myCore.getContextUpdate();
+			if (ContextCore.getContextUpdates().isEmpty() == false) {
+				AbstractItem item = ContextCore.getContextUpdate();
 				System.out.println("ContextManager got update");
 				if (hm.containsKey(item.getType())) {
 					Notification newNot = new Notification(hm.get(item

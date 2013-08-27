@@ -1,7 +1,6 @@
 package net.amicity.android.sensors;
 
 import java.util.ArrayList;
-
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.context_types.WirelessItem;
 import net.amicity.common.core.SensorModule;
@@ -11,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
-import android.os.Bundle;
 import android.os.IBinder;
 
 /**
@@ -34,7 +32,7 @@ public class WifiModule extends Service implements SensorModule {
 	/**
 	 * instance of ContextCore to acces its queues
 	 */
-	ContextCore myCore;
+	//ContextCore myCore;
 	/**
 	 * a ContextItem which will be added to core's queue
 	 */
@@ -44,37 +42,14 @@ public class WifiModule extends Service implements SensorModule {
 	 * used for detecting the Wifi's acces points
 	 */
 	WifiManager mainWifi;
-	/**
-	 * Intent
-	 */
-	Intent mamaie;
 
-	/*
-	 * protected void onCreate(Bundle savedInstanceState) {
-	 * 
-	 * super.onCreate(savedInstanceState); //
-	 * setContentView(R.layout.activity_wifi_location_detection); wifiList = new
-	 * ArrayList<String>();
-	 * 
-	 * mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-	 * receiverWifi = new WifiReceiver(this); mainWifi.setWifiEnabled(true);
-	 * registerReceiver(receiverWifi, new IntentFilter(
-	 * WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)); mainWifi.startScan();
-	 * 
-	 * }
-	 */
+
 	@Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
-		mamaie = intent;
 		System.out.println(" wirelessModule starts ");
 
-		Bundle b = intent.getExtras();
-		myCore = (ContextCore) b.getSerializable("core");
 		wirelessItem = new WirelessItem();
-		System.out.println("Testing the core: " + myCore.something);
-
-		System.out.println("got the core");
 
 		wifiList = new ArrayList<String>();
 
@@ -93,15 +68,11 @@ public class WifiModule extends Service implements SensorModule {
 	 */
 	public void addDataDetected() {
 
-		myCore.postContextUpdate(wirelessItem);
+	ContextCore.postContextUpdate(wirelessItem);
 		System.out.println("Detected: "
 				+ ((WirelessItem) wirelessItem).wifiDetected.size()
 				+ " networks");
-		System.out.println("The curent size of ContextUpdates = "
-				+ myCore.getContextUpdates().size());
-		Bundle b = new Bundle();
-		b.putSerializable("core", myCore);
-		mamaie.putExtras(b);
+	
 	}
 
 	@Override

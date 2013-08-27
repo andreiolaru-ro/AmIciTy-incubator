@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
-
 import net.amicity.common.context_types.LocationItem;
 import net.amicity.common.context_types.WirelessItem;
 import net.amicity.common.core.ContextStorage;
@@ -72,7 +71,7 @@ public class LocationModule implements IntelligenceModule {
 		System.out.println("Location: " + getLocation());
 
 		LocationItem place = new LocationItem(getLocation());
-		myCore.postContextUpdate(place);
+		ContextCore.postContextUpdate(place);
 
 	}
 

@@ -3,7 +3,6 @@ package net.amicity.android;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import net.amicity.android.sensors.WifiModule;
 import net.amicity.common.core.ContextManager;
 import net.amicity.common.core.ContextTypes;
@@ -36,7 +35,7 @@ public class MainActivity extends Activity implements Serializable {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_act);
 		// Create ContextCore
-		cc = new ContextCore("mamaie");
+		cc = new ContextCore();
 		// Create intelligence modules
 		LocationModule lm = new LocationModule(cc);
 		// make the link between ContextTypes and intelligence modules related
@@ -47,9 +46,6 @@ public class MainActivity extends Activity implements Serializable {
 		hm.put(ContextTypes.WIRELESS_CONTEXT, iModules);
 		// start sensors services
 		Intent intent = new Intent(this, WifiModule.class);
-		Bundle b = new Bundle();
-		b.putSerializable("core", cc);
-		intent.putExtras(b);
 		startService(intent);
 
 		// Create the ContextManger
@@ -59,13 +55,6 @@ public class MainActivity extends Activity implements Serializable {
 		NotificationDispatcher nd = new NotificationDispatcher(cc);
 		nd.start();
 
-		System.out.println("before : ");
-		while (this.getIntent().getExtras() == null) {
-			continue;
-		}
-		b = this.getIntent().getExtras();
-		cc = (ContextCore) b.getSerializable("core");
-		System.out.println("after : " + cc.getContextUpdates().size());
 	}
 
 }

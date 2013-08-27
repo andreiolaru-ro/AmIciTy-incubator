@@ -13,7 +13,6 @@ package net.amicity.common.core.context;
 
 import java.io.Serializable;
 import java.util.concurrent.LinkedBlockingQueue;
-
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.Notification;
@@ -29,10 +28,6 @@ public class ContextCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * testing stuff
-	 */
-	public String something;
-	/**
 	 * 
 	 */
 	private final ContextStorage contextStorage;
@@ -42,7 +37,7 @@ public class ContextCore implements Serializable {
 	 * Intelligent modules and to extract added ContextItems to be prepared for
 	 * Notification
 	 */
-	private final LinkedBlockingQueue<AbstractItem> contextUpdates;
+	private static LinkedBlockingQueue<AbstractItem> contextUpdates;
 	/**
 	 * a synch queue to notify intelligent modules that they may be interested
 	 * in some (processed)ContextItems added in ContextStorage
@@ -53,29 +48,19 @@ public class ContextCore implements Serializable {
 	 * initialising the class's queues
 	 */
 	public ContextCore() {
-		this.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
+		ContextCore.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
 		this.notificationQueue = new LinkedBlockingQueue<Notification>();
 		this.contextStorage = new ContextStorage();
 		System.out.println(" ContextCore constructor ");
 	}
 
-	/**
-	 * @param ceva
-	 */
-	public ContextCore(String ceva) {
-		something = ceva;
-		this.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
-		this.notificationQueue = new LinkedBlockingQueue<Notification>();
-		this.contextStorage = new ContextStorage();
-		System.out.println(" ContextCore constructor ");
-	}
 
 	/**
 	 * @param newItem
 	 *            : ContextItem to be added by the IntelligentModule or
 	 *            SensorModule to be analised and used by interested entities
 	 */
-	public void postContextUpdate(AbstractItem newItem) {
+	public static void postContextUpdate(AbstractItem newItem) {
 		getContextUpdates().add(newItem);
 	}
 
@@ -83,7 +68,7 @@ public class ContextCore implements Serializable {
 	 * @return the Contextitem by ContextManager to be processed, creating an
 	 *         ContextStore's component and to notify the interested entities
 	 */
-	public AbstractItem getContextUpdate() {
+	public static AbstractItem getContextUpdate() {
 		return getContextUpdates().remove();
 	}
 
@@ -106,7 +91,7 @@ public class ContextCore implements Serializable {
 	/**
 	 * @return The contextUpdates queue.
 	 */
-	public LinkedBlockingQueue<AbstractItem> getContextUpdates() {
+	public static LinkedBlockingQueue<AbstractItem> getContextUpdates() {
 		return contextUpdates;
 	}
 
