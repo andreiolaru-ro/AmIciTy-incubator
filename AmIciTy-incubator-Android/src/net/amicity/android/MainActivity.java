@@ -3,8 +3,8 @@ package net.amicity.android;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import net.amicity.android.sensors.AccelerometerModule;
+import net.amicity.android.sensors.SoundModule;
 import net.amicity.android.sensors.WifiModule;
 import net.amicity.common.core.ContextManager;
 import net.amicity.common.core.ContextTypes;
@@ -69,8 +69,8 @@ public class MainActivity extends Activity implements Serializable {
 		// start sensors services
 		intent = new Intent(this, WifiModule.class);
 		startService(intent);
-		// Intent intent2 = new Intent(this, SoundModule.class);
-		// startService(intent2);
+		 Intent intent2 = new Intent(this, SoundModule.class);
+		 startService(intent2);
 		intent3 = new Intent(this, AccelerometerModule.class);
 		startService(intent3);
 
