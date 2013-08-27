@@ -113,6 +113,9 @@ public class WirelessModule implements SensorModule {
 
 	}
 
+	/**
+	 * add data collected to ContextUpdates
+	 */
 	public void addDataDetected() {
 
 		myCore.postContextUpdate(wirelessItem);
