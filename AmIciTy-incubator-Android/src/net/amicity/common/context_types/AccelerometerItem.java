@@ -30,14 +30,12 @@ public class AccelerometerItem extends AbstractItem {
 	/**
 	 * String that says if the man walks or stays
 	 */
-	String man;
+	public String man;
 
 	/**
-	 * @param nr
-	 *            -> the total number of moves
+	 * public constructor for accelerometerItem, initiates the string
 	 */
-	public AccelerometerItem(float nr) {
-		this.total = nr;
+	public AccelerometerItem() {
 		man = new String();
 	}
 

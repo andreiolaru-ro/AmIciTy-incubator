@@ -35,10 +35,6 @@ public class AccelerometerModule extends Service implements
 		SensorEventListener, SensorModule {
 
 	/**
-	 * The core linked with the module.
-	 */
-	ContextCore ctxCore;
-	/**
 	 * mLastX -> last x coordinate taken by accelerometer
 	 */
 	private float mLastX;
@@ -81,13 +77,15 @@ public class AccelerometerModule extends Service implements
 
 	@Override
 	public void connect(ContextCore cc) {
-		this.ctxCore = cc;
-		accelerometerItem = new AccelerometerItem(0);
+		// dummy
 	}
 
 	@Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
+
+		accelerometerItem = new AccelerometerItem();
+
 		mInitialized = false;
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mAccelerometer = mSensorManager
@@ -96,15 +94,13 @@ public class AccelerometerModule extends Service implements
 		mSensorManager.registerListener(this, mAccelerometer,
 				SensorManager.SENSOR_DELAY_NORMAL);
 
-		// maybe a while(true) here
-
 		return Service.START_STICKY;
 	}
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 
-		if (clock.getMinutes(System.currentTimeMillis()) > 5) {
+		if (clock.getMinutes(System.currentTimeMillis()) > 1) {
 			clock.stop();
 			try {
 				accelerometerItem.changeType(total);
