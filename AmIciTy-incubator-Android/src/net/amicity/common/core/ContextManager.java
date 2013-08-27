@@ -14,6 +14,7 @@ package net.amicity.common.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.amicity.common.context_types.AbstractItem;
+import net.amicity.common.context_types.SoundItem;
 import net.amicity.common.core.context.ContextCore;
 
 /**
@@ -58,7 +59,13 @@ public class ContextManager extends Thread {
 				if (hm.containsKey(item.getType())) {
 					Notification newNot = new Notification(hm.get(item
 							.getType()));
+
+					if( item instanceof SoundItem)
+						System.out.println("Value of soundItem is " + ((SoundItem)item).getValue());
+					myCore.getContextStorage().remove(item.getType());
 					myCore.getContextStorage().add(item);
+					if( item instanceof SoundItem)
+						System.out.println(" Fresh value:"+	((SoundItem)myCore.getContextStorage().get(ContextTypes.SOUND_CONTEXT)).getValue());
 					myCore.postNotification(newNot);
 					System.out.println("ContextManager post notification");
 				}
