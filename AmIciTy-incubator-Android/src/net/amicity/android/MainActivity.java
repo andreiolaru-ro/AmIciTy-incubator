@@ -3,8 +3,8 @@ package net.amicity.android;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import net.amicity.android.sensors.AccelerometerModule;
-import net.amicity.android.sensors.SoundModule;
 import net.amicity.android.sensors.WifiModule;
 import net.amicity.common.core.ContextManager;
 import net.amicity.common.core.ContextTypes;
@@ -33,6 +33,14 @@ public class MainActivity extends Activity implements Serializable {
 	 * The context Core
 	 */
 	ContextCore cc;
+	/**
+	 * 
+	 */
+	Intent intent;
+	/**
+	 * 
+	 */
+	Intent intent3;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +58,21 @@ public class MainActivity extends Activity implements Serializable {
 		ArrayList<IntelligenceModule> iModules = new ArrayList<IntelligenceModule>();
 		iModules.add(lm);
 		hm.put(ContextTypes.WIRELESS_CONTEXT, iModules);
-		
+
 		ArrayList<IntelligenceModule> iModules2 = new ArrayList<IntelligenceModule>();
 		iModules2.add(si);
 		hm.put(ContextTypes.SOUND_CONTEXT, iModules2);
-		
+
 		ArrayList<IntelligenceModule> iModules3 = new ArrayList<IntelligenceModule>();
-		iModules2.add(dat);
+		iModules3.add(dat);
 		hm.put(ContextTypes.ACCELEROMETER, iModules3);
 		// start sensors services
-		Intent intent = new Intent(this, WifiModule.class);
+		intent = new Intent(this, WifiModule.class);
 		startService(intent);
-		Intent intent2 = new Intent(this, SoundModule.class);
-		startService(intent2);
-		Intent intent3 = new Intent(this, AccelerometerModule.class);
-		//startService(intent3);
+		// Intent intent2 = new Intent(this, SoundModule.class);
+		// startService(intent2);
+		intent3 = new Intent(this, AccelerometerModule.class);
+		startService(intent3);
 
 		// Create the ContextManger
 		ContextManager cm = new ContextManager(cc, hm);
@@ -73,6 +81,13 @@ public class MainActivity extends Activity implements Serializable {
 		NotificationDispatcher nd = new NotificationDispatcher(cc);
 		nd.start();
 
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		this.stopService(intent);
+		this.stopService(intent3);
 	}
 
 }
