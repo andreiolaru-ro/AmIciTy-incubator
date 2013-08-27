@@ -37,4 +37,11 @@ public class SoundItem extends AbstractItem {
 		this.value = value;
 		this.type = ContextTypes.SOUND_CONTEXT;
 	}
+	
+	/**
+	 * @return The sound value.
+	 */
+	public double getValue() {
+		return value;
+	}
 }

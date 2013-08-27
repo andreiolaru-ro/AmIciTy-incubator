@@ -24,7 +24,6 @@ import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.IBinder;
-import android.util.Log;
 
 /**
  * The class which listens periodically to ambient sounds and creates a context
@@ -70,7 +69,6 @@ public class SoundModule extends Service implements SensorModule {
 				.getSystemService(Context.AUDIO_SERVICE);
 		t = new Timer();
 		m = new MediaRecorder();
-		m = new MediaRecorder();
 		m.setAudioSource(MediaRecorder.AudioSource.MIC);
 		m.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		m.setOutputFile(Environment.getExternalStorageDirectory()
@@ -91,13 +89,14 @@ public class SoundModule extends Service implements SensorModule {
 			@Override
 			public void run() {
 				double d = m.getMaxAmplitude() / 32767.0;
-				audioManager.setStreamVolume(AudioManager.STREAM_RING,
-						(int) Math.ceil(d * 7),
-						AudioManager.FLAG_ALLOW_RINGER_MODES);
-				Log.e("Cristi", "Changed to " + (int) Math.ceil(d * 7));
-
+				//audioManager.setStreamVolume(AudioManager.STREAM_RING,
+					//	(int) Math.ceil(d * 7),
+						//AudioManager.FLAG_ALLOW_RINGER_MODES);
+				//Log.e("Cristi", "Changed to " + (int) Math.ceil(d * 7));
+			
 				soundItem = new SoundItem(d);
 				ContextCore.postContextUpdate(soundItem);
+				System.out.println(" created and added sound item");
 
 				m.stop();
 				m.reset();
