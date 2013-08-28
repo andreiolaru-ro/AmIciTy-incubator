@@ -36,7 +36,6 @@ public class NotificationDispatcher extends Thread {
 	 */
 	public NotificationDispatcher(ContextCore core) {
 		myCore = core;
-		System.out.println("Notif disp constructor");
 	}
 
 	@Override
@@ -44,9 +43,7 @@ public class NotificationDispatcher extends Thread {
 		while (true) {
 			if (myCore.getNotificationQueue().isEmpty() == false) {
 				Notification notExtract = myCore.getNotification();
-				System.out.println("Notif disp get notif");
 				for (IntelligenceModule i : notExtract.intelModules) {
-					System.out.println("Notif disp invoking intel");
 					i.invoke();
 				}
 

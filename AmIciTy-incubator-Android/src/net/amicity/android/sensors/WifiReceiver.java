@@ -34,7 +34,6 @@ public class WifiReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context c, Intent intent) {
-		System.out.println("in WifiReceiver");
 		List<ScanResult> networksDetected = main.mainWifi.getScanResults();
 
 		for (Iterator<ScanResult> it = networksDetected.iterator(); it
@@ -45,7 +44,6 @@ public class WifiReceiver extends BroadcastReceiver {
 				main.wifiList.add(networkResult.SSID);
 			}
 		}
-		System.out.println("Size inside: " + main.wifiList.size());
 
 		((WirelessItem) main.wirelessItem).wifiDetected.addAll(main.wifiList);
 		main.addDataDetected();

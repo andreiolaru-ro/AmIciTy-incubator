@@ -13,6 +13,7 @@ package net.amicity.common.core.context;
 
 import java.io.Serializable;
 import java.util.concurrent.LinkedBlockingQueue;
+
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.Notification;
@@ -51,9 +52,7 @@ public class ContextCore implements Serializable {
 		ContextCore.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
 		this.notificationQueue = new LinkedBlockingQueue<Notification>();
 		this.contextStorage = new ContextStorage();
-		System.out.println(" ContextCore constructor ");
 	}
-
 
 	/**
 	 * @param newItem

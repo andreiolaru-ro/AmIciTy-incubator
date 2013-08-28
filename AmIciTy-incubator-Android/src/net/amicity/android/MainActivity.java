@@ -53,6 +53,7 @@ public class MainActivity extends Activity implements Serializable {
 		// make the link between ContextTypes and intelligence modules related
 		// to type
 		final HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm = new HashMap<ContextTypes, ArrayList<IntelligenceModule>>();
+
 		ArrayList<IntelligenceModule> iModules = new ArrayList<IntelligenceModule>();
 		iModules.add(lm);
 		hm.put(ContextTypes.WIRELESS_CONTEXT, iModules);

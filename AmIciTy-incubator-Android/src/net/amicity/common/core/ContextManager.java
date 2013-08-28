@@ -13,8 +13,8 @@ package net.amicity.common.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import net.amicity.common.context_types.AbstractItem;
-import net.amicity.common.context_types.SoundItem;
 import net.amicity.common.core.context.ContextCore;
 
 /**
@@ -47,7 +47,6 @@ public class ContextManager extends Thread {
 			HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm) {
 		myCore = coreReceived;
 		this.hm = hm;
-		System.out.println("ContextManager constructor");
 	}
 
 	@Override
@@ -55,42 +54,16 @@ public class ContextManager extends Thread {
 		while (true) {
 			if (ContextCore.getContextUpdates().isEmpty() == false) {
 				AbstractItem item = ContextCore.getContextUpdate();
-				System.out.println("ContextManager got update");
 				if (hm.containsKey(item.getType())) {
 					Notification newNot = new Notification(hm.get(item
 							.getType()));
-
-					if( item instanceof SoundItem)
-						System.out.println("Value of soundItem is " + ((SoundItem)item).getValue());
-					myCore.getContextStorage().remove(item.getType());
+					myCore.getContextStorage().remove(item.getType()); // se va
+																		// modifica
+																		// cu un
+																		// hashmap
 					myCore.getContextStorage().add(item);
-					if( item instanceof SoundItem)
-						System.out.println(" Fresh value:"+	((SoundItem)myCore.getContextStorage().get(ContextTypes.SOUND_CONTEXT)).getValue());
 					myCore.postNotification(newNot);
-					System.out.println("ContextManager post notification");
 				}
-				/*
-				 * if (item instanceof WirelessItem) {
-				 * System.out.println("ContextManager entered wireless zone");
-				 * ArrayList<IntelligentTypes> list = new
-				 * ArrayList<IntelligentTypes>();
-				 * list.add(IntelligentTypes.LOCATION_INTELLIGENT); Notification
-				 * newNot = new Notification(list);
-				 * myCore.postNotification(newNot);
-				 * System.out.println("ContextManager post notification");
-				 * myCore.contextStorage.add(item); } if (item instanceof
-				 * SoundItem) { ArrayList<IntelligentTypes> list = new
-				 * ArrayList<IntelligentTypes>();
-				 * list.add(IntelligentTypes.LOCATION_INTELLIGENT);
-				 * list.add(IntelligentTypes.SOUND_INTELLIGENT); Notification
-				 * newNot = new Notification(list);
-				 * myCore.postNotification(newNot);
-				 * myCore.contextStorage.add(item); } if (item instanceof
-				 * LocationItem) { // ?????????????????????????????? // de-ai ma
-				 * gandesc ca ar tebui sa fie trimis un mesaj catre //
-				 * messagedipsatcher // care sa anunte infrastrcutura de adresa
-				 * IP }
-				 */
 			}
 		}
 	}

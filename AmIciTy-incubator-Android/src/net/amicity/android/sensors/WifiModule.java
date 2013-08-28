@@ -47,7 +47,6 @@ public class WifiModule extends Service implements SensorModule {
 	@Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
-		System.out.println(" wirelessModule starts ");
 
 		wirelessItem = new WirelessItem();
 
@@ -69,9 +68,6 @@ public class WifiModule extends Service implements SensorModule {
 	public void addDataDetected() {
 
 		ContextCore.postContextUpdate(wirelessItem);
-		System.out.println("Detected: "
-				+ ((WirelessItem) wirelessItem).wifiDetected.size()
-				+ " networks");
 
 	}
 
