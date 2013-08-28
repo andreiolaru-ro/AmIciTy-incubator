@@ -1,6 +1,7 @@
 package net.amicity.android.sensors;
 
 import java.util.ArrayList;
+
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.context_types.WirelessItem;
 import net.amicity.common.core.SensorModule;
@@ -32,7 +33,7 @@ public class WifiModule extends Service implements SensorModule {
 	/**
 	 * instance of ContextCore to acces its queues
 	 */
-	//ContextCore myCore;
+	// ContextCore myCore;
 	/**
 	 * a ContextItem which will be added to core's queue
 	 */
@@ -42,7 +43,6 @@ public class WifiModule extends Service implements SensorModule {
 	 * used for detecting the Wifi's acces points
 	 */
 	WifiManager mainWifi;
-
 
 	@Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
@@ -68,11 +68,17 @@ public class WifiModule extends Service implements SensorModule {
 	 */
 	public void addDataDetected() {
 
-	ContextCore.postContextUpdate(wirelessItem);
+		ContextCore.postContextUpdate(wirelessItem);
 		System.out.println("Detected: "
 				+ ((WirelessItem) wirelessItem).wifiDetected.size()
 				+ " networks");
-	
+
+	}
+
+	@Override
+	public void onDestroy() {
+		receiverWifi.abortBroadcast();
+		super.onDestroy();
 	}
 
 	@Override

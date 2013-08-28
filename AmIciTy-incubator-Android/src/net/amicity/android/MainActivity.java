@@ -3,6 +3,7 @@ package net.amicity.android;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import net.amicity.android.sensors.AccelerometerModule;
 import net.amicity.android.sensors.SoundModule;
 import net.amicity.android.sensors.WifiModule;
@@ -34,13 +35,9 @@ public class MainActivity extends Activity implements Serializable {
 	 */
 	ContextCore cc;
 	/**
-	 * 
+	 * An array of intents that starts services
 	 */
-	Intent intent;
-	/**
-	 * 
-	 */
-	Intent intent3;
+	ArrayList<Intent> intents;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +64,15 @@ public class MainActivity extends Activity implements Serializable {
 		iModules3.add(dat);
 		hm.put(ContextTypes.ACCELEROMETER, iModules3);
 		// start sensors services
-		intent = new Intent(this, WifiModule.class);
+		Intent intent = new Intent(this, WifiModule.class);
+		intents.add(intent);
 		startService(intent);
-		 Intent intent2 = new Intent(this, SoundModule.class);
-		 startService(intent2);
-		intent3 = new Intent(this, AccelerometerModule.class);
+		Intent intent2 = new Intent(this, SoundModule.class);
+		startService(intent2);
+		intents.add(intent);
+		Intent intent3 = new Intent(this, AccelerometerModule.class);
 		startService(intent3);
+		intents.add(intent);
 
 		// Create the ContextManger
 		ContextManager cm = new ContextManager(cc, hm);
@@ -85,9 +85,10 @@ public class MainActivity extends Activity implements Serializable {
 
 	@Override
 	protected void onDestroy() {
+		for (Intent i : intents) {
+			this.stopService(i);
+		}
 		super.onDestroy();
-		this.stopService(intent);
-		this.stopService(intent3);
 	}
 
 }
