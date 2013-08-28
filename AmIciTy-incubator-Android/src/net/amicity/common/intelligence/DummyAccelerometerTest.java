@@ -1,7 +1,6 @@
 package net.amicity.common.intelligence;
 
 import net.amicity.common.context_types.AccelerometerItem;
-import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
@@ -19,10 +18,6 @@ public class DummyAccelerometerTest implements IntelligenceModule {
 	 */
 	ContextCore myCore;
 	/**
-	 * The ContextStorage;
-	 */
-	ContextStorage storage;
-	/**
 	 * A string that indicates if the people walks or stays
 	 */
 	String action;
@@ -35,14 +30,13 @@ public class DummyAccelerometerTest implements IntelligenceModule {
 	 */
 	public DummyAccelerometerTest(ContextCore cc) {
 		myCore = cc;
-		storage = cc.getContextStorage();
 	}
 
 	@Override
 	public void invoke() {
-		System.out.println("DummyAccelerometerTest invoked");
 
-		action = ((AccelerometerItem) storage.get(ContextTypes.ACCELEROMETER)).man;
+		action = ((AccelerometerItem) myCore.getContextStorage().get(
+				ContextTypes.ACCELEROMETER)).man;
 		System.out.println("The (wo)man is: " + action);
 
 	}

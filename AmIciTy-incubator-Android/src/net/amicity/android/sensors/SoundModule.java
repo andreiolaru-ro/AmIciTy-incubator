@@ -13,6 +13,7 @@ package net.amicity.android.sensors;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.context_types.SoundItem;
 import net.amicity.common.core.SensorModule;
@@ -24,7 +25,6 @@ import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.IBinder;
-import android.util.Log;
 
 /**
  * The class which listens periodically to ambient sounds and creates a context
@@ -66,7 +66,6 @@ public class SoundModule extends Service implements SensorModule {
 	@Override
 	public int onStartCommand(final Intent intent, int flags, int startId) {
 		super.onStartCommand(intent, flags, startId);
-		Log.e("CRISTI", "I M IN");
 		audioManager = (AudioManager) this
 				.getSystemService(Context.AUDIO_SERVICE);
 		t = new Timer();
@@ -91,14 +90,9 @@ public class SoundModule extends Service implements SensorModule {
 			@Override
 			public void run() {
 				double d = m.getMaxAmplitude() / 32767.0;
-				//audioManager.setStreamVolume(AudioManager.STREAM_RING,
-					//	(int) Math.ceil(d * 7),
-						//AudioManager.FLAG_ALLOW_RINGER_MODES);
-				//Log.e("Cristi", "Changed to " + (int) Math.ceil(d * 7));
-			
+
 				soundItem = new SoundItem(d);
 				ContextCore.postContextUpdate(soundItem);
-				System.out.println(" created and added sound item");
 
 				m.stop();
 				m.reset();
