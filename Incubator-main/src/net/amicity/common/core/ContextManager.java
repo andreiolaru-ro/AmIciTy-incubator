@@ -54,14 +54,13 @@ public class ContextManager extends Thread {
 		while (true) {
 			if (ContextCore.getContextUpdates().isEmpty() == false) {
 				AbstractItem item = ContextCore.getContextUpdate();
+
 				if (hm.containsKey(item.getType())) {
 					Notification newNot = new Notification(hm.get(item
 							.getType()));
-					myCore.getContextStorage().remove(item.getType()); // se va
-																		// modifica
-																		// cu un
-																		// hashmap
-					myCore.getContextStorage().add(item);
+
+					myCore.getContextStorage().put(item.getType(), item);
+
 					myCore.postNotification(newNot);
 				}
 			}
