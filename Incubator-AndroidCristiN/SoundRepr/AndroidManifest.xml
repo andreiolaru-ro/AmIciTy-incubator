@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme" >
         <activity
             
-            android:name="com.example.soundrepr.MainActivity"
+            android:name="com.example.soundrepr.SoundRepr"
             android:label="@string/app_name" 
             android:configChanges="orientation">
             <intent-filter>

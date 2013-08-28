@@ -3,7 +3,6 @@ package net.amicity.android;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import net.amicity.android.sensors.AccelerometerModule;
 import net.amicity.android.sensors.SoundModule;
 import net.amicity.android.sensors.WifiModule;
@@ -24,7 +23,8 @@ import android.os.Bundle;
  * @author cristian
  * 
  */
-public class MainActivity extends Activity implements Serializable {
+public class MainActivity extends Activity implements Serializable
+{
 
 	/**
 	 * 
@@ -40,16 +40,19 @@ public class MainActivity extends Activity implements Serializable {
 	ArrayList<Intent> intents;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_act);
 		intents = new ArrayList<Intent>();
 		// Create ContextCore
 		cc = new ContextCore();
 		// Create intelligence modules
+
 		LocationModule lm = new LocationModule(cc);
 		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
+
 		// make the link between ContextTypes and intelligence modules related
 		// to type
 		final HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm = new HashMap<ContextTypes, ArrayList<IntelligenceModule>>();
@@ -85,8 +88,10 @@ public class MainActivity extends Activity implements Serializable {
 	}
 
 	@Override
-	protected void onDestroy() {
-		for (Intent i : intents) {
+	protected void onDestroy()
+	{
+		for (Intent i : intents)
+		{
 			this.stopService(i);
 		}
 		super.onDestroy();

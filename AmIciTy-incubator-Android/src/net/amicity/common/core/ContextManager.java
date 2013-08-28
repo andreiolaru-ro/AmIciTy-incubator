@@ -22,7 +22,8 @@ import net.amicity.common.core.context.ContextCore;
  *         ContextUpdates queue and adds them to the sendQueue and/or post
  *         notifications in the notificationsQueue.
  */
-public class ContextManager extends Thread {
+public class ContextManager extends Thread
+{
 
 	/**
 	 * instance to acces the ContextCore's synchr queues : Update and to manage
@@ -44,28 +45,39 @@ public class ContextManager extends Thread {
 	 *            has to be invoked
 	 */
 	public ContextManager(ContextCore coreReceived,
-			HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm) {
+			HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm)
+	{
 		myCore = coreReceived;
 		this.hm = hm;
 		System.out.println("ContextManager constructor");
 	}
 
 	@Override
-	public void run() {
-		while (true) {
-			if (ContextCore.getContextUpdates().isEmpty() == false) {
+	public void run()
+	{
+		while (true)
+		{
+			if (ContextCore.getContextUpdates().isEmpty() == false)
+			{
 				AbstractItem item = ContextCore.getContextUpdate();
 				System.out.println("ContextManager got update");
-				if (hm.containsKey(item.getType())) {
+				if (hm.containsKey(item.getType()))
+				{
 					Notification newNot = new Notification(hm.get(item
 							.getType()));
 
-					if( item instanceof SoundItem)
-						System.out.println("Value of soundItem is " + ((SoundItem)item).getValue());
-					myCore.getContextStorage().remove(item.getType());
-					myCore.getContextStorage().add(item);
-					if( item instanceof SoundItem)
-						System.out.println(" Fresh value:"+	((SoundItem)myCore.getContextStorage().get(ContextTypes.SOUND_CONTEXT)).getValue());
+					if (item instanceof SoundItem)
+						System.out.println("Value of soundItem is "
+								+ ((SoundItem) item).getValue());
+					// myCore.getContextStorage().remove(item.getType());
+					myCore.getContextStorage().put(item.getType(), item);
+					if (item instanceof SoundItem)
+						System.out
+								.println(" Fresh value:"
+										+ ((SoundItem) myCore
+												.getContextStorage()
+												.get(ContextTypes.SOUND_CONTEXT))
+												.getValue());
 					myCore.postNotification(newNot);
 					System.out.println("ContextManager post notification");
 				}
