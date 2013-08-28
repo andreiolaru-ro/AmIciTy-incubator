@@ -43,6 +43,7 @@ public class MainActivity extends Activity implements Serializable {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_act);
+		intents = new ArrayList<Intent>();
 		// Create ContextCore
 		cc = new ContextCore();
 		// Create intelligence modules
@@ -69,10 +70,10 @@ public class MainActivity extends Activity implements Serializable {
 		startService(intent);
 		Intent intent2 = new Intent(this, SoundModule.class);
 		startService(intent2);
-		intents.add(intent);
+		intents.add(intent2);
 		Intent intent3 = new Intent(this, AccelerometerModule.class);
 		startService(intent3);
-		intents.add(intent);
+		intents.add(intent3);
 
 		// Create the ContextManger
 		ContextManager cm = new ContextManager(cc, hm);
