@@ -11,6 +11,7 @@
  ******************************************************************************/
 package net.amicity.common.core.context;
 
+import java.io.Serializable;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import net.amicity.common.context_types.AbstractItem;
@@ -20,7 +21,12 @@ import net.amicity.common.core.Notification;
 /**
  * @author ''Azgabast'', vlad, cristian The top-level module of the application.
  */
-public class ContextCore {
+public class ContextCore implements Serializable {
+
+	/**
+	 * The defaul serail version
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 
@@ -32,7 +38,7 @@ public class ContextCore {
 	 * Intelligent modules and to extract added ContextItems to be prepared for
 	 * Notification
 	 */
-	private final LinkedBlockingQueue<AbstractItem> contextUpdates;
+	private static LinkedBlockingQueue<AbstractItem> contextUpdates;
 	/**
 	 * a synch queue to notify intelligent modules that they may be interested
 	 * in some (processed)ContextItems added in ContextStorage
@@ -43,11 +49,9 @@ public class ContextCore {
 	 * initialising the class's queues
 	 */
 	public ContextCore() {
-		this.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
+		ContextCore.contextUpdates = new LinkedBlockingQueue<AbstractItem>();
 		this.notificationQueue = new LinkedBlockingQueue<Notification>();
 		this.contextStorage = new ContextStorage();
-		System.out.println(" ContextCore constructor ");
-
 	}
 
 	/**
@@ -55,7 +59,7 @@ public class ContextCore {
 	 *            : ContextItem to be added by the IntelligentModule or
 	 *            SensorModule to be analised and used by interested entities
 	 */
-	public void postContextUpdate(AbstractItem newItem) {
+	public static void postContextUpdate(AbstractItem newItem) {
 		getContextUpdates().add(newItem);
 	}
 
@@ -63,7 +67,7 @@ public class ContextCore {
 	 * @return the Contextitem by ContextManager to be processed, creating an
 	 *         ContextStore's component and to notify the interested entities
 	 */
-	public AbstractItem getContextUpdate() {
+	public static AbstractItem getContextUpdate() {
 		return getContextUpdates().remove();
 	}
 
@@ -86,7 +90,7 @@ public class ContextCore {
 	/**
 	 * @return The contextUpdates queue.
 	 */
-	public LinkedBlockingQueue<AbstractItem> getContextUpdates() {
+	public static LinkedBlockingQueue<AbstractItem> getContextUpdates() {
 		return contextUpdates;
 	}
 

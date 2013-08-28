@@ -30,10 +30,7 @@ public class MainActivity extends Activity implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * The context Core
-	 */
-	ContextCore cc;
+
 	/**
 	 * An array of intents that starts services
 	 */
@@ -45,7 +42,7 @@ public class MainActivity extends Activity implements Serializable {
 		setContentView(R.layout.main_act);
 		intents = new ArrayList<Intent>();
 		// Create ContextCore
-		cc = new ContextCore();
+		ContextCore cc = new ContextCore();
 		// Create intelligence modules
 		LocationModule lm = new LocationModule(cc);
 		SoundIntel si = new SoundIntel(cc, this);

@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
+
 import net.amicity.common.context_types.LocationItem;
 import net.amicity.common.context_types.WirelessItem;
-import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
@@ -35,10 +35,6 @@ public class LocationModule implements IntelligenceModule {
 	 */
 	ContextCore myCore;
 	/**
-	 * The ContextStorage;
-	 */
-	ContextStorage storage;
-	/**
 	 * arraylist of wireless netowrks detected
 	 */
 	ArrayList<String> wifiDetected;
@@ -50,26 +46,26 @@ public class LocationModule implements IntelligenceModule {
 
 	/**
 	 * constructor of the class initialize its members
-	 * @param cc the context core
+	 * 
+	 * @param cc
+	 *            the context core
 	 */
 
-	public LocationModule( ContextCore cc) {
+	public LocationModule(ContextCore cc) {
 		myCore = cc;
-		storage = cc.getContextStorage();
 		dataNetLocation = new TreeMap<String, ArrayList<String>>();
 		initHardData();
 	}
 
 	@Override
 	public void invoke() {
-		System.out.println("Location module invoked");
 
-		wifiDetected = ((WirelessItem) storage
-				.get(ContextTypes.WIRELESS_CONTEXT)).wifiDetected;
+		wifiDetected = ((WirelessItem) myCore.getContextStorage().get(
+				ContextTypes.WIRELESS_CONTEXT)).wifiDetected;
 		System.out.println("Location: " + getLocation());
 
 		LocationItem place = new LocationItem(getLocation());
-		myCore.postContextUpdate(place);
+		ContextCore.postContextUpdate(place);
 
 	}
 
