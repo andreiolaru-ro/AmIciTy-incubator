@@ -21,10 +21,6 @@ public class SoundIntel implements IntelligenceModule {
 	 * The current value of the recorded sound.
 	 */
 	int value;
-	/**
-	 * The object which stores the current soundItem;
-	 */
-	SoundItem si;
 
 	/**
 	 * The linked contextCore;
@@ -35,6 +31,7 @@ public class SoundIntel implements IntelligenceModule {
 	 * The audio manager used to access the ringer volume.
 	 */
 	AudioManager audioManager;
+
 	/**
 	 * The main activity.
 	 */
@@ -57,9 +54,9 @@ public class SoundIntel implements IntelligenceModule {
 		double valuee = ((SoundItem) cc.getContextStorage().get(
 				ContextTypes.SOUND_CONTEXT)).getValue();
 		intent.putExtra("value", valuee);
+		System.out.println("Value of sound is: " + value);
 
 		ma.startService(intent);
 		ma.stopService(intent);
 	}
-
 }
