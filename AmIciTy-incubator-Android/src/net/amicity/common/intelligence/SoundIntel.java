@@ -54,7 +54,7 @@ public class SoundIntel implements IntelligenceModule {
 		double valuee = ((SoundItem) cc.getContextStorage().get(
 				ContextTypes.SOUND_CONTEXT)).getValue();
 		intent.putExtra("value", valuee);
-		System.out.println("Value of sound is: " + value);
+		System.out.println("Value of sound is: " + valuee);
 
 		ma.startService(intent);
 		ma.stopService(intent);
