@@ -13,7 +13,6 @@ package net.amicity.common.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.core.context.ContextCore;
 
@@ -22,7 +21,8 @@ import net.amicity.common.core.context.ContextCore;
  *         ContextUpdates queue and adds them to the sendQueue and/or post
  *         notifications in the notificationsQueue.
  */
-public class ContextManager extends Thread {
+public class ContextManager extends Thread
+{
 
 	/**
 	 * instance to acces the ContextCore's synchr queues : Update and to manage
@@ -44,24 +44,28 @@ public class ContextManager extends Thread {
 	 *            has to be invoked
 	 */
 	public ContextManager(ContextCore coreReceived,
-			HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm) {
+			HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm)
+	{
 		myCore = coreReceived;
 		this.hm = hm;
 	}
 
 	@Override
-	public void run() {
-		while (true) {
-			if (ContextCore.getContextUpdates().isEmpty() == false) {
+	public void run()
+	{
+		while (true)
+		{
+			if (ContextCore.getContextUpdates().isEmpty() == false)
+			{
 				AbstractItem item = ContextCore.getContextUpdate();
-				if (hm.containsKey(item.getType())) {
+
+				if (hm.containsKey(item.getType()))
+				{
 					Notification newNot = new Notification(hm.get(item
 							.getType()));
-					myCore.getContextStorage().remove(item.getType()); // se va
-																		// modifica
-																		// cu un
-																		// hashmap
-					myCore.getContextStorage().add(item);
+
+					myCore.getContextStorage().put(item.getType(), item);
+
 					myCore.postNotification(newNot);
 				}
 			}
