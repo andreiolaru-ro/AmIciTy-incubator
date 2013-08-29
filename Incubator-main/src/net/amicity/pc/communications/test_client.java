@@ -12,8 +12,10 @@
 package net.amicity.pc.communications;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 import net.amicity.common.communications.Connection;
 
@@ -35,9 +37,25 @@ public class test_client {
 				"gica", 4500);
 		
 		File file = new File("E:\file.txt");
+		FileContext fc = new FileContext();
+		Scanner s;
+		try {
+			s = new Scanner(file);
+			String line = "";
+			while(s.hasNext()) {
+				line = line + s.nextLine();
+				line = line + "\n";
+			}
+			s.close();
+			fc.filename = file.getName();
+			fc.content = line;
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		
-		d.send(c, file);
-
+		//send
+		d.send(c, fc);
 	}
 
 }

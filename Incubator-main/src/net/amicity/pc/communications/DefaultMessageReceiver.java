@@ -14,7 +14,6 @@ package net.amicity.pc.communications;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Scanner;
 
 import net.amicity.common.communications.MessageReceiver;
 
@@ -26,21 +25,15 @@ public class DefaultMessageReceiver implements MessageReceiver {
 
 	@Override
 	public void receive(Object obj) {
-		File str = (File) obj;
-		Scanner s;
+		FileContext str = (FileContext) obj;
 		try {
-			s = new Scanner(str);
-			String line = "";
-			while(s.hasNext()) {
-				line += s.nextLine();
-			}
-			s.close();
-			File toWrite = new File(str.getName());
+			
+			File toWrite = new File(str.filename);
 			if(!toWrite.exists())
 				toWrite.createNewFile();
 			FileWriter fw = new FileWriter(toWrite.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(line);
+			bw.write(str.content);
 			bw.close();
 			
 		}
