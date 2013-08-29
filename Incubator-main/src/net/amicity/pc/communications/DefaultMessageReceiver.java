@@ -11,6 +11,8 @@
  ******************************************************************************/
 package net.amicity.pc.communications;
 
+import java.io.File;
+
 import net.amicity.common.communications.MessageReceiver;
 
 /**
@@ -21,8 +23,8 @@ public class DefaultMessageReceiver implements MessageReceiver {
 
 	@Override
 	public void receive(Object obj) {
-		String str = (String) obj;
-		System.out.println(str);
+		File str = (File) obj;
+		System.out.println(str.getName());
 	}
 
 }

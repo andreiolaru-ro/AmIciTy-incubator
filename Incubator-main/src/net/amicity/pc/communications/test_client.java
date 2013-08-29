@@ -11,8 +11,10 @@
  ******************************************************************************/
 package net.amicity.pc.communications;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+
 import net.amicity.common.communications.Connection;
 
 /**
@@ -31,8 +33,10 @@ public class test_client {
 
 		Connection c = new Connection(InetAddress.getByName("172.16.4.144"),
 				"gica", 4500);
-
-		d.send(c, "hello");
+		
+		File file = new File("E:\file.txt");
+		
+		d.send(c, file);
 
 	}
 
