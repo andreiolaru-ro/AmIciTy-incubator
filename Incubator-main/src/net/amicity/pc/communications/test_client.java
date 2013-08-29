@@ -31,7 +31,7 @@ public class test_client {
 
 		DefaultNetLink d = new DefaultNetLink();
 
-		Connection c = new Connection(InetAddress.getByName("172.16.4.144"),
+		Connection c = new Connection(InetAddress.getByName("172.16.6.24"),
 				"gica", 4500);
 		
 		File file = new File("E:\file.txt");
