@@ -36,7 +36,7 @@ public class test_client {
 		Connection c = new Connection(InetAddress.getByName("172.16.6.24"),
 				"gica", 4500);
 		
-		File file = new File("E:\file.txt");
+		File file = new File("E:\\mamaie.txt");
 		FileContext fc = new FileContext();
 		Scanner s;
 		try {
