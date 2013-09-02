@@ -1,6 +1,5 @@
 package net.amicity.pc;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,17 +28,18 @@ public class Main_server {
 			@Override
 			public void run() {
 				for (Connection i : manager.getConnections()) {
-					if (!i.getSocket().isConnected()) {
-						try {
+					try {
+						if (i.getSocket().getInputStream().read() == -1) {
 							i.getSocket().close();
+							i.setStateOff();
 						}
-						catch (IOException e) {
-							e.printStackTrace();
+						else {
+							System.out.println("Connected with " + i.getId());
 						}
-						i.setStateOff();
 					}
-					else {
-						System.out.println("Connected with " + i.getId());
+					catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
 			}
