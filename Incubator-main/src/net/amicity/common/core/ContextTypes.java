@@ -32,6 +32,11 @@ public enum ContextTypes {
 	 * the result of the intelligent module LocationModule, used by
 	 * infrastructure to determine the IP adress for connection
 	 */
-	LOCATION_CONTEXT;
+	LOCATION_CONTEXT,
+
+	/**
+	 * ContextType for an item containing a filename and its content
+	 */
+	FILE_CONTEXT;
 
 }
