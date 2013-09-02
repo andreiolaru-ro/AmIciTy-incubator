@@ -17,7 +17,9 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import net.amicity.common.communications.ConnMgr;
 import net.amicity.common.communications.Connection;
+import net.amicity.common.communications.ConnectionManager;
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
 
@@ -26,6 +28,18 @@ import net.amicity.common.communications.NetLink;
  * 
  */
 public class DefaultNetLink implements NetLink {
+
+	/**
+	 * The connection manager for all connections available.
+	 */
+	ConnectionManager manager;
+
+	/**
+	 * 
+	 */
+	public DefaultNetLink() {
+		manager = new ConnMgr();
+	}
 
 	@Override
 	public void send(Connection c, Object o) {
@@ -89,9 +103,67 @@ public class DefaultNetLink implements NetLink {
 	}
 
 	@Override
-	public void createConnection(Connection c) {
-		// TODO Auto-generated method stub
+	public void createConnection(Connection server, Connection me) {
+		Socket client;
+		ObjectOutputStream out;
 
+		try {
+			client = new Socket(server.getIp(), server.getPort());
+			out = new ObjectOutputStream(client.getOutputStream());
+			out.writeObject(me);
+			out.flush();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void serverReceival(int port) {
+		final ServerSocket serverSocket;
+
+		try {
+			serverSocket = new ServerSocket(port);
+
+			System.out.println("Server started on port: " + port);
+
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					while (true) {
+						try {
+							Socket client = serverSocket.accept();
+							ObjectInputStream in = new ObjectInputStream(
+									client.getInputStream());
+							Object obj = in.readObject();
+							Connection newCon = (Connection) obj;
+							newCon.setSocket(client);
+							manager.addConnection(newCon);
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						catch (ClassNotFoundException e) {
+							e.printStackTrace();
+						}
+					}
+
+				}
+
+			}).start();
+		}
+		catch (IOException e) {
+			System.out.println("Could not listen on port: " + port);
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @return the Connection manager
+	 */
+	public ConnectionManager getConnectionManager() {
+		return this.manager;
 	}
 
 }
