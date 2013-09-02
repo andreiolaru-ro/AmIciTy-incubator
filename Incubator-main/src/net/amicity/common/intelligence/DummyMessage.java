@@ -51,7 +51,7 @@ public class DummyMessage implements IntelligenceModule {
 		if (location.equals("CANTI"))
 			try {
 				System.out.println(" conectare!!");
-				d.send(new Connection(InetAddress.getByName("172.16.4.144"),
+				d.send(new Connection(InetAddress.getByName("127.0.0.1"),
 						"Titi", 4500), "Salut!");
 			}
 			catch (UnknownHostException e) {
