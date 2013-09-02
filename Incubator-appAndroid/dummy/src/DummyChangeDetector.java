@@ -32,7 +32,6 @@ public class DummyChangeDetector extends TimerTask
 	 * 
 	 */
 	File workSpaceCheck;
-//	FileChangeData fileChanged;
 	
 	/**
 	 * @param f : director whose files are checked for changes
@@ -93,26 +92,37 @@ public class DummyChangeDetector extends TimerTask
 	
 	public void run(){
 		              
-		int contained;
+		int contained, i, j;
 		
-		for(int i=0 ; i < filesArray.size() ; i++ ){
+		for( i = 0 ; i < filesArray.size() ; i++ ){
+			
 			contained = 0;
+			
+			// comparing the differences between FirstDetected whose 
+			// properties are not changed, with the changed properties of
+			// filesArray element
+			
 			FirstDetected fileOld= filesDetected.get(i);
 			File f = filesArray.get(i);	
 			
+
 			if(f.lastModified() != fileOld.lastTimeChanged){
 				fileOld.lastTimeChanged = f.lastModified();
 		
 				
-			     for(int j = 0; j < filesChanged.size(); j++){
+			     for( j = 0; j < filesChanged.size() ; j++){
+			     	
 			     	FileChangeData fileLiteral= filesChanged.get(j);
 			     	String fullPath = fileLiteral.fileChanged.getAbsolutePath() +  fileLiteral.fileChanged.getName();
 			     	String fPath = f.getAbsolutePath() + f.getName();
 			     	
+			     	
+			     	// the file has already been changed in past, and we
+			     	// just modify the fileLiteral properties
 			     	if(fullPath.compareTo(fPath) == 0 ){
+			     		
 			     		System.out.println("il contine" );
 			     		contained = 1;
-			     		fileLiteral= filesChanged.get(j);
 						fileLiteral.changesDetected++;
 						System.out.println(f.length() + "   " +fileOld.lastsize);
 						fileLiteral.sizeDifference = f.length() - fileOld.lastsize;
@@ -122,10 +132,15 @@ public class DummyChangeDetector extends TimerTask
 			     		return;
 			     	}
 			     }
+			     
+			     // if it's the first time when the file has been changed, 
+			     // add a file 
 			     if(contained == 0){
+			     	
 			     	System.out.println("este noua " );
 			     	FileChangeData fileChanged = new FileChangeData(f, 0, f.length());
 			     	filesChanged.add(fileChanged);
+			     	
 			     }
 		
 			}	
