@@ -34,6 +34,11 @@ public class ContextCore implements Serializable {
 	private final ContextStorage contextStorage;
 
 	/**
+	 * The username
+	 */
+	private String username;
+
+	/**
 	 * a synchronized queue used to add new ContextItems by Sensor modules or
 	 * Intelligent modules and to extract added ContextItems to be prepared for
 	 * Notification
@@ -106,6 +111,21 @@ public class ContextCore implements Serializable {
 	 */
 	public LinkedBlockingQueue<Notification> getNotificationQueue() {
 		return notificationQueue;
+	}
+
+	/**
+	 * @param username
+	 *            -> the username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return this.username;
 	}
 
 }

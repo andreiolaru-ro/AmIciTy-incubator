@@ -51,14 +51,15 @@ public class DummyMessage implements IntelligenceModule {
 		if (location.equals("CANTI"))
 			try {
 				System.out.println(" conectare!!");
-				d.send(new Connection(InetAddress.getByName("127.0.0.1"),
-						"Titi", 4500), "Salut!");
+				d.createConnection(
+						new Connection(InetAddress.getByName("172.16.15.223"),
+								"", 4500),
+						new Connection(InetAddress.getLocalHost(), cc
+								.getUsername(), 4500));
 			}
 			catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 	}
-
 }
