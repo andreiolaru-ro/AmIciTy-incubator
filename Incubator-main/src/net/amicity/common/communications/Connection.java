@@ -21,6 +21,7 @@ package net.amicity.common.communications;
  * Contributors:
  *     ''Azgabast'' - initial API and implementation
  ******************************************************************************/
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -28,8 +29,12 @@ import java.net.Socket;
  * @author ''Azgabast''
  * 
  */
-public class Connection {
+public class Connection implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * The time passed since this connection was created.
 	 */
