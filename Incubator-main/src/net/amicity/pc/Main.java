@@ -2,6 +2,7 @@ package net.amicity.pc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import net.amicity.common.core.ContextManager;
 import net.amicity.common.core.ContextTypes;
@@ -25,6 +26,10 @@ public class Main {
 	public static void main(String[] args) {
 		// Create ContextCore
 		final ContextCore cc = new ContextCore();
+
+		Scanner s = new Scanner(System.in);
+		cc.setUsername(s.next());
+		s.close();
 
 		// Create intelligence modules
 	//	LocationModule lm = new LocationModule(cc);
