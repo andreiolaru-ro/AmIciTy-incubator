@@ -110,5 +110,15 @@ public class ConnMgr implements ConnectionManager {
 	public ArrayList<Connection> getConnections() {
 		return this.connList;
 	}
+	
+	@Override
+	public ArrayList<Connection> getOtherConnections(Connection me) {
+		ArrayList<Connection> other = new ArrayList<Connection>();
+		for(Connection c : connList) {
+			if(c.getId().substring(0, c.getId().indexOf('-')).equals(me.getId().substring(0, me.getId().indexOf('-'))))
+				other.add(c);
+		}
+		return other;
+	}
 
 }

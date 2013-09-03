@@ -11,11 +11,9 @@
  ******************************************************************************/
 package net.amicity.pc.communications;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-
 import net.amicity.common.communications.MessageReceiver;
+import net.amicity.common.context_types.AbstractItem;
+import net.amicity.common.core.context.ContextCore;
 
 /**
  * @author cristian
@@ -25,24 +23,9 @@ public class DefaultMessageReceiver implements MessageReceiver {
 
 	@Override
 	public void receive(Object obj) {
-		FileContext str = (FileContext) obj;
-		try {
-			
-			File toWrite = new File(str.filename);
-			if(!toWrite.exists())
-				toWrite.createNewFile();
-			FileWriter fw = new FileWriter(toWrite.getAbsoluteFile());
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(str.content);
-			bw.close();
-			
-		}
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println("done");
+		AbstractItem item = (AbstractItem) obj;
+		ContextCore.postContextUpdate(item);
+		System.out.println("Server put context updates");
 	}
 
 }
