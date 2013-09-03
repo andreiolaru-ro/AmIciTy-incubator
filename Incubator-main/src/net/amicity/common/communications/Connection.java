@@ -79,7 +79,7 @@ public class Connection implements Serializable {
 	/**
 	 * The socket for connection with server
 	 */
-	Socket socket;
+	transient Socket socket;
 
 	/**
 	 * @param ip
