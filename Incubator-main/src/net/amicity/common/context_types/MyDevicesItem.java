@@ -16,6 +16,10 @@ public class MyDevicesItem extends AbstractItem {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	ArrayList<Connection> myDevices;
 	
 	/**
