@@ -115,8 +115,11 @@ public class ConnMgr implements ConnectionManager {
 	public ArrayList<Connection> getOtherConnections(Connection me) {
 		ArrayList<Connection> other = new ArrayList<Connection>();
 		for(Connection c : connList) {
-			if(c.getId().substring(0, c.getId().indexOf('-')).equals(me.getId().substring(0, me.getId().indexOf('-'))))
+			System.out.println("Verify: " + c.getId());
+			if(c.getId().substring(0, c.getId().indexOf('-')).equals(me.getId().substring(0, me.getId().indexOf('-')))) {
 				other.add(c);
+				System.out.println("Added");
+			}
 		}
 		other.remove(me);
 		return other;

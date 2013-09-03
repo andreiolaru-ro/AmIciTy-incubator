@@ -144,6 +144,7 @@ public class DefaultNetLink implements NetLink {
 							manager.addConnection(newCon);
 							
 							ArrayList<Connection> other = manager.getOtherConnections(newCon);
+							System.out.println(other);
 							if(!other.isEmpty()) {
 								ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
 								MyDevicesItem mdi = new MyDevicesItem();

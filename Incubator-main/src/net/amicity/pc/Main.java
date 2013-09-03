@@ -75,8 +75,8 @@ public class Main {
 
 		
 		// start the files monitorization
-		ChangeDetectorModule cdm = new ChangeDetectorModule();
-		cdm.startTimer();
+		//ChangeDetectorModule cdm = new ChangeDetectorModule();
+		//cdm.startTimer();
 
 		WirelessModule wm = new WirelessModule();
 		wm.connect(cc);
