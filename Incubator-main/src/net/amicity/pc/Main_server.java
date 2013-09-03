@@ -29,19 +29,23 @@ public class Main_server {
 			@Override
 			public void run() {
 				for (Connection i : manager.getConnections()) {
-					try {
-						i.getSocket().getOutputStream().write(1);
-						System.out.println("Connection with " + i.getId() + "is available");
-					}
-					catch (IOException e) {
-						System.out.println("connection with " + i.getId() + " is closed");
+					if (i.isOn()) {
 						try {
-							i.getSocket().close();
+							i.getSocket().getOutputStream().write(1);
+							System.out.println("Connection with " + i.getId()
+									+ "is available");
 						}
-						catch (IOException e1) {
-							e1.printStackTrace();
+						catch (IOException e) {
+							System.out.println("connection with " + i.getId()
+									+ " is closed");
+							try {
+								i.getSocket().close();
+							}
+							catch (IOException e1) {
+								e1.printStackTrace();
+							}
+							i.setStateOff();
 						}
-						i.setStateOff();
 					}
 				}
 			}
