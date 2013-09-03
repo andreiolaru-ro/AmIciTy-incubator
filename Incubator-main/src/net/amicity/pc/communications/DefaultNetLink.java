@@ -146,10 +146,12 @@ public class DefaultNetLink implements NetLink {
 							ArrayList<Connection> other = manager.getOtherConnections(newCon);
 							System.out.println(other);
 							if(!other.isEmpty()) {
+								System.out.println("am intrat in if");
 								ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
 								MyDevicesItem mdi = new MyDevicesItem();
 								mdi.setMyDevices(other);
 								out.writeObject(mdi);
+								System.out.println("Am trimis");
 								out.flush();
 								for(Connection c : other) {
 									ArrayList<Connection> newOther = new ArrayList<Connection>();
