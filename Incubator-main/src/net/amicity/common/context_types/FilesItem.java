@@ -1,6 +1,8 @@
 package net.amicity.common.context_types;
 
 import java.util.ArrayList;
+
+import net.amicity.common.core.ContextTypes;
 import net.amicity.pc.sensors.*;
 
 /**
@@ -19,6 +21,9 @@ public class FilesItem extends AbstractItem
 	 * @param filesReceived : received the list of files to be pushed in queue
 	 */
 	public FilesItem(ArrayList<FileChangeData> filesReceived){
+		
+		filesMonitorized = new ArrayList<FileChangeData>();
 		filesMonitorized.addAll(filesReceived);
+		this.type = ContextTypes.FILE_CONTEXT;
 	}
 }

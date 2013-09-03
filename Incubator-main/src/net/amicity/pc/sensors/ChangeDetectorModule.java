@@ -47,8 +47,7 @@ public class ChangeDetectorModule extends TimerTask
 		filesChanged = new ArrayList<FileChangeData>();
 		filesDetected = new ArrayList<FirstDetected>();
 		filesArray= new ArrayList<File>();
-		workSpaceCheck = new File("D:/ECLIPSE/Workspace");
-			
+		workSpaceCheck = new File("D:/ECLIPSE/Workspace");		
 		this.detectFiles(workSpaceCheck);
 	    
 	
@@ -59,6 +58,8 @@ public class ChangeDetectorModule extends TimerTask
 	 * the SenderModule's timer
 	 */
 	public void startTimer(){
+		
+		System.out.println("Verific daca intru aici");
 		
 		 Timer timerChanges = new Timer("Change");
 		 timerChanges.schedule(this, 0, 10000);
@@ -132,10 +133,10 @@ public class ChangeDetectorModule extends TimerTask
 			     		System.out.println("il contine" );
 			     		contained = 1;
 						fileLiteral.changesDetected++;
-						System.out.println(f.length() + "   " +fileOld.lastsize);
+				//		System.out.println(f.length() + "   " +fileOld.lastsize);
 						fileLiteral.sizeDifference = f.length() - fileOld.lastsize;
 						
-						System.out.println(fileLiteral.fileChanged.getName() + " " + fileLiteral.changesDetected + " " + fileLiteral.sizeDifference);
+				//		System.out.println(fileLiteral.fileChanged.getName() + " " + fileLiteral.changesDetected + " " + fileLiteral.sizeDifference);
 						
 			     		return;
 			     	}
@@ -146,7 +147,7 @@ public class ChangeDetectorModule extends TimerTask
 			     if(contained == 0){
 			     	
 			     	System.out.println("este noua " );
-			     	FileChangeData fileChanged = new FileChangeData(f, 0, f.length());
+			     	FileChangeData fileChanged = new FileChangeData(f, 1, f.length());
 			     	filesChanged.add(fileChanged);
 			     	
 			     }

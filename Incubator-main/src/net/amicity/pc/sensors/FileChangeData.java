@@ -34,4 +34,31 @@ public class FileChangeData{
 		changesDetected = change;
 		sizeDifference = size;
 	}
+	
+	/**
+	 * @return : the File member to obtain data about the file
+	 */
+	public File getFile(){
+		return fileChanged;
+	}
+	
+	/**
+	 * @return : number of changes made after the last send
+	 */
+	public int getNrChange(){
+		int nrChanges = changesDetected;
+		changesDetected = 0;
+		return nrChanges;
+	}
+	
+	/**
+	 * @return : the difference between the files sizes after the last send
+	 */
+	public long getDifference(){
+		
+		long nrDifference = sizeDifference;
+		sizeDifference = 0;
+		return  nrDifference;
+	}
+
 }

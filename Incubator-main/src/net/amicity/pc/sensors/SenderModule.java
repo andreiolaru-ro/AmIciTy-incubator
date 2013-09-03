@@ -35,20 +35,25 @@ public class SenderModule  extends TimerTask
 	 */
 	public void setTimer(){
 		Timer timerPush = new Timer("Send");
-		timerPush.schedule(this, 0, 50000);
+		timerPush.schedule(this, 0, 20000);
 	}
 	
 	
 	@Override
 	public void run()
 	{
+		System.out.println("Ma intreb daca este gol");
+		int i;
+		
 		if(myDetector.filesChanged.isEmpty() == false){
+			
+			System.out.println("nu mai este gol");
+			
 			
 			FilesItem sendNewChanges = new FilesItem(myDetector.filesChanged);
 			ContextCore.postContextUpdate(sendNewChanges);
 			
-			// am clearuit asta!! Sei vorsichtig!!!
-			myDetector.filesChanged.clear();
+			  
 		}
 		
 	}
