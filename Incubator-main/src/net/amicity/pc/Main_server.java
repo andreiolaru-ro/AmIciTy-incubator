@@ -31,6 +31,7 @@ public class Main_server {
 				for (Connection i : manager.getConnections()) {
 					try {
 						i.getSocket().getOutputStream().write(1);
+						System.out.println("Connection with " + i.getId() + "is available");
 					}
 					catch (IOException e) {
 						System.out.println("connection with " + i.getId() + " is closed");
