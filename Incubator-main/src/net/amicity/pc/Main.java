@@ -8,8 +8,10 @@ import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.NotificationDispatcher;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.common.intelligence.DummyDevicesModule;
 import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.LocationModule;
+import net.amicity.pc.sensors.ServerModule;
 import net.amicity.pc.sensors.WirelessModule;
 
 /**
@@ -34,6 +36,7 @@ public class Main {
 		// Create intelligence modules
 		LocationModule lm = new LocationModule(cc);
 		DummyMessage dm = new DummyMessage(cc);
+		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 
 		// ChangeDetectorModule cdm = new ChangeDetectorModule();
 		// cdm.startTimer();
@@ -48,10 +51,15 @@ public class Main {
 		ArrayList<IntelligenceModule> iModules2 = new ArrayList<IntelligenceModule>();
 		iModules2.add(dm);
 		hm.put(ContextTypes.LOCATION_CONTEXT, iModules2);
+		ArrayList<IntelligenceModule> iModules3 = new ArrayList<IntelligenceModule>();
+		iModules3.add(ddm);
+		hm.put(ContextTypes.DEVICES_CONTEXT, iModules3);
 
 		// start sensors services
 		WirelessModule wm = new WirelessModule();
 		wm.connect(cc);
+		ServerModule sm = new ServerModule();
+		sm.connect(cc);
 
 		// Create the ContextManger
 		ContextManager cm = new ContextManager(cc, hm);
