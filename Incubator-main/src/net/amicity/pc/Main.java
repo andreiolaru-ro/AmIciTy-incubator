@@ -2,7 +2,6 @@ package net.amicity.pc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import net.amicity.common.core.ContextManager;
 import net.amicity.common.core.ContextTypes;
@@ -25,19 +24,20 @@ public class Main {
 	public static void main(String[] args) {
 		// Create ContextCore
 		final ContextCore cc = new ContextCore();
+		PCInterface pci = new PCInterface();
+		while (pci.getUserName().length() == 0) {
+			System.out.println("");
+		}
 
-		Scanner s = new Scanner(System.in);
-		cc.setUsername(s.next());
-		s.close();
-
+		System.out.println(" USER IS: " + pci.getUserName());
+		cc.setUsername(pci.getUserName());
 		// Create intelligence modules
 		LocationModule lm = new LocationModule(cc);
 		DummyMessage dm = new DummyMessage(cc);
-		
-		//ChangeDetectorModule cdm = new ChangeDetectorModule();
-		//cdm.startTimer();
-		
-		
+
+		// ChangeDetectorModule cdm = new ChangeDetectorModule();
+		// cdm.startTimer();
+
 		// make the link between ContextTypes and intelligence modules related
 		// to type
 		final HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm = new HashMap<ContextTypes, ArrayList<IntelligenceModule>>();
@@ -48,7 +48,6 @@ public class Main {
 		ArrayList<IntelligenceModule> iModules2 = new ArrayList<IntelligenceModule>();
 		iModules2.add(dm);
 		hm.put(ContextTypes.LOCATION_CONTEXT, iModules2);
-		
 
 		// start sensors services
 		WirelessModule wm = new WirelessModule();
@@ -59,7 +58,7 @@ public class Main {
 		cm.start();
 		// Create the Notification Dispatcher
 		NotificationDispatcher nd = new NotificationDispatcher(cc);
-		nd.start(); 
+		nd.start();
 
 	}
 }

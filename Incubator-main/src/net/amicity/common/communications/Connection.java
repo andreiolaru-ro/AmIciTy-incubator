@@ -112,6 +112,13 @@ public class Connection implements Serializable {
 	}
 
 	/**
+	 * @return whether the state is on or off;
+	 */
+	public boolean isOn() {
+		return this.s == State.On;
+	}
+
+	/**
 	 * @return The ip of the connection.
 	 */
 	public InetAddress getIp() {
