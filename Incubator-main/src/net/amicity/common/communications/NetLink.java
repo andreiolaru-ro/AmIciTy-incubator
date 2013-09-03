@@ -11,6 +11,8 @@
  ******************************************************************************/
 package net.amicity.common.communications;
 
+import java.net.Socket;
+
 /**
  * @author cristian
  * 
@@ -47,5 +49,12 @@ public interface NetLink {
 	 *            -> the server port
 	 */
 	void serverReceival(int port);
+
+	/**
+	 * clients receive data from server
+	 * @param server the socket server
+	 * @param msgR the message receiver
+	 */
+	void receiveFromServer(Socket server, MessageReceiver msgR);
 
 }

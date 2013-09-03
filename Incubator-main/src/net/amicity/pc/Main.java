@@ -103,16 +103,13 @@ public class Main {
 		hm.put(ContextTypes.FILE_CONTEXT, iModules4);
 
 		// start sensors services
-
 		
 		// start the files monitorization
-		ChangeDetectorModule cdm = new ChangeDetectorModule();
-		cdm.startTimer();
+		//ChangeDetectorModule cdm = new ChangeDetectorModule();
+		//cdm.startTimer();
 
 		WirelessModule wm = new WirelessModule();
 		wm.connect(cc);
-		ServerModule sm = new ServerModule();
-		sm.connect(cc);
 
 		// Create the ContextManger
 		ContextManager cm = new ContextManager(cc, hm);
