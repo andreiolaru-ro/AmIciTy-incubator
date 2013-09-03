@@ -1,7 +1,14 @@
 package net.amicity.pc;
 
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import net.amicity.common.core.ContextManager;
 import net.amicity.common.core.ContextTypes;
@@ -20,12 +27,36 @@ import net.amicity.pc.sensors.WirelessModule;
  * @author cristian
  * 
  */
+class WindowMessage extends JFrame{
+	WindowMessage(){
+		createWindow();
+		addWrite();
+		
+	}
+	public void createWindow(){
+
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle winSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		this.setSize(300, 300);
+		this.setLocation(dimension.width - 300 ,  winSize.height  - 300);
+		this.show();
+	}
+	public void addWrite(){
+		JLabel eticheta = new JLabel();
+		
+	}
+}
+
+
 public class Main {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		
+		//WindowMessage win= new WindowMessage();
 		
 		
 		// Create ContextCore
