@@ -79,7 +79,7 @@ public class Connection implements Serializable {
 	/**
 	 * The socket for connection with server
 	 */
-	Socket socket;
+	transient Socket socket;
 
 	/**
 	 * @param ip
@@ -109,6 +109,13 @@ public class Connection implements Serializable {
 	 */
 	public void setStateOff() {
 		this.s = State.Off;
+	}
+
+	/**
+	 * @return whether the state is on or off;
+	 */
+	public boolean isOn() {
+		return this.s == State.On;
 	}
 
 	/**

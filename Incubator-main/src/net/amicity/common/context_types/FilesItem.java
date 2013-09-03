@@ -13,6 +13,10 @@ import net.amicity.pc.sensors.*;
 public class FilesItem extends AbstractItem
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * arraylist of files changed detected
 	 */
 	public ArrayList<FileChangeData> filesMonitorized;

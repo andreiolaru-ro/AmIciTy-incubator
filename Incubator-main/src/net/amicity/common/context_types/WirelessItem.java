@@ -23,6 +23,10 @@ import net.amicity.common.core.ContextTypes;
 public class WirelessItem extends AbstractItem {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * arraylist of wireless netowrks detected
 	 */
 	public ArrayList<String> wifiDetected;

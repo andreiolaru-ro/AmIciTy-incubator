@@ -16,12 +16,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import net.amicity.common.communications.ConnMgr;
 import net.amicity.common.communications.Connection;
 import net.amicity.common.communications.ConnectionManager;
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
+import net.amicity.common.context_types.MyDevicesItem;
 
 /**
  * @author cristian
@@ -140,6 +142,27 @@ public class DefaultNetLink implements NetLink {
 							Connection newCon = (Connection) obj;
 							newCon.setSocket(client);
 							manager.addConnection(newCon);
+							
+							ArrayList<Connection> other = manager.getOtherConnections(newCon);
+							if(!other.isEmpty()) {
+								ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
+								MyDevicesItem mdi = new MyDevicesItem();
+								mdi.setMyDevices(other);
+								out.writeObject(mdi);
+								out.flush();
+								for(Connection c : other) {
+									ArrayList<Connection> newOther = new ArrayList<Connection>();
+									newOther.addAll(other);
+									newOther.add(newCon);
+									newOther.remove(c);
+									MyDevicesItem mdi2 = new MyDevicesItem();
+									mdi2.setMyDevices(other);
+									ObjectOutputStream out2 = new ObjectOutputStream(c.getSocket().getOutputStream());
+									out2.writeObject(mdi);
+									out2.flush();
+								}
+							}
+							
 						}
 						catch (IOException e) {
 							e.printStackTrace();

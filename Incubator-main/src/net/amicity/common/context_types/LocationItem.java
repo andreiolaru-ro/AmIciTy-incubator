@@ -12,6 +12,10 @@ import net.amicity.common.core.ContextTypes;
 public class LocationItem extends AbstractItem {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * the location detected to connect to its server
 	 */
 	public String location;

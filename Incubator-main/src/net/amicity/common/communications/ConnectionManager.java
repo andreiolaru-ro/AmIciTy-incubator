@@ -11,6 +11,8 @@
  ******************************************************************************/
 package net.amicity.common.communications;
 
+import java.util.ArrayList;
+
 /*******************************************************************************
  * Copyright (c) 2013 ''Azgabast''.
  * All rights reserved. This program and the accompanying materials
@@ -38,4 +40,11 @@ public interface ConnectionManager
 	 * @return Whether the connection was removed or not.
 	 */
 	public boolean removeConnection(Connection c);
+	
+	/**
+	 * @param me 
+	 * -> the user to search all his devices
+	 * @return an ArrayList of connections from same user as me
+	 */
+	public ArrayList<Connection> getOtherConnections(Connection me);
 }
