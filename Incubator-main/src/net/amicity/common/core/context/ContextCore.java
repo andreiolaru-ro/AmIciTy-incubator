@@ -42,7 +42,7 @@ public class ContextCore implements Serializable {
 	/**
 	 * The serverSocket for eachlab
 	 */
-	private Socket serverSocket;
+	private static Socket serverSocket;
 
 	/**
 	 * a synchronized queue used to add new ContextItems by Sensor modules or
@@ -137,15 +137,15 @@ public class ContextCore implements Serializable {
 	/**
 	 * @return the server socket
 	 */
-	public Socket getServerSocket() {
+	public static Socket getServerSocket() {
 		return serverSocket;
 	}
 
 	/**
-	 * @param serverSocket the server socket
+	 * @param server the server socket
 	 */
-	public void setServerSocket(Socket serverSocket) {
-		this.serverSocket = serverSocket;
+	public static void setServerSocket(Socket server) {
+		serverSocket = server;
 	}
 
 }

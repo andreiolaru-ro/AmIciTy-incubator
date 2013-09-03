@@ -33,7 +33,6 @@ public class ServerModule implements SensorModule {
 	@Override
 	public void connect(ContextCore cc) {
 		myCore = cc;
-		
 		DefaultNetLink d = new DefaultNetLink();
 		d.receiveFromServer(server, new DefaultMessageReceiver());
 		

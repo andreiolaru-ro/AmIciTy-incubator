@@ -79,8 +79,6 @@ public class Main {
 
 		WirelessModule wm = new WirelessModule();
 		wm.connect(cc);
-		ServerModule sm = new ServerModule(cc.getServerSocket());
-		sm.connect(cc);
 
 		// Create the ContextManger
 		ContextManager cm = new ContextManager(cc, hm);

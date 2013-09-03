@@ -24,6 +24,8 @@ import net.amicity.common.communications.ConnectionManager;
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MyDevicesItem;
+import net.amicity.common.core.context.ContextCore;
+import net.amicity.pc.sensors.ServerModule;
 
 /**
  * @author cristian
@@ -111,11 +113,24 @@ public class DefaultNetLink implements NetLink {
 
 		try {
 			client = new Socket(server.getIp(), server.getPort());
+			ContextCore.setServerSocket(client);
+			// Start the server
+			ServerModule sm = new ServerModule(ContextCore.getServerSocket());
+			sm.connect(ContextCore.class.newInstance());
+			
 			out = new ObjectOutputStream(client.getOutputStream());
 			out.writeObject(me);
 			out.flush();
 		}
 		catch (IOException e) {
+			e.printStackTrace();
+		}
+		catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -201,6 +216,7 @@ public class DefaultNetLink implements NetLink {
 			public void run() {
 				while (true) {
 					try {
+						System.out.println("Start receiving");
 						ObjectInputStream in = new ObjectInputStream(
 								server.getInputStream());
 						Object obj = in.readObject();
