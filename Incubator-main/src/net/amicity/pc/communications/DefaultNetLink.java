@@ -114,8 +114,9 @@ public class DefaultNetLink implements NetLink {
 		try {
 			client = new Socket(server.getIp(), server.getPort());
 			ContextCore.setServerSocket(client);
+			
 			// Start the server
-			ServerModule sm = new ServerModule(ContextCore.getServerSocket());
+			ServerModule sm = new ServerModule(client);
 			sm.connect(ContextCore.class.newInstance());
 			
 			out = new ObjectOutputStream(client.getOutputStream());
@@ -209,23 +210,18 @@ public class DefaultNetLink implements NetLink {
 	
 	@Override
 	public void receiveFromServer(final Socket server, final MessageReceiver msgR) {
-		
-		final ServerSocket serverSocket;
-		try {
-			serverSocket = new ServerSocket(4500);
+
 			new Thread(new Runnable() {
 
 				@Override
 				public void run() {
 					while (true) {
 						try {
-							Socket client = serverSocket.accept();
 							System.out.println("Start receiving");
 							ObjectInputStream in = new ObjectInputStream(
-									client.getInputStream());
+									server.getInputStream());
 							Object obj = in.readObject();
 							msgR.receive(obj);
-							in.close();
 						}
 						catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -240,13 +236,6 @@ public class DefaultNetLink implements NetLink {
 				}
 
 			}).start();
-		}
-		catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-
 	}
 
 }
