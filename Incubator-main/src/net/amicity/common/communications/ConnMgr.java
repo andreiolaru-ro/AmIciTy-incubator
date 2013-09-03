@@ -118,6 +118,7 @@ public class ConnMgr implements ConnectionManager {
 			if(c.getId().substring(0, c.getId().indexOf('-')).equals(me.getId().substring(0, me.getId().indexOf('-'))))
 				other.add(c);
 		}
+		other.remove(me);
 		return other;
 	}
 

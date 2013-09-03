@@ -150,7 +150,6 @@ public class DefaultNetLink implements NetLink {
 								mdi.setMyDevices(other);
 								out.writeObject(mdi);
 								out.flush();
-								out.close();
 								for(Connection c : other) {
 									ArrayList<Connection> newOther = new ArrayList<Connection>();
 									newOther.addAll(other);
@@ -161,7 +160,6 @@ public class DefaultNetLink implements NetLink {
 									ObjectOutputStream out2 = new ObjectOutputStream(c.getSocket().getOutputStream());
 									out2.writeObject(mdi);
 									out2.flush();
-									out2.close();
 								}
 							}
 							
