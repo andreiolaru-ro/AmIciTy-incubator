@@ -11,7 +11,6 @@ import net.amicity.common.core.NotificationDispatcher;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.LocationModule;
-import net.amicity.pc.sensors.ChangeDetectorModule;
 import net.amicity.pc.sensors.WirelessModule;
 
 /**
@@ -32,16 +31,16 @@ public class Main {
 		s.close();
 
 		// Create intelligence modules
-	//	LocationModule lm = new LocationModule(cc);
-	//	DummyMessage dm = new DummyMessage(cc);
+		LocationModule lm = new LocationModule(cc);
+		DummyMessage dm = new DummyMessage(cc);
 		
-		ChangeDetectorModule cdm = new ChangeDetectorModule();
-		cdm.startTimer();
+		//ChangeDetectorModule cdm = new ChangeDetectorModule();
+		//cdm.startTimer();
 		
 		
 		// make the link between ContextTypes and intelligence modules related
 		// to type
-	/*	final HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm = new HashMap<ContextTypes, ArrayList<IntelligenceModule>>();
+		final HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm = new HashMap<ContextTypes, ArrayList<IntelligenceModule>>();
 
 		ArrayList<IntelligenceModule> iModules = new ArrayList<IntelligenceModule>();
 		iModules.add(lm);
@@ -60,7 +59,7 @@ public class Main {
 		cm.start();
 		// Create the Notification Dispatcher
 		NotificationDispatcher nd = new NotificationDispatcher(cc);
-		nd.start(); */
+		nd.start(); 
 
 	}
 }
