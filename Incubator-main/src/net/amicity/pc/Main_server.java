@@ -30,7 +30,7 @@ public class Main_server {
 			public void run() {
 				for (Connection i : manager.getConnections()) {
 					if (i.isOn()) {
-					/*	try {
+						try {
 							i.getSocket().getOutputStream().write(1);
 							System.out.println("Connection with " + i.getId()
 									+ "is available");
@@ -45,7 +45,7 @@ public class Main_server {
 								e1.printStackTrace();
 							}
 							i.setStateOff();
-						}*/
+						}
 					}
 				}
 			}

@@ -72,7 +72,6 @@ public class Main {
 		hm.put(ContextTypes.FILE_CONTEXT, iModules4);
 
 		// start sensors services
-
 		
 		// start the files monitorization
 		//ChangeDetectorModule cdm = new ChangeDetectorModule();
@@ -80,7 +79,7 @@ public class Main {
 
 		WirelessModule wm = new WirelessModule();
 		wm.connect(cc);
-		ServerModule sm = new ServerModule();
+		ServerModule sm = new ServerModule(cc.getServerSocket());
 		sm.connect(cc);
 
 		// Create the ContextManger
