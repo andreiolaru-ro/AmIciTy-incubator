@@ -209,33 +209,44 @@ public class DefaultNetLink implements NetLink {
 	
 	@Override
 	public void receiveFromServer(final Socket server, final MessageReceiver msgR) {
+		
+		final ServerSocket serverSocket;
+		try {
+			serverSocket = new ServerSocket(4500);
+			new Thread(new Runnable() {
 
-		new Thread(new Runnable() {
+				@Override
+				public void run() {
+					while (true) {
+						try {
+							Socket client = serverSocket.accept();
+							System.out.println("Start receiving");
+							ObjectInputStream in = new ObjectInputStream(
+									client.getInputStream());
+							Object obj = in.readObject();
+							msgR.receive(obj);
+							in.close();
+						}
+						catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						System.out.println("Start receiving");
-						ObjectInputStream in = new ObjectInputStream(
-								server.getInputStream());
-						Object obj = in.readObject();
-						msgR.receive(obj);
-						in.close();
-					}
-					catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 				}
 
-			}
+			}).start();
+		}
+		catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
-		}).start();
+
 	}
 
 }
