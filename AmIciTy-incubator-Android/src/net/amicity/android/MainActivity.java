@@ -21,7 +21,6 @@ import net.amicity.incubator_android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -54,35 +53,30 @@ public class MainActivity extends Activity implements Serializable {
 	 * The button which logs the user in.
 	 */
 	Button b;
+	/**
+	 * The devices connected to this one.
+	 */
+	TextView devices;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_act);
+		Intent i = getIntent();
 		intents = new ArrayList<Intent>();
-		/*usrname = (EditText) findViewById(R.id.user);
-		changes = (TextView) findViewById(R.id.changes);
-		b = (Button) findViewById(R.id.b);
 
-		b.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-			}
-		});*/
 		// Create ContextCore
-		ContextCore cc = new ContextCore();
-		cc.setUsername("Mamaie-Android");
-		// Create intelligence modules
 
+		ContextCore cc = new ContextCore();
+		// Create intelligence modules
+		cc.setUsername(i.getExtras().getString("username"));
+
+		changes.setText("User is:" + i.getExtras().getString("username"));
 		LocationModule lm = new LocationModule(cc);
 		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
 		DummyMessage dm = new DummyMessage(cc, this);
 		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
-		
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type
@@ -100,15 +94,15 @@ public class MainActivity extends Activity implements Serializable {
 		iModules3.add(dat);
 		iModules3.add(aft);
 		hm.put(ContextTypes.ACCELEROMETER, iModules3);
-		
+
 		ArrayList<IntelligenceModule> iModules4 = new ArrayList<IntelligenceModule>();
 		iModules4.add(dm);
 		hm.put(ContextTypes.LOCATION_CONTEXT, iModules4);
-		
+
 		ArrayList<IntelligenceModule> iModules5 = new ArrayList<IntelligenceModule>();
 		iModules5.add(aft);
 		hm.put(ContextTypes.DEVICES_CONTEXT, iModules5);
-		
+
 		// start sensors services
 		Intent intent = new Intent(this, WifiModule.class);
 		intents.add(intent);
