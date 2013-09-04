@@ -104,6 +104,7 @@ public class MainActivity extends Activity implements Serializable {
 		hm.put(ContextTypes.DEVICES_CONTEXT, iModules5);
 
 		// start sensors services
+
 		Intent intent = new Intent(this, WifiModule.class);
 		intents.add(intent);
 		startService(intent);
