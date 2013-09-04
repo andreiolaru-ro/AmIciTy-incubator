@@ -24,6 +24,10 @@ import net.amicity.common.core.ContextTypes;
 public class SoundItem extends AbstractItem {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * The maximum noise heard in the last interval.
 	 */
 	double value;

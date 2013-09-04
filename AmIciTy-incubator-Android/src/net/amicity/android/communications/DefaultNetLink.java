@@ -21,11 +21,15 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
 
+import net.amicity.android.MainActivity;
 import net.amicity.common.communications.ConnMgr;
 import net.amicity.common.communications.Connection;
 import net.amicity.common.communications.ConnectionManager;
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
+import net.amicity.common.core.context.ContextCore;
+import net.amicity.android.sensors.ServerModule;
+import android.content.Intent;
 import android.util.Log;
 
 /**
@@ -38,9 +42,22 @@ public class DefaultNetLink implements NetLink {
 	 * The connection manager for all connections available.
 	 */
 	ConnectionManager manager;
-
 	/**
+	 * The main activity
+	 */
+	MainActivity activity;
+	
+	/**
+	 * @param act 
 	 * 
+	 */
+	public DefaultNetLink(MainActivity act) {
+		manager = new ConnMgr();
+		this.activity = act;
+	}
+	
+	/**
+	 * the emptyconstructor
 	 */
 	public DefaultNetLink() {
 		manager = new ConnMgr();
@@ -152,8 +169,32 @@ public class DefaultNetLink implements NetLink {
 	}
 
 	@Override
-	public void createConnection(Connection server, Connection me) {
-		// TODO Auto-generated method stub
+	public void createConnection(final Connection server, final Connection me) {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Socket client;
+				ObjectOutputStream out;
+
+				try {
+					client = new Socket(server.getIp(), server.getPort());
+					ContextCore.setServerSocket(client);
+					
+					// Start the server
+					Intent intent = new Intent(activity, ServerModule.class);
+					activity.startService(intent);
+					
+					out = new ObjectOutputStream(client.getOutputStream());
+					out.writeObject(me);
+					out.flush();
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}).start();
 		
 	}
 
@@ -164,9 +205,36 @@ public class DefaultNetLink implements NetLink {
 	}
 
 	@Override
-	public void receiveFromServer(Socket server, MessageReceiver msgR) {
-		// TODO Auto-generated method stub
-		
+	public void receiveFromServer(final Socket server, final MessageReceiver msgR) {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						System.out.println("Start receiving");
+						ObjectInputStream in = new ObjectInputStream(
+								server.getInputStream());
+						Object obj = in.readObject();
+						if(obj instanceof String) {
+							//do nothing
+						}
+						else
+							msgR.receive(obj);
+					}
+					catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			}
+
+		}).start();
 	}
 
 }

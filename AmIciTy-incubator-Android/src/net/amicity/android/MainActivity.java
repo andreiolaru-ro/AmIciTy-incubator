@@ -78,7 +78,7 @@ public class MainActivity extends Activity implements Serializable {
 		LocationModule lm = new LocationModule(cc);
 		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
-		DummyMessage dm = new DummyMessage(cc);
+		DummyMessage dm = new DummyMessage(cc, this);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type
@@ -95,6 +95,11 @@ public class MainActivity extends Activity implements Serializable {
 		ArrayList<IntelligenceModule> iModules3 = new ArrayList<IntelligenceModule>();
 		iModules3.add(dat);
 		hm.put(ContextTypes.ACCELEROMETER, iModules3);
+		
+		ArrayList<IntelligenceModule> iModules4 = new ArrayList<IntelligenceModule>();
+		iModules4.add(dm);
+		hm.put(ContextTypes.LOCATION_CONTEXT, iModules4);
+		
 		// start sensors services
 		Intent intent = new Intent(this, WifiModule.class);
 		intents.add(intent);

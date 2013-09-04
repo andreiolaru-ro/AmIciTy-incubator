@@ -12,6 +12,8 @@
 package net.amicity.android.communications;
 
 import net.amicity.common.communications.MessageReceiver;
+import net.amicity.common.context_types.AbstractItem;
+import net.amicity.common.core.context.ContextCore;
 
 /**
  * @author cristian
@@ -21,8 +23,9 @@ public class DefaultMessageReceiver implements MessageReceiver {
 
 	@Override
 	public void receive(Object obj) {
-		String str = (String) obj;
-		System.out.println(str);
+		AbstractItem item = (AbstractItem) obj;
+		System.out.println("Server put context updates");
+		ContextCore.postContextUpdate(item);
 	}
 
 }

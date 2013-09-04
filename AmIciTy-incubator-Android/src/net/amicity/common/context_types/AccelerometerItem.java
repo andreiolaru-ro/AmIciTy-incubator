@@ -24,6 +24,10 @@ import net.amicity.common.core.ContextTypes;
 public class AccelerometerItem extends AbstractItem {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * the total number of moves (on x, y and z) in 5 minutes
 	 */
 	float total;

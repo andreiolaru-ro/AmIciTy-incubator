@@ -9,6 +9,7 @@ import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.android.MainActivity;
 import net.amicity.android.communications.DefaultNetLink;
 
 /**
@@ -35,14 +36,20 @@ public class DummyMessage implements IntelligenceModule {
 	 * DefaultNetLink for connecting to server
 	 */
 	DefaultNetLink d;
+	/**
+	 * The main activity.
+	 */
+	MainActivity act;
 
 	/**
 	 * @param cc
+	 * @param act 
 	 */
-	public DummyMessage(ContextCore cc) {
+	public DummyMessage(ContextCore cc, MainActivity act) {
 		this.cc = cc;
 		this.cs = cc.getContextStorage();
-		d = new DefaultNetLink();
+		this.act = act;
+		d = new DefaultNetLink(act);
 	}
 
 	@Override
