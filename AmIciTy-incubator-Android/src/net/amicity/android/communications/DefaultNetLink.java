@@ -181,6 +181,8 @@ public class DefaultNetLink implements NetLink {
 					client = new Socket(server.getIp(), server.getPort());
 					ContextCore.setServerSocket(client);
 					
+					System.out.println("Starting the server service");
+					
 					// Start the server
 					Intent intent = new Intent(activity, ServerModule.class);
 					activity.startService(intent);

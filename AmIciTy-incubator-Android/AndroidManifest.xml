@@ -56,9 +56,11 @@
         <service
             android:name="net.amicity.android.sensors.AccelerometerModule">
         </service>
-        
         <service
             android:name="net.amicity.common.intelligence.SoundChanger">
+        </service>
+         <service
+            android:name="net.amicity.android.sensors.ServerModule">
         </service>
     </application>
 
