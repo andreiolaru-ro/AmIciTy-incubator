@@ -34,24 +34,29 @@ public class Main_server {
 				for (Connection i : manager.getConnections()) {
 					if (i.isOn()) {
 						try {
-							ObjectOutputStream out = new ObjectOutputStream(i.getSocket().getOutputStream());
+							ObjectOutputStream out = new ObjectOutputStream(i
+									.getSocket().getOutputStream());
 							out.writeObject("Hello");
-							System.out.println("Connection with " + i.getId()
-									+ "is available");
+							PCInterface.addNotification("Connection with "
+									+ i.getId() + "is available");
+
 						}
 						catch (IOException e) {
-							System.out.println("connection with " + i.getId()
-									+ " is closed");
+							PCInterface.addNotification("connection with "
+									+ i.getId() + " is closed");
+
 							try {
-								//send to other devices closed connection
-								ArrayList<Connection> other = manager.getOtherConnections(i);
-								for(Connection c : other) {
+								// send to other devices closed connection
+								ArrayList<Connection> other = manager
+										.getOtherConnections(i);
+								for (Connection c : other) {
 									ArrayList<Connection> newOther = new ArrayList<Connection>();
 									newOther.addAll(other);
 									newOther.remove(c);
 									MyDevicesItem mdi2 = new MyDevicesItem();
 									mdi2.setMyDevices(other);
-									ObjectOutputStream out2 = new ObjectOutputStream(c.getSocket().getOutputStream());
+									ObjectOutputStream out2 = new ObjectOutputStream(
+											c.getSocket().getOutputStream());
 									out2.writeObject(mdi2);
 									out2.flush();
 								}

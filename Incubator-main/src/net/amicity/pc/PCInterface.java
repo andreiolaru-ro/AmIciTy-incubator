@@ -34,7 +34,7 @@ public class PCInterface extends JFrame {
 	/**
 	 * 
 	 */
-	JTextArea jtf;
+	static JTextArea jtf;
 	/**
 	 * 
 	 */
@@ -108,6 +108,14 @@ public class PCInterface extends JFrame {
 	 */
 	public String getUserName() {
 		return user;
+	}
+
+	/**
+	 * @param notif
+	 *            the notification to be added
+	 */
+	public static void addNotification(String notif) {
+		jtf.append(notif + "\n");
 	}
 
 	/**
