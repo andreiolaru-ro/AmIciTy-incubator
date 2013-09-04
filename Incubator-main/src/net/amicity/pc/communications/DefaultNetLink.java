@@ -221,7 +221,11 @@ public class DefaultNetLink implements NetLink {
 							ObjectInputStream in = new ObjectInputStream(
 									server.getInputStream());
 							Object obj = in.readObject();
-							msgR.receive(obj);
+							if(obj instanceof String) {
+								//do nothing
+							}
+							else
+								msgR.receive(obj);
 						}
 						catch (IOException e) {
 							// TODO Auto-generated catch block
