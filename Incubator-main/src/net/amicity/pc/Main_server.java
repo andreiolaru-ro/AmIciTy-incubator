@@ -2,13 +2,11 @@ package net.amicity.pc;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import net.amicity.common.communications.ConnMgr;
 import net.amicity.common.communications.Connection;
-import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.pc.communications.DefaultNetLink;
 
 /**
@@ -37,29 +35,13 @@ public class Main_server {
 							ObjectOutputStream out = new ObjectOutputStream(i
 									.getSocket().getOutputStream());
 							out.writeObject("Hello");
-							PCInterface.addNotification("Connection with "
-									+ i.getId() + "is available");
-
+							System.out.println("Connection with " + i.getId()
+									+ "is available");
 						}
 						catch (IOException e) {
-							PCInterface.addNotification("connection with "
-									+ i.getId() + " is closed");
-
+							System.out.println("connection with " + i.getId()
+									+ " is closed");
 							try {
-								// send to other devices closed connection
-								ArrayList<Connection> other = manager
-										.getOtherConnections(i);
-								for (Connection c : other) {
-									ArrayList<Connection> newOther = new ArrayList<Connection>();
-									newOther.addAll(other);
-									newOther.remove(c);
-									MyDevicesItem mdi2 = new MyDevicesItem();
-									mdi2.setMyDevices(other);
-									ObjectOutputStream out2 = new ObjectOutputStream(
-											c.getSocket().getOutputStream());
-									out2.writeObject(mdi2);
-									out2.flush();
-								}
 								i.getSocket().close();
 							}
 							catch (IOException e1) {
