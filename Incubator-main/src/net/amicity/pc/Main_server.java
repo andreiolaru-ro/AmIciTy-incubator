@@ -1,6 +1,7 @@
 package net.amicity.pc;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,7 +32,8 @@ public class Main_server {
 				for (Connection i : manager.getConnections()) {
 					if (i.isOn()) {
 						try {
-							i.getSocket().getOutputStream().write(1);
+							ObjectOutputStream out = new ObjectOutputStream(i.getSocket().getOutputStream());
+							out.writeObject("Hello");
 							System.out.println("Connection with " + i.getId()
 									+ "is available");
 						}
