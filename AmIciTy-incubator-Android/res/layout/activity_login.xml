@@ -6,23 +6,27 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".LoginActivity" >
 
-    <TextView
-        android:id="@+id/changes"
+    <EditText
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp"
-        android:text="             " />
+        android:layout_marginTop="163dp"
+        android:ems="10" >
 
-    <TextView
-        android:id="@+id/devices"
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/changes"
-        android:layout_centerVertical="true"
-        android:text="             " />
+        android:layout_below="@+id/editText1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="Login" />
 
 </RelativeLayout>
