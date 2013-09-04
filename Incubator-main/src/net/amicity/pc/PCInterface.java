@@ -76,6 +76,10 @@ public class PCInterface extends JFrame {
 		jp = new JPanel();
 		jpuser = new JPanel();
 		usrname = new JTextField(15);
+		jtf = new JTextArea(20, 20);
+		setLayout(new GridLayout(2, 1));
+		jsp = new JScrollPane(jtf);
+
 		b = new JButton("Login");
 		// ActionListener bs;
 		b.addActionListener(new ActionListener() {
@@ -93,9 +97,6 @@ public class PCInterface extends JFrame {
 		});
 		jpuser.add(usrname);
 		jpuser.add(b);
-		jtf = new JTextArea(20, 20);
-		setLayout(new GridLayout(2, 1));
-		jsp = new JScrollPane(jtf);
 
 		jp.add(jsp);
 		add(jpuser);
