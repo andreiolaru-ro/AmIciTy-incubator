@@ -10,6 +10,7 @@
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 package net.amicity.common.communications;
+
 /*******************************************************************************
  * Copyright (c) 2013 ''Azgabast''.
  * All rights reserved. This program and the accompanying materials
@@ -23,82 +24,107 @@ package net.amicity.common.communications;
 import java.util.ArrayList;
 import java.util.Set;
 
-
 /**
- * @author ''Azgabast''
- * The class which manages what connections the device has and their current
- * state.
+ * @author ''Azgabast'' The class which manages what connections the device has
+ *         and their current state.
  */
-public class ConnMgr implements ConnectionManager
-{
+public class ConnMgr implements ConnectionManager {
+
 	/**
-	 *  The connection list.
+	 * The connection list.
 	 */
 	ArrayList<Connection> connList;
-	
+
 	/**
-	 *  The null constructor, which creates a new empty list.
+	 * The null constructor, which creates a new empty list.
 	 */
 	public ConnMgr() {
 		connList = new ArrayList<Connection>();
 	}
-	
+
 	/**
-	 * @param connLst The initial connection list.
+	 * @param connLst
+	 *            The initial connection list.
 	 */
 	public ConnMgr(Set<Connection> connLst) {
 		connList = new ArrayList<Connection>();
 		connList.addAll(connLst);
 	}
-	
+
 	/**
-	 * @param connLst The initial connection list.
+	 * @param connLst
+	 *            The initial connection list.
 	 */
 	public ConnMgr(Connection[] connLst) {
 		connList = new ArrayList<Connection>();
-		for( int i = 0; i < connLst.length; i ++)
+		for (int i = 0; i < connLst.length; i++)
 			connList.add(connLst[i]);
 	}
-	
+
 	/**
-	 * @param c The Connection to be added.
+	 * @param c
+	 *            The Connection to be added.
 	 */
 	@Override
 	public void addConnection(Connection c) {
 		connList.add(c);
 	}
-	
+
 	/**
-	 * @param id The desired connection's ID.
+	 * @param id
+	 *            The desired connection's ID.
 	 * @return The desired connection, or null if it isn't found.
 	 */
 	@Override
 	public Connection getConnection(String id) {
-		for ( Connection c: connList)
-			if( c.id == id )
+		for (Connection c : connList)
+			if (c.id == id)
 				return c;
 		return null;
 	}
-	
+
 	/**
-	 * @param c The connection to be removed.
+	 * @param c
+	 *            The connection to be removed.
 	 * @return Whether the connection was removed or not.
 	 */
 	@Override
 	public boolean removeConnection(Connection c) {
-		return connList.remove(c);	
+		return connList.remove(c);
+	}
+
+	@Override
+	public String toString() {
+		String s = "";
+		for (Connection c : connList) {
+			s = s + "Id: " + c.id + " Ip: " + c.ip + "Port: " + c.port
+					+ " State: " + c.getState() + "\n";
+		}
+		return s;
+
+	}
+
+	/**
+	 * @return the Connection list
+	 */
+	public ArrayList<Connection> getConnections() {
+		return this.connList;
 	}
 	
 	@Override
-	public String toString() {
-		String s="";
-		for( Connection c: connList) {
-			s = s + "Id: " + c.id + " Ip: " + c.ip 
-					+ "Port: " + c.port + " State: " + c.getState() + "\n";
+	public ArrayList<Connection> getOtherConnections(Connection me) {
+		ArrayList<Connection> other = new ArrayList<Connection>();
+		for(Connection c : connList) {
+			if(c.isOn()) {
+				System.out.println("Verify: " + c.getId());
+				if(c.getId().substring(0, c.getId().indexOf('-')).equals(me.getId().substring(0, me.getId().indexOf('-')))) {
+					other.add(c);
+					System.out.println("Added");
+				}
+			}
 		}
-		return s;
-		
+		other.remove(me);
+		return other;
 	}
-	
-	
+
 }

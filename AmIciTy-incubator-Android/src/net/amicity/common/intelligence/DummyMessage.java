@@ -9,8 +9,8 @@ import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.pc.PCInterface;
-import net.amicity.pc.communications.DefaultNetLink;
+import net.amicity.android.MainActivity;
+import net.amicity.android.communications.DefaultNetLink;
 
 /**
  * A DummyClass that sends information to the server if it is in Canti
@@ -36,14 +36,20 @@ public class DummyMessage implements IntelligenceModule {
 	 * DefaultNetLink for connecting to server
 	 */
 	DefaultNetLink d;
+	/**
+	 * The main activity.
+	 */
+	MainActivity act;
 
 	/**
 	 * @param cc
+	 * @param act 
 	 */
-	public DummyMessage(ContextCore cc) {
+	public DummyMessage(ContextCore cc, MainActivity act) {
 		this.cc = cc;
 		this.cs = cc.getContextStorage();
-		d = new DefaultNetLink();
+		this.act = act;
+		d = new DefaultNetLink(act);
 	}
 
 	@Override
@@ -51,13 +57,12 @@ public class DummyMessage implements IntelligenceModule {
 		location = ((LocationItem) cs.get(ContextTypes.LOCATION_CONTEXT)).location;
 		if (location.equals("CANTI"))
 			try {
-				PCInterface.addNotification("conectare");
+				System.out.println(" conectare!!");
 				d.createConnection(
 						new Connection(InetAddress.getByName("172.16.15.223"),
 								"", 4500),
 						new Connection(InetAddress.getLocalHost(), cc
 								.getUsername(), 4500));
-				PCInterface.addNotification("connected to 172.16.15.223");
 			}
 			catch (UnknownHostException e) {
 				e.printStackTrace();

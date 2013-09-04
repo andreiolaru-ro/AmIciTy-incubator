@@ -32,7 +32,8 @@ public class Main_server {
 				for (Connection i : manager.getConnections()) {
 					if (i.isOn()) {
 						try {
-							ObjectOutputStream out = new ObjectOutputStream(i.getSocket().getOutputStream());
+							ObjectOutputStream out = new ObjectOutputStream(i
+									.getSocket().getOutputStream());
 							out.writeObject("Hello");
 							System.out.println("Connection with " + i.getId()
 									+ "is available");

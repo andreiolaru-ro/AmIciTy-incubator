@@ -43,7 +43,7 @@ public class Main {
 
 		PCInterface pci = new PCInterface();
 		while (pci.getUserName().length() == 0) {
-			System.out.println("");
+			System.out.flush();
 		}
 
 

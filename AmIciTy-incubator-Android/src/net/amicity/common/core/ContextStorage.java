@@ -15,7 +15,7 @@ public class ContextStorage extends
 {
 
 	/**
-	 * default serial UID - why needed?
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
