@@ -37,6 +37,11 @@ public enum ContextTypes {
 	/**
 	 * ContextType for an item containing a filename and its content
 	 */
-	FILE_CONTEXT;
+	FILE_CONTEXT,
+	
+	/**
+	 * ContextType for an item containing all devices for the user
+	 */
+	DEVICES_CONTEXT;
 
 }

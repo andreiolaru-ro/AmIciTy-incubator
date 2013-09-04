@@ -14,7 +14,7 @@ public class ContextStorage extends
 		ConcurrentHashMap<ContextTypes, AbstractItem>
 {
 
-	/**
+/*	/**
 	 * default serial UID - why needed?
 	 */
 	private static final long serialVersionUID = 1L;

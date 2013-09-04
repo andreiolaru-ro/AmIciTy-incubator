@@ -13,6 +13,7 @@ import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.NotificationDispatcher;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.DummyAccelerometerTest;
+import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.LocationModule;
 import net.amicity.common.intelligence.SoundIntel;
 import net.amicity.incubator_android.R;
@@ -77,6 +78,7 @@ public class MainActivity extends Activity implements Serializable {
 		LocationModule lm = new LocationModule(cc);
 		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
+		DummyMessage dm = new DummyMessage(cc);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type

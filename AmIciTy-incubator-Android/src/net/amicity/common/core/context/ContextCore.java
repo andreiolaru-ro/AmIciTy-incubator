@@ -12,6 +12,7 @@
 package net.amicity.common.core.context;
 
 import java.io.Serializable;
+import java.net.Socket;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import net.amicity.common.context_types.AbstractItem;
@@ -32,6 +33,16 @@ public class ContextCore implements Serializable {
 	 * 
 	 */
 	private final ContextStorage contextStorage;
+
+	/**
+	 * The username
+	 */
+	private String username;
+	
+	/**
+	 * The serverSocket for eachlab
+	 */
+	private static Socket serverSocket;
 
 	/**
 	 * a synchronized queue used to add new ContextItems by Sensor modules or
@@ -106,6 +117,35 @@ public class ContextCore implements Serializable {
 	 */
 	public LinkedBlockingQueue<Notification> getNotificationQueue() {
 		return notificationQueue;
+	}
+
+	/**
+	 * @param username
+	 *            -> the username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return this.username;
+	}
+
+	/**
+	 * @return the server socket
+	 */
+	public static Socket getServerSocket() {
+		return serverSocket;
+	}
+
+	/**
+	 * @param server the server socket
+	 */
+	public static void setServerSocket(Socket server) {
+		serverSocket = server;
 	}
 
 }

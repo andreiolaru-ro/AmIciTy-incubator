@@ -21,7 +21,9 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
 
+import net.amicity.common.communications.ConnMgr;
 import net.amicity.common.communications.Connection;
+import net.amicity.common.communications.ConnectionManager;
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
 import android.util.Log;
@@ -32,6 +34,18 @@ import android.util.Log;
  */
 public class DefaultNetLink implements NetLink {
 
+	/**
+	 * The connection manager for all connections available.
+	 */
+	ConnectionManager manager;
+
+	/**
+	 * 
+	 */
+	public DefaultNetLink() {
+		manager = new ConnMgr();
+	}
+	
 	@Override
 	public void send(final Connection c, final Object o) {
 
@@ -138,9 +152,21 @@ public class DefaultNetLink implements NetLink {
 	}
 
 	@Override
-	public void createConnection(Connection c) {
+	public void createConnection(Connection server, Connection me) {
 		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void serverReceival(int port) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void receiveFromServer(Socket server, MessageReceiver msgR) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
