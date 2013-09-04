@@ -19,6 +19,10 @@ import net.amicity.incubator_android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * @author cristian
@@ -36,11 +40,36 @@ public class MainActivity extends Activity implements Serializable {
 	 */
 	ArrayList<Intent> intents;
 
+	/**
+	 * The textbox for the username;
+	 */
+	EditText usrname;
+	/**
+	 * The textarea for the changes to be seen;
+	 */
+	TextView changes;
+	/**
+	 * The button which logs the user in.
+	 */
+	Button b;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_act);
 		intents = new ArrayList<Intent>();
+		usrname = (EditText) findViewById(R.id.user);
+		changes = (TextView) findViewById(R.id.changes);
+		b = (Button) findViewById(R.id.b);
+
+		b.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		// Create ContextCore
 		ContextCore cc = new ContextCore();
 		// Create intelligence modules

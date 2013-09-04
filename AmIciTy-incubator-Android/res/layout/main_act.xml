@@ -9,8 +9,31 @@
     tools:context=".MainActivity" >
 
     <TextView
+        android:id="@+id/changes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="214dp"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/changes"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="83dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/user"
+        android:layout_alignBottom="@+id/user"
+        android:layout_toRightOf="@+id/user"
+        android:text="Login" />
 
 </RelativeLayout>
