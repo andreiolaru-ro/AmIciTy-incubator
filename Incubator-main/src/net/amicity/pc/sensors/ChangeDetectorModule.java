@@ -132,7 +132,7 @@ public class ChangeDetectorModule extends TimerTask
 			     		
 			     		System.out.println("il contine" );
 			     		contained = 1;
-						fileLiteral.changesDetected++;
+						fileLiteral.changesDetected = true;
 				//		System.out.println(f.length() + "   " +fileOld.lastsize);
 						fileLiteral.sizeDifference = f.length() - fileOld.lastsize;
 						
@@ -147,7 +147,7 @@ public class ChangeDetectorModule extends TimerTask
 			     if(contained == 0){
 			     	
 			     	System.out.println("este noua " );
-			     	FileChangeData fileChanged = new FileChangeData(f, 1, f.length());
+			     	FileChangeData fileChanged = new FileChangeData(f, f.length());
 			     	filesChanged.add(fileChanged);
 			     	
 			     }

@@ -27,25 +27,7 @@ import net.amicity.pc.sensors.WirelessModule;
  * @author cristian
  * 
  */
-class WindowMessage extends JFrame{
-	WindowMessage(){
-		createWindow();
-		addWrite();
-		
-	}
-	public void createWindow(){
 
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		Rectangle winSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		this.setSize(300, 300);
-		this.setLocation(dimension.width - 300 ,  winSize.height  - 300);
-		this.show();
-	}
-	public void addWrite(){
-		JLabel eticheta = new JLabel();
-		
-	}
-}
 
 
 public class Main {
@@ -54,10 +36,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		
-		//WindowMessage win= new WindowMessage();
-		
+				
 		
 		// Create ContextCore
 		final ContextCore cc = new ContextCore();
@@ -80,8 +59,6 @@ public class Main {
 		DummyMessage dm = new DummyMessage(cc);
 		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 
-		// ChangeDetectorModule cdm = new ChangeDetectorModule();
-		// cdm.startTimer();
 
 
 		// make the link between ContextTypes and intelligence modules related
@@ -101,12 +78,13 @@ public class Main {
 		ArrayList<IntelligenceModule> iModules4 = new ArrayList<IntelligenceModule>();
 		iModules4.add(fam);
 		hm.put(ContextTypes.FILE_CONTEXT, iModules4);
+		
 
 		// start sensors services
 		
 		// start the files monitorization
-		//ChangeDetectorModule cdm = new ChangeDetectorModule();
-		//cdm.startTimer();
+		ChangeDetectorModule cdm = new ChangeDetectorModule();
+		cdm.startTimer();
 
 		WirelessModule wm = new WirelessModule();
 		wm.connect(cc);

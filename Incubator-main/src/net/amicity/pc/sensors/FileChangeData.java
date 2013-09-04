@@ -17,7 +17,12 @@ public class FileChangeData{
 	/**
 	 * the number of changes made upon the file
 	 */
-	int changesDetected;
+	boolean changesDetected;
+	
+	/**
+	 * the number of changes made upon the file
+	 */
+	boolean opened;
 	/**
 	 * the difference between the first size and the new size at detecting a change
 	 */
@@ -28,10 +33,11 @@ public class FileChangeData{
 	 * @param change : the number of changes occured
 	 * @param size : the size  
 	 */
-	public FileChangeData(File f, int change, long size)
+	public FileChangeData(File f, long size)
 	{
 		fileChanged = f;
-		changesDetected = change;
+		opened = true;
+		changesDetected = false;
 		sizeDifference = size;
 	}
 	
@@ -45,10 +51,10 @@ public class FileChangeData{
 	/**
 	 * @return : number of changes made after the last send
 	 */
-	public int getNrChange(){
-		int nrChanges = changesDetected;
-		changesDetected = 0;
-		return nrChanges;
+	public boolean getNrChange(){
+		boolean Changes = changesDetected;
+		changesDetected = false;
+		return Changes;
 	}
 	
 	/**

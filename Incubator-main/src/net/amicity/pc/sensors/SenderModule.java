@@ -42,13 +42,10 @@ public class SenderModule  extends TimerTask
 	@Override
 	public void run()
 	{
-		System.out.println("Ma intreb daca este gol");
-		int i;
 		
 		if(myDetector.filesChanged.isEmpty() == false){
 			
 			System.out.println("nu mai este gol");
-			
 			
 			FilesItem sendNewChanges = new FilesItem(myDetector.filesChanged);
 			ContextCore.postContextUpdate(sendNewChanges);

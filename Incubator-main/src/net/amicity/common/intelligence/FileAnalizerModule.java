@@ -1,7 +1,7 @@
 package net.amicity.common.intelligence;
 
-import javax.swing.JFrame;
-
+import java.io.File;
+import java.util.ArrayList;
 import net.amicity.common.context_types.FilesItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
@@ -18,12 +18,28 @@ import net.amicity.pc.sensors.FileChangeData;
  */
 public class FileAnalizerModule implements IntelligenceModule
 {
+	/**
+	 * instance of core to gain acces to its q
+	 */
 	ContextCore myCore;
+	/**
+	 * a list with the files opened
+	 */
+	ArrayList<File> filesOpened; 
 	
 	
+	/**
+	 * if it is already a window on screen
+	 */
+	boolean shown;
 	
+	/**
+	 * @param received : the core of the application
+	 */
 	public FileAnalizerModule(ContextCore received){
 		myCore = received;
+		filesOpened = new ArrayList<File>();
+		shown = false;
 	}
 
 	@Override
@@ -35,19 +51,34 @@ public class FileAnalizerModule implements IntelligenceModule
 		for(FileChangeData fcd : itemReceived.filesMonitorized){
 
 			
-			String fileName  = fcd.getFile().getName();
+			File file  = fcd.getFile();
 			long nrDiff = fcd.getDifference();
-			int nrChange = fcd.getNrChange();
+			boolean changed = fcd.getNrChange();
 			
-			if(nrDiff < 100 || nrChange < 3){
-				/*System.out.println("Nu prea avet habar sa codati");
-				System.out.println("pe" + fileName + " " + nrChange +" "+ nrDiff);
-				System.out.println("vrei sa te ajute un prieten?");*/
+			if(changed == false  ){
+				System.out.println("nu am mai modificat fisierul de cand l-am deschis");
 				
-				WindowMessage win= new WindowMessage();
-				
-				
+				if(filesOpened.contains(file) == true && shown == false){
+					System.out.println("NU ESTE UN FISIER NOU DESCHIS");
+					WindowMessage win= new WindowMessage(this);
+					win.show();
+					shown = true;
+				}
+				else{
+System.out.println("ESTE UN FISIER NOU DESCHIS si nu este continut" + filesOpened.size());
+					filesOpened.add(file);
+				}
 			}
+			else{
+				System.out.println("Am mai modificat fisierul de cand l-am deschis");
+				
+				if(nrDiff < 100 && shown == false){
+					WindowMessage win= new WindowMessage(this);
+					win.show();
+					shown = true;
+				}
+			}
+			
 
 		}
 
@@ -55,11 +86,4 @@ public class FileAnalizerModule implements IntelligenceModule
 
 }
 
-
-class WindowMessage extends JFrame{
-	WindowMessage(){
-		this.setSize(300, 300);
-		this.show();
-	}
-}
 
