@@ -20,6 +20,7 @@ public class ServerModule extends Service implements SensorModule {
 		super.onStartCommand(intent, flags, startId);
 		
 		DefaultNetLink d = new DefaultNetLink();
+		System.out.println("Am deschis conexiunea cu serverul");
 		d.receiveFromServer(ContextCore.getServerSocket(), new DefaultMessageReceiver());
 		
 		return Service.START_STICKY;

@@ -12,6 +12,7 @@ import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.NotificationDispatcher;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.common.intelligence.AndroidFileTransfer;
 import net.amicity.common.intelligence.DummyAccelerometerTest;
 import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.LocationModule;
@@ -63,8 +64,7 @@ public class MainActivity extends Activity implements Serializable {
 		setContentView(R.layout.main_act);
 		Intent i = getIntent();
 		intents = new ArrayList<Intent>();
-		changes = (TextView) findViewById(R.id.changes);
-		devices = (TextView) findViewById(R.id.devices);
+
 		// Create ContextCore
 
 		ContextCore cc = new ContextCore();
@@ -76,6 +76,7 @@ public class MainActivity extends Activity implements Serializable {
 		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
 		DummyMessage dm = new DummyMessage(cc, this);
+		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type
@@ -91,11 +92,16 @@ public class MainActivity extends Activity implements Serializable {
 
 		ArrayList<IntelligenceModule> iModules3 = new ArrayList<IntelligenceModule>();
 		iModules3.add(dat);
+		iModules3.add(aft);
 		hm.put(ContextTypes.ACCELEROMETER, iModules3);
 
 		ArrayList<IntelligenceModule> iModules4 = new ArrayList<IntelligenceModule>();
 		iModules4.add(dm);
 		hm.put(ContextTypes.LOCATION_CONTEXT, iModules4);
+
+		ArrayList<IntelligenceModule> iModules5 = new ArrayList<IntelligenceModule>();
+		iModules5.add(aft);
+		hm.put(ContextTypes.DEVICES_CONTEXT, iModules5);
 
 		// start sensors services
 		Intent intent = new Intent(this, WifiModule.class);

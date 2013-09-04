@@ -175,7 +175,7 @@ public class DefaultNetLink implements NetLink {
 									newOther.add(newCon);
 									newOther.remove(c);
 									MyDevicesItem mdi2 = new MyDevicesItem();
-									mdi2.setMyDevices(other);
+									mdi2.setMyDevices(newOther);
 									ObjectOutputStream out2 = new ObjectOutputStream(c.getSocket().getOutputStream());
 									out2.writeObject(mdi2);
 									out2.flush();
