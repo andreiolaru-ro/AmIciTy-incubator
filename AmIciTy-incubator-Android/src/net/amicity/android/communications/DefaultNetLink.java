@@ -73,7 +73,7 @@ public class DefaultNetLink implements NetLink {
 				try {
 					Socket client;
 					ObjectOutputStream out;
-					client = new Socket(c.getIp(), c.getPort());
+					client = new Socket(c.getIp(), 4501);
 					out = new ObjectOutputStream(client.getOutputStream());
 					out.writeObject(o);
 					out.flush();
@@ -98,8 +98,6 @@ public class DefaultNetLink implements NetLink {
 			final Test act = (Test) msgR;
 
 			System.out.println("Server started on port: " + port);
-			act.tx.setText("My ip is: " + getLocalIpAddress());
-			// System.out.println("My ip is:" + getLocalIpAddress());
 
 			new Thread(new Runnable() {
 
