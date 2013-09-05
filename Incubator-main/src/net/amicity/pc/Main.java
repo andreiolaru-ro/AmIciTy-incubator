@@ -10,6 +10,7 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import net.amicity.common.communications.SimplePeerMachinesManager;
 import net.amicity.common.core.ContextManager;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
@@ -56,7 +57,8 @@ public class Main {
 		
 
 		LocationModule lm = new LocationModule(cc);
-		DummyMessage dm = new DummyMessage(cc);
+		SimplePeerMachinesManager peer =  new SimplePeerMachinesManager();
+		DummyMessage dm = new DummyMessage(cc, peer);
 		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 
 

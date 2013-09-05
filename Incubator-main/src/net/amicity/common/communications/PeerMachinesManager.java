@@ -13,12 +13,12 @@ interface PeerMachinesManager{
 	/**
 	 *  creating the list of the data from the stations fron the room
 	 */
-	public void setLocationStations();
+	public void addLocationStations(String Ip, boolean server, String location);
 	/**
 	 * @param location : where the user is situated based on the wifi comparison
 	 * @return the Server Station from the location received
 	 */
-	public Station getServerForLocation(String location);
+	public String getServerForLocation(String location);
 	/**
 	 * @param id : used to identify the station
 	 * @return the Station Ip used for connection

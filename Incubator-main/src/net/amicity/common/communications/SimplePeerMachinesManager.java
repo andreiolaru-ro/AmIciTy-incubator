@@ -3,6 +3,8 @@ package net.amicity.common.communications;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 
@@ -13,46 +15,60 @@ import java.util.Iterator;
  * @author vlad
  *
  */
-class SimplePeerMachinesManager implements PeerMachinesManager{
+public class SimplePeerMachinesManager implements PeerMachinesManager{
 	/**
 	 * list cotinaing "Station" instances with its data
 	 */
 	ArrayList <Station> stationsReceived;
 	
 	/**
+	 * a map Location-IP
+	 */
+	TreeMap<String, String> serversIP ;
+	
+	/**
 	 *  initiating the members of the class
 	 */
-	 SimplePeerMachinesManager()
+	 public SimplePeerMachinesManager()
 	{
 		stationsReceived = new ArrayList<Station>();
-		setLocationStations();
+		serversIP  = new TreeMap<String,String>();
+		addServersIP();
+		//setLocationStations();
 		
 	}
+	 public void addServersIP(){
+		 serversIP.put("CANTI", "172.16.15.223");
+		 serversIP.put("acasa", "192.168.0.128"); 
+	 }
+	 
 	@Override
-	public void setLocationStations(){
+	public void addLocationStations(String Ip, boolean server, String location){
 		
-		stationsReceived.add(new Station("172.128.12.6", 5000,"1","CANTI"));
+		stationsReceived.add(new Station(Ip, 4501, "1", true,location ));
+		
+	/*	stationsReceived.add(new Station("172.128.12.6", 5000,"1","CANTI"));
 		stationsReceived.add(new Station("172.128.12.7", 2333,"2","CANTI"));
 		stationsReceived.add(new Station("172.128.12.8", 1555,"3","CANTI"));
 		stationsReceived.add(new Station("172.128.12.9", 7000,"4","CANTI"));
 		stationsReceived.add(new Station("172.128.12.10", 4000,"5","CANTI"));
 		stationsReceived.add(new Station("192.168.0.195", 2323,"6",true,"CANTI"));
-		stationsReceived.add(new Station("192.168.0.128", 4444,"7",true,"acasa"));
+		stationsReceived.add(new Station("192.168.0.128", 4444,"7",true,"acasa"));*/
 	}
 	@Override
-	public Station getServerForLocation(String location ){
+	public String getServerForLocation(String location ){
 		
 		
-		for(Iterator<Station> it  = stationsReceived.listIterator(); it.hasNext();){
-			Station st =  it.next();
-			if(st.isServer== true && st.location.compareTo(location)== 0){
-				
-				return st;
+		for(Map.Entry<String, String> serverIp : serversIP.entrySet()){
+			if(serverIp.getKey().equals(location) == true){
+				addLocationStations("192.168.0.195", true, location);
+				return serverIp.getValue();
 			}
-			
 		}
+		
 		return null; 
 	}
+	
 	@Override
 	public String getStationIp(Object Id){
 		
