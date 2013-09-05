@@ -20,13 +20,18 @@ public class SenderModule  extends TimerTask
 	 *  instance of ChangeDetectorModule in order to gain access to the arrays
 	 *  of FilesChanged 
 	 */
-	ChangeDetectorModule myDetector;
+	public ChangeDetectorModule myDetector;
 	
+	/**
+	 * timer to send the data of changed file in core's q
+	 */
+	Timer timerPush;
 	
 	/**
 	 * @param detectorReceived : the instance of ChangeDetectorModule received
 	 */
 	public SenderModule(ChangeDetectorModule detectorReceived){
+		
 		myDetector = detectorReceived;
 	}
 	
@@ -34,7 +39,7 @@ public class SenderModule  extends TimerTask
 	 *  setting the timer to send all the changes occured in the Core's queue 
 	 */
 	public void setTimer(){
-		Timer timerPush = new Timer("Send");
+		timerPush = new Timer("Send");
 		timerPush.schedule(this, 0, 20000);
 	}
 	

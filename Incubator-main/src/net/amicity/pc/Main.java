@@ -43,12 +43,14 @@ public class Main {
 
 		System.out.println(" USER IS: " + pci.getUserName());
 		cc.setUsername(pci.getUserName());
+		
+		// start the files monitorization
+		ChangeDetectorModule cdm = new ChangeDetectorModule();
+		cdm.startTimer();
 
 		// Create intelligence modules
 
-		FileAnalizerModule fam = new FileAnalizerModule(cc);
-		
-
+		FileAnalizerModule fam = new FileAnalizerModule(cc, cdm);
 		LocationModule lm = new LocationModule(cc);
 		SimplePeerMachinesManager peer =  new SimplePeerMachinesManager();
 		DummyMessage dm = new DummyMessage(cc, peer);
@@ -79,10 +81,6 @@ public class Main {
 		hm.put(ContextTypes.PERCEPTION_CONTEXT, iModules5);
 
 		// start sensors services
-		
-		// start the files monitorization
-		//ChangeDetectorModule cdm = new ChangeDetectorModule();
-		//cdm.startTimer();
 
 		WirelessModule wm = new WirelessModule();
 		wm.connect(cc);

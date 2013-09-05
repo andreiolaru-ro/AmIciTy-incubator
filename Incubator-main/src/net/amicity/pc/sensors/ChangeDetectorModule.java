@@ -38,6 +38,16 @@ public class ChangeDetectorModule extends TimerTask
 	 */
 	File workSpaceCheck;
 	
+	 /**
+	 * timer which pushes modified files in core q 
+	 */
+	public SenderModule pushQueue;
+	
+	/**
+	 * timer for change verfication;
+	 */
+	Timer timerChanges;
+	
 
 	/**
 	 * initialising this Module's lists
@@ -49,6 +59,8 @@ public class ChangeDetectorModule extends TimerTask
 		filesArray= new ArrayList<File>();
 		workSpaceCheck = new File("D:/ECLIPSE/Workspace");		
 		this.detectFiles(workSpaceCheck);
+		pushQueue = new SenderModule(this);
+		
 	    
 	
 	}
@@ -60,12 +72,9 @@ public class ChangeDetectorModule extends TimerTask
 	public void startTimer(){
 		
 		System.out.println("Verific daca intru aici");
-		
-		 Timer timerChanges = new Timer("Change");
-		 timerChanges.schedule(this, 0, 10000);
-		 
-		 SenderModule pushQueue = new SenderModule(this);
-		 pushQueue.setTimer();
+		timerChanges = new Timer("Change");
+		timerChanges.schedule(this, 0, 10000);
+	//	pushQueue.setTimer();
 	}
 	
 	/**

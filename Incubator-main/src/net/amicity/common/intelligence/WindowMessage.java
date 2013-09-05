@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import net.amicity.common.intelligence.*;
+import net.amicity.common.core.context.ContextCore;
 
 
 
@@ -45,11 +45,16 @@ public class WindowMessage extends JFrame implements ActionListener{
 	 */
 	JButton butonAlone;
 	
+	/**
+	 * to gain acces to shown parameter;
+	 */
 	FileAnalizerModule myAnalizer;
 	
 	
 	/**
 	 * initialising the window
+	 * @param analizerRecv : creating a connection between this class and 
+	 * 					FileAnalizerModule
 	 */
 	WindowMessage(FileAnalizerModule analizerRecv){
 		myAnalizer = analizerRecv;
@@ -67,7 +72,8 @@ public class WindowMessage extends JFrame implements ActionListener{
 	public void createWindow(){
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		Rectangle winSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		Rectangle winSize = 
+		GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		this.setTitle("Need Help?");
 		this.setSize(width, height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,14 +115,21 @@ public class WindowMessage extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+//	     myAnalizer.myTimer.cancel();
+//	     myAnalizer.myTimer.pushQueue.cancel();
+	     
+	     
 		String command = e.getActionCommand();
+		
+		
 		if(command.equals("Contact a friend") == true){
-			Socket  s = myAnalizer.myCore.getServerSocket();
+			Socket  s = ContextCore.getServerSocket();
 			ObjectOutputStream out;
 			try
 			{
 				out = new ObjectOutputStream(s.getOutputStream());
 				out.writeObject("Ce faci mah, da-mi lista!");
+				System.out.println("am trimis un mesaj aluia de langa mine");
 			}
 			catch (IOException e1)
 			{
@@ -131,6 +144,7 @@ public class WindowMessage extends JFrame implements ActionListener{
 			myAnalizer.shown = false;
 			dispose();
 		}
+		
 
 		
 	}
