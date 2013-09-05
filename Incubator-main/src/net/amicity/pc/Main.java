@@ -35,14 +35,14 @@ public class Main {
 		// Create ContextCore
 		final ContextCore cc = new ContextCore();
 
-		PCInterface pci = new PCInterface();
+/*		PCInterface pci = new PCInterface();
 		while (pci.getUserName().length() == 0) {
 			System.out.flush();
-		}
+		}*/
 
 
-		System.out.println(" USER IS: " + pci.getUserName());
-		cc.setUsername(pci.getUserName());
+//		System.out.println(" USER IS: " + pci.getUserName());
+//		cc.setUsername(pci.getUserName());
 		
 		// start the files monitorization
 		ChangeDetectorModule cdm = new ChangeDetectorModule();
@@ -82,8 +82,8 @@ public class Main {
 
 		// start sensors services
 
-		WirelessModule wm = new WirelessModule();
-		wm.connect(cc);
+//		WirelessModule wm = new WirelessModule();
+//		wm.connect(cc);
 
 		// Create the ContextManger
 		ContextManager cm = new ContextManager(cc, hm);

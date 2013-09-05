@@ -66,10 +66,9 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule
 				System.out.println("nu am mai modificat fisierul de cand l-am deschis");
 				
 				if(filesOpened.contains(file) == true && shown == false){
-					System.out.println("NU ESTE UN FISIER NOU DESCHIS");
-					System.out.println( myTimer.cancel());
-					System.out.println( myTimer.pushQueue.cancel());
+					myTimer.ceaseTimer();
 					WindowMessage win= new WindowMessage(this);
+					win.show();
 					shown = true;
 				}
 				else{

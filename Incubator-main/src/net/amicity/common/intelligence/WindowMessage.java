@@ -109,15 +109,14 @@ public class WindowMessage extends JFrame implements ActionListener{
 		
 		this.setSize(width -1, height -1);
 		this.setSize(width, height);
+		
 	
 	} 
 	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-//	     myAnalizer.myTimer.cancel();
-//	     myAnalizer.myTimer.pushQueue.cancel();
-	     
+		myAnalizer.myTimer.startTimer();
 	     
 		String command = e.getActionCommand();
 		

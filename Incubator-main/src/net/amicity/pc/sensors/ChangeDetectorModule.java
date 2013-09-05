@@ -3,7 +3,6 @@ package net.amicity.pc.sensors;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
@@ -15,7 +14,7 @@ import java.util.TimerTask;
  *
  */
 
-public class ChangeDetectorModule extends TimerTask
+public class ChangeDetectorModule
 {
 	
 	/**
@@ -41,12 +40,12 @@ public class ChangeDetectorModule extends TimerTask
 	 /**
 	 * timer which pushes modified files in core q 
 	 */
-	public SenderModule pushQueue;
+	SenderModule pushQueue;
 	
 	/**
 	 * timer for change verfication;
 	 */
-	Timer timerChanges;
+      Timer timerChanges;
 	
 
 	/**
@@ -64,6 +63,14 @@ public class ChangeDetectorModule extends TimerTask
 	    
 	
 	}
+	/**
+	 * pausing the timer to check for changes
+	 */
+	public void ceaseTimer(){
+		timerChanges.cancel();
+		pushQueue.timerPush.cancel();
+		
+	}
 	
 	/**
 	 * starting ChangeDetectorModule Timer and calling the method to start
@@ -73,8 +80,8 @@ public class ChangeDetectorModule extends TimerTask
 		
 		System.out.println("Verific daca intru aici");
 		timerChanges = new Timer("Change");
-		timerChanges.schedule(this, 0, 10000);
-	//	pushQueue.setTimer();
+		timerChanges.schedule(new OutsideTimer(this), 10000, 10000);
+		pushQueue.setTimer();
 	}
 	
 	/**
@@ -107,62 +114,6 @@ public class ChangeDetectorModule extends TimerTask
 		} 
 	}
 	
-	@Override
-	public void run(){
-		              
-		int contained, i, j;
-		
-		for( i = 0 ; i < filesArray.size() ; i++ ){
-			
-			contained = 0;
-			
-			// comparing the differences between FirstDetected whose 
-			// properties are not changed, with the changed properties of
-			// filesArray element
-			
-			FirstDetected fileOld= filesDetected.get(i);
-			File f = filesArray.get(i);	
-			
-
-			if(f.lastModified() != fileOld.lastTimeChanged){
-				fileOld.lastTimeChanged = f.lastModified();
-		
-				
-			     for( j = 0; j < filesChanged.size() ; j++){
-			     	
-			     	FileChangeData fileLiteral= filesChanged.get(j);
-			     	String fullPath = fileLiteral.fileChanged.getAbsolutePath() +  fileLiteral.fileChanged.getName();
-			     	String fPath = f.getAbsolutePath() + f.getName();
-			     	
-			     	
-			     	// the file has already been changed in past, and we
-			     	// just modify the fileLiteral properties
-			     	if(fullPath.compareTo(fPath) == 0 ){
-			     		
-			     		System.out.println("il contine" );
-			     		contained = 1;
-						fileLiteral.changesDetected = true;
-				//		System.out.println(f.length() + "   " +fileOld.lastsize);
-						fileLiteral.sizeDifference = f.length() - fileOld.lastsize;
-						
-				//		System.out.println(fileLiteral.fileChanged.getName() + " " + fileLiteral.changesDetected + " " + fileLiteral.sizeDifference);
-						
-			     		return;
-			     	}
-			     }
-			     
-			     // if it's the first time when the file has been changed, 
-			     // add a file 
-			     if(contained == 0){
-			     	
-			     	System.out.println("este noua " );
-			     	FileChangeData fileChanged = new FileChangeData(f, f.length());
-			     	filesChanged.add(fileChanged);
-			     	
-			     }
-		
-			}	
-		}
-	}
+	
 	
 }

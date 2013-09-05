@@ -1,10 +1,6 @@
 package net.amicity.pc.sensors;
 
 import java.util.Timer;
-import java.util.TimerTask;
-
-import net.amicity.common.context_types.FilesItem;
-import net.amicity.common.core.context.ContextCore;
 
 
 /**
@@ -14,7 +10,7 @@ import net.amicity.common.core.context.ContextCore;
  * @author vlad
  *
  */
-public class SenderModule  extends TimerTask
+public class SenderModule 
 {
 	/**
 	 *  instance of ChangeDetectorModule in order to gain access to the arrays
@@ -40,24 +36,10 @@ public class SenderModule  extends TimerTask
 	 */
 	public void setTimer(){
 		timerPush = new Timer("Send");
-		timerPush.schedule(this, 0, 20000);
+		timerPush.schedule(new SenderTimer(this), 20000, 20000);
 	}
 	
-	
-	@Override
-	public void run()
-	{
-		
-		if(myDetector.filesChanged.isEmpty() == false){
-			
-			System.out.println("nu mai este gol");
-			
-			FilesItem sendNewChanges = new FilesItem(myDetector.filesChanged);
-			ContextCore.postContextUpdate(sendNewChanges);
-			
-			  
-		}
-		
-	}
 
 }
+
+
