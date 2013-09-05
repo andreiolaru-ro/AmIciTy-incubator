@@ -6,6 +6,7 @@ import net.amicity.common.context_types.FilesItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.pc.sensors.ChangeDetectorModule;
 import net.amicity.pc.sensors.FileChangeData;
 
 
@@ -16,7 +17,7 @@ import net.amicity.pc.sensors.FileChangeData;
  * @author vlad
  *
  */
-public class FileAnalizerModule implements IntelligenceModule
+public class FileAnalizerModule extends Thread implements IntelligenceModule
 {
 	/**
 	 * instance of core to gain acces to its q
@@ -27,7 +28,10 @@ public class FileAnalizerModule implements IntelligenceModule
 	 */
 	ArrayList<File> filesOpened; 
 	
-	
+	/**
+	 * controlling the timers which show the window;
+	 */
+	ChangeDetectorModule myTimer;
 	/**
 	 * if it is already a window on screen
 	 */
@@ -35,8 +39,11 @@ public class FileAnalizerModule implements IntelligenceModule
 	
 	/**
 	 * @param received : the core of the application
+	 * @param receivedTimer : the timer which shows the window
 	 */
-	public FileAnalizerModule(ContextCore received){
+	public FileAnalizerModule(ContextCore received,ChangeDetectorModule receivedTimer  ){
+		
+		myTimer = receivedTimer;
 		myCore = received;
 		filesOpened = new ArrayList<File>();
 		shown = false;
@@ -60,8 +67,9 @@ public class FileAnalizerModule implements IntelligenceModule
 				
 				if(filesOpened.contains(file) == true && shown == false){
 					System.out.println("NU ESTE UN FISIER NOU DESCHIS");
+					System.out.println( myTimer.cancel());
+					System.out.println( myTimer.pushQueue.cancel());
 					WindowMessage win= new WindowMessage(this);
-					win.show();
 					shown = true;
 				}
 				else{
