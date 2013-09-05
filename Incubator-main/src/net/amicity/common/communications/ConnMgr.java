@@ -22,6 +22,7 @@ package net.amicity.common.communications;
  *     ''Azgabast'' - initial API and implementation
  ******************************************************************************/
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -77,9 +78,11 @@ public class ConnMgr implements ConnectionManager {
 	 */
 	@Override
 	public Connection getConnection(String id) {
-		for (Connection c : connList)
-			if (c.id == id)
+		for(Iterator<Connection> iterator = connList.iterator(); iterator.hasNext(); ) {
+			Connection c = iterator.next();
+			if(c.id == id)
 				return c;
+		}
 		return null;
 	}
 
