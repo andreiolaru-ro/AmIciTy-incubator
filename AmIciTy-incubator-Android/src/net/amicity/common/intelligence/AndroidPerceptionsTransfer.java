@@ -55,6 +55,7 @@ public class AndroidPerceptionsTransfer implements IntelligenceModule{
 		MyDevicesItem myDeviceItem = ((MyDevicesItem) myCore.getContextStorage().get(
 				ContextTypes.DEVICES_CONTEXT));
 		if(myDeviceItem != null) {
+			myDevices = myDeviceItem.getMyDevices();
 			for(Connection c : myDevices) {
 				System.out.println("incearcaa cu: " + c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3));
 				if(c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3).equalsIgnoreCase("pc")) {

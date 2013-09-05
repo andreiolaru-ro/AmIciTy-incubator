@@ -35,6 +35,7 @@ public class ShowPerceptionModule implements IntelligenceModule {
 		pi = ((PerceptionItem) myCore.getContextStorage().get(
 				ContextTypes.PERCEPTION_CONTEXT));
 		// Afisarea perceptiilor....
+		System.out.println("Perceptions: " + pi.getUser() + ", sound: " + pi.getValue() + ", man: " + pi.getAction());
 		PCInterface.addNotification("Last sound level was: " + pi.getValue()
 				+ "\n");
 		PCInterface.addNotification("Last time the user was " + pi.getAction()

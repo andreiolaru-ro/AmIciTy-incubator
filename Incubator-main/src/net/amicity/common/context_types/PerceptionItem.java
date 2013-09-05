@@ -1,5 +1,7 @@
 package net.amicity.common.context_types;
 
+import net.amicity.common.core.ContextTypes;
+
 /**
  * A class for sending perceptions
  * 
@@ -40,6 +42,7 @@ public class PerceptionItem extends AbstractItem {
 		this.user = user;
 		this.value = value;
 		this.action = action;
+		this.type = ContextTypes.PERCEPTION_CONTEXT;
 	}
 
 	/**
@@ -54,6 +57,13 @@ public class PerceptionItem extends AbstractItem {
 	 */
 	public double getValue() {
 		return this.value;
+	}
+	
+	/**
+	 * @return the curent user
+	 */
+	public String getUser() {
+		return this.user;
 	}
 
 }

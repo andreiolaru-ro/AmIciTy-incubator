@@ -13,6 +13,7 @@ package net.amicity.pc.communications;
 
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.context_types.AbstractItem;
+import net.amicity.common.context_types.PerceptionItem;
 import net.amicity.common.core.context.ContextCore;
 
 /**
@@ -25,6 +26,9 @@ public class DefaultMessageReceiver implements MessageReceiver {
 	public void receive(Object obj) {
 		AbstractItem item = (AbstractItem) obj;
 		System.out.println("Server put context updates");
+		if( item instanceof PerceptionItem) {
+			System.out.println("Received a perception");
+		}
 		ContextCore.postContextUpdate(item);
 	}
 

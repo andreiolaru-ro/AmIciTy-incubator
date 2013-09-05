@@ -54,7 +54,7 @@ public class ContextManager extends Thread {
 		while (true) {
 			if (ContextCore.getContextUpdates().isEmpty() == false) {
 				AbstractItem item = ContextCore.getContextUpdate();
-
+				
 				if (hm.containsKey(item.getType())) {
 					Notification newNot = new Notification(hm.get(item
 							.getType()));
