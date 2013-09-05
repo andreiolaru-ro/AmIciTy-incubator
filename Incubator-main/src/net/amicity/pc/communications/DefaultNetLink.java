@@ -156,7 +156,7 @@ public class DefaultNetLink implements NetLink {
 							ObjectInputStream in = new ObjectInputStream(client
 									.getInputStream());
 							Object obj = in.readObject();
-							Connection newCon = (Connection) obj;
+							final Connection newCon = (Connection) obj;
 							newCon.setSocket(client);
 							manager.addConnection(newCon);
 
@@ -190,20 +190,22 @@ public class DefaultNetLink implements NetLink {
 								@Override
 								public void run() {
 									while (true) {
-										ObjectInputStream in2;
-										try {
-											in2 = new ObjectInputStream(client
-													.getInputStream());
-											Object obj2 = in2.readObject();
-											if (obj2 instanceof String)
-												System.out.println(obj2
-														.toString());
-										}
-										catch (IOException e) {
-											e.printStackTrace();
-										}
-										catch (ClassNotFoundException e) {
-											e.printStackTrace();
+										if(manager.getConnection(newCon.getId()).isOn()) {
+											ObjectInputStream in2;
+											try {
+												in2 = new ObjectInputStream(client
+														.getInputStream());
+												Object obj2 = in2.readObject();
+												if (obj2 instanceof String)
+													System.out.println(obj2
+															.toString());
+											}
+											catch (IOException e) {
+												// do nothing
+											}
+											catch (ClassNotFoundException e) {
+												// do nothing
+											}
 										}
 									}
 								}
