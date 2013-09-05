@@ -5,6 +5,9 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -108,6 +111,19 @@ public class WindowMessage extends JFrame implements ActionListener{
 	{
 		String command = e.getActionCommand();
 		if(command.equals("Contact a friend") == true){
+			Socket  s = myAnalizer.myCore.getServerSocket();
+			ObjectOutputStream out;
+			try
+			{
+				out = new ObjectOutputStream(s.getOutputStream());
+				out.writeObject("Ce faci mah, da-mi lista!");
+			}
+			catch (IOException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			myAnalizer.shown = false;
 			dispose();
 		}
