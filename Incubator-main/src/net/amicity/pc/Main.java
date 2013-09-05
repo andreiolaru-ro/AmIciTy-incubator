@@ -1,14 +1,7 @@
 package net.amicity.pc;
 
-import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import net.amicity.common.communications.SimplePeerMachinesManager;
 import net.amicity.common.core.ContextManager;
@@ -20,8 +13,8 @@ import net.amicity.common.intelligence.DummyDevicesModule;
 import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.common.intelligence.LocationModule;
+import net.amicity.common.intelligence.ShowPerceptionModule;
 import net.amicity.pc.sensors.ChangeDetectorModule;
-import net.amicity.pc.sensors.ServerModule;
 import net.amicity.pc.sensors.WirelessModule;
 
 /**
@@ -60,6 +53,7 @@ public class Main {
 		SimplePeerMachinesManager peer =  new SimplePeerMachinesManager();
 		DummyMessage dm = new DummyMessage(cc, peer);
 		DummyDevicesModule ddm = new DummyDevicesModule(cc);
+		ShowPerceptionModule spm = new ShowPerceptionModule(cc);
 
 
 
@@ -80,7 +74,9 @@ public class Main {
 		ArrayList<IntelligenceModule> iModules4 = new ArrayList<IntelligenceModule>();
 		iModules4.add(fam);
 		hm.put(ContextTypes.FILE_CONTEXT, iModules4);
-		
+		ArrayList<IntelligenceModule> iModules5 = new ArrayList<IntelligenceModule>();
+		iModules5.add(spm);
+		hm.put(ContextTypes.PERCEPTION_CONTEXT, iModules5);
 
 		// start sensors services
 		
