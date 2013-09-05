@@ -115,11 +115,11 @@ public class DefaultNetLink implements NetLink {
 		try {
 			client = new Socket(server.getIp(), server.getPort());
 			ContextCore.setServerSocket(client);
-			
+
 			// Start the server
 			ServerModule sm = new ServerModule(client);
 			sm.connect(ContextCore.class.newInstance());
-			
+
 			out = new ObjectOutputStream(client.getOutputStream());
 			out.writeObject(me);
 			out.flush();
@@ -152,42 +152,62 @@ public class DefaultNetLink implements NetLink {
 				public void run() {
 					while (true) {
 						try {
-							Socket client = serverSocket.accept();
-							ObjectInputStream in = new ObjectInputStream(
-									client.getInputStream());
+							final Socket client = serverSocket.accept();
+							ObjectInputStream in = new ObjectInputStream(client
+									.getInputStream());
 							Object obj = in.readObject();
-							if(obj instanceof String){
-								System.out.println(obj);
-							}
-							else{
 							Connection newCon = (Connection) obj;
 							newCon.setSocket(client);
 							manager.addConnection(newCon);
-							
-							ArrayList<Connection> other = manager.getOtherConnections(newCon);
+
+							ArrayList<Connection> other = manager
+									.getOtherConnections(newCon);
 							System.out.println(other);
-							if(!other.isEmpty()) {
+							if (!other.isEmpty()) {
 								System.out.println("am intrat in if");
-								ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
+								ObjectOutputStream out = new ObjectOutputStream(
+										client.getOutputStream());
 								MyDevicesItem mdi = new MyDevicesItem();
 								mdi.setMyDevices(other);
 								out.writeObject(mdi);
 								System.out.println("Am trimis");
 								out.flush();
-								for(Connection c : other) {
+								for (Connection c : other) {
 									ArrayList<Connection> newOther = new ArrayList<Connection>();
 									newOther.addAll(other);
 									newOther.add(newCon);
 									newOther.remove(c);
 									MyDevicesItem mdi2 = new MyDevicesItem();
 									mdi2.setMyDevices(newOther);
-									ObjectOutputStream out2 = new ObjectOutputStream(c.getSocket().getOutputStream());
+									ObjectOutputStream out2 = new ObjectOutputStream(
+											c.getSocket().getOutputStream());
 									out2.writeObject(mdi2);
 									out2.flush();
 								}
 							}
-							}
-							
+							new Thread(new Runnable() {
+
+								@Override
+								public void run() {
+									while (true) {
+										ObjectInputStream in2;
+										try {
+											in2 = new ObjectInputStream(client
+													.getInputStream());
+											Object obj2 = in2.readObject();
+											if (obj2 instanceof String)
+												System.out.println(obj2
+														.toString());
+										}
+										catch (IOException e) {
+											e.printStackTrace();
+										}
+										catch (ClassNotFoundException e) {
+											e.printStackTrace();
+										}
+									}
+								}
+							}).start();
 						}
 						catch (IOException e) {
 							e.printStackTrace();
@@ -213,41 +233,42 @@ public class DefaultNetLink implements NetLink {
 	public ConnectionManager getConnectionManager() {
 		return this.manager;
 	}
-	
+
 	@Override
-	public void receiveFromServer(final Socket server, final MessageReceiver msgR) {
+	public void receiveFromServer(final Socket server,
+			final MessageReceiver msgR) {
 
-			new Thread(new Runnable() {
+		new Thread(new Runnable() {
 
-				@Override
-				public void run() {
-					while (true) {
-						try {
-							System.out.println("Start receiving");
-							ObjectInputStream in = new ObjectInputStream(
-									server.getInputStream());
-							Object obj = in.readObject();
-							if(obj instanceof String) {
-								//do nothing
-							}
-							else {
-								System.out.println("Received an item");
-								msgR.receive(obj);
-							}
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						System.out.println("Start receiving");
+						ObjectInputStream in = new ObjectInputStream(
+								server.getInputStream());
+						Object obj = in.readObject();
+						if (obj instanceof String) {
+							// do nothing
 						}
-						catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						else {
+							System.out.println("Received an item");
+							msgR.receive(obj);
 						}
 					}
-
+					catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 
-			}).start();
+			}
+
+		}).start();
 	}
 
 }

@@ -29,6 +29,7 @@ public class Main_server {
 
 			@Override
 			public void run() {
+
 				for (Connection i : manager.getConnections()) {
 					if (i.isOn()) {
 						try {
