@@ -155,6 +155,10 @@ public class DefaultNetLink implements NetLink {
 							ObjectInputStream in = new ObjectInputStream(
 									client.getInputStream());
 							Object obj = in.readObject();
+							if(obj instanceof String){
+								System.out.println(obj);
+							}
+							else{
 							Connection newCon = (Connection) obj;
 							newCon.setSocket(client);
 							manager.addConnection(newCon);
@@ -180,6 +184,7 @@ public class DefaultNetLink implements NetLink {
 									out2.writeObject(mdi2);
 									out2.flush();
 								}
+							}
 							}
 							
 						}
