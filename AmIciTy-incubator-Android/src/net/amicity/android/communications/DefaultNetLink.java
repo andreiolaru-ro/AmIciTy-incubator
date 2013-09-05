@@ -74,6 +74,7 @@ public class DefaultNetLink implements NetLink {
 					Socket client;
 					ObjectOutputStream out;
 					client = new Socket(c.getIp(), 4501);
+					System.out.println("Created connectino with other client");
 					out = new ObjectOutputStream(client.getOutputStream());
 					out.writeObject(o);
 					out.flush();

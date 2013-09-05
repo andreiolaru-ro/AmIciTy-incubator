@@ -50,7 +50,7 @@ public class AndroidFileTransfer implements IntelligenceModule {
 			action = myAccelerometerItem.man;
 			for(Connection c : myDevices) {
 				System.out.println("incearca cu: " + c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3));
-				if(c.getId().substring(c.getId().indexOf('-'), c.getId().indexOf('-') + 2).equalsIgnoreCase("pc")) {
+				if(c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3).equalsIgnoreCase("pc")) {
 					if(action.equals("stays")) {
 						//transfer files to c
 						System.out.println("poti incepe transferul");

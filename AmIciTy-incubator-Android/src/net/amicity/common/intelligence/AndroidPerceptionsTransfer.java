@@ -56,9 +56,10 @@ public class AndroidPerceptionsTransfer implements IntelligenceModule{
 				ContextTypes.DEVICES_CONTEXT));
 		if(myDeviceItem != null) {
 			for(Connection c : myDevices) {
-				System.out.println("incearca cu: " + c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3));
-				if(c.getId().substring(c.getId().indexOf('-'), c.getId().indexOf('-') + 2).equalsIgnoreCase("pc")) {
+				System.out.println("incearcaa cu: " + c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3));
+				if(c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3).equalsIgnoreCase("pc")) {
 					//send perceptions
+					System.out.println("Send Perceptions");
 					DefaultNetLink d = new DefaultNetLink();
 					PerceptionItem pi = new PerceptionItem(myCore.getUsername(),value,action);
 					d.send(c, pi);

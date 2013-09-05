@@ -24,7 +24,7 @@ public class DefaultMessageReceiver implements MessageReceiver {
 	@Override
 	public void receive(Object obj) {
 		AbstractItem item = (AbstractItem) obj;
-		System.out.println("Server put context updates");
+		System.out.println("Server put context updatesssss");
 		ContextCore.postContextUpdate(item);
 	}
 

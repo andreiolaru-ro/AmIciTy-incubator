@@ -116,7 +116,9 @@ public class PCInterface extends JFrame {
 	 *            the notification to be added
 	 */
 	public static void addNotification(String notif) {
-		jtf.append(notif + "\n");
+		System.out.println(notif);
+		jtf.setText(jtf.getText() + "\n" + notif);
+		//jtf.append(notif + "\n");
 	}
 
 	/**

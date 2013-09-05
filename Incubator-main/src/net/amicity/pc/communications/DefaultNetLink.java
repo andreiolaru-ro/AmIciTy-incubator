@@ -70,7 +70,7 @@ public class DefaultNetLink implements NetLink {
 		try {
 			serverSocket = new ServerSocket(port);
 
-			System.out.println("Server started on port: " + port);
+			System.out.println("Server with clients started on port: " + port);
 
 			new Thread(new Runnable() {
 
@@ -79,6 +79,7 @@ public class DefaultNetLink implements NetLink {
 					while (true) {
 						try {
 							Socket client = serverSocket.accept();
+							System.out.println("accepted from client");
 							ObjectInputStream in = new ObjectInputStream(
 									client.getInputStream());
 							Object obj = in.readObject();
@@ -224,8 +225,10 @@ public class DefaultNetLink implements NetLink {
 							if(obj instanceof String) {
 								//do nothing
 							}
-							else
+							else {
+								System.out.println("Received an item");
 								msgR.receive(obj);
+							}
 						}
 						catch (IOException e) {
 							// TODO Auto-generated catch block
