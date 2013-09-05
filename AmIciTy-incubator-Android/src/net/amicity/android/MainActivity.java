@@ -69,9 +69,10 @@ public class MainActivity extends Activity implements Serializable {
 
 		ContextCore cc = new ContextCore();
 		// Create intelligence modules
-		cc.setUsername(i.getExtras().getString("username"));
+		String uname = i.getExtras().getString("username");
+		cc.setUsername(uname);
 
-		changes.setText("User is:" + i.getExtras().getString("username"));
+		// changes.setText("User is:" + i.getExtras().getString("username"));
 		LocationModule lm = new LocationModule(cc);
 		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
