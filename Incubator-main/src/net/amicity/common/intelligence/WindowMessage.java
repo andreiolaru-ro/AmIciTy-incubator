@@ -152,7 +152,6 @@ public class WindowMessage extends JFrame implements ActionListener{
 			dispose();
 		}
 		if(command.equals("No thanks") == true){
-			myAnalizer.myTimer.longer();
 			myAnalizer.myTimer.startTimer();
 			myAnalizer.shown = false;
 			dispose();
