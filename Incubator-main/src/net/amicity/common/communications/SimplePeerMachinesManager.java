@@ -99,7 +99,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	@Override
 	public void invoke()
 	{
-
+		System.out.println("trebuie sa merg prin dispozitivele celorlalti");
 		// TODO Auto-generated method stub
 		
 	}

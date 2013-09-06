@@ -260,22 +260,16 @@ public class DefaultNetLink implements NetLink {
 
 						if (obj instanceof String) {
 						}
-						if( obj instanceof MyDevicesItem){
-							MyDevicesItem itemsRecv = (MyDevicesItem) obj;
-							OtherDevicesItem itemContact = new OtherDevicesItem();
-							itemContact.setHisDevices(itemsRecv.getMyDevices());
-							ContextCore.postContextUpdate(itemContact);
-							
+						else {
+							System.out.println("Received an item");
+							msgR.receive(obj);
 						}
 						
 						/*if( obj instanceof MessageItem){
 							System.out.println("cineva vrea sa te ajute");
 						}*/
 
-						else {
-							System.out.println("Received an item");
-							msgR.receive(obj);
-						}
+						
 
 					}
 					catch (IOException e) {
