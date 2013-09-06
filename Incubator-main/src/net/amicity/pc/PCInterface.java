@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,44 +26,49 @@ import javax.swing.JTextField;
 public class PCInterface extends JFrame {
 
 	/**
-	 * 
+	 * The default serial uid.
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * The window height.
 	 */
 	int h;
 	/**
-	 * 
+	 * The window width.
 	 */
 	int w;
 	/**
-	 * 
+	 * The text which displays notifications.
 	 */
 	static JTextArea jtf;
 	/**
-	 * 
+	 * The textbox where the username is written.
 	 */
 	JTextField usrname;
 	/**
-	 * 
+	 * The JPanel that contains the notification textArea.
 	 */
 	JPanel jp;
 	/**
-	 * 
+	 * The JPanel that contains the user textbox and the login button.
 	 */
 	JPanel jpuser;
 	/**
-	 * 
+	 * A JScrollPane for scrolling through the notifications.
 	 */
 	JScrollPane jsp;
 	/**
-	 * 
+	 * The login button.
 	 */
 	JButton b;
 	/**
-	 * 
+	 * The username, as extracted from the textbox.
 	 */
 	String user;
 
 	/**
-	 * 
+	 * The Interface constructor, which makes the frame and sets its parameters.
+	 * It also adds all the components and sets the listener for the button.
 	 */
 	public PCInterface() {
 		user = "";
@@ -86,7 +93,8 @@ public class PCInterface extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (usrname.getText().length() != 0) {
+				if (usrname.getText().length() != 0
+						&& usrname.getText().contains("-")) {
 					user = usrname.getText();
 					usrname.setText("Logged in as: " + user);
 					b.setEnabled(false);
@@ -94,6 +102,37 @@ public class PCInterface extends JFrame {
 				}
 			}
 
+		});
+		usrname.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (e.getSource() == usrname) {
+					if (key == KeyEvent.VK_ENTER) {
+						if (usrname.getText().length() != 0
+								&& usrname.getText().contains("-")) {
+							user = usrname.getText();
+							usrname.setText("Logged in as: " + user);
+							b.setEnabled(false);
+							usrname.setEditable(false);
+						}
+					}
+				}
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
 		});
 		jpuser.add(usrname);
 		jpuser.add(b);
@@ -118,7 +157,7 @@ public class PCInterface extends JFrame {
 	public static void addNotification(String notif) {
 		System.out.println(notif);
 		jtf.setText(jtf.getText() + "\n" + notif);
-		//jtf.append(notif + "\n");
+		// jtf.append(notif + "\n");
 	}
 
 	/**
