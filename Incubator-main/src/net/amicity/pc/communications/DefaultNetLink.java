@@ -255,6 +255,12 @@ public class DefaultNetLink implements NetLink {
 								server.getInputStream());
 						Object obj = in.readObject();
 						if (obj instanceof String) {}
+						if (obj instanceof MessageItem) {}
+						if (obj instanceof String) {}
+						else {
+							System.out.println("Received an item");
+							msgR.receive(obj);
+						}
 						if (obj instanceof MessageItem) {
 							System.out.println("cineva vrea sa te ajute");
 						}

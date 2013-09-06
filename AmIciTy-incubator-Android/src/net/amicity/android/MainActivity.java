@@ -27,6 +27,7 @@ import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.AndroidFileTransfer;
 import net.amicity.common.intelligence.AndroidPerceptionsTransfer;
 import net.amicity.common.intelligence.DummyAccelerometerTest;
+import net.amicity.common.intelligence.DummyDevicesModule;
 import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.LocationModule;
 import net.amicity.common.intelligence.SoundIntel;
@@ -90,6 +91,7 @@ public class MainActivity extends Activity implements Serializable {
 		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
 		DummyMessage dm = new DummyMessage(cc, this);
+		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
 		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc);
 
@@ -117,6 +119,7 @@ public class MainActivity extends Activity implements Serializable {
 
 		ArrayList<IntelligenceModule> iModules5 = new ArrayList<IntelligenceModule>();
 		iModules5.add(aft);
+		iModules5.add(ddm);
 		hm.put(ContextTypes.DEVICES_CONTEXT, iModules5);
 
 		// start sensors services
