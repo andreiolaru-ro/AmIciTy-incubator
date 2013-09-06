@@ -3,4 +3,7 @@
     <issue id="OldTargetApi">
         <ignore path="AndroidManifest.xml" />
     </issue>
+    <issue id="SdCardPath">
+        <ignore path="src/net/amicity/common/intelligence/AndroidFileTransfer.java" />
+    </issue>
 </lint>

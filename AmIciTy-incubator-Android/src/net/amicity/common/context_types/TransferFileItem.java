@@ -55,6 +55,7 @@ public class TransferFileItem extends AbstractItem {
 					catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
+					files.add(fc);
 				}
 			}
 			else{
