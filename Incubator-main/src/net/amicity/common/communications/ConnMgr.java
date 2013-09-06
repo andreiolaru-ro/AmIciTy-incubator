@@ -77,10 +77,11 @@ public class ConnMgr implements ConnectionManager {
 	 * @return The desired connection, or null if it isn't found.
 	 */
 	@Override
-	public Connection getConnection(String id) {
-		for(Iterator<Connection> iterator = connList.iterator(); iterator.hasNext(); ) {
+	public synchronized Connection getConnection(String id) {
+		for (Iterator<Connection> iterator = connList.iterator(); iterator
+				.hasNext();) {
 			Connection c = iterator.next();
-			if(c.id == id)
+			if (c.id == id)
 				return c;
 		}
 		return null;
@@ -113,14 +114,17 @@ public class ConnMgr implements ConnectionManager {
 	public ArrayList<Connection> getConnections() {
 		return this.connList;
 	}
-	
+
 	@Override
 	public ArrayList<Connection> getOtherConnections(Connection me) {
 		ArrayList<Connection> other = new ArrayList<Connection>();
-		for(Connection c : connList) {
-			if(c.isOn()) {
+		for (Connection c : connList) {
+			if (c.isOn()) {
 				System.out.println("Verify: " + c.getId());
-				if(c.getId().substring(0, c.getId().indexOf('-')).equals(me.getId().substring(0, me.getId().indexOf('-')))) {
+				if (c.getId()
+						.substring(0, c.getId().indexOf('-'))
+						.equals(me.getId()
+								.substring(0, me.getId().indexOf('-')))) {
 					other.add(c);
 					System.out.println("Added");
 				}
