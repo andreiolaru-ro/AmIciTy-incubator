@@ -18,6 +18,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import net.amicity.common.communications.Connection;
+import net.amicity.common.intelligence.FileContext;
 
 /**
  * @author cristian

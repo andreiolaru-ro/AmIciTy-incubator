@@ -13,6 +13,7 @@ import net.amicity.common.intelligence.DummyDevicesModule;
 import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.common.intelligence.LocationModule;
+import net.amicity.common.intelligence.SaveTransferedFiles;
 import net.amicity.common.intelligence.ShowPerceptionModule;
 import net.amicity.pc.sensors.ChangeDetectorModule;
 import net.amicity.pc.sensors.WirelessModule;
@@ -56,6 +57,7 @@ public class Main {
 		DummyMessage dm = new DummyMessage(cc, peer);
 		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 		ShowPerceptionModule spm = new ShowPerceptionModule(cc);
+		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
 
 
 
@@ -79,6 +81,9 @@ public class Main {
 		ArrayList<IntelligenceModule> iModules5 = new ArrayList<IntelligenceModule>();
 		iModules5.add(spm);
 		hm.put(ContextTypes.PERCEPTION_CONTEXT, iModules5);
+		ArrayList<IntelligenceModule> iModules6 = new ArrayList<IntelligenceModule>();
+		iModules6.add(stf);
+		hm.put(ContextTypes.TRANSFER_FILE_CONTEXT, iModules6);
 
 		// start sensors services
 

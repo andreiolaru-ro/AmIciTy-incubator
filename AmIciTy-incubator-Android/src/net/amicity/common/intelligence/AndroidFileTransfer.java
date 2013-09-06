@@ -1,10 +1,13 @@
 package net.amicity.common.intelligence;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import net.amicity.android.communications.DefaultNetLink;
 import net.amicity.common.communications.Connection;
 import net.amicity.common.context_types.AccelerometerItem;
 import net.amicity.common.context_types.MyDevicesItem;
+import net.amicity.common.context_types.TransferFileItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
@@ -53,7 +56,11 @@ public class AndroidFileTransfer implements IntelligenceModule {
 				if(c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3).equalsIgnoreCase("pc")) {
 					if(action.equals("stays")) {
 						//transfer files to c
+						TransferFileItem tfi = new TransferFileItem();
+						tfi.addFiles(new File("/workspace"));
 						System.out.println("poti incepe transferul");
+						DefaultNetLink d = new DefaultNetLink();
+						d.send(c, tfi);
 					}
 				}
 			}

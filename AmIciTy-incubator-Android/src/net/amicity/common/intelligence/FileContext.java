@@ -1,4 +1,4 @@
-package net.amicity.pc.communications;
+package net.amicity.common.intelligence;
 
 import java.io.Serializable;
 
