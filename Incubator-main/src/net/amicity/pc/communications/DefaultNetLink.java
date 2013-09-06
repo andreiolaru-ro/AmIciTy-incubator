@@ -209,7 +209,7 @@ public class DefaultNetLink implements NetLink {
 														.getInputStream());
 												Object obj2 = in2.readObject();
 												if (obj2 instanceof String){
-													new HelpMessage(obj2.toString(), null);
+													new HelpMessage(obj2.toString(), "Vlad");
 												}
 											}
 											catch (IOException e) {
@@ -299,11 +299,11 @@ class HelpMessage extends JFrame implements ActionListener{
 	/**
 	 * the frame's width
 	 */
-	final int width;
+	int width;
 	/**
 	 * the frame's height
 	 */
-	final int height;
+	int height;
 	/**
 	 * if the user asks for help
 	 */
@@ -364,8 +364,9 @@ class HelpMessage extends JFrame implements ActionListener{
 	 */
 	public void addWrite(){
 		
-		JLabel eticheta = new JLabel("Somebody needs help for: " + myFilename);
+		JLabel eticheta = new JLabel( myUser +   " needs help for: " + myFilename);
 		Dimension dim = eticheta.getPreferredSize();
+		width = dim.width + 20;
 		eticheta.setBounds((290 - dim.width)/2  ,30 , dim.width, dim.height);
 		add(eticheta);
 		
@@ -383,6 +384,8 @@ class HelpMessage extends JFrame implements ActionListener{
 		butonNo.addActionListener(this);
 		
 		
+		
+		
 		this.setSize(width -1, height -1);
 		this.setSize(width, height);
 		
@@ -398,19 +401,18 @@ class HelpMessage extends JFrame implements ActionListener{
 		
 		
 		if(command.equals("Yes, with pleasure") == true){
-		/*	Socket  s = ContextCore.getServerSocket();
+			Socket  s = ContextCore.getServerSocket();
 			ObjectOutputStream out;
 			try
 			{
 				out = new ObjectOutputStream(s.getOutputStream());
-				out.writeObject("need help for: " + myUnmodifiedFile.getName());
-				System.out.println("am trimis un mesaj aluia de langa mine");
+				out.writeObject(ContextCore.getUsername() + " would gladly help you");
 			}
 			catch (IOException e1)
 			{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}*/
+			}
 			
 			dispose();
 		}
