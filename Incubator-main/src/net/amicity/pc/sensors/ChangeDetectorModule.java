@@ -57,11 +57,9 @@ public class ChangeDetectorModule
 		filesDetected = new ArrayList<FirstDetected>();
 		filesArray= new ArrayList<File>();
 		workSpaceCheck = new File("./../");		
+		//workSpaceCheck = new File("D:/ECLIPSE");	
 		this.detectFiles(workSpaceCheck);
 		pushQueue = new SenderModule(this);
-		
-	    
-	
 	}
 	
 	

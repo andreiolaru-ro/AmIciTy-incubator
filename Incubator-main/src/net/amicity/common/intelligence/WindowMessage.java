@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import net.amicity.common.communications.MessageItem;
 import net.amicity.common.core.context.ContextCore;
 
 /**
@@ -141,7 +142,7 @@ public class WindowMessage extends JFrame implements ActionListener {
 			ObjectOutputStream out;
 			try {
 				out = new ObjectOutputStream(s.getOutputStream());
-				out.writeObject(myUnmodifiedFile.getName());
+	out.writeObject(new MessageItem(ContextCore.getUsername(), myUnmodifiedFile.getName()) );
 				System.out.println("am trimis un mesaj aluia de langa mine");
 			}
 			catch (IOException e1) {
