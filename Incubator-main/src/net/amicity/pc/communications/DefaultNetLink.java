@@ -36,6 +36,7 @@ import net.amicity.common.communications.MessageItem;
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MyDevicesItem;
+import net.amicity.common.context_types.OtherDevicesItem;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.pc.sensors.ServerModule;
@@ -210,7 +211,8 @@ public class DefaultNetLink implements NetLink {
 														.getInputStream());
 												Object obj2 = in2.readObject();
 												if (obj2 instanceof MessageItem){
-													new HelpMessage(obj2, client);
+													sendUsersItem(client);
+												//	new HelpMessage(obj2, client);
 												}
 											}
 											catch (IOException e) {
@@ -265,13 +267,21 @@ public class DefaultNetLink implements NetLink {
 						Object obj = in.readObject();
 						if (obj instanceof String) {
 						}
-						if( obj instanceof MessageItem){
-							System.out.println("cineva vrea sa te ajute");
+						if( obj instanceof MyDevicesItem){
+							MyDevicesItem itemsRecv = (MyDevicesItem) obj;
+							OtherDevicesItem itemContact = new OtherDevicesItem();
+							itemContact.setHisDevices(itemsRecv.getMyDevices());
+							ContextCore.postContextUpdate(itemContact);
+							
 						}
-					/*	else {
+						
+						/*if( obj instanceof MessageItem){
+							System.out.println("cineva vrea sa te ajute");
+						}*/
+						else {
 							System.out.println("Received an item");
 							msgR.receive(obj);
-						}*/
+						}
 					}
 					catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -286,6 +296,27 @@ public class DefaultNetLink implements NetLink {
 			}
 
 		}).start();
+	}
+	
+	
+	/**
+	 * @param client : the client to whom the list of devices will be send
+	 */
+	public void sendUsersItem(Socket client){
+		MyDevicesItem items = new MyDevicesItem();
+		items.setMyDevices( manager.getAllHisConnections("tataie"));
+		ObjectOutputStream out;
+		try
+		{
+			out = new ObjectOutputStream(client.getOutputStream());
+			out.writeObject(items);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

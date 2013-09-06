@@ -88,6 +88,9 @@ public class Main {
 		ArrayList<IntelligenceModule> iModules6 = new ArrayList<IntelligenceModule>();
 		iModules6.add(stf);
 		hm.put(ContextTypes.TRANSFER_FILE_CONTEXT, iModules6);
+		ArrayList<IntelligenceModule> iModules7 = new ArrayList<IntelligenceModule>();
+		iModules7.add(peer);
+		hm.put(ContextTypes.OTHER_DEVICES_CONTEXT, iModules7);
 
 		// start sensors services
 

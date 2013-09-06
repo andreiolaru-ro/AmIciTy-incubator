@@ -22,7 +22,7 @@ import net.amicity.common.core.ContextTypes;
  * @author cristian
  * 
  */
-public class MyDevicesItem extends AbstractItem {
+public class MyDevicesItem extends AbstractItem{
 
 	/**
 	 * 

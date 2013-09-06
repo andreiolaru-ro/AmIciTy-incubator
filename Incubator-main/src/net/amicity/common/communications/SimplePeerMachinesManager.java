@@ -16,13 +16,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.amicity.common.core.IntelligenceModule;
+
 /**
  * operates the data from the stations in order to initiate communication
  * 
  * @author vlad
  * 
  */
-public class SimplePeerMachinesManager implements PeerMachinesManager {
+public class SimplePeerMachinesManager implements PeerMachinesManager, IntelligenceModule{
 
 	/**
 	 * list cotinaing "Station" instances with its data
@@ -92,5 +94,13 @@ public class SimplePeerMachinesManager implements PeerMachinesManager {
 		}
 		return null;
 
+	}
+
+	@Override
+	public void invoke()
+	{
+
+		// TODO Auto-generated method stub
+		
 	}
 }

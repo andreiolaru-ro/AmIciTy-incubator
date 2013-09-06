@@ -50,6 +50,11 @@ public enum ContextTypes {
 	DEVICES_CONTEXT,
 	
 	/**
+	 * ContextType for an item containing all devices from another user
+	 */
+	OTHER_DEVICES_CONTEXT,
+	
+	/**
 	 * contextType for an item containing all perception received
 	 */
 	PERCEPTION_CONTEXT;
