@@ -9,7 +9,7 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.common.intelligence;
+package net.amicity.pc.interfaces;
 
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 
 import net.amicity.common.communications.MessageItem;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.common.intelligence.FileAnalizerModule;
 
 /**
  * shows a frma to ask a pesone wheter he wants to contact someone
@@ -78,7 +79,7 @@ public class WindowMessage extends JFrame implements ActionListener {
 	 * @param unmodifiedFile
 	 *            : the properties of the file unmodified
 	 */
-	WindowMessage(FileAnalizerModule analizerRecv, File unmodifiedFile) {
+	public WindowMessage(FileAnalizerModule analizerRecv, File unmodifiedFile) {
 		myUnmodifiedFile = unmodifiedFile;
 		myAnalizer = analizerRecv;
 		width = 300;
@@ -142,7 +143,8 @@ public class WindowMessage extends JFrame implements ActionListener {
 			ObjectOutputStream out;
 			try {
 				out = new ObjectOutputStream(s.getOutputStream());
-	out.writeObject(new MessageItem(ContextCore.getUsername(), myUnmodifiedFile.getName()) );
+				out.writeObject(new MessageItem(ContextCore.getUsername(),
+						myUnmodifiedFile.getName()));
 				System.out.println("am trimis un mesaj aluia de langa mine");
 			}
 			catch (IOException e1) {
@@ -150,13 +152,13 @@ public class WindowMessage extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 
-			myAnalizer.myTimer.startTimer();
-			myAnalizer.shown = false;
+			myAnalizer.getMyTimer().startTimer();
+			myAnalizer.setShown(false);
 			dispose();
 		}
 		if (command.equals("No thanks") == true) {
-			myAnalizer.myTimer.startTimer();
-			myAnalizer.shown = false;
+			myAnalizer.getMyTimer().startTimer();
+			myAnalizer.setShown(false);
 			dispose();
 		}
 

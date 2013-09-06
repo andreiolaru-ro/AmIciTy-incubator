@@ -26,6 +26,7 @@ import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.common.intelligence.LocationModule;
 import net.amicity.common.intelligence.SaveTransferedFiles;
 import net.amicity.common.intelligence.ShowPerceptionModule;
+import net.amicity.pc.interfaces.PCInterface;
 import net.amicity.pc.sensors.ChangeDetectorModule;
 import net.amicity.pc.sensors.WirelessModule;
 
