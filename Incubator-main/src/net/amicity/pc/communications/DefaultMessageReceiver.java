@@ -28,6 +28,8 @@ public class DefaultMessageReceiver implements MessageReceiver {
 		System.out.println("Server put context updates");
 		if( item instanceof PerceptionItem) {
 			System.out.println("Received a perception");
+			PerceptionItem pi = (PerceptionItem) item;
+			System.out.println("Received percecption from: " + pi.getUser() + ", sound: " + pi.getValue() + ", accelerometer: " + pi.getAction());
 		}
 		ContextCore.postContextUpdate(item);
 	}
