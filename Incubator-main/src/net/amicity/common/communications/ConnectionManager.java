@@ -47,4 +47,10 @@ public interface ConnectionManager
 	 * @return an ArrayList of connections from same user as me
 	 */
 	public ArrayList<Connection> getOtherConnections(Connection me);
+
+	/**
+	 * @param id an id for all his connections
+	 * @return all connections from id
+	 */
+	ArrayList<Connection> getAllHisConnections(String id);
 }

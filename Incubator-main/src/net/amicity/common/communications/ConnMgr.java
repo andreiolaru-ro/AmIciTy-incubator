@@ -133,5 +133,18 @@ public class ConnMgr implements ConnectionManager {
 		other.remove(me);
 		return other;
 	}
+	
+	@Override
+	public ArrayList<Connection> getAllHisConnections(String id) {
+		ArrayList<Connection> other = new ArrayList<Connection>();
+		for (Connection c : connList) {
+			if (c.isOn()) {
+				if (c.getId().substring(0, c.getId().indexOf('-')).equals(id)) {
+					other.add(c);
+				}
+			}
+		}
+		return other;
+	}
 
 }
