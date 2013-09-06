@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -88,7 +90,38 @@ public class PCInterface extends JFrame {
 		jsp = new JScrollPane(jtf);
 
 		b = new JButton("Login");
-		// ActionListener bs;
+
+		final MouseListener ml = new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (e.getSource() == usrname) {
+					usrname.setText("");
+				}
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO;
+			}
+		};
+
 		b.addActionListener(new ActionListener() {
 
 			@Override
@@ -99,10 +132,13 @@ public class PCInterface extends JFrame {
 					usrname.setText("Logged in as: " + user);
 					b.setEnabled(false);
 					usrname.setEditable(false);
+					usrname.setEnabled(false);
+					usrname.removeMouseListener(ml);
 				}
 			}
 
 		});
+
 		usrname.addKeyListener(new KeyListener() {
 
 			@Override
@@ -116,6 +152,12 @@ public class PCInterface extends JFrame {
 							usrname.setText("Logged in as: " + user);
 							b.setEnabled(false);
 							usrname.setEditable(false);
+							usrname.setEnabled(false);
+							usrname.removeMouseListener(ml);
+						}
+						else {
+							usrname.setText("Usage: name-device");
+
 						}
 					}
 				}
@@ -134,6 +176,8 @@ public class PCInterface extends JFrame {
 
 			}
 		});
+
+		usrname.addMouseListener(ml);
 		jpuser.add(usrname);
 		jpuser.add(b);
 
