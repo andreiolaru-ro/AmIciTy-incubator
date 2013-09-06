@@ -1,5 +1,6 @@
 package net.amicity.android;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +16,6 @@ import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.AndroidFileTransfer;
 import net.amicity.common.intelligence.AndroidPerceptionsTransfer;
 import net.amicity.common.intelligence.DummyAccelerometerTest;
-import net.amicity.common.intelligence.DummyDevicesModule;
 import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.LocationModule;
 import net.amicity.common.intelligence.SoundIntel;
@@ -81,7 +81,6 @@ public class MainActivity extends Activity implements Serializable {
 		DummyMessage dm = new DummyMessage(cc, this);
 		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
 		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc);
-		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type
@@ -107,7 +106,6 @@ public class MainActivity extends Activity implements Serializable {
 
 		ArrayList<IntelligenceModule> iModules5 = new ArrayList<IntelligenceModule>();
 		iModules5.add(aft);
-		iModules5.add(ddm);
 		hm.put(ContextTypes.DEVICES_CONTEXT, iModules5);
 
 		// start sensors services
@@ -133,10 +131,16 @@ public class MainActivity extends Activity implements Serializable {
 
 	@Override
 	protected void onDestroy() {
+		super.onDestroy();
 		for (Intent i : intents) {
 			this.stopService(i);
 		}
-		super.onDestroy();
+		try {
+			ContextCore.getServerSocket().close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
