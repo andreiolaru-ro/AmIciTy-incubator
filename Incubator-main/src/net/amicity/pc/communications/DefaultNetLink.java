@@ -17,7 +17,6 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -37,7 +36,6 @@ import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.pc.sensors.ServerModule;
 
 /**
@@ -264,14 +262,16 @@ public class DefaultNetLink implements NetLink {
 								server.getInputStream());
 						Object obj = in.readObject();
 						if (obj instanceof String) {
+							//do nothing
+						}
+						else {
+							System.out.println("Received an item");
+							msgR.receive(obj);
 						}
 						if( obj instanceof MessageItem){
 							System.out.println("cineva vrea sa te ajute");
 						}
-					/*	else {
-							System.out.println("Received an item");
-							msgR.receive(obj);
-						}*/
+						
 					}
 					catch (IOException e) {
 						// TODO Auto-generated catch block
