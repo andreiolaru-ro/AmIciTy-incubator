@@ -63,6 +63,11 @@ public class ChangeDetectorModule
 	    
 	
 	}
+	
+	public void longer(){
+		pushQueue.timeStart = 2 * pushQueue.timeStart;
+	}
+	
 	/**
 	 * pausing the timer to check for changes
 	 */

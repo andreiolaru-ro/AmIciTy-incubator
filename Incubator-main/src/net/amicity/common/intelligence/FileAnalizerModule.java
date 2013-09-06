@@ -19,6 +19,7 @@ import net.amicity.pc.sensors.FileChangeData;
  */
 public class FileAnalizerModule extends Thread implements IntelligenceModule
 {
+	
 	/**
 	 * instance of core to gain acces to its q
 	 */
@@ -66,8 +67,9 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule
 				System.out.println("nu am mai modificat fisierul de cand l-am deschis");
 				
 				if(filesOpened.contains(file) == true && shown == false){
+					
 					myTimer.ceaseTimer();
-					WindowMessage win= new WindowMessage(this);
+					WindowMessage win= new WindowMessage(this, file);
 					win.show();
 					shown = true;
 				}
@@ -80,7 +82,7 @@ System.out.println("ESTE UN FISIER NOU DESCHIS si nu este continut" + filesOpene
 				System.out.println("Am mai modificat fisierul de cand l-am deschis");
 				
 				if(nrDiff < 100 && shown == false){
-					WindowMessage win= new WindowMessage(this);
+					WindowMessage win= new WindowMessage(this, file);
 					win.show();
 					shown = true;
 				}

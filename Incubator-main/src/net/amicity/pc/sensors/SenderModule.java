@@ -12,6 +12,9 @@ import java.util.Timer;
  */
 public class SenderModule 
 {
+	
+	long timeStart;
+	
 	/**
 	 *  instance of ChangeDetectorModule in order to gain access to the arrays
 	 *  of FilesChanged 
@@ -27,7 +30,7 @@ public class SenderModule
 	 * @param detectorReceived : the instance of ChangeDetectorModule received
 	 */
 	public SenderModule(ChangeDetectorModule detectorReceived){
-		
+		timeStart = 20000;
 		myDetector = detectorReceived;
 	}
 	
@@ -36,7 +39,7 @@ public class SenderModule
 	 */
 	public void setTimer(){
 		timerPush = new Timer("Send");
-		timerPush.schedule(new SenderTimer(this), 20000, 20000);
+		timerPush.schedule(new SenderTimer(this), timeStart, timeStart);
 	}
 	
 

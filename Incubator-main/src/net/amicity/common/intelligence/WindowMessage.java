@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -24,10 +25,15 @@ import net.amicity.common.core.context.ContextCore;
  *
  */
 public class WindowMessage extends JFrame implements ActionListener{
+	
 	/**
 	 * don;t know why it is necessary
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	
+	File myUnmodifiedFile;
+	
 	/**
 	 * the frame's width
 	 */
@@ -55,8 +61,10 @@ public class WindowMessage extends JFrame implements ActionListener{
 	 * initialising the window
 	 * @param analizerRecv : creating a connection between this class and 
 	 * 					FileAnalizerModule
+	 * @param unmodifiedFile : the properties of the file unmodified
 	 */
-	WindowMessage(FileAnalizerModule analizerRecv){
+	WindowMessage(FileAnalizerModule analizerRecv, File unmodifiedFile){
+		myUnmodifiedFile = unmodifiedFile;
 		myAnalizer = analizerRecv;
 		width = 300;
 		height = 200;
@@ -116,7 +124,7 @@ public class WindowMessage extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		myAnalizer.myTimer.startTimer();
+		
 	     
 		String command = e.getActionCommand();
 		
@@ -127,7 +135,7 @@ public class WindowMessage extends JFrame implements ActionListener{
 			try
 			{
 				out = new ObjectOutputStream(s.getOutputStream());
-				out.writeObject("Ce faci mah, da-mi lista!");
+				out.writeObject("need help for: " + myUnmodifiedFile.getName());
 				System.out.println("am trimis un mesaj aluia de langa mine");
 			}
 			catch (IOException e1)
@@ -140,6 +148,8 @@ public class WindowMessage extends JFrame implements ActionListener{
 			dispose();
 		}
 		if(command.equals("No thanks") == true){
+			myAnalizer.myTimer.longer();
+			myAnalizer.myTimer.startTimer();
 			myAnalizer.shown = false;
 			dispose();
 		}
