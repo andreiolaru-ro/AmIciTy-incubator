@@ -37,7 +37,7 @@ public class ContextCore implements Serializable {
 	/**
 	 * The username
 	 */
-	private String username;
+	private static String username;
 	
 	/**
 	 * The serverSocket for eachlab
@@ -130,8 +130,8 @@ public class ContextCore implements Serializable {
 	/**
 	 * @return the username
 	 */
-	public String getUsername() {
-		return this.username;
+	public static  String getUsername() {
+		return username;
 	}
 
 	/**
