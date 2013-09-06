@@ -210,7 +210,7 @@ public class DefaultNetLink implements NetLink {
 														.getInputStream());
 												Object obj2 = in2.readObject();
 												if (obj2 instanceof MessageItem){
-													new HelpMessage(obj2);
+													new HelpMessage(obj2, client);
 												}
 											}
 											catch (IOException e) {
@@ -328,15 +328,20 @@ class HelpMessage extends JFrame implements ActionListener{
 	String myUser;
 	
 	
+	Socket myClient;
+	
+	
 	/**
 	 * initialising the window
 	 * @param filename : the file's name for which help is required
 	 * @param user : the nema of the user whoch called for help
 	 */
-	HelpMessage(Object objectReceived){
+	HelpMessage(Object objectReceived, Socket client ){
 		MessageItem myItem = (MessageItem) objectReceived;
 		myFilename = myItem.myFilename;
 		myUser = myItem.myUser;
+		
+		myClient = client;
 		
 		width = 300;
 		height = 200;
@@ -405,11 +410,10 @@ class HelpMessage extends JFrame implements ActionListener{
 		
 		
 		if(command.equals("Yes, with pleasure") == true){
-			Socket  s = ContextCore.getServerSocket();
 			ObjectOutputStream out;
 			try
 			{
-				out = new ObjectOutputStream(s.getOutputStream());
+				out = new ObjectOutputStream(myClient.getOutputStream());
 				out.writeObject(new MessageItem(ContextCore.getUsername(), myFilename));
 			}
 			catch (IOException e1)
