@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (C) 2013 Andrei Olaru, Vlad Herescu, Cristian Neagoe, Cristian Grigoras
+ * 
+ * This file is part of AmIciTy-incubator-Android.
+ * 
+ * AmIciTy-incubator-Android is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+ * 
+ * AmIciTy-incubator-Android is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
 package net.amicity.pc;
 
 import java.util.ArrayList;
@@ -23,16 +34,13 @@ import net.amicity.pc.sensors.WirelessModule;
  * 
  */
 
-
-
 public class Main {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-				
-		
+
 		// Create ContextCore
 		final ContextCore cc = new ContextCore();
 
@@ -41,10 +49,9 @@ public class Main {
 			System.out.flush();
 		}
 
-
 		System.out.println(" USER IS: " + pci.getUserName());
 		cc.setUsername(pci.getUserName());
-		
+
 		// start the files monitorization
 		ChangeDetectorModule cdm = new ChangeDetectorModule();
 		cdm.startTimer();
@@ -53,18 +60,15 @@ public class Main {
 
 		FileAnalizerModule fam = new FileAnalizerModule(cc, cdm);
 		LocationModule lm = new LocationModule(cc);
-		SimplePeerMachinesManager peer =  new SimplePeerMachinesManager();
+		SimplePeerMachinesManager peer = new SimplePeerMachinesManager();
 		DummyMessage dm = new DummyMessage(cc, peer);
 		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 		ShowPerceptionModule spm = new ShowPerceptionModule(cc);
 		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
 
-
-
 		// make the link between ContextTypes and intelligence modules related
 		// to type
 		final HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm = new HashMap<ContextTypes, ArrayList<IntelligenceModule>>();
-
 
 		ArrayList<IntelligenceModule> iModules = new ArrayList<IntelligenceModule>();
 		iModules.add(lm);
@@ -95,8 +99,7 @@ public class Main {
 		cm.start();
 		// Create the Notification Dispatcher
 		NotificationDispatcher nd = new NotificationDispatcher(cc);
-		nd.start(); 
-
+		nd.start();
 
 	}
 }

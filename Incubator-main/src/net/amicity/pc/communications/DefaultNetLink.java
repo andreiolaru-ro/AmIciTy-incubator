@@ -32,6 +32,7 @@ import javax.swing.JLabel;
 import net.amicity.common.communications.ConnMgr;
 import net.amicity.common.communications.Connection;
 import net.amicity.common.communications.ConnectionManager;
+import net.amicity.common.communications.MessageItem;
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MyDevicesItem;
@@ -208,8 +209,8 @@ public class DefaultNetLink implements NetLink {
 												in2 = new ObjectInputStream(client
 														.getInputStream());
 												Object obj2 = in2.readObject();
-												if (obj2 instanceof String){
-													new HelpMessage(obj2.toString(), "Vlad");
+												if (obj2 instanceof MessageItem){
+													new HelpMessage(obj2, client);
 												}
 											}
 											catch (IOException e) {
@@ -263,12 +264,14 @@ public class DefaultNetLink implements NetLink {
 								server.getInputStream());
 						Object obj = in.readObject();
 						if (obj instanceof String) {
-							
 						}
-						else {
+						if( obj instanceof MessageItem){
+							System.out.println("cineva vrea sa te ajute");
+						}
+					/*	else {
 							System.out.println("Received an item");
 							msgR.receive(obj);
-						}
+						}*/
 					}
 					catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -325,14 +328,20 @@ class HelpMessage extends JFrame implements ActionListener{
 	String myUser;
 	
 	
+	Socket myClient;
+	
+	
 	/**
 	 * initialising the window
 	 * @param filename : the file's name for which help is required
 	 * @param user : the nema of the user whoch called for help
 	 */
-	HelpMessage(String filename, String user){
-		myFilename = filename;
-		myUser = user;
+	HelpMessage(Object objectReceived, Socket client ){
+		MessageItem myItem = (MessageItem) objectReceived;
+		myFilename = myItem.myFilename;
+		myUser = myItem.myUser;
+		
+		myClient = client;
 		
 		width = 300;
 		height = 200;
@@ -401,12 +410,11 @@ class HelpMessage extends JFrame implements ActionListener{
 		
 		
 		if(command.equals("Yes, with pleasure") == true){
-			Socket  s = ContextCore.getServerSocket();
 			ObjectOutputStream out;
 			try
 			{
-				out = new ObjectOutputStream(s.getOutputStream());
-				out.writeObject(ContextCore.getUsername() + " would gladly help you");
+				out = new ObjectOutputStream(myClient.getOutputStream());
+				out.writeObject(new MessageItem(ContextCore.getUsername(), myFilename));
 			}
 			catch (IOException e1)
 			{
