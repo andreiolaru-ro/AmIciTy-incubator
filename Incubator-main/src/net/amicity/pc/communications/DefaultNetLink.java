@@ -11,23 +11,12 @@
  ******************************************************************************/
 package net.amicity.pc.communications;
 
-import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import net.amicity.common.communications.ConnMgr;
 import net.amicity.common.communications.Connection;
@@ -38,7 +27,7 @@ import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.context_types.OtherDevicesItem;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.common.intelligence.FileAnalizerModule;
+import net.amicity.pc.interfaces.HelpMessage;
 import net.amicity.pc.sensors.ServerModule;
 
 /**
@@ -204,15 +193,18 @@ public class DefaultNetLink implements NetLink {
 								@Override
 								public void run() {
 									while (true) {
-										if(manager.getConnection(newCon.getId()).isOn()) {
+										if (manager.getConnection(
+												newCon.getId()).isOn()) {
 											ObjectInputStream in2;
 											try {
-												in2 = new ObjectInputStream(client
-														.getInputStream());
+												in2 = new ObjectInputStream(
+														client.getInputStream());
 												Object obj2 = in2.readObject();
+
 												if (obj2 instanceof MessageItem){
 													sendUsersItem(client);
 												//	new HelpMessage(obj2, client);
+
 												}
 											}
 											catch (IOException e) {
@@ -265,6 +257,7 @@ public class DefaultNetLink implements NetLink {
 						ObjectInputStream in = new ObjectInputStream(
 								server.getInputStream());
 						Object obj = in.readObject();
+
 						if (obj instanceof String) {
 						}
 						if( obj instanceof MyDevicesItem){
@@ -278,10 +271,12 @@ public class DefaultNetLink implements NetLink {
 						/*if( obj instanceof MessageItem){
 							System.out.println("cineva vrea sa te ajute");
 						}*/
+
 						else {
 							System.out.println("Received an item");
 							msgR.receive(obj);
 						}
+
 					}
 					catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -320,150 +315,3 @@ public class DefaultNetLink implements NetLink {
 	}
 
 }
-
-
-
-class HelpMessage extends JFrame implements ActionListener{
-	
-	/**
-	 * don;t know why it is necessary
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * the frame's width
-	 */
-	int width;
-	/**
-	 * the frame's height
-	 */
-	int height;
-	/**
-	 * if the user asks for help
-	 */
-	JButton butonYes;
-	/**
-	 * if the user doesn't need help
-	 */
-	JButton butonNo;
-	
-	/**
-	 * the filename for which help is required
-	 */
-	String myFilename;
-	
-	
-	/**
-	 * the user which needs help
-	 */
-	String myUser;
-	
-	
-	Socket myClient;
-	
-	
-	/**
-	 * initialising the window
-	 * @param filename : the file's name for which help is required
-	 * @param user : the nema of the user whoch called for help
-	 */
-	HelpMessage(Object objectReceived, Socket client ){
-		MessageItem myItem = (MessageItem) objectReceived;
-		myFilename = myItem.myFilename;
-		myUser = myItem.myUser;
-		
-		myClient = client;
-		
-		width = 300;
-		height = 200;
-		createWindow();
-		addWrite();
-		
-	}
-	
-	
-	/**
-	 * setting the properties
-	 */
-	public void createWindow(){
-
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		Rectangle winSize = 
-		GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		this.setTitle("Need Help?");
-		this.setSize(width, height);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocation(dimension.width - width ,  winSize.height  - height);
-		this.setVisible(true);
-		this.toFront();
-		setLayout(null);
-	}
-	
-	/**
-	 * adding the components
-	 */
-	public void addWrite(){
-		
-		JLabel eticheta = new JLabel( myUser +   " needs help for: " + myFilename);
-		Dimension dim = eticheta.getPreferredSize();
-		width = dim.width + 20;
-		eticheta.setBounds((290 - dim.width)/2  ,30 , dim.width, dim.height);
-		add(eticheta);
-		
-
-		butonYes = new JButton("Yes, with pleasure");
-		dim = butonYes.getPreferredSize();
-		butonYes.setBounds(10  ,100 , dim.width, dim.height);
-		add(butonYes); 
-		butonYes.addActionListener(this);
-		
-		butonNo = new JButton("No, too busy");
-		Dimension dim2 = butonYes.getPreferredSize();
-		butonNo.setBounds(20 + dim.width  ,100 , dim2.width, dim2.height);
-		add(butonNo); 
-		butonNo.addActionListener(this);
-		
-		
-		
-		
-		this.setSize(width -1, height -1);
-		this.setSize(width, height);
-		
-	
-	} 
-	
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		
-	     
-		String command = e.getActionCommand();
-		
-		
-		if(command.equals("Yes, with pleasure") == true){
-			ObjectOutputStream out;
-			try
-			{
-				out = new ObjectOutputStream(myClient.getOutputStream());
-				out.writeObject(new MessageItem(ContextCore.getUsername(), myFilename));
-			}
-			catch (IOException e1)
-			{
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			dispose();
-		}
-		if(command.equals("No, too busy") == true){
-			dispose();
-		}
-		
-
-		
-	}
-	
-}
-
-
-

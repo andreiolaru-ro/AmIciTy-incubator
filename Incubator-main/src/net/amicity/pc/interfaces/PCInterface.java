@@ -9,7 +9,7 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.pc;
+package net.amicity.pc.interfaces;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;

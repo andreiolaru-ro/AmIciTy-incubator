@@ -21,8 +21,8 @@ import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.pc.PCInterface;
 import net.amicity.pc.communications.DefaultNetLink;
+import net.amicity.pc.interfaces.PCInterface;
 
 /**
  * A DummyClass that sends information to the server if it is in Canti

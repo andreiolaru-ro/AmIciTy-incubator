@@ -15,7 +15,7 @@ import net.amicity.common.context_types.PerceptionItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.pc.PCInterface;
+import net.amicity.pc.interfaces.PCInterface;
 
 /**
  * @author cristian

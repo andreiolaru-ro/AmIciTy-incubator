@@ -18,6 +18,7 @@ import net.amicity.common.context_types.FilesItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.pc.interfaces.WindowMessage;
 import net.amicity.pc.sensors.ChangeDetectorModule;
 import net.amicity.pc.sensors.FileChangeData;
 
@@ -42,11 +43,11 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 	/**
 	 * controlling the timers which show the window;
 	 */
-	ChangeDetectorModule myTimer;
+	private ChangeDetectorModule myTimer;
 	/**
 	 * if it is already a window on screen
 	 */
-	boolean shown;
+	private boolean shown;
 
 	/**
 	 * @param received
@@ -57,10 +58,10 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 	public FileAnalizerModule(ContextCore received,
 			ChangeDetectorModule receivedTimer) {
 
-		myTimer = receivedTimer;
+		setMyTimer(receivedTimer);
 		myCore = received;
 		filesOpened = new ArrayList<File>();
-		shown = false;
+		setShown(false);
 	}
 
 	@Override
@@ -78,12 +79,12 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 				System.out
 						.println("nu am mai modificat fisierul de cand l-am deschis");
 
-				if (filesOpened.contains(file) == true && shown == false) {
+				if (filesOpened.contains(file) == true && isShown() == false) {
 
-					myTimer.ceaseTimer();
+					getMyTimer().ceaseTimer();
 					WindowMessage win = new WindowMessage(this, file);
 					win.show();
-					shown = true;
+					setShown(true);
 				}
 				else {
 					System.out
@@ -96,15 +97,31 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 				System.out
 						.println("Am mai modificat fisierul de cand l-am deschis");
 
-				if (nrDiff < 100 && shown == false) {
+				if (nrDiff < 100 && isShown() == false) {
 					WindowMessage win = new WindowMessage(this, file);
 					win.show();
-					shown = true;
+					setShown(true);
 				}
 			}
 
 		}
 
+	}
+
+	public ChangeDetectorModule getMyTimer() {
+		return myTimer;
+	}
+
+	public void setMyTimer(ChangeDetectorModule myTimer) {
+		this.myTimer = myTimer;
+	}
+
+	public boolean isShown() {
+		return shown;
+	}
+
+	public void setShown(boolean shown) {
+		this.shown = shown;
 	}
 
 }

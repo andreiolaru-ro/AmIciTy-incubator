@@ -44,7 +44,7 @@
         </activity>
         
          <activity
-            android:name="net.amicity.android.LoginActivity">
+            android:name="net.amicity.android.interfaces.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
