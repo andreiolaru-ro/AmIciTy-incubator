@@ -1,5 +1,6 @@
 package net.amicity.android;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,10 +131,16 @@ public class MainActivity extends Activity implements Serializable {
 
 	@Override
 	protected void onDestroy() {
+		super.onDestroy();
 		for (Intent i : intents) {
 			this.stopService(i);
 		}
-		super.onDestroy();
+		try {
+			ContextCore.getServerSocket().close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
