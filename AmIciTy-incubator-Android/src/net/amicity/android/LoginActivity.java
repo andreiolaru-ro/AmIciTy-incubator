@@ -10,11 +10,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * The Activity which provides a textbox where the user may login and the
+ * corresponding login button. After the button is pressed, the user will enter
+ * the application.
+ * 
+ * @author ''Azgabast''
+ * 
+ */
 public class LoginActivity extends Activity {
 
+	/**
+	 * The login button.
+	 */
 	Button b;
+	/**
+	 * The user textbox.
+	 */
 	EditText username;
+	/**
+	 * The intent which contains the username to be sent to the main activity.
+	 */
 	Intent i;
+	/**
+	 * The current context.
+	 */
 	Context c;
 
 	@Override
