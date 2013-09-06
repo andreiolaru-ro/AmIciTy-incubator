@@ -11,12 +11,23 @@
  ******************************************************************************/
 package net.amicity.pc.communications;
 
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import net.amicity.common.communications.ConnMgr;
 import net.amicity.common.communications.Connection;
@@ -25,6 +36,7 @@ import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.pc.sensors.ServerModule;
 
 /**
@@ -196,9 +208,9 @@ public class DefaultNetLink implements NetLink {
 												in2 = new ObjectInputStream(client
 														.getInputStream());
 												Object obj2 = in2.readObject();
-												if (obj2 instanceof String)
-													System.out.println(obj2
-															.toString());
+												if (obj2 instanceof String){
+													new HelpMessage(obj2.toString(), null);
+												}
 											}
 											catch (IOException e) {
 												// do nothing
@@ -251,7 +263,7 @@ public class DefaultNetLink implements NetLink {
 								server.getInputStream());
 						Object obj = in.readObject();
 						if (obj instanceof String) {
-							// do nothing
+							
 						}
 						else {
 							System.out.println("Received an item");
@@ -274,3 +286,143 @@ public class DefaultNetLink implements NetLink {
 	}
 
 }
+
+
+
+class HelpMessage extends JFrame implements ActionListener{
+	
+	/**
+	 * don;t know why it is necessary
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * the frame's width
+	 */
+	final int width;
+	/**
+	 * the frame's height
+	 */
+	final int height;
+	/**
+	 * if the user asks for help
+	 */
+	JButton butonYes;
+	/**
+	 * if the user doesn't need help
+	 */
+	JButton butonNo;
+	
+	/**
+	 * the filename for which help is required
+	 */
+	String myFilename;
+	
+	
+	/**
+	 * the user which needs help
+	 */
+	String myUser;
+	
+	
+	/**
+	 * initialising the window
+	 * @param filename : the file's name for which help is required
+	 * @param user : the nema of the user whoch called for help
+	 */
+	HelpMessage(String filename, String user){
+		myFilename = filename;
+		myUser = user;
+		
+		width = 300;
+		height = 200;
+		createWindow();
+		addWrite();
+		
+	}
+	
+	
+	/**
+	 * setting the properties
+	 */
+	public void createWindow(){
+
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle winSize = 
+		GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		this.setTitle("Need Help?");
+		this.setSize(width, height);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocation(dimension.width - width ,  winSize.height  - height);
+		this.setVisible(true);
+		this.toFront();
+		setLayout(null);
+	}
+	
+	/**
+	 * adding the components
+	 */
+	public void addWrite(){
+		
+		JLabel eticheta = new JLabel("Somebody needs help for: " + myFilename);
+		Dimension dim = eticheta.getPreferredSize();
+		eticheta.setBounds((290 - dim.width)/2  ,30 , dim.width, dim.height);
+		add(eticheta);
+		
+
+		butonYes = new JButton("Yes, with pleasure");
+		dim = butonYes.getPreferredSize();
+		butonYes.setBounds(10  ,100 , dim.width, dim.height);
+		add(butonYes); 
+		butonYes.addActionListener(this);
+		
+		butonNo = new JButton("No, too busy");
+		Dimension dim2 = butonYes.getPreferredSize();
+		butonNo.setBounds(20 + dim.width  ,100 , dim2.width, dim2.height);
+		add(butonNo); 
+		butonNo.addActionListener(this);
+		
+		
+		this.setSize(width -1, height -1);
+		this.setSize(width, height);
+		
+	
+	} 
+	
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		
+	     
+		String command = e.getActionCommand();
+		
+		
+		if(command.equals("Yes, with pleasure") == true){
+		/*	Socket  s = ContextCore.getServerSocket();
+			ObjectOutputStream out;
+			try
+			{
+				out = new ObjectOutputStream(s.getOutputStream());
+				out.writeObject("need help for: " + myUnmodifiedFile.getName());
+				System.out.println("am trimis un mesaj aluia de langa mine");
+			}
+			catch (IOException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}*/
+			
+			dispose();
+		}
+		if(command.equals("No, too busy") == true){
+			dispose();
+		}
+		
+
+		
+	}
+	
+}
+
+
+

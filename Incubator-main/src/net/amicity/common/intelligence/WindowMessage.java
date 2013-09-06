@@ -32,6 +32,9 @@ public class WindowMessage extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	
+	/**
+	 *  the properties of the unmodifief file
+	 */
 	File myUnmodifiedFile;
 	
 	/**
@@ -135,7 +138,7 @@ public class WindowMessage extends JFrame implements ActionListener{
 			try
 			{
 				out = new ObjectOutputStream(s.getOutputStream());
-				out.writeObject("need help for: " + myUnmodifiedFile.getName());
+				out.writeObject(myUnmodifiedFile.getName());
 				System.out.println("am trimis un mesaj aluia de langa mine");
 			}
 			catch (IOException e1)
@@ -144,6 +147,7 @@ public class WindowMessage extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			}
 			
+			myAnalizer.myTimer.startTimer();
 			myAnalizer.shown = false;
 			dispose();
 		}

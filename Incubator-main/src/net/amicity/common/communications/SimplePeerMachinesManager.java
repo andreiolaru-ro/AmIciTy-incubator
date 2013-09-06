@@ -38,7 +38,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager{
 		
 	}
 	 public void addServersIP(){
-		 serversIP.put("CANTI", "172.16.15.119");
+		 serversIP.put("CANTI", "172.16.15.223");
 		 serversIP.put("acasa", "192.168.0.128"); 
 	 }
 	 
