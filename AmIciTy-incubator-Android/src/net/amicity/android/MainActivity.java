@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements Serializable {
 	/**
 	 * An array of intents that starts services
 	 */
-	ArrayList<Intent> intents;
+	public ArrayList<Intent> intents;
 
 	/**
 	 * The textbox for the username;

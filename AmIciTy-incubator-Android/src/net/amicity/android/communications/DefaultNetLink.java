@@ -185,6 +185,7 @@ public class DefaultNetLink implements NetLink {
 					// Start the server
 					Intent intent = new Intent(activity, ServerModule.class);
 					activity.startService(intent);
+					activity.intents.add(intent);
 					
 					out = new ObjectOutputStream(client.getOutputStream());
 					out.writeObject(me);
