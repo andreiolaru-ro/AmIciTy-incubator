@@ -27,7 +27,6 @@ import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.context_types.OtherDevicesItem;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.pc.interfaces.HelpMessage;
 import net.amicity.pc.sensors.ServerModule;
 
 /**
@@ -201,11 +200,9 @@ public class DefaultNetLink implements NetLink {
 														client.getInputStream());
 												Object obj2 = in2.readObject();
 
-												if (obj2 instanceof MessageItem){
+												if (obj2 instanceof MessageItem)
 													sendUsersItem(client);
-												//	new HelpMessage(obj2, client);
 
-												}
 											}
 											catch (IOException e) {
 												// do nothing
@@ -264,12 +261,7 @@ public class DefaultNetLink implements NetLink {
 							System.out.println("Received an item");
 							msgR.receive(obj);
 						}
-						
-						/*if( obj instanceof MessageItem){
-							System.out.println("cineva vrea sa te ajute");
-						}*/
 
-						
 
 					}
 					catch (IOException e) {
@@ -292,8 +284,8 @@ public class DefaultNetLink implements NetLink {
 	 * @param client : the client to whom the list of devices will be send
 	 */
 	public void sendUsersItem(Socket client){
-		MyDevicesItem items = new MyDevicesItem();
-		items.setMyDevices( manager.getAllHisConnections("tataie"));
+		OtherDevicesItem items = new OtherDevicesItem();
+		items.setHisDevices( manager.getAllHisConnections("tataie"));
 		ObjectOutputStream out;
 		try
 		{

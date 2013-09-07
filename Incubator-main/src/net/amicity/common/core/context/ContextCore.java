@@ -123,8 +123,8 @@ public class ContextCore implements Serializable {
 	 * @param username
 	 *            -> the username
 	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public static void setUsername(String username) {
+		ContextCore.username = username;
 	}
 
 	/**

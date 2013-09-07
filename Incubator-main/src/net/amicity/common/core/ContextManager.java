@@ -54,6 +54,12 @@ public class ContextManager extends Thread {
 		while (true) {
 			if (ContextCore.getContextUpdates().isEmpty() == false) {
 				AbstractItem item = ContextCore.getContextUpdate();
+				System.out.println("A NEW ITEM HAS BEEN ADDED TO THE STORAGE");
+				if(item.getType() == ContextTypes.OTHER_DEVICES_CONTEXT){
+					System.out.println();
+					System.out.println("ESTE DE TIPUL ALTOR DISPOZITIVE");
+				}
+				
 				
 				if (hm.containsKey(item.getType())) {
 					Notification newNot = new Notification(hm.get(item

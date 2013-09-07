@@ -23,7 +23,7 @@ import net.amicity.pc.sensors.ChangeDetectorModule;
 import net.amicity.pc.sensors.FileChangeData;
 
 /**
- * module which analises the
+ * module which analises the opened files
  * 
  * 
  * @author vlad

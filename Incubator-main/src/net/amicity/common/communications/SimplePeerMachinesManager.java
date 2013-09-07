@@ -11,12 +11,19 @@
  ******************************************************************************/
 package net.amicity.common.communications;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import net.amicity.common.context_types.OtherDevicesItem;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.amicity.common.core.ContextStorage;
+import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
+import net.amicity.common.core.context.ContextCore;
+import net.amicity.pc.communications.DefaultNetLink;
 
 /**
  * operates the data from the stations in order to initiate communication
@@ -39,17 +46,34 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	/**
 	 * initiating the members of the class
 	 */
-	public SimplePeerMachinesManager() {
+	
+	
+	DefaultNetLink myDefaultNetLink;
+	
+	
+	/**
+	 * obtaining the queues of the core
+	 */
+	ContextCore myCore;
+	
+	/**
+	 * @param cc : receving all the queues
+	 */
+	public SimplePeerMachinesManager(ContextCore cc) {
 		stationsReceived = new ArrayList<Station>();
 		serversIP = new TreeMap<String, String>();
 		addServersIP();
-		// setLocationStations();
+		myDefaultNetLink = new DefaultNetLink();
+		myCore = cc;
 
 	}
 
+	/**
+	 * adding pairs of data Location-IP
+	 */
 	public void addServersIP() {
 		serversIP.put("CANTI", "172.16.15.223");
-		serversIP.put("acasa", "192.168.0.128");
+		serversIP.put("acasa", "192.168.0.197");
 	}
 
 	@Override
@@ -98,8 +122,29 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 
 	@Override
 	public void invoke()
-	{
-		System.out.println("trebuie sa merg prin dispozitivele celorlalti");
+	{	
+		OtherDevicesItem devices;
+		ContextStorage dataKept =  myCore.getContextStorage();
+		devices = (OtherDevicesItem) dataKept.get(ContextTypes.OTHER_DEVICES_CONTEXT);
+		ArrayList<Connection> connections = devices.getTheDevices();
+		
+		for(Connection cn : connections){
+			try
+			{
+				Connection me = new Connection(InetAddress.getLocalHost(),
+						ContextCore.getUsername(), 4501);
+				myDefaultNetLink.createConnection(cn, me);
+				myDefaultNetLink.send(cn, "cucu");
+			}
+			catch (UnknownHostException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		 
 		// TODO Auto-generated method stub
 		
 	}
