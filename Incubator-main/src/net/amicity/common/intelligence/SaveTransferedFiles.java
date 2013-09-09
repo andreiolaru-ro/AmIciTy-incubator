@@ -52,12 +52,13 @@ public class SaveTransferedFiles implements IntelligenceModule {
 					BufferedWriter bw = new BufferedWriter(fw);
 					bw.write(f.content);
 					bw.close();
-					PCInterface.addNotification("all working directory moved, you can start work");
 				}
 				catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
+			PCInterface.addNotification("all working directory moved, you can start work");
+			System.out.println("all working directory moved, you can start work");
 		}
 	}
 	

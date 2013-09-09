@@ -141,7 +141,6 @@ public class DefaultNetLink implements NetLink {
 
 			out = new ObjectOutputStream(client.getOutputStream());
 			out.writeObject(me);
-			out.flush();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -190,7 +189,6 @@ public class DefaultNetLink implements NetLink {
 								mdi.setMyDevices(other);
 								out.writeObject(mdi);
 								System.out.println("Am trimis");
-								out.flush();
 								for (Connection c : other) {
 									ArrayList<Connection> newOther = new ArrayList<Connection>();
 									newOther.addAll(other);
@@ -201,7 +199,6 @@ public class DefaultNetLink implements NetLink {
 									ObjectOutputStream out2 = new ObjectOutputStream(
 											c.getSocket().getOutputStream());
 									out2.writeObject(mdi2);
-									out2.flush();
 								}
 							}
 							new Thread(new Runnable() {
