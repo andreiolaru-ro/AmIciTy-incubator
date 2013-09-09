@@ -77,7 +77,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	 * adding pairs of data Location-IP
 	 */
 	public void addServersIP() {
-		serversIP.put("CANTI", "172.16.14.145");
+		serversIP.put("CANTI", "172.16.15.223");
 		serversIP.put("acasa", "192.168.0.197");
 	}
 

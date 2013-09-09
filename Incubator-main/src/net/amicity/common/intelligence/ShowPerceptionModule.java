@@ -11,6 +11,7 @@
  ******************************************************************************/
 package net.amicity.common.intelligence;
 
+import net.amicity.common.context_types.PCAccelerometerItem;
 import net.amicity.common.context_types.PerceptionItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
@@ -52,6 +53,7 @@ public class ShowPerceptionModule implements IntelligenceModule {
 				+ "\n");
 		PCInterface.addNotification("Last time the user was " + pi.getAction()
 				+ "\n");
+		ContextCore.postContextUpdate(new PCAccelerometerItem(pi.getAction(),pi.getUser()));
 
 	}
 }
