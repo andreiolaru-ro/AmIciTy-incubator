@@ -136,11 +136,11 @@ public class HelpMessage extends JFrame implements ActionListener {
 			
 			try {
 				cc = new Connection(InetAddress.getLocalHost(), id, 4501);
-				
-				
 				MessageItem mesaj = new MessageItem(id,myFilename,cc, 1  );
 				System.out.println("AJUTORUL A FOST CONFIRMAT");
 				myLink.send(connectionRecv, mesaj);
+				System.out.println("SEND A FOST REALIZAT");
+				
 			}
 			catch (IOException e1) {
 				// TODO Auto-generated catch block
