@@ -143,8 +143,9 @@ public class WindowMessage extends JFrame implements ActionListener {
 			ObjectOutputStream out;
 			try {
 				out = new ObjectOutputStream(s.getOutputStream());
-				out.writeObject(new MessageItem(ContextCore.getUsername(),
-						myUnmodifiedFile.getName()));
+				out.writeObject("HELP");
+				/*out.writeObject(new MessageItem(ContextCore.getUsername(),
+						myUnmodifiedFile.getName()));*/
 				System.out.println("am trimis un mesaj aluia de langa mine");
 			}
 			catch (IOException e1) {

@@ -128,7 +128,10 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		devices = (OtherDevicesItem) dataKept.get(ContextTypes.OTHER_DEVICES_CONTEXT);
 		ArrayList<Connection> connections = devices.getTheDevices();
 		
-		for(Connection cn : connections){
+		
+		System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
+		
+	/*	for(Connection cn : connections){
 			try
 			{
 				Connection me = new Connection(InetAddress.getLocalHost(),
@@ -141,7 +144,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		} */
 		
 		
 		 

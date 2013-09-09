@@ -199,9 +199,11 @@ public class DefaultNetLink implements NetLink {
 												in2 = new ObjectInputStream(
 														client.getInputStream());
 												Object obj2 = in2.readObject();
-
-												if (obj2 instanceof MessageItem)
-													sendUsersItem(client);
+												if (obj2 instanceof String){
+													String wordRecv= (String) obj2;
+													if(wordRecv.equals("HELP")== true)
+													    sendUsersItem(client);
+												}
 
 											}
 											catch (IOException e) {
@@ -259,6 +261,9 @@ public class DefaultNetLink implements NetLink {
 						}
 						else {
 							System.out.println("Received an item");
+							if (obj instanceof OtherDevicesItem){
+								System.out.println("AM PRIMIT DISPOZITIVELE");
+							}
 							msgR.receive(obj);
 						}
 
