@@ -138,6 +138,7 @@ public class HelpMessage extends JFrame implements ActionListener {
 				cc = new Connection(InetAddress.getLocalHost(), id, 4501);
 				MessageItem mesaj = new MessageItem(id,myFilename,cc, 1  );
 				System.out.println("AJUTORUL A FOST CONFIRMAT");
+				System.out.println(connectionRecv.getId() + " " + connectionRecv.getIp() + " ");
 				myLink.send(connectionRecv, mesaj);
 				System.out.println("SEND A FOST REALIZAT");
 				

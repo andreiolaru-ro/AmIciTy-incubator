@@ -64,13 +64,14 @@ public class AndroidFileTransfer implements IntelligenceModule {
 				.getContextStorage().get(ContextTypes.ACCELEROMETER));
 		MyDevicesItem myDeviceItem = ((MyDevicesItem) myCore
 				.getContextStorage().get(ContextTypes.DEVICES_CONTEXT));
-		if( !sent ) {
+		System.out.println("AndroidFileTransfer invoked " + sent);
+		if( sent == false ) {
 			if (myAccelerometerItem != null && myDeviceItem != null) {
 				myDevices = myDeviceItem.getMyDevices();
 				action = myAccelerometerItem.man;
 
 				for(Connection c : myDevices) {
-					System.out.println("incearcaa cu: " + c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3));
+					System.out.println("incearcaaa cu: " + c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3));
 					if(c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3).equalsIgnoreCase("pc")) {
 						if(action.equals("stays")) {
 							//transfer files to c
@@ -79,11 +80,11 @@ public class AndroidFileTransfer implements IntelligenceModule {
 							System.out.println("poti incepe transferul");
 							DefaultNetLink d = new DefaultNetLink();
 							d.send(c, tfi);
+							sent = true;
 						}
 					}
 				}
 			}
-			sent = true;
 		}
 
 	}

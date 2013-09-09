@@ -35,12 +35,17 @@ public class AccelerometerItem extends AbstractItem {
 	 * String that says if the man walks or stays
 	 */
 	public String man;
+	/**
+	 * The accelerometer limit between stays and walks
+	 */
+	private float noise;
 
 	/**
 	 * public constructor for accelerometerItem, initiates the string
 	 */
 	public AccelerometerItem() {
 		man = new String();
+		noise = 1.2f;
 	}
 
 	/**
@@ -50,7 +55,7 @@ public class AccelerometerItem extends AbstractItem {
 	public void changeType(float nr) {
 		this.total = nr;
 		type = ContextTypes.ACCELEROMETER;
-		if (total > 1.5)
+		if (total > noise)
 			man = "walking";
 		else
 			man = "stays";
