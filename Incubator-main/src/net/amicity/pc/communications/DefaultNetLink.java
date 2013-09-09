@@ -88,6 +88,7 @@ public class DefaultNetLink implements NetLink {
 									client.getInputStream());
 							Object obj = in.readObject();
 							if(obj instanceof MessageItem){
+								System.out.println("AM PRIMIT UN MESSAGEITEM");
 								MessageItem mi = (MessageItem) obj;
 								if(mi.nr == 0)
 									new HelpMessage(obj);
@@ -306,7 +307,7 @@ public class DefaultNetLink implements NetLink {
 	 */
 	public void sendUsersItem(Socket client){
 		OtherDevicesItem items = new OtherDevicesItem();
-		items.setHisDevices( manager.getAllHisConnections("tataie"));
+		items.setHisDevices( manager.getAllHisConnections("mamaie"));
 		ObjectOutputStream out;
 		try
 		{

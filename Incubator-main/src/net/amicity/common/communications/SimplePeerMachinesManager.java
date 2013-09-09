@@ -146,6 +146,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 					cc = new Connection(InetAddress.getLocalHost(), username, 4501);
 					MessageItem mesaj = new MessageItem(username,filename,cc, 0  );
 					myDefaultNetLink.send(cn, mesaj );
+					System.out.println("HELP SENT");
 				}
 				catch (UnknownHostException e)
 				{
