@@ -40,7 +40,7 @@ public class SaveTransferedFiles implements IntelligenceModule {
 		files = ((TransferFileItem) myCore.getContextStorage().get(
 				ContextTypes.TRANSFER_FILE_CONTEXT)).getFiles();
 		for(FileContext f : files) {
-			//System.out.println("filename : " + f.filename + "content : " + f.content);
+			System.out.println("filename : " + f.filename + "content : ");
 			try {
 				File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/workspace/" + f.filename);
 				if(!file.exists()) {

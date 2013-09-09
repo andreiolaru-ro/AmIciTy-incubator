@@ -39,25 +39,23 @@ public class SaveTransferedFiles implements IntelligenceModule {
 	public void invoke() {
 		files = ((TransferFileItem) myCore.getContextStorage().get(
 				ContextTypes.TRANSFER_FILE_CONTEXT)).getFiles();
-		boolean succes = new File("./munca").mkdir();
-		if(succes) {
-			for(FileContext f : files) {
-				//System.out.println("filename : " + f.filename + "content : " + f.content);
-				try {
-					File file = new File("./munca/" + f.filename);
-					if(!file.exists()) {
-						file.createNewFile();
-					}
-					FileWriter fw = new FileWriter(file.getAbsolutePath());
-					BufferedWriter bw = new BufferedWriter(fw);
-					bw.write(f.content);
-					bw.close();
-					PCInterface.addNotification("all working directory moved, you can start work");
+		System.out.println("SaveTransferFiles invoked");
+		for(FileContext f : files) {
+			try {
+				File file = new File("./munca/" + f.filename);
+				if(!file.exists()) {
+					file.createNewFile();
 				}
-				catch (IOException e) {
-					e.printStackTrace();
-				}
+				FileWriter fw = new FileWriter(file.getAbsolutePath());
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(f.content);
+				bw.close();
 			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			PCInterface.addNotification("all working directory moved, you can start work");
+			System.out.println("all working directory moved, you can start work");
 		}
 	}
 	

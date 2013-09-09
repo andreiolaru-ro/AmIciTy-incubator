@@ -57,10 +57,12 @@ public class PCFileTransfer implements IntelligenceModule {
 		user = pai.user;
 		myDevices = ((MyDevicesItem) myCore
 				.getContextStorage().get(ContextTypes.DEVICES_CONTEXT)).getMyDevices();
+		System.out.println("PCFileTransfer invoked");
 		if( !sent ) {
 			if(action.equals("walking")) {
 				for(Connection c : myDevices) {
 					if(c.getId().equals(user)) {
+						System.out.println("Started the file transfer");
 						TransferFileItem tfi = new TransferFileItem();
 						tfi.addFiles(new File("./munca"));
 						System.out.println("poti incepe transferul");

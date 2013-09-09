@@ -189,7 +189,6 @@ public class DefaultNetLink implements NetLink {
 					
 					out = new ObjectOutputStream(client.getOutputStream());
 					out.writeObject(me);
-					out.flush();
 				}
 				catch (IOException e) {
 					e.printStackTrace();
