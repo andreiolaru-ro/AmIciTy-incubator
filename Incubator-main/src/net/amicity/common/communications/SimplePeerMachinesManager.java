@@ -12,13 +12,11 @@
 package net.amicity.common.communications;
 
 import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
+
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import net.amicity.common.context_types.OtherDevicesItem;
 
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -31,6 +29,8 @@ import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.pc.communications.DefaultNetLink;
+import net.amicity.pc.interfaces.Anunt;
+import net.amicity.pc.interfaces.HelpMessage;
 
 /**
  * operates the data from the stations in order to initiate communication
@@ -135,14 +135,23 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	public void invoke()
 	{	
 		OtherDevicesItem devices;
+		MessageItem message1, message2;
 		ContextStorage dataKept =  myCore.getContextStorage();
-		devices = (OtherDevicesItem) dataKept.get(ContextTypes.OTHER_DEVICES_CONTEXT);
+		devices = (OtherDevicesItem) dataKept.remove(ContextTypes.OTHER_DEVICES_CONTEXT);
+		message1 = (MessageItem) dataKept.remove(ContextTypes.SEND_ITEM_CONTEXT);
+		message2 = (MessageItem) dataKept.remove(ContextTypes.OTHER_DEVICES_CONTEXT);
+		
+		
+		
 		ArrayList<Connection> connections = devices.getTheDevices();
 		
 		
 		System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
 		
-		for(Connection cn : connections){
+		if(devices != null){
+			
+			System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
+			for(Connection cn : connections){
 				
 				String username = ContextCore.getUsername();
 				String filename = myFam.fileChanged.getName();
@@ -150,7 +159,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 				try
 				{ 
 					cc = new Connection( InetAddress.getLocalHost(), username, 4501);
-					MessageItem mesaj = new MessageItem(username,filename,cc, 0  );
+					MessageItem mesaj = new MessageItem(username,filename,cc, ContextTypes.SEND_ITEM_CONTEXT  );
 					myDefaultNetLink.send(cn, mesaj );
 				}
 				catch (UnknownHostException e)
@@ -160,10 +169,15 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 				}
 				
 			
-		} 
-		
-		
-		 
+			} 
+		}
+		if(message1  != null)
+			new HelpMessage(message1);
+		if(message2  != null){
+			Anunt help =	new Anunt();
+			help.start();
+		}
+
 		// TODO Auto-generated method stub
 		
 	}

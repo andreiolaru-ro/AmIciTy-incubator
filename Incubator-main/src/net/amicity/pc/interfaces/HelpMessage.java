@@ -17,6 +17,7 @@ import javax.swing.WindowConstants;
 
 import net.amicity.common.communications.Connection;
 import net.amicity.common.communications.MessageItem;
+import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.pc.communications.DefaultNetLink;
 
@@ -135,7 +136,7 @@ public class HelpMessage extends JFrame implements ActionListener {
 			
 			try {
 				cc = new Connection(InetAddress.getLocalHost(), id, 4501);
-				MessageItem mesaj = new MessageItem(id,myFilename,cc, 1  );
+				MessageItem mesaj = new MessageItem(id,myFilename,cc, ContextTypes.RECEIVED_ITEM_CONTEXT  );
 				System.out.println("AJUTORUL A FOST CONFIRMAT");
 				System.out.println(connectionRecv.getId() + " " + connectionRecv.getIp() + " ");
 				myLink.send(connectionRecv, mesaj);

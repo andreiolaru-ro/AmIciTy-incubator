@@ -26,6 +26,7 @@ import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.context_types.OtherDevicesItem;
+import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.pc.interfaces.Anunt;
 import net.amicity.pc.interfaces.HelpMessage;
@@ -89,22 +90,9 @@ public class DefaultNetLink implements NetLink {
 							Object obj = in.readObject();
 							if(obj instanceof MessageItem){
 								System.out.println("AM PRIMIT UN MESSAGEITEM");
-								MessageItem mi = (MessageItem) obj;
-								if(mi.nr == 0)
-									new HelpMessage(obj);
-								else{
-										
-									Anunt help =	new Anunt();
-									help.start();
-									
-									
-								}
-								
-									
 							}
-							else{
-								msgR.receive(obj);
-							}
+							msgR.receive(obj);
+							
 							in.close();
 							client.close();
 							

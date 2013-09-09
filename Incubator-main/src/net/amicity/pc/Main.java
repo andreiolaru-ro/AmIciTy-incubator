@@ -97,6 +97,12 @@ public class Main {
 		ArrayList<IntelligenceModule> iModules8 = new ArrayList<IntelligenceModule>();
 		iModules8.add(pft);
 		hm.put(ContextTypes.ACCELEROMETER, iModules8);
+		ArrayList<IntelligenceModule> iModules9 = new ArrayList<IntelligenceModule>();
+		iModules9.add(peer);
+		hm.put(ContextTypes.SEND_ITEM_CONTEXT, iModules9);
+		ArrayList<IntelligenceModule> iModules10 = new ArrayList<IntelligenceModule>();
+		iModules10.add(peer);
+		hm.put(ContextTypes.RECEIVED_ITEM_CONTEXT, iModules10);
 
 		// start sensors services
 

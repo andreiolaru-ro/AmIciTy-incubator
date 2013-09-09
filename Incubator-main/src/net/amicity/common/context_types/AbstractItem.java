@@ -31,7 +31,7 @@ public abstract class AbstractItem implements ContextItem, Serializable {
 	/**
 	 * the ContextType
 	 */
-	ContextTypes type;
+	protected ContextTypes type;
 
 	@Override
 	public void setType(ContextTypes type) {
