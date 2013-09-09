@@ -43,9 +43,7 @@ public class NotificationDispatcher extends Thread {
 		while (true) {
 			if (myCore.getNotificationQueue().isEmpty() == false) {
 				Notification notExtract = myCore.getNotification();
-				System.out.println("a notification has been extracted");
 				for (IntelligenceModule i : notExtract.intelModules) {
-					System.out.println("A MODULE HAS BEEN INVOKED");
 					i.invoke();
 				}
 
