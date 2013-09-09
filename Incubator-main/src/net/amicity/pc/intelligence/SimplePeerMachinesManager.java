@@ -9,12 +9,15 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.common.communications;
+package net.amicity.pc.intelligence;
 
 import java.net.InetAddress;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+
+import net.amicity.common.communications.Connection;
+import net.amicity.common.communications.MessageItem;
 import net.amicity.common.context_types.OtherDevicesItem;
 
 import java.util.Iterator;
@@ -27,7 +30,6 @@ import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.pc.communications.DefaultNetLink;
 import net.amicity.pc.interfaces.Anunt;
 import net.amicity.pc.interfaces.HelpMessage;
@@ -155,7 +157,6 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 				{ 
 					
 					System.out.println(" trimit lui cristi datele mele");
-					System.out.println(cn.ip);
 					cc = new Connection( InetAddress.getLocalHost(), username, 4501);
 					MessageItem mesaj = new MessageItem(username,filename,cc, ContextTypes.SEND_ITEM_CONTEXT  );
 					myDefaultNetLink.send(cn, mesaj );

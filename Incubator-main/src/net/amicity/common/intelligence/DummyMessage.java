@@ -15,13 +15,13 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import net.amicity.common.communications.Connection;
-import net.amicity.common.communications.SimplePeerMachinesManager;
 import net.amicity.common.context_types.LocationItem;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.pc.communications.DefaultNetLink;
+import net.amicity.pc.intelligence.SimplePeerMachinesManager;
 import net.amicity.pc.interfaces.PCInterface;
 
 /**

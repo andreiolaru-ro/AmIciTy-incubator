@@ -26,9 +26,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import net.amicity.common.communications.MessageItem;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.common.intelligence.FileAnalizerModule;
+import net.amicity.pc.intelligence.FileAnalizerModule;
 
 /**
  * shows a frma to ask a pesone wheter he wants to contact someone

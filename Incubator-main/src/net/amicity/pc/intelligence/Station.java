@@ -9,7 +9,7 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.common.communications;
+package net.amicity.pc.intelligence;
 
 /**
  * class which describes the characters of a station used in communication
