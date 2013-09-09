@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 
 import javax.swing.JButton;
@@ -15,8 +16,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
+import net.amicity.common.communications.Connection;
 import net.amicity.common.communications.MessageItem;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.pc.communications.DefaultNetLink;
 
 public class HelpMessage extends JFrame implements ActionListener {
 
@@ -51,26 +54,26 @@ public class HelpMessage extends JFrame implements ActionListener {
 	 * the user which needs help
 	 */
 	String myUser;
+	
+	DefaultNetLink  myLink;
+	
+	Connection connectionRecv;
 
-	Socket myClient;
 
 	/**
 	 * initialising the window
+	 * @param objectReceived : the MessageItem received
 	 * 
-	 * @param filename
-	 *            : the file's name for which help is required
-	 * @param user
-	 *            : the nema of the user whoch called for help
 	 */
-	public HelpMessage(Object objectReceived, Socket client) {
+	public HelpMessage(Object objectReceived) {
+		System.out.println("FEREASTRA A FOST PRIMITA");
 		MessageItem myItem = (MessageItem) objectReceived;
 		myFilename = myItem.myFilename;
 		myUser = myItem.myUser;
-
-		myClient = client;
-
+		connectionRecv = myItem.connectionSent;
 		width = 300;
 		height = 200;
+		myLink = new DefaultNetLink();
 		createWindow();
 		addWrite();
 
@@ -127,13 +130,17 @@ public class HelpMessage extends JFrame implements ActionListener {
 		String command = e.getActionCommand();
 
 		if (command.equals("Yes, with pleasure") == true) {
-			ObjectOutputStream out;
+			
+			String id = ContextCore.getUsername();
+			Connection cc;
+			
 			try {
-				out = new ObjectOutputStream(myClient.getOutputStream());
-				out.writeObject(new MessageItem(ContextCore.getUsername(),
-						myFilename, 1));
-				out.close();
-				myClient.close();
+				cc = new Connection(InetAddress.getLocalHost(), id, 4501);
+				
+				
+				MessageItem mesaj = new MessageItem(id,myFilename,cc, 1  );
+				System.out.println("AJUTORUL A FOST CONFIRMAT");
+				myLink.send(connectionRecv, mesaj);
 			}
 			catch (IOException e1) {
 				// TODO Auto-generated catch block

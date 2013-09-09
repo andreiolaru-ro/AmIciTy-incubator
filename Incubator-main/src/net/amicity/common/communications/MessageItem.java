@@ -21,13 +21,16 @@ public class MessageItem implements Serializable
 	
 	public int nr;
 	
+	public Connection connectionSent;
 	/**
      * @param User : receving the name of the User
  	* @param Filename : receving the name of the file
+	 * @param cc : used to response to the MessageItem
  	*/
-	public MessageItem(String User, String Filename, int nr){
+	public MessageItem(String User, String Filename, Connection cc,int nr){
 	    myUser = User;
 	    myFilename = Filename;
+	    connectionSent = cc;
 	    this.nr = nr;
     }
 }

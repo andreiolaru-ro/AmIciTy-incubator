@@ -137,8 +137,22 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
 		
 		for(Connection cn : connections){
-				MessageItem mesaj = new MessageItem(ContextCore.getUsername(), myFam.fileChanged.getName(), 0);
-				myDefaultNetLink.send(cn, mesaj );
+				
+				String username = ContextCore.getUsername();
+				String filename = myFam.fileChanged.getName();
+				Connection cc;
+				try
+				{
+					cc = new Connection(InetAddress.getLocalHost(), username, 4501);
+					MessageItem mesaj = new MessageItem(username,filename,cc, 0  );
+					myDefaultNetLink.send(cn, mesaj );
+				}
+				catch (UnknownHostException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			
 		} 
 		

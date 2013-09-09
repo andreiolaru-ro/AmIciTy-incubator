@@ -90,19 +90,20 @@ public class DefaultNetLink implements NetLink {
 							if(obj instanceof MessageItem){
 								MessageItem mi = (MessageItem) obj;
 								if(mi.nr == 0)
-									new HelpMessage(obj, client);
+									new HelpMessage(obj);
 								else{
+									System.out.println("APARE FEREASTRA");
 									new Anunt();
-									in.close();
-									client.close();
 								}
+								
 									
 							}
 							else{
 								msgR.receive(obj);
-								in.close();
-								client.close();
 							}
+							in.close();
+							client.close();
+							
 						}
 						catch (IOException e) {
 							// TODO Auto-generated catch block
