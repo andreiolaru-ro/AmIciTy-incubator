@@ -69,6 +69,7 @@ public class LoginActivity extends Activity {
 					i.putExtra("username", username.getText().toString());
 					Log.e("Cristi", i.getExtras().getString("username"));
 					startActivity(i);
+					finish();
 				}
 
 			}
