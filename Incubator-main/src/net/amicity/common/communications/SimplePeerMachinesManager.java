@@ -72,7 +72,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	 * adding pairs of data Location-IP
 	 */
 	public void addServersIP() {
-		serversIP.put("CANTI", "172.16.15.223");
+		serversIP.put("CANTI", "172.16.14.145");
 		serversIP.put("acasa", "192.168.0.197");
 	}
 
@@ -131,20 +131,10 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		
 		System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
 		
-	/*	for(Connection cn : connections){
-			try
-			{
-				Connection me = new Connection(InetAddress.getLocalHost(),
-						ContextCore.getUsername(), 4501);
-				myDefaultNetLink.createConnection(cn, me);
+		for(Connection cn : connections){
 				myDefaultNetLink.send(cn, "cucu");
-			}
-			catch (UnknownHostException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} */
+			
+		} 
 		
 		
 		 

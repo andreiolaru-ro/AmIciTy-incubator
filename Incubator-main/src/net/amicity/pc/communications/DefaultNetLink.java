@@ -85,7 +85,10 @@ public class DefaultNetLink implements NetLink {
 							ObjectInputStream in = new ObjectInputStream(
 									client.getInputStream());
 							Object obj = in.readObject();
-							msgR.receive(obj);
+							if(obj instanceof String)
+								System.out.println(obj);
+							else
+								msgR.receive(obj);
 							in.close();
 							client.close();
 						}
