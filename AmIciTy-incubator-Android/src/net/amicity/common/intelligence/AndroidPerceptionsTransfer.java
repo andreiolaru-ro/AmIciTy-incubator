@@ -67,7 +67,7 @@ public class AndroidPerceptionsTransfer implements IntelligenceModule {
 		if (myDeviceItem != null) {
 			myDevices = myDeviceItem.getMyDevices();
 			for (Connection c : myDevices) {
-				System.out.println("incearcaa cu: "
+				System.out.println("incearca cu: "
 						+ c.getId().substring(c.getId().indexOf('-') + 1,
 								c.getId().indexOf('-') + 3));
 				if (c.getId()
