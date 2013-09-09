@@ -50,18 +50,13 @@ public class WirelessModule implements SensorModule {
 	 * constructor of the class initialize its members
 	 */
 	public WirelessModule() {
-
 		wirelessItem = new WirelessItem();
-		System.out.println(" wirelessModule constructor ");
-
 	}
 
 	@Override
 	public void connect(ContextCore coreReceived) {
 		myCore = coreReceived;
-		System.out.println(" wireless module connect");
 		obtainData();
-		System.out.println(" wireless module obtainData");
 	}
 
 	/**

@@ -23,6 +23,10 @@ public class ServerModule extends Service implements SensorModule {
 		System.out.println("Am deschis conexiunea cu serverul");
 		d.receiveFromServer(ContextCore.getServerSocket(), new DefaultMessageReceiver());
 		
+		// listen from other devices
+		DefaultNetLink d2 = new DefaultNetLink();
+		d2.initializeReceival(4501, new DefaultMessageReceiver());
+		
 		return Service.START_STICKY;
 	}
 

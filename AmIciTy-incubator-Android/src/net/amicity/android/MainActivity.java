@@ -35,6 +35,7 @@ import net.amicity.common.intelligence.SoundIntel;
 import net.amicity.incubator_android.R;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,6 +77,7 @@ public class MainActivity extends Activity implements Serializable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.main_act);
 		Intent i = getIntent();
 		intents = new ArrayList<Intent>();

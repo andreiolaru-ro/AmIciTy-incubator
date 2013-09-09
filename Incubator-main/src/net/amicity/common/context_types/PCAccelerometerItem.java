@@ -55,6 +55,7 @@ public class PCAccelerometerItem extends AbstractItem {
 	public PCAccelerometerItem(String man, String user) {
 		this.man = man;
 		this.user = user;
+		this.type = ContextTypes.ACCELEROMETER;
 	}
 
 	/**

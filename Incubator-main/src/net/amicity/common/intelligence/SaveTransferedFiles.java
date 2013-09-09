@@ -54,9 +54,9 @@ public class SaveTransferedFiles implements IntelligenceModule {
 			catch (IOException e) {
 				e.printStackTrace();
 			}
-			PCInterface.addNotification("all working directory moved, you can start work");
-			System.out.println("all working directory moved, you can start work");
 		}
+		PCInterface.addNotification("all working directory moved, you can start work");
+		System.out.println("all working directory moved, you can start work");
 	}
 	
 }

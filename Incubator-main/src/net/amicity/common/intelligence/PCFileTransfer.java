@@ -67,6 +67,7 @@ public class PCFileTransfer implements IntelligenceModule {
 						tfi.addFiles(new File("./munca"));
 						System.out.println("poti incepe transferul");
 						DefaultNetLink d = new DefaultNetLink();
+						System.out.println(c.getId() + " " + c.getIp());
 						d.send(c, tfi);
 					}
 				}
