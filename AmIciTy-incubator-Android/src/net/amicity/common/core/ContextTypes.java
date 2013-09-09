@@ -52,6 +52,16 @@ public enum ContextTypes {
 	/**
 	 * contextType for an item containing all perception received
 	 */
-	PERCEPTION_CONTEXT;
+	PERCEPTION_CONTEXT,
+	
+	/**
+	 * 
+	 */
+	SEND_ITEM_CONTEXT,
+	
+	/**
+	 * 
+	 */
+	RECEIVED_ITEM_CONTEXT;
 
 }

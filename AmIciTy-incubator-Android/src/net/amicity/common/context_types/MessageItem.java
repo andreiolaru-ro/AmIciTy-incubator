@@ -1,8 +1,8 @@
-package net.amicity.common.communications;
+package net.amicity.common.context_types;
 
 import java.io.Serializable;
 
-import net.amicity.common.context_types.AbstractItem;
+import net.amicity.common.communications.Connection;
 import net.amicity.common.core.ContextTypes;
 
 

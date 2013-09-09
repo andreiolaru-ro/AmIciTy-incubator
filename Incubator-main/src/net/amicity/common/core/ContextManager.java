@@ -14,8 +14,8 @@ package net.amicity.common.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import net.amicity.common.communications.MessageItem;
 import net.amicity.common.context_types.AbstractItem;
+import net.amicity.common.context_types.MessageItem;
 import net.amicity.common.core.context.ContextCore;
 
 /**

@@ -9,30 +9,26 @@
  * 
  * You should have received a copy of the GNU General Public License along with AmIciTy-incubator-Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package net.amicity.pc.intelligence;
+package net.amicity.android.intelligent;
 
 import java.net.InetAddress;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import net.amicity.android.communications.DefaultNetLink;
 import net.amicity.common.communications.Connection;
 import net.amicity.common.context_types.MessageItem;
-import net.amicity.common.context_types.OtherDevicesItem;
+
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-
-
-
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.pc.communications.DefaultNetLink;
-import net.amicity.pc.interfaces.Anunt;
-import net.amicity.pc.interfaces.HelpMessage;
+
 
 /**
  * operates the data from the stations in order to initiate communication
@@ -65,20 +61,16 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	 */
 	ContextCore myCore;
 	
-	FileAnalizerModule myFam; 
 	
 	/**
 	 * @param cc : receving all the queues
-	 * @param fam : to obtain the files changed
 	 */
-	public SimplePeerMachinesManager(ContextCore cc, FileAnalizerModule fam){
+	public SimplePeerMachinesManager(ContextCore cc){
 		stationsReceived = new ArrayList<Station>();
 		serversIP = new TreeMap<String, String>();
 		addServersIP();
 		myDefaultNetLink = new DefaultNetLink();
 		myCore = cc;
-		myFam = fam;
-
 	}
 
 	/**
@@ -136,55 +128,23 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	@Override
 	public void invoke()
 	{	
-		OtherDevicesItem devices;
 		MessageItem message1, message2;
 		ContextStorage dataKept =  myCore.getContextStorage();
-		devices = (OtherDevicesItem) dataKept.remove(ContextTypes.OTHER_DEVICES_CONTEXT);
 		message1 = (MessageItem) dataKept.remove(ContextTypes.SEND_ITEM_CONTEXT);
 		message2 = (MessageItem) dataKept.remove(ContextTypes.RECEIVED_ITEM_CONTEXT);
 		
 		
-		if(devices != null){
-			
-			ArrayList<Connection> connections = devices.getTheDevices();
-			System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
-			for(Connection cn : connections){
-				
-				String username = ContextCore.getUsername();
-				String filename = myFam.fileChanged.getName();
-				Connection cc;
-				try
-				{ 
-					
-					System.out.println(" trimit lui cristi datele mele");
-					cc = new Connection( InetAddress.getLocalHost(), username, 4501);
-					MessageItem mesaj = new MessageItem(username,filename,cc, ContextTypes.SEND_ITEM_CONTEXT  );
-					myDefaultNetLink.send(cn, mesaj );
-				}
-				catch (UnknownHostException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			
-			} 
-		}
-		else{
-			System.out.println("devices ESTE NULL");
-		}
-		
 		
 		if(message1  != null){
-			new HelpMessage(message1);
+			//new HelpMessage(message1);
 		}
 		else{
 			System.out.println("message1 ESTE NULL");
 		}
 			
 		if(message2  != null){
-			Anunt help =	new Anunt();
-			help.start();
+		//	Anunt help =	new Anunt();
+		//	help.start();
 		}
 		else{
 			System.out.println("message2 ESTE NULL");

@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 import net.amicity.common.communications.Connection;
-import net.amicity.common.communications.MessageItem;
+import net.amicity.common.context_types.MessageItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.pc.communications.DefaultNetLink;
