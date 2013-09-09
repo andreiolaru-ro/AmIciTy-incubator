@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 
 
-public class Anunt extends JFrame
+public class Anunt extends Thread
 {
 	/**
 	 * the frame's width
@@ -25,31 +25,47 @@ public class Anunt extends JFrame
 	
 	public Anunt(){
 
+		
+		
+	}
+	public void run(){
+		JFrame frame = new JFrame();
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		Rectangle winSize = GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getMaximumWindowBounds();
-		this.setTitle("Need Help?");
-		this.setSize(width, height);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setTitle("Need Help?");
+		frame.setSize(width, height);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
 		JLabel eticheta = new JLabel("Someone will come to help you any minute now");
 		Dimension dim = eticheta.getPreferredSize();
 		width = dim.width + 20;
 		eticheta.setBounds((width - dim.width) / 2, 30, dim.width, dim.height);
-		add(eticheta);
+		frame.add(eticheta);
 		
 		
-		this.setLocation(dimension.width - width, winSize.height - height);
-		this.setVisible(true);
-		this.toFront();
-		setLayout(null);
+		frame.setLocation(dimension.width - width, winSize.height - height);
+		frame.setVisible(true);
+		frame.toFront();
+		frame.setLayout(null);
 		
 		
 		
-		this.setSize(width - 1, height - 1);
-		this.setSize(width, height);
+		frame.setSize(width - 1, height - 1);
+		frame.setSize(width, height);
 		
+		
+		try
+		{
+			this.sleep(5000);
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		frame.dispose();
 	}
 	
 	

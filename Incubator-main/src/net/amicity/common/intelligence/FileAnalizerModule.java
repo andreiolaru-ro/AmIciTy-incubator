@@ -72,7 +72,6 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 	public void invoke() {
 		FilesItem itemReceived = (FilesItem) myCore.getContextStorage().get(
 				ContextTypes.FILE_CONTEXT);
-		System.out.println("Itemul a fost primit de analizator");
 		for (FileChangeData fcd : itemReceived.filesMonitorized) {
 
 			File file = fcd.getFile();
@@ -80,8 +79,6 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 			boolean changed = fcd.getNrChange();
 
 			if (changed == false) {
-				System.out
-						.println("nu am mai modificat fisierul de cand l-am deschis");
 
 				if (filesOpened.contains(file) == true && isShown() == false) {
 
@@ -92,16 +89,10 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 					setShown(true);
 				}
 				else {
-					System.out
-							.println("ESTE UN FISIER NOU DESCHIS si nu este continut"
-									+ filesOpened.size());
 					filesOpened.add(file);
 				}
 			}
 			else {
-				System.out
-						.println("Am mai modificat fisierul de cand l-am deschis");
-
 				if (nrDiff < 100 && isShown() == false) {
 					WindowMessage win = new WindowMessage(this, file);
 					win.show();

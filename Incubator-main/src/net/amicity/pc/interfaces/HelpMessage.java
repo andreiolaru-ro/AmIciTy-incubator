@@ -7,9 +7,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.InetAddress;
-import java.net.Socket;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

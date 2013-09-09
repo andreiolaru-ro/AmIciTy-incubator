@@ -93,8 +93,11 @@ public class DefaultNetLink implements NetLink {
 								if(mi.nr == 0)
 									new HelpMessage(obj);
 								else{
-									System.out.println("APARE FEREASTRA");
-									new Anunt();
+										
+									Anunt help =	new Anunt();
+									help.start();
+									
+									
 								}
 								
 									

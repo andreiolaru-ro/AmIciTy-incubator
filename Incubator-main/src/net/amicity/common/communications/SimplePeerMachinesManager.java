@@ -12,12 +12,18 @@
 package net.amicity.common.communications;
 
 import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import net.amicity.common.context_types.OtherDevicesItem;
+
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+
+
 
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
@@ -142,8 +148,8 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 				String filename = myFam.fileChanged.getName();
 				Connection cc;
 				try
-				{
-					cc = new Connection(InetAddress.getLocalHost(), username, 4501);
+				{ 
+					cc = new Connection( InetAddress.getLocalHost(), username, 4501);
 					MessageItem mesaj = new MessageItem(username,filename,cc, 0  );
 					myDefaultNetLink.send(cn, mesaj );
 					System.out.println("HELP SENT");
@@ -162,4 +168,5 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		// TODO Auto-generated method stub
 		
 	}
+	
 }
