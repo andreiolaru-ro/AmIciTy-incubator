@@ -14,6 +14,7 @@ package net.amicity.common.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import net.amicity.common.communications.MessageItem;
 import net.amicity.common.context_types.AbstractItem;
 import net.amicity.common.core.context.ContextCore;
 
@@ -54,6 +55,9 @@ public class ContextManager extends Thread {
 		while (true) {
 			if (ContextCore.getContextUpdates().isEmpty() == false) {
 				AbstractItem item = ContextCore.getContextUpdate();
+				if( item instanceof MessageItem){
+					System.out.println("S-A PRIMIT in CONTEXTMANAGER UN MessageItem");
+				}
 				
 				if (hm.containsKey(item.getType())) {
 					Notification newNot = new Notification(hm.get(item

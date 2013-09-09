@@ -139,17 +139,12 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		ContextStorage dataKept =  myCore.getContextStorage();
 		devices = (OtherDevicesItem) dataKept.remove(ContextTypes.OTHER_DEVICES_CONTEXT);
 		message1 = (MessageItem) dataKept.remove(ContextTypes.SEND_ITEM_CONTEXT);
-		message2 = (MessageItem) dataKept.remove(ContextTypes.OTHER_DEVICES_CONTEXT);
+		message2 = (MessageItem) dataKept.remove(ContextTypes.RECEIVED_ITEM_CONTEXT);
 		
-		
-		
-		ArrayList<Connection> connections = devices.getTheDevices();
-		
-		
-		System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
 		
 		if(devices != null){
 			
+			ArrayList<Connection> connections = devices.getTheDevices();
 			System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
 			for(Connection cn : connections){
 				
@@ -158,6 +153,9 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 				Connection cc;
 				try
 				{ 
+					
+					System.out.println(" trimit lui cristi datele mele");
+					System.out.println(cn.ip);
 					cc = new Connection( InetAddress.getLocalHost(), username, 4501);
 					MessageItem mesaj = new MessageItem(username,filename,cc, ContextTypes.SEND_ITEM_CONTEXT  );
 					myDefaultNetLink.send(cn, mesaj );
@@ -171,12 +169,26 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 			
 			} 
 		}
-		if(message1  != null)
+		else{
+			System.out.println("devices ESTE NULL");
+		}
+		
+		
+		if(message1  != null){
 			new HelpMessage(message1);
+		}
+		else{
+			System.out.println("message1 ESTE NULL");
+		}
+			
 		if(message2  != null){
 			Anunt help =	new Anunt();
 			help.start();
 		}
+		else{
+			System.out.println("message2 ESTE NULL");
+		}
+			
 
 		// TODO Auto-generated method stub
 		

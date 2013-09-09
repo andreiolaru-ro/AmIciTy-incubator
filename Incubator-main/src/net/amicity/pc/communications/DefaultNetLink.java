@@ -295,7 +295,7 @@ public class DefaultNetLink implements NetLink {
 	 */
 	public void sendUsersItem(Socket client){
 		OtherDevicesItem items = new OtherDevicesItem();
-		items.setHisDevices( manager.getAllHisConnections("mamaie"));
+		items.setHisDevices( manager.getAllHisConnections("cucu"));
 		ObjectOutputStream out;
 		try
 		{
