@@ -24,6 +24,7 @@ import net.amicity.common.intelligence.DummyDevicesModule;
 import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.common.intelligence.LocationModule;
+import net.amicity.common.intelligence.PCFileTransfer;
 import net.amicity.common.intelligence.SaveTransferedFiles;
 import net.amicity.common.intelligence.ShowPerceptionModule;
 import net.amicity.pc.interfaces.PCInterface;
@@ -51,7 +52,7 @@ public class Main {
 		}
 
 		System.out.println(" USER IS: " + pci.getUserName());
-		cc.setUsername(pci.getUserName());
+		ContextCore.setUsername(pci.getUserName());
 
 		// start the files monitorization
 		ChangeDetectorModule cdm = new ChangeDetectorModule();
@@ -66,6 +67,7 @@ public class Main {
 		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 		ShowPerceptionModule spm = new ShowPerceptionModule(cc);
 		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
+		PCFileTransfer pft = new PCFileTransfer(cc);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type
@@ -92,6 +94,9 @@ public class Main {
 		ArrayList<IntelligenceModule> iModules7 = new ArrayList<IntelligenceModule>();
 		iModules7.add(peer);
 		hm.put(ContextTypes.OTHER_DEVICES_CONTEXT, iModules7);
+		ArrayList<IntelligenceModule> iModules8 = new ArrayList<IntelligenceModule>();
+		iModules8.add(pft);
+		hm.put(ContextTypes.ACCELEROMETER, iModules8);
 
 		// start sensors services
 

@@ -30,6 +30,7 @@ import net.amicity.common.intelligence.DummyAccelerometerTest;
 import net.amicity.common.intelligence.DummyDevicesModule;
 import net.amicity.common.intelligence.DummyMessage;
 import net.amicity.common.intelligence.LocationModule;
+import net.amicity.common.intelligence.SaveTransferedFiles;
 import net.amicity.common.intelligence.SoundIntel;
 import net.amicity.incubator_android.R;
 import android.app.Activity;
@@ -82,11 +83,12 @@ public class MainActivity extends Activity implements Serializable {
 		// Create ContextCore
 
 		ContextCore cc = new ContextCore();
-		// Create intelligence modules
+		
 		String uname = i.getExtras().getString("username");
 		cc.setUsername(uname);
+		
+		// Create intelligence modules
 
-		// changes.setText("User is:" + i.getExtras().getString("username"));
 		LocationModule lm = new LocationModule(cc);
 		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
@@ -94,6 +96,7 @@ public class MainActivity extends Activity implements Serializable {
 		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
 		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc);
+		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type
@@ -121,6 +124,10 @@ public class MainActivity extends Activity implements Serializable {
 		iModules5.add(aft);
 		iModules5.add(ddm);
 		hm.put(ContextTypes.DEVICES_CONTEXT, iModules5);
+		
+		ArrayList<IntelligenceModule> iModules6 = new ArrayList<IntelligenceModule>();
+		iModules6.add(stf);
+		hm.put(ContextTypes.TRANSFER_FILE_CONTEXT, iModules6);
 
 		// start sensors services
 
