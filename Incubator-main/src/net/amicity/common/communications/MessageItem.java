@@ -18,12 +18,16 @@ public class MessageItem implements Serializable
 	 */
 	public String myFilename;
 	
+	
+	public int nr;
+	
 	/**
      * @param User : receving the name of the User
  	* @param Filename : receving the name of the file
  	*/
-	public MessageItem(String User, String Filename){
+	public MessageItem(String User, String Filename, int nr){
 	    myUser = User;
 	    myFilename = Filename;
+	    this.nr = nr;
     }
 }

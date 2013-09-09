@@ -23,6 +23,7 @@ import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.common.intelligence.FileAnalizerModule;
 import net.amicity.pc.communications.DefaultNetLink;
 
 /**
@@ -56,15 +57,19 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	 */
 	ContextCore myCore;
 	
+	FileAnalizerModule myFam; 
+	
 	/**
 	 * @param cc : receving all the queues
+	 * @param fam : to obtain the files changed
 	 */
-	public SimplePeerMachinesManager(ContextCore cc) {
+	public SimplePeerMachinesManager(ContextCore cc, FileAnalizerModule fam){
 		stationsReceived = new ArrayList<Station>();
 		serversIP = new TreeMap<String, String>();
 		addServersIP();
 		myDefaultNetLink = new DefaultNetLink();
 		myCore = cc;
+		myFam = fam;
 
 	}
 
@@ -132,7 +137,8 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
 		
 		for(Connection cn : connections){
-				myDefaultNetLink.send(cn, "cucu");
+				MessageItem mesaj = new MessageItem(ContextCore.getUsername(), myFam.fileChanged.getName(), 0);
+				myDefaultNetLink.send(cn, mesaj );
 			
 		} 
 		

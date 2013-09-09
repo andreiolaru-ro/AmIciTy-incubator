@@ -13,6 +13,7 @@ import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.WindowConstants;
 
 import net.amicity.common.communications.MessageItem;
 import net.amicity.common.core.context.ContextCore;
@@ -85,7 +86,7 @@ public class HelpMessage extends JFrame implements ActionListener {
 				.getMaximumWindowBounds();
 		this.setTitle("Need Help?");
 		this.setSize(width, height);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setLocation(dimension.width - width, winSize.height - height);
 		this.setVisible(true);
 		this.toFront();
@@ -130,12 +131,15 @@ public class HelpMessage extends JFrame implements ActionListener {
 			try {
 				out = new ObjectOutputStream(myClient.getOutputStream());
 				out.writeObject(new MessageItem(ContextCore.getUsername(),
-						myFilename));
+						myFilename, 1));
+				out.close();
+				myClient.close();
 			}
 			catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
 
 			dispose();
 		}

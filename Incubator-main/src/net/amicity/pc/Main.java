@@ -61,7 +61,7 @@ public class Main {
 
 		FileAnalizerModule fam = new FileAnalizerModule(cc, cdm);
 		LocationModule lm = new LocationModule(cc);
-		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc);
+		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc, fam);
 		DummyMessage dm = new DummyMessage(cc, peer);
 		DummyDevicesModule ddm = new DummyDevicesModule(cc);
 		ShowPerceptionModule spm = new ShowPerceptionModule(cc);

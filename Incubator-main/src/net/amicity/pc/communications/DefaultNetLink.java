@@ -27,6 +27,8 @@ import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.context_types.OtherDevicesItem;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.pc.interfaces.Anunt;
+import net.amicity.pc.interfaces.HelpMessage;
 import net.amicity.pc.sensors.ServerModule;
 
 /**
@@ -85,12 +87,22 @@ public class DefaultNetLink implements NetLink {
 							ObjectInputStream in = new ObjectInputStream(
 									client.getInputStream());
 							Object obj = in.readObject();
-							if(obj instanceof String)
-								System.out.println(obj);
-							else
+							if(obj instanceof MessageItem){
+								MessageItem mi = (MessageItem) obj;
+								if(mi.nr == 0)
+									new HelpMessage(obj, client);
+								else{
+									new Anunt();
+									in.close();
+									client.close();
+								}
+									
+							}
+							else{
 								msgR.receive(obj);
-							in.close();
-							client.close();
+								in.close();
+								client.close();
+							}
 						}
 						catch (IOException e) {
 							// TODO Auto-generated catch block

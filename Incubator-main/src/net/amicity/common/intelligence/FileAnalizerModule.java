@@ -48,6 +48,9 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 	 * if it is already a window on screen
 	 */
 	private boolean shown;
+	
+	
+	public File fileChanged;
 
 	/**
 	 * @param received
@@ -62,6 +65,7 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 		myCore = received;
 		filesOpened = new ArrayList<File>();
 		setShown(false);
+		fileChanged = null;
 	}
 
 	@Override
@@ -82,6 +86,7 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 				if (filesOpened.contains(file) == true && isShown() == false) {
 
 					getMyTimer().ceaseTimer();
+					fileChanged =file;
 					WindowMessage win = new WindowMessage(this, file);
 					win.show();
 					setShown(true);
