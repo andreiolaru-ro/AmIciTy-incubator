@@ -52,6 +52,5 @@ public class ShowPerceptionModule implements IntelligenceModule {
 		PCInterface.addNotification("Last time the user was " + pi.getAction()
 				+ "\n");
 		ContextCore.postContextUpdate(new PCAccelerometerItem(pi.getAction(),pi.getUser()));
-
 	}
 }

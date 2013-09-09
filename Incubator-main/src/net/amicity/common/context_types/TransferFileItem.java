@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import net.amicity.common.core.ContextTypes;
 import net.amicity.common.intelligence.FileContext;
 
 /**
@@ -27,6 +28,7 @@ public class TransferFileItem extends AbstractItem {
 	 */
 	public TransferFileItem() {
 		files = new ArrayList<FileContext>();
+		this.type = ContextTypes.TRANSFER_FILE_CONTEXT;
 	}
 	
 	/**

@@ -96,7 +96,7 @@ public class DefaultNetLink implements NetLink {
 
 		try {
 			serverSocket = new ServerSocket(port);
-			final Test act = (Test) msgR;
+			// final Test act = (Test) msgR;
 
 			System.out.println("Server started on port: " + port);
 
@@ -110,16 +110,6 @@ public class DefaultNetLink implements NetLink {
 							ObjectInputStream in = new ObjectInputStream(
 									client.getInputStream());
 							final Object obj = in.readObject();
-
-							act.runOnUiThread(new Runnable() {
-
-								@Override
-								public void run() {
-									msgR.receive(obj);
-									// act.tx.setText((String) obj);
-								}
-							});
-
 							msgR.receive(obj);
 							in.close();
 							client.close();

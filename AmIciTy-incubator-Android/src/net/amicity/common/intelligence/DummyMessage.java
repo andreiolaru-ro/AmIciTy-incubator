@@ -72,7 +72,7 @@ public class DummyMessage implements IntelligenceModule {
 				d.createConnection(
 						new Connection(InetAddress.getByName("172.16.15.223"),
 								"", 4500),
-						new Connection(InetAddress.getLocalHost(), cc
+						new Connection(InetAddress.getByName(DefaultNetLink.getLocalIpAddress()), cc
 								.getUsername(), 4500));
 			}
 			catch (UnknownHostException e) {
