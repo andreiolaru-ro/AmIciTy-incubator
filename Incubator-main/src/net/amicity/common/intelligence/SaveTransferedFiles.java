@@ -1,11 +1,16 @@
 package net.amicity.common.intelligence;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import net.amicity.common.context_types.TransferFileItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.pc.interfaces.PCInterface;
 
 
 /**
@@ -34,8 +39,25 @@ public class SaveTransferedFiles implements IntelligenceModule {
 	public void invoke() {
 		files = ((TransferFileItem) myCore.getContextStorage().get(
 				ContextTypes.TRANSFER_FILE_CONTEXT)).getFiles();
-		for(FileContext f : files) {
-			System.out.println("filename : " + f.filename + "content : " + f.content);
+		boolean succes = new File("./munca").mkdir();
+		if(succes) {
+			for(FileContext f : files) {
+				//System.out.println("filename : " + f.filename + "content : " + f.content);
+				try {
+					File file = new File("./munca/" + f.filename);
+					if(!file.exists()) {
+						file.createNewFile();
+					}
+					FileWriter fw = new FileWriter(file.getAbsolutePath());
+					BufferedWriter bw = new BufferedWriter(fw);
+					bw.write(f.content);
+					bw.close();
+					PCInterface.addNotification("all working directory moved, you can start work");
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 	

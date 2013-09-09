@@ -42,6 +42,10 @@ public class AndroidFileTransfer implements IntelligenceModule {
 	 * An arraylist of all my devices
 	 */
 	ArrayList<Connection> myDevices;
+	/**
+	 * a boolean that says if i already sent the files
+	 */
+	boolean sent;
 
 	/**
 	 * constructor of the class initialize its members
@@ -51,6 +55,7 @@ public class AndroidFileTransfer implements IntelligenceModule {
 	 */
 	public AndroidFileTransfer(ContextCore cc) {
 		myCore = cc;
+		sent = false;
 	}
 
 	@Override
@@ -59,23 +64,26 @@ public class AndroidFileTransfer implements IntelligenceModule {
 				.getContextStorage().get(ContextTypes.ACCELEROMETER));
 		MyDevicesItem myDeviceItem = ((MyDevicesItem) myCore
 				.getContextStorage().get(ContextTypes.DEVICES_CONTEXT));
-		if (myAccelerometerItem != null && myDeviceItem != null) {
-			myDevices = myDeviceItem.getMyDevices();
-			action = myAccelerometerItem.man;
+		if( !sent ) {
+			if (myAccelerometerItem != null && myDeviceItem != null) {
+				myDevices = myDeviceItem.getMyDevices();
+				action = myAccelerometerItem.man;
 
-			for(Connection c : myDevices) {
-				System.out.println("incearcaa cu: " + c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3));
-				if(c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3).equalsIgnoreCase("pc")) {
-					if(action.equals("stays")) {
-						//transfer files to c
-						TransferFileItem tfi = new TransferFileItem();
-						tfi.addFiles(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/workspace"));
-						System.out.println("poti incepe transferul");
-						DefaultNetLink d = new DefaultNetLink();
-						d.send(c, tfi);
+				for(Connection c : myDevices) {
+					System.out.println("incearcaa cu: " + c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3));
+					if(c.getId().substring(c.getId().indexOf('-') + 1, c.getId().indexOf('-') + 3).equalsIgnoreCase("pc")) {
+						if(action.equals("stays")) {
+							//transfer files to c
+							TransferFileItem tfi = new TransferFileItem();
+							tfi.addFiles(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/workspace"));
+							System.out.println("poti incepe transferul");
+							DefaultNetLink d = new DefaultNetLink();
+							d.send(c, tfi);
+						}
 					}
 				}
 			}
+			sent = true;
 		}
 
 	}

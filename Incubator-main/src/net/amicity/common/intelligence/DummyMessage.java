@@ -56,6 +56,7 @@ public class DummyMessage implements IntelligenceModule {
 
 	/**
 	 * @param cc
+	 * @param peerListReceived 
 	 */
 	public DummyMessage(ContextCore cc,
 			SimplePeerMachinesManager peerListReceived) {
@@ -76,7 +77,7 @@ public class DummyMessage implements IntelligenceModule {
 			d.createConnection(new Connection(InetAddress.getByName(ip), "",
 					4500),
 					new Connection(InetAddress.getLocalHost(),
-							cc.getUsername(), 4500));
+							ContextCore.getUsername(), 4500));
 			PCInterface.addNotification("connected to 172.16.15.223");
 		}
 		catch (UnknownHostException e) {
