@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+nullnullpackage net.amicity.pc;
+=======
 nullnullnullpackage net.amicity.pc;
+>>>>>>> refs/remotes/origin/development/architecture
 
 import java.util.ArrayList;
 import java.util.HashMap;

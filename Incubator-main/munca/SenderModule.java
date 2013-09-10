@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+nullnullpackage net.amicity.pc.sensors;
+=======
 nullnullnullpackage net.amicity.pc.sensors;
+>>>>>>> refs/remotes/origin/development/architecture
 
 import java.util.Timer;
 

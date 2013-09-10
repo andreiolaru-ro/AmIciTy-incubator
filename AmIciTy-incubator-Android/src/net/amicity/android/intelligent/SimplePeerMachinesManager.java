@@ -11,28 +11,21 @@
  ******************************************************************************/
 package net.amicity.android.intelligent;
 
-
 import java.util.ArrayList;
-
-
-import net.amicity.android.MainActivity;
-import net.amicity.android.communications.DefaultNetLink;
-import net.amicity.common.context_types.MessageItem;
-
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.util.Log;
+import net.amicity.android.MainActivity;
+import net.amicity.android.communications.DefaultNetLink;
+import net.amicity.common.context_types.MessageItem;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.util.Log;
 
 /**
  * operates the data from the stations in order to initiate communication
@@ -40,8 +33,8 @@ import net.amicity.common.core.context.ContextCore;
  * @author vlad
  * 
  */
-public class SimplePeerMachinesManager implements PeerMachinesManager, IntelligenceModule{
-	
+public class SimplePeerMachinesManager implements PeerMachinesManager,
+		IntelligenceModule {
 
 	/**
 	 * list cotinaing "Station" instances with its data
@@ -56,36 +49,34 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	/**
 	 * initiating the members of the class
 	 */
-	
-	
+
 	DefaultNetLink myDefaultNetLink;
-	
-	
+
 	/**
 	 * obtaining the queues of the core
 	 */
 	ContextCore myCore;
-	
+
 	MainActivity myMainActivity;
-	
-	
+
 	/**
-	 * @param cc : receving all the queues
+	 * @param cc
+	 *            : receving all the queues
 	 */
-	public SimplePeerMachinesManager(ContextCore cc, MainActivity main){
+	public SimplePeerMachinesManager(ContextCore cc, MainActivity main) {
 		stationsReceived = new ArrayList<Station>();
 		serversIP = new TreeMap<String, String>();
 		addServersIP();
 		myDefaultNetLink = new DefaultNetLink();
 		myCore = cc;
-		myMainActivity= main;
+		myMainActivity = main;
 	}
 
 	/**
 	 * adding pairs of data Location-IP
 	 */
 	public void addServersIP() {
-		serversIP.put("CANTI", "172.16.15.223");
+		serversIP.put("CANTI", "192.168.0.198");
 		serversIP.put("acasa", "192.168.0.197");
 	}
 
@@ -134,42 +125,38 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	}
 
 	@Override
-	public void invoke()
-	{	
+	public void invoke() {
 		MessageItem message1;
-		ContextStorage dataKept =  myCore.getContextStorage();
-		message1 = (MessageItem) dataKept.remove(ContextTypes.SEND_ITEM_CONTEXT);
-		
+		ContextStorage dataKept = myCore.getContextStorage();
+		message1 = (MessageItem) dataKept
+				.remove(ContextTypes.SEND_ITEM_CONTEXT);
+
 		myMainActivity.runOnUiThread(new Runnable() {
 
-				@Override
-				public void run() {
-		
-				AlertDialog.Builder alertDialogB = new AlertDialog.Builder(myMainActivity);
+			@Override
+			public void run() {
+
+				AlertDialog.Builder alertDialogB = new AlertDialog.Builder(
+						myMainActivity);
 				alertDialogB.setTitle("HELP, please");
 				alertDialogB.setMessage("Someone needs your help");
-				alertDialogB.setPositiveButton("Yes", new DialogInterface.OnClickListener()
-				{
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which)
-				{
-				     Log.e("help send", "A MERS MAHHH");
-					// TODO Auto-generated method stub
-					
-				}
-			});
-		AlertDialog alertDialog = alertDialogB.create();
-				 
-		// show it
-	     alertDialog.show();
-			
-		} 
-	     
-		
-			
-		
+				alertDialogB.setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Log.e("help send", "A MERS MAHHH");
+								// TODO Auto-generated method stub
+
+							}
+						});
+				AlertDialog alertDialog = alertDialogB.create();
+
+				alertDialog.show();
+
+			}
+
 		});
 	}
 }
-	
