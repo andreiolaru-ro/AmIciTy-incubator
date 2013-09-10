@@ -13,6 +13,7 @@ package net.amicity.common.intelligence;
 
 import java.util.ArrayList;
 
+import net.amicity.android.MainActivity;
 import net.amicity.common.communications.Connection;
 import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.core.ContextTypes;
@@ -37,13 +38,21 @@ public class DummyDevicesModule implements IntelligenceModule {
 	ArrayList<Connection> myDevices;
 
 	/**
+	 * The main activity instance, for updating its texts.
+	 */
+	MainActivity ma;
+
+	/**
 	 * constructor of the class initialize its members
 	 * 
 	 * @param cc
 	 *            the context core
+	 * @param ma
+	 *            the main activity which will be updated.
 	 */
-	public DummyDevicesModule(ContextCore cc) {
+	public DummyDevicesModule(ContextCore cc, MainActivity ma) {
 		myCore = cc;
+		this.ma = ma;
 	}
 
 	@Override
@@ -52,6 +61,9 @@ public class DummyDevicesModule implements IntelligenceModule {
 				ContextTypes.DEVICES_CONTEXT)).getMyDevices();
 		for (Connection c : myDevices) {
 			System.out.println(c.getId());
+			// ma.getChanges().setText("");
+			ma.getDevices().setText(c.getId());
+
 		}
 		// System.out.println("This are my devices: " + myDevices);
 	}
