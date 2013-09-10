@@ -13,11 +13,13 @@ package net.amicity.pc;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import net.amicity.common.communications.ConnMgr;
 import net.amicity.common.communications.Connection;
+import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.pc.communications.DefaultNetLink;
 
 /**
@@ -55,6 +57,19 @@ public class Main_server {
 									+ " is closed");
 							try {
 								i.getSocket().close();
+								ArrayList<Connection> other = manager
+										.getOtherConnections(i);
+								for (Connection c : other) {
+									ArrayList<Connection> newOther = new ArrayList<Connection>();
+									newOther.addAll(other);
+									newOther.remove(c);
+									MyDevicesItem mdi2 = new MyDevicesItem();
+									mdi2.setMyDevices(newOther);
+									ObjectOutputStream out2 = new ObjectOutputStream(
+											c.getSocket().getOutputStream());
+									out2.writeObject(mdi2);
+									System.out.println("Am trimis iesirea unui tip");
+								}
 							}
 							catch (IOException e1) {
 								e1.printStackTrace();
