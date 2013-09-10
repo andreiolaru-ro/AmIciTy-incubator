@@ -154,7 +154,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 					
 				}
 			});
-		AlertDialog alertDialog = alertDialogB.show();
+		AlertDialog alertDialog = alertDialogB.create();
 				 
 		// show it
 	     alertDialog.show();
