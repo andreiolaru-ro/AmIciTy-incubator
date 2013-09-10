@@ -18,6 +18,7 @@ import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
+import net.amicity.pc.interfaces.PCInterface;
 
 /**
  * A class for showing all my devices
@@ -50,9 +51,12 @@ public class DummyDevicesModule implements IntelligenceModule {
 	public void invoke() {
 		myDevices = ((MyDevicesItem) myCore.getContextStorage().get(
 				ContextTypes.DEVICES_CONTEXT)).getMyDevices();
+		String devicesList = "";
 		for (Connection c : myDevices) {
 			System.out.println(c.getId());
+			devicesList = devicesList + c.getId() + "\n";
 		}
+		PCInterface.addDevices(devicesList);
 		// System.out.println("This are my devices: " + myDevices);
 	}
 

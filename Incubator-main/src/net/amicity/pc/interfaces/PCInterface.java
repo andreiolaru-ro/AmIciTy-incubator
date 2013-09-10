@@ -70,6 +70,11 @@ public class PCInterface extends JFrame {
 	 * A JScrollPane for scrolling through the notifications.
 	 */
 	JScrollPane jsp;
+
+	/**
+	 * The jtextarea that contains the other devices I'm connected to.
+	 */
+	static JTextArea devices;
 	/**
 	 * The login button.
 	 */
@@ -94,9 +99,12 @@ public class PCInterface extends JFrame {
 		this.setLocation(dim.width / 2 - w / 2, dim.height / 2 - h / 2);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		jp = new JPanel();
+		jp.setLayout(new GridLayout(2, 1));
 		jpuser = new JPanel();
 		usrname = new JTextField(15);
 		jtf = new JTextArea(20, 20);
+		devices = new JTextArea(10, 20);
+		devices.setText("My devices:\n");
 		setLayout(new GridLayout(2, 1));
 		jsp = new JScrollPane(jtf);
 
@@ -191,8 +199,12 @@ public class PCInterface extends JFrame {
 		usrname.addMouseListener(ml);
 		jpuser.add(usrname);
 		jpuser.add(b);
-
-		jp.add(jsp);
+		JPanel aux = new JPanel();
+		aux.add(devices);
+		jp.add(aux);
+		JPanel aux2 = new JPanel();
+		aux2.add(jsp);
+		jp.add(aux2);
 		add(jpuser);
 		add(jp);
 		this.setVisible(true);
@@ -212,6 +224,14 @@ public class PCInterface extends JFrame {
 	public static void addNotification(String notif) {
 		jtf.setText(jtf.getText() + "\n" + notif);
 		// jtf.append(notif + "\n");
+	}
+
+	/**
+	 * @param mydevices
+	 *            the list of devices to be shown.
+	 */
+	public static void addDevices(final String mydevices) {
+		devices.setText("my devices:\n" + mydevices);
 	}
 
 	/**
