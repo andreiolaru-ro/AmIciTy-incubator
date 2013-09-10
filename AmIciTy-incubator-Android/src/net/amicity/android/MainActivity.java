@@ -50,7 +50,6 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements Serializable {
 	
 	
-	final Context context = this;
 
 	/**
 	 * 
@@ -106,7 +105,7 @@ public class MainActivity extends Activity implements Serializable {
 		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
 		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc);
 		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
-		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc, context);
+		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc, this);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type

@@ -15,6 +15,7 @@ package net.amicity.android.intelligent;
 import java.util.ArrayList;
 
 
+import net.amicity.android.MainActivity;
 import net.amicity.android.communications.DefaultNetLink;
 import net.amicity.common.context_types.MessageItem;
 
@@ -41,7 +42,6 @@ import net.amicity.common.core.context.ContextCore;
  */
 public class SimplePeerMachinesManager implements PeerMachinesManager, IntelligenceModule{
 	
-	Context c;
 
 	/**
 	 * list cotinaing "Station" instances with its data
@@ -66,17 +66,19 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	 */
 	ContextCore myCore;
 	
+	MainActivity myMainActivity;
+	
 	
 	/**
 	 * @param cc : receving all the queues
 	 */
-	public SimplePeerMachinesManager(ContextCore cc, Context context){
+	public SimplePeerMachinesManager(ContextCore cc, MainActivity main){
 		stationsReceived = new ArrayList<Station>();
 		serversIP = new TreeMap<String, String>();
 		addServersIP();
 		myDefaultNetLink = new DefaultNetLink();
 		myCore = cc;
-		c= context;
+		myMainActivity= main;
 	}
 
 	/**
@@ -138,13 +140,16 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		ContextStorage dataKept =  myCore.getContextStorage();
 		message1 = (MessageItem) dataKept.remove(ContextTypes.SEND_ITEM_CONTEXT);
 		
+		myMainActivity.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
 		
-		
-		AlertDialog.Builder alertDialogB = new AlertDialog.Builder(c);
-		alertDialogB.setTitle("HELP, please");
-		alertDialogB.setMessage("Someone needs your help");
-		alertDialogB.setPositiveButton("Yes", new DialogInterface.OnClickListener()
-			{
+				AlertDialog.Builder alertDialogB = new AlertDialog.Builder(myMainActivity);
+				alertDialogB.setTitle("HELP, please");
+				alertDialogB.setMessage("Someone needs your help");
+				alertDialogB.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+				{
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which)
@@ -159,10 +164,12 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		// show it
 	     alertDialog.show();
 			
-		}
+		} 
 	     
 		
 			
 		
+		});
+	}
 }
 	
