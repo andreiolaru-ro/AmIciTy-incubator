@@ -160,7 +160,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 
 		   }
 		});
-				alertDialogB.setPositiveButton("No, leave me alone",
+				alertDialogB.setNegativeButton("No, leave me alone",
 						new DialogInterface.OnClickListener() {
 
 							@Override
