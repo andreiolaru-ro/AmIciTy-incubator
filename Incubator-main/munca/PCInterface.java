@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-nullnullpackage net.amicity.pc;
-=======
-nullnullnullpackage net.amicity.pc;
->>>>>>> refs/remotes/origin/development/architecture
+nullnullnullnullnullpackage net.amicity.pc;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;

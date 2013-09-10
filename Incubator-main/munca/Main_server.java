@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-nullnullpackage net.amicity.pc;
-=======
-nullnullnullpackage net.amicity.pc;
->>>>>>> refs/remotes/origin/development/architecture
+nullnullnullnullnullpackage net.amicity.pc;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
