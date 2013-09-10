@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-nullnull/*******************************************************************************
-=======
 nullnullnull/*******************************************************************************
->>>>>>> refs/remotes/origin/development/architecture
  * Copyright (C) 2013 Andrei Olaru , Vlad Herescu, Cristian Radu Neagoe, Cristian Grigoras.
  * 
  * This file is part of AmIciTy-incubator.
