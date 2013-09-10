@@ -87,6 +87,7 @@ public class MainActivity extends Activity implements Serializable {
 		Intent i = getIntent();
 		intents = new ArrayList<Intent>();
 
+		
 		// Create ContextCore
 
 		ContextCore cc = new ContextCore();
