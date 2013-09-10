@@ -27,6 +27,7 @@ import net.amicity.common.communications.Connection;
 import net.amicity.common.communications.ConnectionManager;
 import net.amicity.common.communications.MessageReceiver;
 import net.amicity.common.communications.NetLink;
+import net.amicity.common.context_types.MessageItem;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.android.sensors.ServerModule;
 import android.content.Intent;
@@ -106,10 +107,15 @@ public class DefaultNetLink implements NetLink {
 				public void run() {
 					while (true) {
 						try {
+							
+							
 							Socket client = serverSocket.accept();
 							ObjectInputStream in = new ObjectInputStream(
 									client.getInputStream());
 							final Object obj = in.readObject();
+							if(obj instanceof MessageItem){
+								Log.e("MessageItem", "am primit un messageItem");
+							}
 							msgR.receive(obj);
 							in.close();
 							client.close();
