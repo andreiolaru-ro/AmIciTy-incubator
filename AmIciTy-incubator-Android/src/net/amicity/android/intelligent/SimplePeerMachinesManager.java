@@ -138,11 +138,12 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		ContextStorage dataKept =  myCore.getContextStorage();
 		message1 = (MessageItem) dataKept.remove(ContextTypes.SEND_ITEM_CONTEXT);
 		
-		if(message1  != null){
-			AlertDialog.Builder alertDialogB = new AlertDialog.Builder(c);
-			alertDialogB.setTitle("HELP, please");
-			alertDialogB.setMessage("Someone needs your help");
-			alertDialogB.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+		
+		
+		AlertDialog.Builder alertDialogB = new AlertDialog.Builder(c);
+		alertDialogB.setTitle("HELP, please");
+		alertDialogB.setMessage("Someone needs your help");
+		alertDialogB.setPositiveButton("Yes", new DialogInterface.OnClickListener()
 			{
 				
 				@Override
@@ -153,13 +154,15 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 					
 				}
 			});
+		AlertDialog alertDialog = alertDialogB.show();
+				 
+		// show it
+	     alertDialog.show();
 			
 		}
-		else{
-			System.out.println("message1 ESTE NULL");
-		}
+	     
+		
 			
 		
-	}
-	
 }
+	
