@@ -64,7 +64,7 @@ public class MainActivity extends Activity implements Serializable {
 	/**
 	 * The textarea for the changes to be seen;
 	 */
-	TextView changes;
+	private TextView changes;
 	/**
 	 * The button which logs the user in.
 	 */
@@ -72,7 +72,7 @@ public class MainActivity extends Activity implements Serializable {
 	/**
 	 * The devices connected to this one.
 	 */
-	TextView devices;
+	private TextView devices;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,17 +85,18 @@ public class MainActivity extends Activity implements Serializable {
 		// Create ContextCore
 
 		ContextCore cc = new ContextCore();
-		
+		setDevices((TextView) findViewById(R.id.devices));
+		setChanges((TextView) findViewById(R.id.changes));
 		String uname = i.getExtras().getString("username");
 		cc.setUsername(uname);
-		
+
 		// Create intelligence modules
 
 		LocationModule lm = new LocationModule(cc);
 		SoundIntel si = new SoundIntel(cc, this);
 		DummyAccelerometerTest dat = new DummyAccelerometerTest(cc);
 		DummyMessage dm = new DummyMessage(cc, this);
-		DummyDevicesModule ddm = new DummyDevicesModule(cc);
+		DummyDevicesModule ddm = new DummyDevicesModule(cc, this);
 		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
 		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc);
 		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
@@ -126,7 +127,7 @@ public class MainActivity extends Activity implements Serializable {
 		iModules5.add(aft);
 		iModules5.add(ddm);
 		hm.put(ContextTypes.DEVICES_CONTEXT, iModules5);
-		
+
 		ArrayList<IntelligenceModule> iModules6 = new ArrayList<IntelligenceModule>();
 		iModules6.add(stf);
 		hm.put(ContextTypes.TRANSFER_FILE_CONTEXT, iModules6);
@@ -164,6 +165,22 @@ public class MainActivity extends Activity implements Serializable {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public TextView getChanges() {
+		return changes;
+	}
+
+	public void setChanges(TextView changes) {
+		this.changes = changes;
+	}
+
+	public TextView getDevices() {
+		return devices;
+	}
+
+	public void setDevices(TextView devices) {
+		this.devices = devices;
 	}
 
 }
