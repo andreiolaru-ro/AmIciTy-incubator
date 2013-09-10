@@ -223,6 +223,7 @@ public class DefaultNetLink implements NetLink {
 						// do nothing
 						try {
 							server.close();
+							break;
 						}
 						catch (IOException e1) {
 							// do nothing
