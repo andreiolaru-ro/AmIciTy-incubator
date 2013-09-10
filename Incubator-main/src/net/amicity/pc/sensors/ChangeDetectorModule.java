@@ -45,6 +45,7 @@ public class ChangeDetectorModule {
 	 * 
 	 */
 	File workSpaceCheck;
+	
 
 	/**
 	 * timer which pushes modified files in core q
@@ -63,9 +64,7 @@ public class ChangeDetectorModule {
 		filesChanged = new ArrayList<FileChangeData>();
 		filesDetected = new ArrayList<FirstDetected>();
 		filesArray = new ArrayList<File>();
-		//workSpaceCheck = new File("./../");
-		//workSpaceCheck = new File("E:/eclipse/workspace");
-		workSpaceCheck = new File("D:/ECLIPSE");
+		workSpaceCheck = new File("./../");
 		this.detectFiles(workSpaceCheck);
 		pushQueue = new SenderModule(this);
 	}

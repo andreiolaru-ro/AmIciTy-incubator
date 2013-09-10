@@ -11,19 +11,22 @@
  ******************************************************************************/
 package net.amicity.android.intelligent;
 
-import java.net.InetAddress;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+
 import net.amicity.android.communications.DefaultNetLink;
-import net.amicity.common.communications.Connection;
 import net.amicity.common.context_types.MessageItem;
 
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.util.Log;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
@@ -37,6 +40,8 @@ import net.amicity.common.core.context.ContextCore;
  * 
  */
 public class SimplePeerMachinesManager implements PeerMachinesManager, IntelligenceModule{
+	
+	Context c;
 
 	/**
 	 * list cotinaing "Station" instances with its data
@@ -65,12 +70,13 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	/**
 	 * @param cc : receving all the queues
 	 */
-	public SimplePeerMachinesManager(ContextCore cc){
+	public SimplePeerMachinesManager(ContextCore cc, Context context){
 		stationsReceived = new ArrayList<Station>();
 		serversIP = new TreeMap<String, String>();
 		addServersIP();
 		myDefaultNetLink = new DefaultNetLink();
 		myCore = cc;
+		c= context;
 	}
 
 	/**
@@ -128,30 +134,31 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	@Override
 	public void invoke()
 	{	
-		MessageItem message1, message2;
+		MessageItem message1;
 		ContextStorage dataKept =  myCore.getContextStorage();
 		message1 = (MessageItem) dataKept.remove(ContextTypes.SEND_ITEM_CONTEXT);
-		message2 = (MessageItem) dataKept.remove(ContextTypes.RECEIVED_ITEM_CONTEXT);
-		
-		
 		
 		if(message1  != null){
-			//new HelpMessage(message1);
+			AlertDialog.Builder alertDialogB = new AlertDialog.Builder(c);
+			alertDialogB.setTitle("HELP, please");
+			alertDialogB.setMessage("Someone needs your help");
+			alertDialogB.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+			{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which)
+				{
+				     Log.e("help send", "A MERS MAHHH");
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
 		}
 		else{
 			System.out.println("message1 ESTE NULL");
 		}
 			
-		if(message2  != null){
-		//	Anunt help =	new Anunt();
-		//	help.start();
-		}
-		else{
-			System.out.println("message2 ESTE NULL");
-		}
-			
-
-		// TODO Auto-generated method stub
 		
 	}
 	
