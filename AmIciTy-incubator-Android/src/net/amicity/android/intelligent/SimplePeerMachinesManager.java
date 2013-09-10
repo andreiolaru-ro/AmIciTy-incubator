@@ -18,6 +18,7 @@ import java.util.TreeMap;
 
 import net.amicity.android.MainActivity;
 import net.amicity.android.communications.DefaultNetLink;
+import net.amicity.common.communications.Connection;
 import net.amicity.common.context_types.MessageItem;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
@@ -58,6 +59,9 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 	ContextCore myCore;
 
 	MainActivity myMainActivity;
+	
+	
+	MessageItem helpConf;
 
 	/**
 	 * @param cc
@@ -131,6 +135,10 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 		message1 = (MessageItem) dataKept
 				.remove(ContextTypes.SEND_ITEM_CONTEXT);
 
+		
+		createMessageItem(message1);
+		
+		
 		myMainActivity.runOnUiThread(new Runnable() {
 
 			@Override
@@ -141,12 +149,23 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 				alertDialogB.setTitle("HELP, please");
 				alertDialogB.setMessage("Someone needs your help");
 				alertDialogB.setPositiveButton("Yes",
+		new DialogInterface.OnClickListener() {
+
+		@Override
+		public void onClick(DialogInterface dialog,int which) {
+			
+			myDefaultNetLink.send(helpConf.connectionSent, helpConf);
+
+								// TODO Auto-generated method stub
+
+		   }
+		});
+				alertDialogB.setPositiveButton("No, leave me alone",
 						new DialogInterface.OnClickListener() {
 
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								Log.e("help send", "A MERS MAHHH");
 								// TODO Auto-generated method stub
 
 							}
@@ -158,5 +177,12 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 			}
 
 		});
+	}
+	public void createMessageItem(MessageItem recv){
+		String id = recv.myUser;
+		String filename = recv.myFilename;
+		Connection c = recv.connectionSent;
+		
+		helpConf =  new MessageItem(id,filename,c, ContextTypes.RECEIVED_ITEM_CONTEXT  );
 	}
 }

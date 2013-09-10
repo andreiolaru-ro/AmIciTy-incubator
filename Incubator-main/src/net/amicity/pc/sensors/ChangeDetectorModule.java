@@ -63,7 +63,7 @@ public class ChangeDetectorModule {
 		filesChanged = new ArrayList<FileChangeData>();
 		filesDetected = new ArrayList<FirstDetected>();
 		filesArray = new ArrayList<File>();
-		workSpaceCheck = new File("./munca/");
+		workSpaceCheck = new File("./../");
 		// workSpaceCheck = new File("E:/eclipse/workspace");
 		// workSpaceCheck = new File("D:/ECLIPSE");
 
