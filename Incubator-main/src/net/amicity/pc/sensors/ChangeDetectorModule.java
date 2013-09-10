@@ -66,6 +66,7 @@ public class ChangeDetectorModule {
 		workSpaceCheck = new File("./../");
 		// workSpaceCheck = new File("E:/eclipse/workspace");
 		// workSpaceCheck = new File("D:/ECLIPSE");
+
 		this.detectFiles(workSpaceCheck);
 		pushQueue = new SenderModule(this);
 	}

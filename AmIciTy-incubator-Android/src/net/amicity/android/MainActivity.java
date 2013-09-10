@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import net.amicity.android.intelligent.SimplePeerMachinesManager;
 import net.amicity.android.sensors.AccelerometerModule;
 import net.amicity.android.sensors.SoundModule;
 import net.amicity.android.sensors.WifiModule;
@@ -34,6 +35,7 @@ import net.amicity.common.intelligence.SaveTransferedFiles;
 import net.amicity.common.intelligence.SoundIntel;
 import net.amicity.incubator_android.R;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -46,6 +48,9 @@ import android.widget.TextView;
  * 
  */
 public class MainActivity extends Activity implements Serializable {
+	
+	
+	final Context context = this;
 
 	/**
 	 * 
@@ -100,6 +105,7 @@ public class MainActivity extends Activity implements Serializable {
 		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
 		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc);
 		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
+		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc, context);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type
@@ -131,6 +137,12 @@ public class MainActivity extends Activity implements Serializable {
 		ArrayList<IntelligenceModule> iModules6 = new ArrayList<IntelligenceModule>();
 		iModules6.add(stf);
 		hm.put(ContextTypes.TRANSFER_FILE_CONTEXT, iModules6);
+		
+		ArrayList<IntelligenceModule> iModules7 = new ArrayList<IntelligenceModule>();
+		iModules7.add(peer);
+		hm.put(ContextTypes.SEND_ITEM_CONTEXT, iModules7);
+		
+		
 
 		// start sensors services
 
