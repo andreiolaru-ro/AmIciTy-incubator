@@ -106,6 +106,7 @@ public class Main {
 		iModules10.add(peer);
 		hm.put(ContextTypes.RECEIVED_ITEM_CONTEXT, iModules10);
 
+		
 		// start sensors services
 
 		WirelessModule wm = new WirelessModule();
