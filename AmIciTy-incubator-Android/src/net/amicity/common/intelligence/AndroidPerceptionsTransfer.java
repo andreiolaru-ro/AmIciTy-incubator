@@ -71,7 +71,15 @@ public class AndroidPerceptionsTransfer implements IntelligenceModule {
 				ContextTypes.ACCELEROMETER)).man;
 		value = ((SoundItem) myCore.getContextStorage().get(
 				ContextTypes.SOUND_CONTEXT)).getValue();
-		// ma.runOnUiThread(new Runnable()P
+		ma.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				ma.getChanges().setText(
+						"Updates:\n Sound level:\n" + value + "\nUser is:"
+								+ action);
+			}
+		});
 		MyDevicesItem myDeviceItem = ((MyDevicesItem) myCore
 				.getContextStorage().get(ContextTypes.DEVICES_CONTEXT));
 		if (myDeviceItem != null) {
