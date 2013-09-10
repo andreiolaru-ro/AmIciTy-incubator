@@ -263,6 +263,7 @@ public class DefaultNetLink implements NetLink {
 						Object obj = in.readObject();
 
 						if (obj instanceof String) {
+							// do nothing
 						}
 						else {
 							System.out.println("Received an item");
@@ -275,12 +276,16 @@ public class DefaultNetLink implements NetLink {
 
 					}
 					catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						// do nothing
+						try {
+							server.close();
+						}
+						catch (IOException e1) {
+							//do nothing
+						}
 					}
 					catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						// do nothing
 					}
 				}
 
