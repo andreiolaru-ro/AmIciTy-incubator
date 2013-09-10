@@ -13,6 +13,7 @@ package net.amicity.common.intelligence;
 
 import java.util.ArrayList;
 
+import net.amicity.android.MainActivity;
 import net.amicity.android.communications.DefaultNetLink;
 import net.amicity.common.communications.Connection;
 import net.amicity.common.context_types.AccelerometerItem;
@@ -47,13 +48,21 @@ public class AndroidPerceptionsTransfer implements IntelligenceModule {
 	ArrayList<Connection> myDevices;
 
 	/**
+	 * The MainActivity used to post updates to the phone.
+	 */
+	MainActivity ma;
+
+	/**
 	 * constructor of the class initialize its members
 	 * 
 	 * @param cc
 	 *            the context core
+	 * @param ma
+	 *            the main activity.
 	 */
-	public AndroidPerceptionsTransfer(ContextCore cc) {
+	public AndroidPerceptionsTransfer(ContextCore cc, MainActivity ma) {
 		myCore = cc;
+		this.ma = ma;
 	}
 
 	@Override
@@ -62,6 +71,7 @@ public class AndroidPerceptionsTransfer implements IntelligenceModule {
 				ContextTypes.ACCELEROMETER)).man;
 		value = ((SoundItem) myCore.getContextStorage().get(
 				ContextTypes.SOUND_CONTEXT)).getValue();
+		// ma.runOnUiThread(new Runnable()P
 		MyDevicesItem myDeviceItem = ((MyDevicesItem) myCore
 				.getContextStorage().get(ContextTypes.DEVICES_CONTEXT));
 		if (myDeviceItem != null) {
@@ -76,6 +86,7 @@ public class AndroidPerceptionsTransfer implements IntelligenceModule {
 						.equalsIgnoreCase("pc")) {
 					// send perceptions
 					System.out.println("Send Perceptions");
+
 					DefaultNetLink d = new DefaultNetLink();
 					PerceptionItem pi = new PerceptionItem(
 							myCore.getUsername(), value, action);

@@ -1,4 +1,4 @@
-nullpackage net.amicity.pc;
+nullnullpackage net.amicity.pc;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;

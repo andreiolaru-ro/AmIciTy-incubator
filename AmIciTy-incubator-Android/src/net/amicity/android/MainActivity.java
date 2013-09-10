@@ -48,8 +48,7 @@ import android.widget.TextView;
  * 
  */
 public class MainActivity extends Activity implements Serializable {
-	
-	
+
 	final Context context = this;
 
 	/**
@@ -87,7 +86,6 @@ public class MainActivity extends Activity implements Serializable {
 		Intent i = getIntent();
 		intents = new ArrayList<Intent>();
 
-		
 		// Create ContextCore
 
 		ContextCore cc = new ContextCore();
@@ -104,9 +102,11 @@ public class MainActivity extends Activity implements Serializable {
 		DummyMessage dm = new DummyMessage(cc, this);
 		DummyDevicesModule ddm = new DummyDevicesModule(cc, this);
 		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
-		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc);
+		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc,
+				this);
 		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
-		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc, context);
+		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc,
+				context);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type
@@ -138,12 +138,10 @@ public class MainActivity extends Activity implements Serializable {
 		ArrayList<IntelligenceModule> iModules6 = new ArrayList<IntelligenceModule>();
 		iModules6.add(stf);
 		hm.put(ContextTypes.TRANSFER_FILE_CONTEXT, iModules6);
-		
+
 		ArrayList<IntelligenceModule> iModules7 = new ArrayList<IntelligenceModule>();
 		iModules7.add(peer);
 		hm.put(ContextTypes.SEND_ITEM_CONTEXT, iModules7);
-		
-		
 
 		// start sensors services
 

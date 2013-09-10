@@ -1,4 +1,4 @@
-nullpackage net.amicity.pc.sensors;
+nullnullpackage net.amicity.pc.sensors;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import java.util.Timer;
  * @author Vlad herescu 
  *
  */
-
 
 public class ChangeDetectorModule
 {
