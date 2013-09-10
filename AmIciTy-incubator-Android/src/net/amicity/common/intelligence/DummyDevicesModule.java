@@ -59,12 +59,21 @@ public class DummyDevicesModule implements IntelligenceModule {
 	public void invoke() {
 		myDevices = ((MyDevicesItem) myCore.getContextStorage().get(
 				ContextTypes.DEVICES_CONTEXT)).getMyDevices();
-		for (Connection c : myDevices) {
+		final String devices = "";
+		for (final Connection c : myDevices) {
 			System.out.println(c.getId());
+			devices.concat(c.getId() + "\n");
 			// ma.getChanges().setText("");
-			ma.getDevices().setText(c.getId());
 
 		}
+		ma.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				ma.getDevices().setText(devices);
+
+			}
+		});
 		// System.out.println("This are my devices: " + myDevices);
 	}
 
