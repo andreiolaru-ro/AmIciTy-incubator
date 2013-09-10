@@ -122,5 +122,12 @@ public class ChangeDetectorModule {
 
 		}
 	}
+	/**
+	 * forwarding the response
+	 * @param responseGiven : the response give
+	 */
+	public void SenderTimeSet(String responseGiven){
+		pushQueue.changeTimer(responseGiven);
+	}
 
 }

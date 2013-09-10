@@ -149,11 +149,15 @@ public class WindowMessage extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 
+			myAnalizer.getMyTimer().SenderTimeSet("Yes");
 			myAnalizer.getMyTimer().startTimer();
 			myAnalizer.setShown(false);
+	
 			dispose();
 		}
 		if (command.equals("No thanks") == true) {
+			
+			myAnalizer.getMyTimer().SenderTimeSet("No");
 			myAnalizer.getMyTimer().startTimer();
 			myAnalizer.setShown(false);
 			dispose();

@@ -38,11 +38,16 @@ import net.amicity.pc.sensors.WirelessModule;
 
 public class Main {
 
+	
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
+		
+		
+		
 		// Create ContextCore
 		final ContextCore cc = new ContextCore();
 
