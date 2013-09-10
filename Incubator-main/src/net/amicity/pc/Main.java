@@ -50,6 +50,7 @@ public class Main {
 		while (pci.getUserName().length() == 0) {
 			System.out.flush();
 		}
+		
 
 		System.out.println(" USER IS: " + pci.getUserName());
 		ContextCore.setUsername(pci.getUserName());
@@ -58,6 +59,7 @@ public class Main {
 		ChangeDetectorModule cdm = new ChangeDetectorModule();
 		cdm.startTimer();
 
+		
 		// Create intelligence modules
 
 		FileAnalizerModule fam = new FileAnalizerModule(cc, cdm);
