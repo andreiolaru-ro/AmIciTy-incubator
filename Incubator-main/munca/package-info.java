@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 nullnull/**
+=======
+nullnullnull/**
+>>>>>>> refs/remotes/origin/development/architecture
  * 
  */
 /**

@@ -61,7 +61,7 @@ public class AccelerometerModule extends Service implements
 	/**
 	 * A minimum value for showing movement.
 	 */
-	private final float NOISE = (float) 5.0;
+	private final float NOISE = (float) 2.0;
 	/**
 	 * A clock implementation for calculating activity in time
 	 */

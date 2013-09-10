@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.amicity.android.MainActivity;
 import net.amicity.android.communications.DefaultNetLink;
 import net.amicity.common.context_types.MessageItem;
 import net.amicity.common.core.ContextStorage;
@@ -23,7 +24,6 @@ import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
 
@@ -35,8 +35,6 @@ import android.util.Log;
  */
 public class SimplePeerMachinesManager implements PeerMachinesManager,
 		IntelligenceModule {
-
-	Context c;
 
 	/**
 	 * list cotinaing "Station" instances with its data
@@ -59,17 +57,19 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 	 */
 	ContextCore myCore;
 
+	MainActivity myMainActivity;
+
 	/**
 	 * @param cc
 	 *            : receving all the queues
 	 */
-	public SimplePeerMachinesManager(ContextCore cc, Context context) {
+	public SimplePeerMachinesManager(ContextCore cc, MainActivity main) {
 		stationsReceived = new ArrayList<Station>();
 		serversIP = new TreeMap<String, String>();
 		addServersIP();
 		myDefaultNetLink = new DefaultNetLink();
 		myCore = cc;
-		c = context;
+		myMainActivity = main;
 	}
 
 	/**
@@ -131,24 +131,32 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 		message1 = (MessageItem) dataKept
 				.remove(ContextTypes.SEND_ITEM_CONTEXT);
 
-		AlertDialog.Builder alertDialogB = new AlertDialog.Builder(c);
-		alertDialogB.setTitle("HELP, please");
-		alertDialogB.setMessage("Someone needs your help");
-		alertDialogB.setPositiveButton("Yes",
-				new DialogInterface.OnClickListener() {
+		myMainActivity.runOnUiThread(new Runnable() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Log.e("help send", "A MERS MAHHH");
-						// TODO Auto-generated method stub
+			@Override
+			public void run() {
 
-					}
-				});
-		AlertDialog alertDialog = alertDialogB.show();
+				AlertDialog.Builder alertDialogB = new AlertDialog.Builder(
+						myMainActivity);
+				alertDialogB.setTitle("HELP, please");
+				alertDialogB.setMessage("Someone needs your help");
+				alertDialogB.setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
 
-		// show it
-		alertDialog.show();
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Log.e("help send", "A MERS MAHHH");
+								// TODO Auto-generated method stub
 
+							}
+						});
+				AlertDialog alertDialog = alertDialogB.create();
+
+				alertDialog.show();
+
+			}
+
+		});
 	}
-
 }

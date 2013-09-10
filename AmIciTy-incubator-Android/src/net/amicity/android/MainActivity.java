@@ -35,7 +35,6 @@ import net.amicity.common.intelligence.SaveTransferedFiles;
 import net.amicity.common.intelligence.SoundIntel;
 import net.amicity.incubator_android.R;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -48,8 +47,6 @@ import android.widget.TextView;
  * 
  */
 public class MainActivity extends Activity implements Serializable {
-
-	final Context context = this;
 
 	/**
 	 * 
@@ -105,8 +102,7 @@ public class MainActivity extends Activity implements Serializable {
 		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc,
 				this);
 		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
-		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc,
-				context);
+		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc, this);
 
 		// make the link between ContextTypes and intelligence modules related
 		// to type
