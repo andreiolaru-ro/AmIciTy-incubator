@@ -25,6 +25,7 @@ import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.WindowConstants;
 
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.pc.intelligence.FileAnalizerModule;
@@ -83,8 +84,6 @@ public class WindowMessage extends JFrame implements ActionListener {
 		myAnalizer = analizerRecv;
 		width = 300;
 		height = 200;
-		createWindow();
-		addWrite();
 
 	}
 
@@ -98,7 +97,7 @@ public class WindowMessage extends JFrame implements ActionListener {
 				.getMaximumWindowBounds();
 		this.setTitle("Need Help?");
 		this.setSize(width, height);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setLocation(dimension.width - width, winSize.height - height);
 		this.setVisible(true);
 		this.toFront();
@@ -148,10 +147,6 @@ public class WindowMessage extends JFrame implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
-			myAnalizer.getMyTimer().SenderTimeSet("Yes");
-			myAnalizer.getMyTimer().startTimer();
-			myAnalizer.setShown(false);
 	
 			dispose();
 		}

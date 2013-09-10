@@ -65,6 +65,10 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	 */
 	ContextCore myCore;
 	
+	/**
+	 * instance in order to gain acces to its timer and to the name of the 
+	 * files changed
+	 */
 	FileAnalizerModule myFam; 
 	
 	/**
@@ -176,14 +180,16 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		
 		
 		if(message1  != null){
-			new HelpMessage(message1);
+			HelpMessage  help = new HelpMessage(message1);
+			help.createWindow();
+			help.addWrite();
 		}
 		else{
 			System.out.println("message1 ESTE NULL");
 		}
 			
 		if(message2  != null){
-			Anunt help =	new Anunt();
+			Anunt help =	new Anunt(myFam);
 			help.start();
 		}
 		else{

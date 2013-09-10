@@ -1,12 +1,16 @@
 package net.amicity.common.context_types;
 
-import java.io.Serializable;
-
 import net.amicity.common.communications.Connection;
 import net.amicity.common.core.ContextTypes;
 
 
-public class MessageItem extends AbstractItem implements Serializable
+/**
+ * 
+ *  items exchanged between the user who asks for help and the one who answers him 
+ * @author vlad
+ *
+ */
+public class MessageItem extends AbstractItem 
 {
 	/**
 	 * 
@@ -32,6 +36,7 @@ public class MessageItem extends AbstractItem implements Serializable
      * @param User : receving the name of the User
  	* @param Filename : receving the name of the file
 	 * @param cc : used to response to the MessageItem
+	 * @param recv : if the type is send or received
  	*/
 	public MessageItem(String User, String Filename, Connection cc,ContextTypes recv){
 	    myUser = User;

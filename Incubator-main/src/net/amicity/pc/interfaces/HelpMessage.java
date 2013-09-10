@@ -21,6 +21,14 @@ import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.context.ContextCore;
 import net.amicity.pc.communications.DefaultNetLink;
 
+/**
+ * 
+ * frame shown when somebody asks for help. The User can see the files
+ * he works on and can give an answer, waether he can help or not
+ * 
+ * @author vlad
+ *
+ */
 public class HelpMessage extends JFrame implements ActionListener {
 
 	/**
@@ -55,8 +63,14 @@ public class HelpMessage extends JFrame implements ActionListener {
 	 */
 	String myUser;
 	
+	/**
+	 * makes the connection to the deviced which asked for help
+	 */
 	DefaultNetLink  myLink;
 	
+	/**
+	 * gives the data necessary to create the connection
+	 */
 	Connection connectionRecv;
 
 
@@ -74,8 +88,6 @@ public class HelpMessage extends JFrame implements ActionListener {
 		width = 300;
 		height = 200;
 		myLink = new DefaultNetLink();
-		createWindow();
-		addWrite();
 
 	}
 

@@ -50,6 +50,10 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 	private boolean shown;
 	
 	
+	/**
+	 * used by other modules such as the interfaces to find more about
+	 * the file changed
+	 */
 	public File fileChanged;
 
 	/**
@@ -85,7 +89,8 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 					getMyTimer().ceaseTimer();
 					fileChanged =file;
 					WindowMessage win = new WindowMessage(this, file);
-					win.show();
+					win.createWindow();
+					win.addWrite();
 					setShown(true);
 				}
 				else {
@@ -95,7 +100,8 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 			else {
 				if (nrDiff < 100 && isShown() == false) {
 					WindowMessage win = new WindowMessage(this, file);
-					win.show();
+					win.createWindow();
+					win.addWrite();
 					setShown(true);
 				}
 			}
@@ -104,18 +110,30 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 
 	}
 
+	/**
+	 * @return timer
+	 */
 	public ChangeDetectorModule getMyTimer() {
 		return myTimer;
 	}
 
+	/**
+	 * @param myTimer : setting the timer
+	 */
 	public void setMyTimer(ChangeDetectorModule myTimer) {
 		this.myTimer = myTimer;
 	}
 
+	/**
+	 * @return : true if the Frame is shown
+	 */
 	public boolean isShown() {
 		return shown;
 	}
 
+	/**
+	 * @param shown : boolean to know if the frame is shown
+	 */
 	public void setShown(boolean shown) {
 		this.shown = shown;
 	}

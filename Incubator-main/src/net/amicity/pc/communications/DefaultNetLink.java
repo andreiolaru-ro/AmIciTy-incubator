@@ -26,10 +26,7 @@ import net.amicity.common.communications.NetLink;
 import net.amicity.common.context_types.MessageItem;
 import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.context_types.OtherDevicesItem;
-import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.context.ContextCore;
-import net.amicity.pc.interfaces.Anunt;
-import net.amicity.pc.interfaces.HelpMessage;
 import net.amicity.pc.sensors.ServerModule;
 
 /**

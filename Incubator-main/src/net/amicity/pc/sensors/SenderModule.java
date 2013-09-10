@@ -22,6 +22,9 @@ import java.util.Timer;
  */
 public class SenderModule {
 	
+	/**
+	 * the last responde given by the user, in order to make it pro active
+	 */
 	String lastResponse;
 	
 	/**

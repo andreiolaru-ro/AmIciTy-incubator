@@ -43,8 +43,6 @@ public class FileChangeData {
 	/**
 	 * @param f
 	 *            : file which has been changed
-	 * @param change
-	 *            : the number of changes occured
 	 * @param size
 	 *            : the size
 	 */

@@ -3,12 +3,20 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.WindowConstants;
+
+import net.amicity.pc.intelligence.FileAnalizerModule;
 
 
 
+/**
+ * Framw shown to tell the user that he will receive Aim
+ * 
+ * @author vlad
+ *
+ */
 public class Anunt extends Thread
 {
 	/**
@@ -21,13 +29,20 @@ public class Anunt extends Thread
 	int height = 100;
 	
 	
-	JButton buton;
+	/**
+	 * to start the timer;
+	 */
+	FileAnalizerModule myAnalizer;
 	
-	public Anunt(){
+	/**
+	 * @param recvAnalizer : received in order to restart the timer
+	 */
+	public Anunt(FileAnalizerModule recvAnalizer ){
 
-		
+		myAnalizer = recvAnalizer;
 		
 	}
+	@Override
 	public void run(){
 		JFrame frame = new JFrame();
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -35,7 +50,7 @@ public class Anunt extends Thread
 				.getMaximumWindowBounds();
 		frame.setTitle("Need Help?");
 		frame.setSize(width, height);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
 		
 		JLabel eticheta = new JLabel("Someone will come to help you any minute now");
@@ -58,13 +73,20 @@ public class Anunt extends Thread
 		
 		try
 		{
-			this.sleep(5000);
+			Thread.sleep(5000);
 		}
 		catch (InterruptedException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+
+		myAnalizer.getMyTimer().SenderTimeSet("Yes");
+		myAnalizer.getMyTimer().startTimer();
+		myAnalizer.setShown(false);
+		
+		
 		frame.dispose();
 	}
 	
