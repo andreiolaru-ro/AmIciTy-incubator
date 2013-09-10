@@ -214,12 +214,16 @@ public class DefaultNetLink implements NetLink {
 							msgR.receive(obj);
 					}
 					catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						// do nothing
+						try {
+							server.close();
+						}
+						catch (IOException e1) {
+							// do nothing
+						}
 					}
 					catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						// do nothing
 					}
 				}
 
