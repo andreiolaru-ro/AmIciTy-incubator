@@ -70,7 +70,7 @@ public class DummyMessage implements IntelligenceModule {
 			try {
 				System.out.println(" conectare!!");
 				d.createConnection(
-						new Connection(InetAddress.getByName("172.16.15.223"),
+						new Connection(InetAddress.getByName("192.168.0.198"),
 								"", 4500),
 						new Connection(InetAddress.getByName(DefaultNetLink.getLocalIpAddress()), cc
 								.getUsername(), 4500));
