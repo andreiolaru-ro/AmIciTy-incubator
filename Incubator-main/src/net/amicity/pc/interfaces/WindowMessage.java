@@ -109,7 +109,7 @@ public class WindowMessage extends JFrame implements ActionListener {
 	 */
 	public void addWrite() {
 
-		JLabel eticheta = new JLabel("Do you need help for cucu.java?");
+		JLabel eticheta = new JLabel("Do you need help for " +  myAnalizer.fileChanged.getName());
 		Dimension dim = eticheta.getPreferredSize();
 		eticheta.setBounds((290 - dim.width) / 2, 30, dim.width, dim.height);
 		add(eticheta);

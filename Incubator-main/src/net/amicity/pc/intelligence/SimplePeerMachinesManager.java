@@ -187,7 +187,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 		}
 
 		if (message2 != null) {
-			Anunt help = new Anunt(myFam);
+			Anunt help = new Anunt(myFam, message2);
 			help.start();
 		}
 		else {

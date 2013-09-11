@@ -77,7 +77,7 @@ class OutsideTimer extends TimerTask {
 						// + " " + fileLiteral.changesDetected + " " +
 						// fileLiteral.sizeDifference);
 
-						return;
+						break;
 					}
 				}
 

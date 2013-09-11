@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
+import net.amicity.common.context_types.MessageItem;
 import net.amicity.pc.intelligence.FileAnalizerModule;
 
 
@@ -28,6 +29,10 @@ public class Anunt extends Thread
 	 */
 	int height = 100;
 	
+	/**
+	 *  contains data about the user
+	 */
+	MessageItem myItem;
 	
 	/**
 	 * to start the timer;
@@ -36,10 +41,12 @@ public class Anunt extends Thread
 	
 	/**
 	 * @param recvAnalizer : received in order to restart the timer
+	 * @param item : data from the user who helps
 	 */
-	public Anunt(FileAnalizerModule recvAnalizer ){
+	public Anunt(FileAnalizerModule recvAnalizer, MessageItem item ){
 
 		myAnalizer = recvAnalizer;
+		myItem = item;
 		
 	}
 	@Override
@@ -52,8 +59,17 @@ public class Anunt extends Thread
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
+		String id = myItem.myUser;
+		JLabel eticheta;
+		if(id != null){
+		 eticheta	= new JLabel("Someone will come to help you any minute now");
+		}
+		else{
+		  eticheta = new JLabel("There is no one to help you");	
+		}
 		
-		JLabel eticheta = new JLabel("Someone will come to help you any minute now");
+		
+		 
 		Dimension dim = eticheta.getPreferredSize();
 		width = dim.width + 20;
 		eticheta.setBounds((width - dim.width) / 2, 30, dim.width, dim.height);
