@@ -72,6 +72,10 @@ public class HelpMessage extends JFrame implements ActionListener {
 	 * gives the data necessary to create the connection
 	 */
 	Connection connectionRecv;
+	
+	Rectangle winSize;
+	
+	Dimension dimension ;
 
 
 	/**
@@ -96,13 +100,13 @@ public class HelpMessage extends JFrame implements ActionListener {
 	 */
 	public void createWindow() {
 
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		Rectangle winSize = GraphicsEnvironment.getLocalGraphicsEnvironment()
+		dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		winSize = GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getMaximumWindowBounds();
 		this.setTitle("Need Help?");
 		this.setSize(width, height);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		this.setLocation(dimension.width - width, winSize.height - height);
+		
 		this.setVisible(true);
 		this.toFront();
 		setLayout(null);
@@ -116,7 +120,9 @@ public class HelpMessage extends JFrame implements ActionListener {
 		JLabel eticheta = new JLabel(myUser + " needs help for: " + myFilename);
 		Dimension dim = eticheta.getPreferredSize();
 		width = dim.width + 20;
-		eticheta.setBounds((290 - dim.width) / 2, 30, dim.width, dim.height);
+		int mijloc = (width - dim.width) / 2 ;
+		eticheta.setBounds((width - dim.width) / 2, 30, dim.width, dim.height);
+		width = width + mijloc;
 		add(eticheta);
 
 		butonYes = new JButton("Yes, with pleasure");
@@ -131,6 +137,13 @@ public class HelpMessage extends JFrame implements ActionListener {
 		add(butonNo);
 		butonNo.addActionListener(this);
 
+		int buttons_size = dim.width + dim2.height + 150;
+		if(width < buttons_size)
+			width = buttons_size;
+		
+		
+		System.out.println(width + " " + buttons_size);
+		this.setLocation(dimension.width - width, winSize.height - height);
 		this.setSize(width - 1, height - 1);
 		this.setSize(width, height);
 
@@ -140,13 +153,12 @@ public class HelpMessage extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		String command = e.getActionCommand();
+		Connection cc;
+		String id = ContextCore.getUsername();
 
+		try {
 		if (command.equals("Yes, with pleasure") == true) {
-			
-			String id = ContextCore.getUsername();
-			Connection cc;
-			
-			try {
+						
 				cc = new Connection(InetAddress.getLocalHost(), id, 4501);
 				MessageItem mesaj = new MessageItem(id,myFilename,cc, ContextTypes.RECEIVED_ITEM_CONTEXT  );
 				System.out.println("AJUTORUL A FOST CONFIRMAT");
@@ -155,16 +167,22 @@ public class HelpMessage extends JFrame implements ActionListener {
 				System.out.println("SEND A FOST REALIZAT");
 				
 			}
-			catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			
-
-			dispose();
-		}
+		
 		if (command.equals("No, too busy") == true) {
-			dispose();
+			cc = new Connection(InetAddress.getLocalHost(), id, 4501);
+			MessageItem mesaj = new MessageItem(null,myFilename,cc, ContextTypes.RECEIVED_ITEM_CONTEXT  );
+			System.out.println("AJUTORUL A FOST CONFIRMAT");
+			System.out.println(connectionRecv.getId() + " " + connectionRecv.getIp() + " ");
+			myLink.send(connectionRecv, mesaj);
+			System.out.println("SEND A FOST REALIZAT");
+			
+		}
+		dispose();
+		}
+		catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 	}

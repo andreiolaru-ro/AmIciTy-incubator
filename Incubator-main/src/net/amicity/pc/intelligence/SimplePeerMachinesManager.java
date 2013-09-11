@@ -89,7 +89,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	 * adding pairs of data Location-IP
 	 */
 	public void addServersIP() {
-		serversIP.put("CANTI", "172.16.15.223");
+		serversIP.put("CANTI", "192.168.0.193");
 		serversIP.put("acasa", "192.168.0.197");
 	}
 
@@ -189,7 +189,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 		}
 			
 		if(message2  != null){
-			Anunt help =	new Anunt(myFam);
+			Anunt help =	new Anunt(myFam, message2);
 			help.start();
 		}
 		else{
