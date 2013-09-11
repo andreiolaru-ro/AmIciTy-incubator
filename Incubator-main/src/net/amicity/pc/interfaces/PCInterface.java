@@ -12,7 +12,6 @@
 package net.amicity.pc.interfaces;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -98,14 +97,17 @@ public class PCInterface extends JFrame {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - w / 2, dim.height / 2 - h / 2);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		jp = new JPanel();
-		jp.setLayout(new GridLayout(2, 1));
-		jpuser = new JPanel();
+		setLayout(null);
 		usrname = new JTextField(15);
-		jtf = new JTextArea(20, 20);
-		devices = new JTextArea(10, 20);
+		jtf = new JTextArea(10, 17);
+		devices = new JTextArea(5, 10);
+		devices.setEditable(false);
 		devices.setText("My devices:\n");
-		setLayout(new GridLayout(2, 1));
+		devices.setLocation(125, 120);
+		devices.setSize(130, 100);
+		this.getContentPane().add(devices);
+
+		jtf.setText("Updates:");
 		jsp = new JScrollPane(jtf);
 
 		b = new JButton("Login");
@@ -197,16 +199,17 @@ public class PCInterface extends JFrame {
 		});
 
 		usrname.addMouseListener(ml);
-		jpuser.add(usrname);
-		jpuser.add(b);
-		JPanel aux = new JPanel();
-		aux.add(devices);
-		jp.add(aux);
-		JPanel aux2 = new JPanel();
-		aux2.add(jsp);
-		jp.add(aux2);
-		add(jpuser);
-		add(jp);
+		usrname.setSize(125, 30);
+		usrname.setLocation(50, 25);
+		this.add(usrname);
+		b.setLocation(225, 25);
+		b.setSize(80, 30);
+		this.add(b);
+
+		jsp.setSize(250, 160);
+		jsp.setToolTipText("Updates:\n");
+		jsp.setLocation(80, 260);
+		this.add(jsp);
 		this.setVisible(true);
 	}
 
