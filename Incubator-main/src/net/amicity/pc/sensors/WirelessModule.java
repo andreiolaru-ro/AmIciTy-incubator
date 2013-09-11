@@ -47,6 +47,11 @@ public class WirelessModule implements SensorModule {
 	ContextCore myCore;
 
 	/**
+	 * 
+	 */
+	BufferedReader brr;
+
+	/**
 	 * constructor of the class initialize its members
 	 */
 	public WirelessModule() {
@@ -64,44 +69,73 @@ public class WirelessModule implements SensorModule {
 	 */
 	public void obtainData() {
 
-		ProcessBuilder builder = new ProcessBuilder("netsh", "wlan", "show",
-				"networks");
-
-		Process process;
-		try {
-			process = builder.start(); // pornesc programul
-			InputStream is = process.getInputStream(); // obtin outuputul
-														// shellului ca input in
-														// program
-			// clasa este abstracta
-			InputStreamReader isr = new InputStreamReader(is); // creez o
-																// instanta ISR
-																// pe baza lui
-																// InputStream
-			BufferedReader br = new BufferedReader(isr); // transform streamul
-															// de biti in
-															// caractere
-			String line;
-			while ((line = br.readLine()) != null) {
-				StringTokenizer st = new StringTokenizer(line, ": ");
-				while (st.hasMoreTokens()) {
-					String nameLine = st.nextToken();
-					if (nameLine.compareTo("SSID") == 0) {
-						st.nextToken();
-						((WirelessItem) wirelessItem).wifiDetected.add(st
-								.nextToken());
-
+		if (System.getProperty("os.name").equals("Linux")) {
+			Process p;
+			try {
+				p = Runtime.getRuntime().exec(
+						new String[] { "iwlist", "wlan0", "scan" });
+				String s;
+				BufferedReader stdInput = new BufferedReader(
+						new InputStreamReader(p.getInputStream()));
+				while ((s = stdInput.readLine()) != null) {
+					if (s.contains("ESSID")) {
+						((WirelessItem) wirelessItem).wifiDetected.add(s
+								.split(":")[1].substring(1,
+								s.split(":")[1].length() - 1));
 					}
-					else
-						break;
 				}
 			}
-			br.close();
-
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		catch (IOException e) {
+		else {
 
-			e.printStackTrace();
+			ProcessBuilder builder = new ProcessBuilder("netsh", "wlan",
+					"show", "networks");
+
+			Process process;
+			try {
+				process = builder.start(); // pornesc programul
+				InputStream is = process.getInputStream(); // obtin outuputul
+															// shellului ca
+															// input in
+															// program
+				// clasa este abstracta
+				InputStreamReader isr = new InputStreamReader(is); // creez o
+																	// instanta
+																	// ISR
+																	// pe baza
+																	// lui
+																	// InputStream
+				BufferedReader br = new BufferedReader(isr); // transform
+																// streamul
+																// de biti in
+																// caractere
+				String line;
+				while ((line = br.readLine()) != null) {
+					StringTokenizer st = new StringTokenizer(line, ": ");
+					while (st.hasMoreTokens()) {
+						String nameLine = st.nextToken();
+						if (nameLine.compareTo("SSID") == 0) {
+							st.nextToken();
+							((WirelessItem) wirelessItem).wifiDetected.add(st
+									.nextToken());
+
+						}
+						else
+							break;
+					}
+				}
+				br.close();
+
+			}
+			catch (IOException e) {
+
+				e.printStackTrace();
+			}
+
 		}
 
 		addDataDetected();
