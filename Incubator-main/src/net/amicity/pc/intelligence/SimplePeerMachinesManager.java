@@ -11,21 +11,17 @@
  ******************************************************************************/
 package net.amicity.pc.intelligence;
 
+import java.awt.Toolkit;
 import java.net.InetAddress;
-
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-
-import net.amicity.common.communications.Connection;
-import net.amicity.common.context_types.MessageItem;
-import net.amicity.common.context_types.OtherDevicesItem;
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-
-
+import net.amicity.common.communications.Connection;
+import net.amicity.common.context_types.MessageItem;
+import net.amicity.common.context_types.OtherDevicesItem;
 import net.amicity.common.core.ContextStorage;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
@@ -40,7 +36,8 @@ import net.amicity.pc.interfaces.HelpMessage;
  * @author vlad
  * 
  */
-public class SimplePeerMachinesManager implements PeerMachinesManager, IntelligenceModule{
+public class SimplePeerMachinesManager implements PeerMachinesManager,
+		IntelligenceModule {
 
 	/**
 	 * list cotinaing "Station" instances with its data
@@ -55,27 +52,27 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	/**
 	 * initiating the members of the class
 	 */
-	
-	
+
 	DefaultNetLink myDefaultNetLink;
-	
-	
+
 	/**
 	 * obtaining the queues of the core
 	 */
 	ContextCore myCore;
-	
+
 	/**
-	 * instance in order to gain acces to its timer and to the name of the 
-	 * files changed
+	 * instance in order to gain acces to its timer and to the name of the files
+	 * changed
 	 */
-	FileAnalizerModule myFam; 
-	
+	FileAnalizerModule myFam;
+
 	/**
-	 * @param cc : receving all the queues
-	 * @param fam : to obtain the files changed
+	 * @param cc
+	 *            : receving all the queues
+	 * @param fam
+	 *            : to obtain the files changed
 	 */
-	public SimplePeerMachinesManager(ContextCore cc, FileAnalizerModule fam){
+	public SimplePeerMachinesManager(ContextCore cc, FileAnalizerModule fam) {
 		stationsReceived = new ArrayList<Station>();
 		serversIP = new TreeMap<String, String>();
 		addServersIP();
@@ -89,7 +86,7 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	 * adding pairs of data Location-IP
 	 */
 	public void addServersIP() {
-		serversIP.put("CANTI", "192.168.0.193");
+		serversIP.put("CANTI", "192.168.0.198");
 		serversIP.put("acasa", "192.168.0.197");
 	}
 
@@ -138,67 +135,67 @@ public class SimplePeerMachinesManager implements PeerMachinesManager, Intellige
 	}
 
 	@Override
-	public void invoke()
-	{	
+	public void invoke() {
 		OtherDevicesItem devices;
 		MessageItem message1, message2;
-		ContextStorage dataKept =  myCore.getContextStorage();
-		devices = (OtherDevicesItem) dataKept.remove(ContextTypes.OTHER_DEVICES_CONTEXT);
-		message1 = (MessageItem) dataKept.remove(ContextTypes.SEND_ITEM_CONTEXT);
-		message2 = (MessageItem) dataKept.remove(ContextTypes.RECEIVED_ITEM_CONTEXT);
-		
-		
-		if(devices != null){
-			
+		ContextStorage dataKept = myCore.getContextStorage();
+		devices = (OtherDevicesItem) dataKept
+				.remove(ContextTypes.OTHER_DEVICES_CONTEXT);
+		message1 = (MessageItem) dataKept
+				.remove(ContextTypes.SEND_ITEM_CONTEXT);
+		message2 = (MessageItem) dataKept
+				.remove(ContextTypes.RECEIVED_ITEM_CONTEXT);
+
+		if (devices != null) {
+
 			ArrayList<Connection> connections = devices.getTheDevices();
 			System.out.println("AM FACUT ROST DE DISPOZITIVELE ALTUIA");
-			for(Connection cn : connections){
-				
+			for (Connection cn : connections) {
+
 				String username = ContextCore.getUsername();
 				String filename = myFam.fileChanged.getName();
 				Connection cc;
-				try
-				{ 
-					
+				try {
+
 					System.out.println(" trimit lui cristi datele mele");
-					cc = new Connection( InetAddress.getLocalHost(), username, 4501);
-					MessageItem mesaj = new MessageItem(username,filename,cc, ContextTypes.SEND_ITEM_CONTEXT  );
-					myDefaultNetLink.send(cn, mesaj );
+					cc = new Connection(InetAddress.getLocalHost(), username,
+							4501);
+					MessageItem mesaj = new MessageItem(username, filename, cc,
+							ContextTypes.SEND_ITEM_CONTEXT);
+					myDefaultNetLink.send(cn, mesaj);
 				}
-				catch (UnknownHostException e)
-				{
+				catch (UnknownHostException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-			
-			} 
+
+			}
 		}
-		else{
+		else {
+
 			System.out.println("devices ESTE NULL");
 		}
-		
-		
-		if(message1  != null){
-			HelpMessage  help = new HelpMessage(message1);
+
+		if (message1 != null) {
+			HelpMessage help = new HelpMessage(message1);
 			help.createWindow();
 			help.addWrite();
+			Toolkit.getDefaultToolkit().beep();
 		}
-		else{
+		else {
 			System.out.println("message1 ESTE NULL");
 		}
-			
-		if(message2  != null){
-			Anunt help =	new Anunt(myFam, message2);
+
+		if (message2 != null) {
+			Anunt help = new Anunt(myFam, message2);
 			help.start();
 		}
-		else{
+		else {
 			System.out.println("message2 ESTE NULL");
 		}
-			
 
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }

@@ -3,7 +3,6 @@ package net.amicity.common.intelligence;
 import java.io.File;
 import java.util.ArrayList;
 
-import net.amicity.pc.communications.DefaultNetLink;
 import net.amicity.common.communications.Connection;
 import net.amicity.common.context_types.MyDevicesItem;
 import net.amicity.common.context_types.PCAccelerometerItem;
@@ -11,12 +10,13 @@ import net.amicity.common.context_types.TransferFileItem;
 import net.amicity.common.core.ContextTypes;
 import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
-
+import net.amicity.pc.communications.DefaultNetLink;
 
 /**
  * A class for sending back files to phone after suspect leaves
+ * 
  * @author cristian
- *
+ * 
  */
 public class PCFileTransfer implements IntelligenceModule {
 
@@ -27,7 +27,7 @@ public class PCFileTransfer implements IntelligenceModule {
 	/**
 	 * a boolean that says if i already sent the files
 	 */
-	boolean sent;
+	ArrayList<Connection> list;
 	/**
 	 * The accelerometer action
 	 */
@@ -40,13 +40,14 @@ public class PCFileTransfer implements IntelligenceModule {
 	 * An arraylist of all my devices
 	 */
 	ArrayList<Connection> myDevices;
-	
+
 	/**
-	 * @param cc the context core
+	 * @param cc
+	 *            the context core
 	 */
 	public PCFileTransfer(ContextCore cc) {
 		myCore = cc;
-		sent = false;
+		list = new ArrayList<Connection>();
 	}
 
 	@Override
@@ -55,13 +56,13 @@ public class PCFileTransfer implements IntelligenceModule {
 				.getContextStorage().get(ContextTypes.ACCELEROMETER));
 		action = pai.man;
 		user = pai.user;
-		myDevices = ((MyDevicesItem) myCore
-				.getContextStorage().get(ContextTypes.DEVICES_CONTEXT)).getMyDevices();
+		myDevices = ((MyDevicesItem) myCore.getContextStorage().get(
+				ContextTypes.DEVICES_CONTEXT)).getMyDevices();
 		System.out.println("PCFileTransfer invoked");
-		if( !sent ) {
-			if(action.equals("walking")) {
-				for(Connection c : myDevices) {
-					if(c.getId().equals(user)) {
+		if (action.equals("walking")) {
+			for (Connection c : myDevices) {
+				if (c.getId().equals(user)) {
+					if (!list.contains(c)) {
 						System.out.println("Started the file transfer");
 						TransferFileItem tfi = new TransferFileItem();
 						tfi.addFiles(new File("./munca"));
@@ -69,10 +70,10 @@ public class PCFileTransfer implements IntelligenceModule {
 						DefaultNetLink d = new DefaultNetLink();
 						System.out.println(c.getId() + " " + c.getIp());
 						d.send(c, tfi);
+						list.add(c);
 					}
 				}
 			}
 		}
 	}
-
 }

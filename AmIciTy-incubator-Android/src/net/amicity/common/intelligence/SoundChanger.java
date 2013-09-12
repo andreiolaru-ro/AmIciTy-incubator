@@ -38,8 +38,7 @@ public class SoundChanger extends Service {
 
 		audioManager.setStreamVolume(AudioManager.STREAM_RING,
 				(int) Math.ceil(value * 7),
-				AudioManager.FLAG_ALLOW_RINGER_MODES
-						| AudioManager.FLAG_PLAY_SOUND);
+				AudioManager.FLAG_ALLOW_RINGER_MODES);
 		return Service.START_STICKY;
 	}
 

@@ -53,6 +53,11 @@ public class DummyMessage implements IntelligenceModule {
 	MainActivity act;
 
 	/**
+	 * The last location detected.
+	 */
+	String lastLocation;
+
+	/**
 	 * @param cc
 	 * @param act
 	 */
@@ -61,19 +66,21 @@ public class DummyMessage implements IntelligenceModule {
 		this.cs = cc.getContextStorage();
 		this.act = act;
 		d = new DefaultNetLink(act);
+		lastLocation = "";
 	}
 
 	@Override
 	public void invoke() {
 		location = ((LocationItem) cs.get(ContextTypes.LOCATION_CONTEXT)).location;
-		if (location.equals("CANTI"))
+		if (location.equals("CANTI") && !location.equals(lastLocation))
 			try {
 				System.out.println(" conectare!!");
 				d.createConnection(
 						new Connection(InetAddress.getByName("192.168.0.198"),
 								"", 4500),
-						new Connection(InetAddress.getByName(DefaultNetLink.getLocalIpAddress()), cc
-								.getUsername(), 4500));
+						new Connection(InetAddress.getByName(DefaultNetLink
+								.getLocalIpAddress()), cc.getUsername(), 4500));
+				lastLocation = location;
 			}
 			catch (UnknownHostException e) {
 				e.printStackTrace();

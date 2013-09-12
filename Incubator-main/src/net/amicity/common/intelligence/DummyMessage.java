@@ -56,7 +56,7 @@ public class DummyMessage implements IntelligenceModule {
 
 	/**
 	 * @param cc
-	 * @param peerListReceived 
+	 * @param peerListReceived
 	 */
 	public DummyMessage(ContextCore cc,
 			SimplePeerMachinesManager peerListReceived) {
@@ -73,12 +73,11 @@ public class DummyMessage implements IntelligenceModule {
 		String ip = myPeerList.getServerForLocation(location);
 
 		try {
-			PCInterface.addNotification("conectare");
+			PCInterface.addNotification("connecting..");
 			d.createConnection(new Connection(InetAddress.getByName(ip), "",
-					4500),
-					new Connection(InetAddress.getLocalHost(),
-							ContextCore.getUsername(), 4500));
-			PCInterface.addNotification("connected to 172.16.15.223");
+					4500), new Connection(InetAddress.getLocalHost(),
+					ContextCore.getUsername(), 4500));
+			PCInterface.addNotification("connected to server");
 		}
 		catch (UnknownHostException e) {
 			e.printStackTrace();
