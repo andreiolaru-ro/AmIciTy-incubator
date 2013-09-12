@@ -70,10 +70,8 @@ class OutsideTimer extends TimerTask {
 						fileLiteral.changesDetected = true;
 						fileLiteral.sizeDifference = f.length()
 								- fileOld.lastsize;
+						fileOld.lastsize = f.length();
 
-						 System.out.println(fileLiteral.fileChanged.getName()
-						 + " " + fileLiteral.changesDetected + " " +
-						 fileLiteral.sizeDifference);
 
 						break;
 					}
@@ -83,9 +81,9 @@ class OutsideTimer extends TimerTask {
 				// add a file
 				if (contained == 0) {
 
-					System.out.println("este noua ");
 					FileChangeData fileChanged = new FileChangeData(f,
-							f.length());
+							f.length() - fileOld.lastsize);
+					fileOld.lastsize = f.length();
 					myModule.filesChanged.add(fileChanged);
 
 				}

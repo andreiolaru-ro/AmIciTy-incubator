@@ -49,7 +49,7 @@ public class FileChangeData {
 	public FileChangeData(File f, long size) {
 		fileChanged = f;
 		opened = true;
-		changesDetected = false;
+		changesDetected = true;
 		sizeDifference = size;
 	}
 

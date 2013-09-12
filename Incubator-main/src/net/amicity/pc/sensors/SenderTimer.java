@@ -12,9 +12,9 @@
 package net.amicity.pc.sensors;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 import java.util.TimerTask;
 
 import net.amicity.common.context_types.FilesItem;
@@ -44,44 +44,85 @@ public class SenderTimer extends TimerTask {
 	@Override
 	public void run() {
 		
-		/*File f =  mySender.myDetector.filesChanged.get(0).fileChanged;
-		if(){
+		for(int i = 0  ; i< mySender.myDetector.filesChanged.size(); i++){
 			
-		}*/
-/*		String command name = "WINDOWTITLE"
-		
-
-		ProcessBuilder builder = new ProcessBuilder("tasklist", "/FI",
-				"" "");
-
-		Process process;
-		try {
-			process = builder.start(); // pornesc programul
-			InputStream is = process.getInputStream(); // obtin outuputul
-														// shellului ca
-														// input in
-														// program
-			// clasa este abstracta
-			InputStreamReader isr = new InputStreamReader(is); // creez o
-																// instanta
-																// ISR
-																// pe baza
-																// lui
-																// InputStream
-			BufferedReader br = new BufferedReader(isr);
-		
-*/		
+			FileChangeData f = mySender.myDetector.filesChanged.get(i);
+			
+			if(f.changesDetected== false){
+			
+				boolean value = stillOpened(f.fileChanged.getName(), "eclipse.exe");
+				boolean value1 = stillOpened(f.fileChanged.getName(), "Notepad");
+				boolean value2 = stillOpened(f.fileChanged.getName(), "WordPad");
+			
+			if( value == false && value1 == false && value2 == false)
+				mySender.myDetector.filesChanged.remove(f);
+			}
+		}
 
 		if (mySender.myDetector.filesChanged.isEmpty() == false) {
-			
-
-			System.out.println("nu mai este gol" + mySender.myDetector.filesChanged.size() );
 
 			FilesItem sendNewChanges = new FilesItem(
 					mySender.myDetector.filesChanged);
 			ContextCore.postContextUpdate(sendNewChanges);
 
 		}
-
 	}
+	
+	/**
+	 * @param fileName : file to be checked whether is opened
+	 * @param task : the type of the task : eclipse, notepad or Wordpad
+	 * @return : true if it is still opened
+	 */
+	@SuppressWarnings("resource")
+	public static boolean stillOpened(final String fileName, final String task){
+		
+		String commandName ="\"" + "WINDOWTITLE eq "+ fileName + " - Notepad" + "\"";
+		if(task.equals("WordPad")){
+			commandName ="\"" + "WINDOWTITLE eq "+ fileName + " - Wordpad" + "\"";
+		}
+		ProcessBuilder builder = new ProcessBuilder("tasklist", "/FI",
+				commandName);
+		if(task.equals("eclipse.exe")){
+			commandName ="\"" + "imagename eq eclipse.exe" + "\"";
+			builder = new ProcessBuilder("tasklist", "/FI", commandName, "/v");
+		}
+		
+				Process process;
+				try {
+					process = builder.start(); // pornesc programul
+					InputStream is = process.getInputStream(); 
+					InputStreamReader isr = new InputStreamReader(is); 
+					BufferedReader br = new BufferedReader(isr);
+					
+					if(task.endsWith("ad")== true){
+					
+						
+						if( (br.readLine()).startsWith("INFO") == true){
+							br.close();
+							return false;
+						}
+						return true;
+					}
+					 br.readLine();
+					 br.readLine();
+					 br.readLine();
+					 StringTokenizer st = new StringTokenizer(br.readLine(), "/ ");
+					 while (st.hasMoreTokens()) {
+							String nameLine = st.nextToken();
+							if(nameLine.equals(fileName)== true){
+								br.close();
+								return true;
+							}
+							
+					 }
+					 br.close();
+					
+				}
+				catch(Exception e){
+					System.out.println("ERROR  command line process");
+				}
+	
+		return false;
+	}
+	
 }

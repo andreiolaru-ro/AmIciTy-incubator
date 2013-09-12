@@ -29,7 +29,6 @@ import android.content.DialogInterface;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.util.Log;
 
 /**
  * operates the data from the stations in order to initiate communication
@@ -61,14 +60,21 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 	 */
 	ContextCore myCore;
 
+	/**
+	 * the instance of the main activity
+	 */
 	MainActivity myMainActivity;
 	
 	
+	/**
+	 * the item wich will be send to the user who asks for help
+	 */
 	MessageItem helpConf;
 
 	/**
 	 * @param cc
 	 *            : receving all the queues
+	 * @param main : receving the main activity in order to show pupup message
 	 */
 	public SimplePeerMachinesManager(ContextCore cc, MainActivity main) {
 		stationsReceived = new ArrayList<Station>();
@@ -151,7 +157,9 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 				        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 				        Ringtone r = RingtoneManager.getRingtone(myMainActivity, notification);
 				        r.play();
-				  } catch (Exception e) {}
+				  } catch (Exception e) {
+					  System.out.println("ERROR RINGTON");
+				  }
 
 				AlertDialog.Builder alertDialogB = new AlertDialog.Builder(
 						myMainActivity);
@@ -187,6 +195,9 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 
 		});
 	}
+	/**
+	 * @param recv : creating the item with which the user says of he helps
+	 */
 	public void createMessageItem(MessageItem recv){
 		String id = recv.myUser;
 		String filename = recv.myFilename;

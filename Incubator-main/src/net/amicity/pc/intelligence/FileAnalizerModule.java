@@ -12,7 +12,6 @@
 package net.amicity.pc.intelligence;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import net.amicity.common.context_types.FilesItem;
 import net.amicity.common.core.ContextTypes;
@@ -35,10 +34,6 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 	 * instance of core to gain acces to its q
 	 */
 	ContextCore myCore;
-	/**
-	 * a list with the files opened
-	 */
-	ArrayList<File> filesOpened;
 
 	/**
 	 * controlling the timers which show the window;
@@ -67,7 +62,6 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 
 		setMyTimer(receivedTimer);
 		myCore = received;
-		filesOpened = new ArrayList<File>();
 		setShown(false);
 		fileChanged = null;
 	}
@@ -76,15 +70,21 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 	public void invoke() {
 		FilesItem itemReceived = (FilesItem) myCore.getContextStorage().get(
 				ContextTypes.FILE_CONTEXT);
+		
+		
+		
 		for (FileChangeData fcd : itemReceived.filesMonitorized) {
+			
 
 			File file = fcd.getFile();
 			long nrDiff = fcd.getDifference();
 			boolean changed = fcd.getNrChange();
-
+			
+	
+	
 			if (changed == false) {
 
-				if (filesOpened.contains(file) == true && isShown() == false) {
+				if ( isShown() == false){
 					
 					System.out.println("NU A MAI FOST SCHIMBAT");
 
@@ -95,15 +95,16 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 					win.addWrite();
 					setShown(true);
 				}
-				else {
-					filesOpened.add(file);
-				}
 			}
 			else {
+				System.out.println("A INTRAT in ELSE" + " "+ isShown() + " " +nrDiff);
+				
+				
 				if (nrDiff < 100 && isShown() == false) {
 					
-					System.out.println("a fost SCHIMBAT dar NU de AJUNS");
-					
+					System.out.println("a fost SCHIMBAT dar NU de AJUNS " + file.getName());
+					fileChanged =file;
+					getMyTimer().ceaseTimer();
 					WindowMessage win = new WindowMessage(this, file);
 					win.createWindow();
 					win.addWrite();

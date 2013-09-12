@@ -73,8 +73,14 @@ public class HelpMessage extends JFrame implements ActionListener {
 	 */
 	Connection connectionRecv;
 	
+	/**
+	 * used to draw the frame 
+	 */
 	Rectangle winSize;
 	
+	/**
+	 * used to draw the frame
+	 */
 	Dimension dimension ;
 
 
@@ -142,7 +148,6 @@ public class HelpMessage extends JFrame implements ActionListener {
 			width = buttons_size;
 		
 		
-		System.out.println(width + " " + buttons_size);
 		this.setLocation(dimension.width - width, winSize.height - height);
 		this.setSize(width - 1, height - 1);
 		this.setSize(width, height);
@@ -161,10 +166,7 @@ public class HelpMessage extends JFrame implements ActionListener {
 						
 				cc = new Connection(InetAddress.getLocalHost(), id, 4501);
 				MessageItem mesaj = new MessageItem(id,myFilename,cc, ContextTypes.RECEIVED_ITEM_CONTEXT  );
-				System.out.println("AJUTORUL A FOST CONFIRMAT");
-				System.out.println(connectionRecv.getId() + " " + connectionRecv.getIp() + " ");
 				myLink.send(connectionRecv, mesaj);
-				System.out.println("SEND A FOST REALIZAT");
 				
 			}
 			
@@ -172,10 +174,7 @@ public class HelpMessage extends JFrame implements ActionListener {
 		if (command.equals("No, too busy") == true) {
 			cc = new Connection(InetAddress.getLocalHost(), id, 4501);
 			MessageItem mesaj = new MessageItem(null,myFilename,cc, ContextTypes.RECEIVED_ITEM_CONTEXT  );
-			System.out.println("AJUTORUL A FOST CONFIRMAT");
-			System.out.println(connectionRecv.getId() + " " + connectionRecv.getIp() + " ");
 			myLink.send(connectionRecv, mesaj);
-			System.out.println("SEND A FOST REALIZAT");
 			
 		}
 		dispose();
