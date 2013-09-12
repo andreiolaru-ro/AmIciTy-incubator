@@ -12,7 +12,10 @@
 package net.amicity.common.intelligence;
 
 import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Enumeration;
 
 import net.amicity.common.communications.Connection;
 import net.amicity.common.context_types.LocationItem;
@@ -75,13 +78,37 @@ public class DummyMessage implements IntelligenceModule {
 		try {
 			PCInterface.addNotification("connecting..");
 			d.createConnection(new Connection(InetAddress.getByName(ip), "",
-					4500), new Connection(InetAddress.getLocalHost(),
-					ContextCore.getUsername(), 4500));
+					4500),
+					new Connection(InetAddress.getByName(getLocalIpAddress()),
+							ContextCore.getUsername(), 4500));
 			PCInterface.addNotification("connected to server");
 		}
 		catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * @return A string representing the local ip adress
+	 */
+	public static String getLocalIpAddress() {
+		try {
+			for (Enumeration<NetworkInterface> en = NetworkInterface
+					.getNetworkInterfaces(); en.hasMoreElements();) {
+				NetworkInterface intf = en.nextElement();
+				for (Enumeration<InetAddress> enumIpAddr = intf
+						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+					InetAddress inetAddress = enumIpAddr.nextElement();
+					if (!inetAddress.isLoopbackAddress()) {
+						return inetAddress.getHostAddress().toString();
+					}
+				}
+			}
+		}
+		catch (SocketException ex) {
+			ex.printStackTrace();
+		}
+		return null;
 	}
 }
