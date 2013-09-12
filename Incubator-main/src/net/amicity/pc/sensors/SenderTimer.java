@@ -11,7 +11,10 @@
  ******************************************************************************/
 package net.amicity.pc.sensors;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.TimerTask;
 
 import net.amicity.common.context_types.FilesItem;
@@ -41,9 +44,33 @@ public class SenderTimer extends TimerTask {
 	@Override
 	public void run() {
 		
-		//File f =  mySender.myDetector.filesChanged.get(0).fileChanged;
+		/*File f =  mySender.myDetector.filesChanged.get(0).fileChanged;
+		if(){
+			
+		}*/
+/*		String command name = "WINDOWTITLE"
 		
+
+		ProcessBuilder builder = new ProcessBuilder("tasklist", "/FI",
+				"" "");
+
+		Process process;
+		try {
+			process = builder.start(); // pornesc programul
+			InputStream is = process.getInputStream(); // obtin outuputul
+														// shellului ca
+														// input in
+														// program
+			// clasa este abstracta
+			InputStreamReader isr = new InputStreamReader(is); // creez o
+																// instanta
+																// ISR
+																// pe baza
+																// lui
+																// InputStream
+			BufferedReader br = new BufferedReader(isr);
 		
+*/		
 
 		if (mySender.myDetector.filesChanged.isEmpty() == false) {
 			
