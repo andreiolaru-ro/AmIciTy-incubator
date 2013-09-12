@@ -43,6 +43,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
+
 		// Create ContextCore
 		final ContextCore cc = new ContextCore();
 
