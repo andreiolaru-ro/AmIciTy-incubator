@@ -101,7 +101,7 @@ public class MainActivity extends Activity implements Serializable {
 		AndroidFileTransfer aft = new AndroidFileTransfer(cc);
 		AndroidPerceptionsTransfer apt = new AndroidPerceptionsTransfer(cc,
 				this);
-		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
+		SaveTransferedFiles stf = new SaveTransferedFiles(cc, this);
 		SimplePeerMachinesManager peer = new SimplePeerMachinesManager(cc, this);
 
 		// make the link between ContextTypes and intelligence modules related

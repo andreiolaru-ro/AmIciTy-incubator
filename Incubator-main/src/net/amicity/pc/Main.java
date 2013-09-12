@@ -38,19 +38,11 @@ import net.amicity.pc.sensors.WirelessModule;
 
 public class Main {
 
-	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
-
-		
-
-		
-		
-		
-		
 		// Create ContextCore
 		final ContextCore cc = new ContextCore();
 
@@ -58,20 +50,15 @@ public class Main {
 		while (pci.getUserName().length() == 0) {
 			System.out.flush();
 		}
-		
-		
 
-		
-		
 		System.out.println(" USER IS: " + pci.getUserName());
 		ContextCore.setUsername(pci.getUserName());
 
 		// start the files monitorization
-		
+
 		ChangeDetectorModule cdm = new ChangeDetectorModule();
 		cdm.startTimer();
 
-		
 		// Create intelligence modules
 
 		FileAnalizerModule fam = new FileAnalizerModule(cc, cdm);
@@ -83,9 +70,6 @@ public class Main {
 		SaveTransferedFiles stf = new SaveTransferedFiles(cc);
 		PCFileTransfer pft = new PCFileTransfer(cc);
 
-		
-		
-		
 		// make the link between ContextTypes and intelligence modules related
 		// to type
 		final HashMap<ContextTypes, ArrayList<IntelligenceModule>> hm = new HashMap<ContextTypes, ArrayList<IntelligenceModule>>();
@@ -121,7 +105,6 @@ public class Main {
 		iModules10.add(peer);
 		hm.put(ContextTypes.RECEIVED_ITEM_CONTEXT, iModules10);
 
-		
 		// start sensors services
 
 		WirelessModule wm = new WirelessModule();

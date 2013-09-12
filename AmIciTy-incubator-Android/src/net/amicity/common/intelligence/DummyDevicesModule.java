@@ -61,11 +61,9 @@ public class DummyDevicesModule implements IntelligenceModule {
 				ContextTypes.DEVICES_CONTEXT)).getMyDevices();
 		String devices = "Connected to:\n";
 		for (final Connection c : myDevices) {
-			System.out.println(c.getId());
 			devices += c.getId() + "\n";
 		}
 		final String dev = devices;
-		System.out.println(dev);
 		ma.runOnUiThread(new Runnable() {
 
 			@Override
