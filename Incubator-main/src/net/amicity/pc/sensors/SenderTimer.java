@@ -11,6 +11,7 @@
  ******************************************************************************/
 package net.amicity.pc.sensors;
 
+import java.io.File;
 import java.util.TimerTask;
 
 import net.amicity.common.context_types.FilesItem;
@@ -39,10 +40,15 @@ public class SenderTimer extends TimerTask {
 
 	@Override
 	public void run() {
+		
+		//File f =  mySender.myDetector.filesChanged.get(0).fileChanged;
+		
+		
 
 		if (mySender.myDetector.filesChanged.isEmpty() == false) {
+			
 
-			System.out.println("nu mai este gol");
+			System.out.println("nu mai este gol" + mySender.myDetector.filesChanged.size() );
 
 			FilesItem sendNewChanges = new FilesItem(
 					mySender.myDetector.filesChanged);

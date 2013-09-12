@@ -68,14 +68,12 @@ class OutsideTimer extends TimerTask {
 						System.out.println("il contine");
 						contained = 1;
 						fileLiteral.changesDetected = true;
-						// System.out.println(f.length() + "   "
-						// +fileOld.lastsize);
 						fileLiteral.sizeDifference = f.length()
 								- fileOld.lastsize;
 
-						// System.out.println(fileLiteral.fileChanged.getName()
-						// + " " + fileLiteral.changesDetected + " " +
-						// fileLiteral.sizeDifference);
+						 System.out.println(fileLiteral.fileChanged.getName()
+						 + " " + fileLiteral.changesDetected + " " +
+						 fileLiteral.sizeDifference);
 
 						break;
 					}

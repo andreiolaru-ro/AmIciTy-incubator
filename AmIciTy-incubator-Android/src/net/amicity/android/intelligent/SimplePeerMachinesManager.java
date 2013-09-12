@@ -26,6 +26,9 @@ import net.amicity.common.core.IntelligenceModule;
 import net.amicity.common.core.context.ContextCore;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.util.Log;
 
 /**
@@ -143,6 +146,12 @@ public class SimplePeerMachinesManager implements PeerMachinesManager,
 
 			@Override
 			public void run() {
+				
+				try {
+				        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+				        Ringtone r = RingtoneManager.getRingtone(myMainActivity, notification);
+				        r.play();
+				  } catch (Exception e) {}
 
 				AlertDialog.Builder alertDialogB = new AlertDialog.Builder(
 						myMainActivity);

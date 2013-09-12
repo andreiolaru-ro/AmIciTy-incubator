@@ -85,6 +85,8 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 			if (changed == false) {
 
 				if (filesOpened.contains(file) == true && isShown() == false) {
+					
+					System.out.println("NU A MAI FOST SCHIMBAT");
 
 					getMyTimer().ceaseTimer();
 					fileChanged =file;
@@ -99,6 +101,9 @@ public class FileAnalizerModule extends Thread implements IntelligenceModule {
 			}
 			else {
 				if (nrDiff < 100 && isShown() == false) {
+					
+					System.out.println("a fost SCHIMBAT dar NU de AJUNS");
+					
 					WindowMessage win = new WindowMessage(this, file);
 					win.createWindow();
 					win.addWrite();
