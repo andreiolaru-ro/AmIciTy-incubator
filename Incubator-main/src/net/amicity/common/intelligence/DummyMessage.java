@@ -100,7 +100,8 @@ public class DummyMessage implements IntelligenceModule {
 				for (Enumeration<InetAddress> enumIpAddr = intf
 						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
 					InetAddress inetAddress = enumIpAddr.nextElement();
-					if (!inetAddress.isLoopbackAddress()) {
+					if (!inetAddress.isLoopbackAddress()
+							&& !inetAddress.getHostName().contains(":")) {
 						return inetAddress.getHostAddress().toString();
 					}
 				}
