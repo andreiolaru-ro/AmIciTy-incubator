@@ -45,7 +45,7 @@ public class AccelerometerItem extends AbstractItem {
 	 */
 	public AccelerometerItem() {
 		man = new String();
-		noise = 1.2f;
+		noise = 30;
 	}
 
 	/**

@@ -31,8 +31,7 @@ import android.os.IBinder;
  * @author cristian
  * 
  */
-public class AccelerometerModule extends Service implements
-		SensorEventListener, SensorModule {
+public class AccelerometerModule extends Service implements SensorEventListener, SensorModule {
 
 	/**
 	 * mLastX -> last x coordinate taken by accelerometer
@@ -88,11 +87,9 @@ public class AccelerometerModule extends Service implements
 
 		mInitialized = false;
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-		mAccelerometer = mSensorManager
-				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		clock.start();
-		mSensorManager.registerListener(this, mAccelerometer,
-				SensorManager.SENSOR_DELAY_NORMAL);
+		mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
 		return Service.START_STICKY;
 	}
@@ -129,14 +126,14 @@ public class AccelerometerModule extends Service implements
 			float deltaY = Math.abs(mLastY - y);
 			float deltaZ = Math.abs(mLastZ - z);
 
-			total = deltaX + deltaY + deltaZ;
-
 			if (deltaX < NOISE)
 				deltaX = (float) 0.0;
 			if (deltaY < NOISE)
 				deltaY = (float) 0.0;
 			if (deltaZ < NOISE)
 				deltaZ = (float) 0.0;
+
+			total += deltaX + deltaY + deltaZ;
 
 			mLastX = x;
 			mLastY = y;
